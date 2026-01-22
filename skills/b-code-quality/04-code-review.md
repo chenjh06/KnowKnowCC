@@ -2510,7 +2510,7 @@ Level 2 其他技能：
 [03 - Subagents](./03-subagents.md) - 子代理使用指南
 
 Level 3 专家之道：
-[Master 01 - Customization](../../master/01-customization/) - 自定义和扩展
+[Master 01 - Customization](../01-customization/README.md) - 自定义和扩展
 ```
 
 ---

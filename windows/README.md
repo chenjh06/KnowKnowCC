@@ -343,9 +343,9 @@ skills/c-integration/        → Windows 集成注意事项
 
 如果你发现了 Windows 特定的问题或解决方案，欢迎贡献！
 
-详见：[贡献指南](../../modules-archive/templates/contribution-guide.md)
+详见：请通过 GitHub Issues 或 Pull Requests 提交你的建议。
 
 ---
 
 **最后更新**: 2025-01-17
-**相关**: [Level 1 核心掌握](../guide/) | [快速参考](../reference/)
+**相关**: [Level 1 核心掌握](../guide/README.md) | [快速参考](../reference/README.md)

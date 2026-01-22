@@ -370,7 +370,7 @@ DB_HOST、DB_USER、DB_PASSWORD"
 ✅ 有专门的 Windows 路径处理指南
 ✅ 集成 Windows Terminal 优化
 
-详见：[Windows 用户指南](../windows/)
+详见：[Windows 用户指南](../windows/README.md)
 
 ### Q5: 支持哪些编程语言？
 
@@ -423,7 +423,7 @@ DB_HOST、DB_USER、DB_PASSWORD"
 ### Windows 用户
 
 如果你是 Windows 用户，强烈建议阅读：
-[Windows 用户指南](../windows/)
+[Windows 用户指南](../windows/README.md)
 
 ---
 

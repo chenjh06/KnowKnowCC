@@ -162,7 +162,7 @@ Windows 支持：100% 覆盖
 **A**:
 1. 查看对应文档的"常见问题"章节
 2. 查看 [04-best-practices.md](04-best-practices.md) 中的错误分析
-3. 查看 [windows/](../windows/) Windows 专属指南
+3. 查看 [windows/](../windows/README.md) Windows 专属指南
 4. 查看 [reference/troubleshooting.md](../reference/troubleshooting.md) 问题诊断
 
 ### Q6: 必须按顺序阅读吗？
