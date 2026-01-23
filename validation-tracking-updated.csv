@@ -1,0 +1,33 @@
+文档,章节,验证项,优先级,状态,验证日期,验证方法,验证来源,备注
+guide/01-quickstart.md,安装,winget install Anthropic.ClaudeCode,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,官方确认
+guide/01-quickstart.md,安装,irm https://claude.ai/install.ps1,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,官方确认
+guide/01-quickstart.md,安装,npm install -g @anthropic-ai/claude-code,P0,⏳,2026-01-23,权威资源,https://www.runoob.com/ai-agent/claude-code.html,菜鸟教程提及
+guide/01-quickstart.md,基础命令,claude --version,P0,✅,2026-01-23,Bash测试,实际测试: 2.1.15,已测试
+guide/01-quickstart.md,基础命令,claude --help,P0,✅,2026-01-23,Bash测试,实际测试成功,已测试
+guide/01-quickstart.md,基础命令,Ctrl+D 退出,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 退出会话
+guide/02-core-features.md,@符号,文件引用语法 @文件路径,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方详细说明
+guide/02-core-features.md,@符号,目录引用语法 @目录路径/,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方详细说明
+guide/02-core-features.md,@符号,文件模式引用 @*.test.js,P0,⏳,2026-01-23,逻辑推理,基于@符号功能推断,需要实际测试
+guide/02-core-features.md,!命令,Shell 命令执行语法,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方详细说明Bash模式
+guide/02-core-features.md,CLAUDE.md,文件位置和作用,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方确认@引用添加CLAUDE.md
+guide/02-core-features.md,Esc撤销,撤销上一次操作,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: Esc+Esc 回退
+guide/02-core-features.md,Plan模式,Shift+Tab 进入,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 切换权限模式
+guide/02-core-features.md,会话管理,/resume 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/cli-reference,官方确认
+guide/02-core-features.md,会话管理,/continue 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/cli-reference,官方确认
+guide/02-core-features.md,会话管理,/rename 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认内置命令
+guide/02-core-features.md,历史,Ctrl+R 查看历史,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 反向搜索历史
+guide/02-core-features.md,初始化,/init 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认内置命令
+guide/02-core-features.md,Windows,PowerShell 命令兼容性,P1,⏳,2026-01-23,项目文档,需要实际测试,待验证
+guide/02-core-features.md,Windows,路径格式（正斜杠/双反斜杠）,P1,⏳,2026-01-23,项目文档,需要实际测试,待验证
+reference/shortcuts.md,核心快捷键,Shift+Tab Plan模式,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认但有Windows Bug风险
+reference/shortcuts.md,核心快捷键,Ctrl+R 历史记录,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 反向搜索
+reference/shortcuts.md,核心快捷键,Ctrl+D 退出,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 退出会话
+reference/shortcuts.md,核心快捷键,Esc 撤销,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: Esc+Esc 回退
+reference/shortcuts.md,核心快捷键,Ctrl+C 中断,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认: 取消输入
+reference/shortcuts.md,文本编辑,Ctrl+K 删除到行尾,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,文本编辑,Ctrl+U 删除整行,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,文本编辑,Ctrl+Y 粘贴删除文本,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,导航,Ctrl+L 清除屏幕,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,导航,Ctrl+O 切换详细输出,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,导航,Ctrl+G 打开编辑器,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认
+reference/shortcuts.md,导航,Up/Down 箭头历史,P1,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/interactive-mode,官方确认

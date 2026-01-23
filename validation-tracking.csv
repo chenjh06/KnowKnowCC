@@ -1,0 +1,30 @@
+文档,章节,验证项,优先级,状态,验证日期,验证方法,验证来源,备注
+guide/01-quickstart.md,安装,winget install Anthropic.ClaudeCode,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,
+guide/01-quickstart.md,安装,irm https://claude.ai/install.ps1,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,
+guide/01-quickstart.md,安装,npm install -g @anthropic-ai/claude-code,P0,⏳,2026-01-23,权威资源,https://www.runoob.com/ai-agent/claude-code.html,需要进一步验证
+guide/01-quickstart.md,基础命令,claude --version,P0,✅,2026-01-23,Bash测试,实际测试输出: 2.1.15,
+guide/01-quickstart.md,基础命令,claude --help,P0,✅,2026-01-23,Bash测试,实际测试成功,
+guide/01-quickstart.md,基础命令,Ctrl+D 退出,P0,⏳,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,官方文档提及
+guide/02-core-features.md,@符号,文件引用语法 @文件路径,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档明确说明
+guide/02-core-features.md,@符号,目录引用语法 @目录路径/,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档明确说明
+guide/02-core-features.md,@符号,文件模式引用 @*.test.js,P0,⏳,2026-01-23,逻辑推理,基于@符号功能推断,需要实际测试
+guide/02-core-features.md,!命令,Shell 命令执行语法,P0,⏳,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,官方文档提及命令执行能力
+guide/02-core-features.md,CLAUDE.md,文件位置和作用,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档说明@引用会添加CLAUDE.md
+guide/02-core-features.md,Esc撤销,撤销上一次操作,P0,⏳,2026-01-23,项目文档,需要实际测试,未在官方文档找到详细说明
+guide/02-core-features.md,Plan模式,Shift+Tab 进入,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档详细说明
+guide/02-core-features.md,会话管理,/sessions 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档说明/resume/--continue
+guide/02-core-features.md,会话管理,/resume 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档详细说明
+guide/02-core-features.md,会话管理,/rename 命令,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档详细说明
+guide/02-core-features.md,历史,Ctrl+R 查看历史,P0,⏳,2026-01-23,项目文档,需要实际测试,未在官方文档找到说明
+guide/02-core-features.md,初始化,/init 命令,P0,⏳,2026-01-23,项目文档,需要进一步验证,未在官方文档找到说明
+guide/02-core-features.md,Windows,PowerShell 命令兼容性,P1,⏳,2026-01-23,项目文档,需要实际测试,
+guide/02-core-features.md,Windows,路径格式（正斜杠/双反斜杠）,P1,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,核心快捷键,Shift+Tab Plan模式,P0,✅,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/common-workflows,官方文档确认但可能有Windows Bug
+reference/shortcuts.md,核心快捷键,Ctrl+R 历史记录,P0,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,核心快捷键,Ctrl+D 退出,P0,⏳,2026-01-23,官方文档,https://code.claude.com/docs/zh-CN/quickstart,官方文档提及
+reference/shortcuts.md,核心快捷键,Esc 撤销,P0,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,核心快捷键,Ctrl+C 中断,P0,⏳,2026-01-23,通用知识,通用终端快捷键,
+reference/shortcuts.md,文本编辑,Ctrl+A 全选,P1,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,文本编辑,Ctrl+E 编辑器,P1,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,导航,Ctrl+K 上一个命令,P1,⏳,2026-01-23,项目文档,需要实际测试,
+reference/shortcuts.md,导航,Ctrl+J 下一个命令,P1,⏳,2026-01-23,项目文档,需要实际测试,
