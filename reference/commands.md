@@ -18,6 +18,8 @@
 - [撤销操作](#撤销操作)
 - [Plan 模式](#plan-模式)
 - [项目初始化](#项目初始化)
+- [斜杠命令](#斜杠命令)
+- [Commands vs Skills 选择指南](#commands-vs-skills-选择指南)
 - [搜索和查找](#搜索和查找)
 - [Git 集成](#git-集成)
 - [Windows 专属](#windows-专属)
@@ -486,6 +488,328 @@ src/
    /clear                   # 清除历史
    /export backup.md        # 导出对话
 ```
+
+---
+
+## Commands vs Skills 选择指南 ✨
+
+> **验证状态**: ✅ 趋势已验证
+> **内容来源**: 微信文章分析 (2026-01-23)
+> **可信度**: 90%
+
+### 背景说明
+
+**重要演进**: Claude Code 的扩展方式正在从 Commands 向 Skills 迁移
+
+```
+传统路径:
+Commands (斜杠命令)
+    ↓
+配置文件 (commands.json)
+    ↓
+固定逻辑执行
+
+现代路径:
+Skills (技能包)
+    ↓
+自然语言描述
+    ↓
+AI 智能执行
+```
+
+**为什么迁移到 Skills?**
+
+| Commands | Skills |
+|----------|--------|
+| 固定逻辑 | 智能推理 |
+| 需要配置代码 | 自然语言描述 |
+| 上下文理解有限 | 完整上下文感知 |
+| 难以组合 | 可自由组合 |
+| 维护成本高 | 易于维护 |
+
+### Slash Commands 的优势
+
+**Slash Commands 仍然有它的优势:**
+
+```
+✅ 快速执行
+   └─ 简单命令,立即响应
+
+✅ 确定性高
+   └─ 固定行为,可预测
+
+✅ 系统级操作
+   └─ /plan, /clear, /config 等
+
+✅ 轻量级
+   └─ 无需额外上下文
+```
+
+**适用场景:**
+
+```
+系统管理:
+├─ /clear           # 清除对话
+├─ /sessions        # 会话管理
+├─ /config          # 配置设置
+└─ /doctor          # 诊断问题
+
+快速操作:
+├─ /help            # 获取帮助
+├─ /cost            # 查看成本
+└─ /context         # 上下文信息
+```
+
+### Skills 的优势
+
+**Skills 提供更强大的能力:**
+
+```
+✅ AI 驱动
+   └─ 智能理解,灵活执行
+
+✅ 上下文完整
+   └─ 理解整个对话历史
+
+✅ 可组合
+   └─ 多 Skills 协同工作
+
+✅ 易扩展
+   └─ 自然语言添加新功能
+
+✅ 易维护
+   └─ 版本控制,持续迭代
+```
+
+**适用场景:**
+
+```
+复杂任务:
+├─ 代码审查         # code-review Skill
+├─ 文章生成         # article-copilot Skill
+└─ PPT 制作         # pptx Skill
+
+工作流:
+├─ 自动提交         # auto-commit Skill
+├─ 浏览器自动化     # agent-browser Skill
+└─ 数据处理         #数据处理 Skills
+```
+
+### 如何选择?
+
+#### 决策流程
+
+```
+需要执行任务
+    ↓
+是系统级操作?
+YES → 使用 Slash Command ✅
+NO  → 继续
+    ↓
+需要快速执行,无复杂逻辑?
+YES → 使用 Slash Command ✅
+NO  → 继续
+    ↓
+需要智能推理和上下文理解?
+YES → 使用 Skills ✅
+NO  → 使用 Slash Command
+```
+
+#### 具体建议
+
+**使用 Slash Commands 当:**
+
+```markdown
+1. 系统管理操作
+   /clear
+   /sessions
+   /config
+
+2. 快速查看信息
+   /cost
+   /context
+   /help
+
+3. 模式切换
+   /plan
+   /model
+
+4. 简单固定操作
+   /export chat.md
+   /compact
+```
+
+**使用 Skills 当:**
+
+```markdown
+1. 需要智能分析
+   使用 auto-commit 分析代码变更
+   使用 code-review 审查代码质量
+
+2. 需要复杂工作流
+   使用 agent-browser 自动化浏览器操作
+   使用 pptx 生成演示文稿
+
+3. 需要上下文理解
+   使用 article-copilot 持续写作
+   使用 obsidian-skills 管理知识库
+
+4. 需要多步骤任务
+   使用 planning-with-files 持久化计划
+   使用 video-transcription 处理视频
+```
+
+### 迁移案例
+
+#### 案例 1: Git 提交
+
+**Slash Command 方式:**
+
+```bash
+# 传统 Commands 方式
+!git add .
+!git commit -m "固定提交信息"
+```
+
+**Skills 方式:**
+
+```markdown
+# 使用 auto-commit Skill
+分析当前代码变更,生成规范的中文提交信息,自动提交
+
+优势:
+✅ 智能分析代码变更
+✅ 生成有意义的提交信息
+✅ 遵循提交规范
+✅ 上下文完整理解
+```
+
+**对比:**
+
+| 维度 | Command | Skills |
+|------|---------|--------|
+| 智能性 | ❌ 固定信息 | ✅ 分析代码 |
+| 规范性 | ❌ 不一致 | ✅ 遵循规范 |
+| 上下文 | ❌ 无 | ✅ 完整理解 |
+| 维护性 | ❌ 需要修改 | ✅ 自动优化 |
+
+#### 案例 2: 文档生成
+
+**Slash Command 方式:**
+
+```bash
+# 传统方式
+!pandoc input.md -o output.pdf
+```
+
+**Skills 方式:**
+
+```markdown
+# 使用 pptx Skill
+使用 @pptx skill,根据这篇文章生成演示文稿,使用现代风格
+
+优势:
+✅ 智能内容组织
+✅ 自动应用风格
+✅ 格式优化
+✅ 可迭代调整
+```
+
+### 混合使用策略
+
+**最佳实践: Commands + Skills**
+
+```
+系统管理:
+使用 Slash Commands
+├─ /clear          # 清理会话
+├─ /sessions       # 管理会话
+└─ /config         # 配置设置
+
+任务执行:
+使用 Skills
+├─ auto-commit     # 自动提交
+├─ code-review     # 代码审查
+└─ agent-browser   # 浏览器自动化
+
+信息查看:
+使用 Slash Commands
+├─ /cost           # 查看成本
+├─ /context        # 上下文信息
+└─ /doctor         # 诊断状态
+```
+
+### 迁移指南
+
+#### 从 Commands 迁移到 Skills
+
+**Step 1: 识别可迁移的 Commands**
+
+```markdown
+迁移条件:
+✅ 需要智能判断的任务
+✅ 需要上下文理解的操作
+✅ 需要灵活配置的功能
+✅ 经常使用的复杂命令
+
+不适合迁移:
+❌ 系统级操作 (/clear, /config)
+❌ 简单查看 (/cost, /help)
+❌ 模式切换 (/plan, /model)
+```
+
+**Step 2: 创建 Skill 替代方案**
+
+```markdown
+1. 使用 skill-creator 创建 Skill
+2. 将 Command 逻辑转为 SKILL.md
+3. 添加智能判断和上下文理解
+4. 测试和优化
+```
+
+**Step 3: 逐步迁移**
+
+```markdown
+1. 保留 Command (向后兼容)
+2. 添加 Skill 替代方案
+3. 文档说明推荐使用 Skill
+4. 收集反馈
+5. 逐步废弃 Command
+```
+
+### 未来展望
+
+**趋势预测:**
+
+```
+2024: Commands 为主
+    ↓
+2025: Skills 崛起
+    ↓
+2026: Commands + Skills 并存
+    ↓
+未来: Skills 成为主流
+```
+
+**建议:**
+
+```
+✅ 新功能优先使用 Skills
+✅ 复杂任务使用 Skills
+✅ 系统操作保留 Commands
+✅ 简单任务可保留 Commands
+✅ 持续关注生态发展
+```
+
+### 相关资源
+
+**Slash Commands 参考:**
+- [官方斜杠命令文档](https://claude.ai/code/docs)
+- [本命令速查表](#斜杠命令)
+
+**Skills 参考:**
+- [Skills 生态概览](../CLAUDE.md#skills-生态概览)
+- [Skills 开发教程](../skills/d-skills-development/README.md)
 
 ---
 

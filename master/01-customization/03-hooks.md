@@ -2,7 +2,7 @@
 
 > **自动化工作流的触发器**
 
-**阅读时间**: 45分钟
+**阅读时间**: 50分钟
 **难度**: ⭐⭐⭐⭐⭐
 **适用场景**: 自动化工作流、自定义行为、团队协作
 **前置要求**: [Level 2 进阶提升](../../skills/), [工作流自动化](../02-automation/03-workflow-automation.md)
@@ -12,8 +12,9 @@
 ## 目录
 
 - [Hooks 概述](#hooks-概述)
-- [Hook 类型](#hook-类型)
+- [Hook 事件类型](#hook-事件类型)
 - [配置 Hooks](#配置-hooks)
+- [Hook 类型](#hook-类型)
 - [高级用法](#高级用法)
 - [实战案例](#实战案例)
 - [Windows 专属](#windows-专属)
@@ -57,381 +58,517 @@ Hooks 模式：
    └─ 构建生态系统
 ```
 
+### 配置文件位置
+
+```
+用户设置: ~/.claude/settings.json
+项目设置: .claude/settings.json
+本地设置: .claude/settings.local.json
+托管设置: managed-settings.json
+```
+
 ---
 
-## Hook 类型
+## Hook 事件类型
 
-### 1. prePrompt Hook
+Claude Code 支持以下官方 Hook 事件：
 
-**触发时机**：在发送提示词到 Claude 之前
+### 工具相关事件
 
-**用途**：
+#### 1. PreToolUse
 
-```markdown
-✅ 检查 Git 状态
-✅ 更新上下文
-✅ 验证前置条件
-✅ 记录日志
-```
+**触发时机**：在 Claude 创建工具参数之后和处理工具调用之前
 
-**示例**：
-
-```json
-// .claude/settings.json
-
-{
-  "hooks": {
-    "prePrompt": [
-      {
-        "match": "部署|deploy",
-        "command": "git status"
-      },
-      {
-        "match": "审查|review",
-        "command": "git diff HEAD~1"
-      }
-    ]
-  }
-}
-```
-
-### 2. postResponse Hook
-
-**触发时机**：在 Claude 返回响应之后
+**常见匹配器**：
+- `Task` - Subagent 任务
+- `Bash` - Shell 命令
+- `Glob` - 文件模式匹配
+- `Grep` - 内容搜索
+- `Read` - 文件读取
+- `Edit` - 文件编辑
+- `Write` - 文件写入
+- `WebFetch`、`WebSearch` - Web 操作
 
 **用途**：
+- ✅ 验证工具参数
+- ✅ 自动批准某些工具
+- ✅ 记录工具使用
+- ✅ 阻止危险操作
 
-```markdown
-✅ 自动提交代码
-✅ 生成文档
-✅ 发送通知
-✅ 更新状态
-```
+#### 2. PermissionRequest
 
-**示例**：
-
-```json
-{
-  "hooks": {
-    "postResponse": [
-      {
-        "match": "已修复|fixed",
-        "command": "git add . && git commit -m 'Auto commit: Fixed bug'"
-      },
-      {
-        "match": "已生成|generated",
-        "command": "node scripts/update-docs.js"
-      }
-    ]
-  }
-}
-```
-
-### 3. preCommand Hook
-
-**触发时机**：在执行 Claude Code 命令之前
+**触发时机**：在向用户显示权限对话框时运行
 
 **用途**：
+- ✅ 自动允许/拒绝权限
+- ✅ 修改工具参数
+- ✅ 提供默认决策
 
-```markdown
-✅ 环境检查
-✅ 依赖验证
-✅ 配置更新
-✅ 资源准备
-```
+#### 3. PostToolUse
 
-### 4. postCommand Hook
-
-**触发时机**：在执行 Claude Code 命令之后
+**触发时机**：在工具成功完成后立即运行
 
 **用途**：
+- ✅ 自动提交代码
+- ✅ 生成文档
+- ✅ 发送通知
+- ✅ 运行 linter/formatter
 
-```markdown
-✅ 清理临时文件
-✅ 保存日志
-✅ 资源释放
-✅ 状态同步
-```
+#### 4. Notification
+
+**触发时机**：在 Claude Code 发送通知时运行
+
+**常见匹配器**：
+- `permission_prompt` - 权限请求
+- `idle_prompt` - 空闲提示
+- `auth_success` - 认证成功
+- `elicitation_dialog` - MCP 工具引出
+
+### 会话相关事件
+
+#### 5. UserPromptSubmit
+
+**触发时机**：在用户提交提示时运行，在 Claude 处理之前
+
+**用途**：
+- ✅ 验证提示内容
+- ✅ 添加额外上下文
+- ✅ 阻止特定提示
+
+#### 6. Stop
+
+**触发时机**：在主 Claude Code agent 完成响应时运行
+
+**用途**：
+- ✅ 智能判断是否继续
+- ✅ 检查任务完成度
+- ✅ 自动继续工作
+
+#### 7. SubagentStop
+
+**触发时机**：在 Claude Code subagent（Task 工具调用）完成响应时运行
+
+**用途**：
+- ✅ 评估 subagent 结果
+- ✅ 决定是否需要更多上下文
+
+#### 8. SessionStart
+
+**触发时机**：在 Claude Code 启动新会话或恢复现有会话时运行
+
+**匹配器**：
+- `startup` - 从启动调用
+- `resume` - 从 --resume、--continue 或 /resume 调用
+- `clear` - 从 /clear 调用
+- `compact` - 从自动或手动压缩调用
+
+**用途**：
+- ✅ 加载开发上下文
+- ✅ 安装依赖项
+- ✅ 设置环境变量
+- ✅ 持久化环境配置
+
+#### 9. SessionEnd
+
+**触发时机**：在 Claude Code 会话结束时运行
+
+**用途**：
+- ✅ 清理任务
+- ✅ 记录会话统计
+- ✅ 保存会话状态
+
+### 系统事件
+
+#### 10. PreCompact
+
+**触发时机**：在 Claude Code 即将运行压缩操作之前
+
+**匹配器**：
+- `manual` - 从 /compact 调用
+- `auto` - 从自动压缩调用
+
+**用途**：
+- ✅ 优化压缩内容
+- ✅ 保存重要信息
 
 ---
 
 ## 配置 Hooks
 
-### 基本配置
+### 基本结构
 
-**配置文件位置**：
-
-```
-Windows: %APPDATA%\Claude Code\settings.json
-macOS: ~/Library/Application Support/Claude Code/settings.json
-Linux: ~/.config/Claude Code/settings.json
-```
-
-**配置格式**：
+Hooks 按匹配器组织，其中每个匹配器可以有多个 hooks：
 
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "EventName": [
       {
-        "match": "关键词",
-        "command": "命令"
-      }
-    ],
-    "postResponse": [
-      {
-        "match": "关键词",
-        "command": "命令"
+        "matcher": "ToolPattern",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "your-command-here"
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-### Hook 配置详解
+### 字段说明
 
-#### match 属性
+#### matcher（匹配器）
 
-**匹配模式**：
+用于匹配工具名称的模式，区分大小写（仅适用于 PreToolUse、PermissionRequest 和 PostToolUse）：
+
+```
+简单字符串精确匹配：
+  "Write" 仅匹配 Write 工具
+
+正则表达式：
+  "Edit|Write" 匹配 Edit 或 Write
+  "Notebook.*" 匹配所有 Notebook 开头的工具
+
+匹配所有工具：
+  "*" 或 "" 或省略
+```
+
+#### hooks（Hook 数组）
+
+当模式匹配时要执行的 hooks 数组：
+
+```json
+{
+  "type": "command",  // 或 "prompt" 用于基于 LLM 的评估
+  "command": "your-command",
+  "timeout": 30  // 可选：超时时间（秒）
+}
+```
+
+### 配置示例
+
+#### PreToolUse Hook
 
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "PreToolUse": [
       {
-        "match": "测试|test",
-        "command": "npm test"
-      },
-      {
-        "match": "构建|build",
-        "command": "npm run build"
-      },
-      {
-        "match": "部署.*生产环境",
-        "command": "scripts/check-prod.sh"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'File modification detected'"
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-**正则表达式支持**：
+#### PostToolUse Hook
 
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "PostToolUse": [
       {
-        "match": "^生成.*文档$",
-        "command": "node scripts/check-docs.js"
-      },
-      {
-        "match": "(?i)error|warning",
-        "command": "scripts/log-issue.sh"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format.sh"
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-#### command 属性
-
-**简单命令**：
+#### UserPromptSubmit Hook
 
 ```json
 {
-  "command": "git status"
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/prompt-validator.py"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
-**复杂命令（带参数）**：
+#### SessionStart Hook（持久化环境变量）
 
 ```json
 {
-  "command": "node scripts/update-docs.js --output docs/"
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/setup-env.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
-**PowerShell 命令**：
+---
+
+## Hook 类型
+
+### 1. Command Hooks（命令 Hooks）
+
+**type: "command"** - 执行 bash 命令
 
 ```json
 {
-  "command": "pwsh -File scripts/check.ps1"
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run format",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
-**链式命令**：
+**环境变量**：
+- `$CLAUDE_PROJECT_DIR` - 项目根目录的绝对路径
+- `$CLAUDE_CODE_REMOTE` - 在远程（web）环境为 "true"，本地未设置
+
+### 2. Prompt Hooks（基于提示的 Hooks）
+
+**type: "prompt"** - 使用 LLM 评估是否允许或阻止操作
+
+目前仅支持 `Stop` 和 `SubagentStop` hooks：
 
 ```json
 {
-  "command": "git add . && git commit -m 'Auto commit'"
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Evaluate if Claude should stop: $ARGUMENTS. Check if all tasks are complete."
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
+
+**LLM 响应格式**：
+```json
+{
+  "ok": true | false,
+  "reason": "Explanation"
+}
+```
+
+### 两种 Hook 类型对比
+
+| 特性 | Command Hooks | Prompt Hooks |
+|------|---------------|--------------|
+| **执行** | 运行 bash 脚本 | 查询 LLM |
+| **决策逻辑** | 代码实现 | LLM 评估上下文 |
+| **设置复杂性** | 需要脚本文件 | 配置提示 |
+| **上下文感知** | 受脚本逻辑限制 | 自然语言理解 |
+| **性能** | 快速（本地执行） | 较慢（API 调用） |
+| **用例** | 确定性规则 | 上下文感知决策 |
 
 ---
 
 ## 高级用法
 
-### 条件 Hooks
+### Hook 输出控制
 
-**基于条件执行**：
+#### 退出代码控制
+
+Hooks 通过退出代码传达状态：
+
+- **退出代码 0**：成功
+  - `stdout` 在详细模式（Ctrl+O）中显示
+  - `UserPromptSubmit` 和 `SessionStart` 的 `stdout` 被添加为上下文
+  - `stdout` 中的 JSON 被解析为结构化控制
+
+- **退出代码 2**：阻止错误
+  - 仅使用 `stderr` 作为错误消息
+  - 阻止工具调用或提示处理
+
+- **其他退出代码**：非阻止错误
+  - `stderr` 在详细模式中显示
+
+#### JSON 输出（高级控制）
+
+Hooks 可以返回结构化 JSON 进行复杂控制：
+
+```json
+{
+  "continue": true,
+  "stopReason": "string",
+  "suppressOutput": true,
+  "systemMessage": "string"
+}
+```
+
+**PreToolUse 决策控制**：
+
+```json
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "allow",
+    "permissionDecisionReason": "Auto-approved",
+    "updatedInput": {
+      "field_to_modify": "new value"
+    }
+  }
+}
+```
+
+**UserPromptSubmit 决策控制**：
+
+```json
+{
+  "decision": "block",
+  "reason": "Security policy violation",
+  "hookSpecificOutput": {
+    "hookEventName": "UserPromptSubmit",
+    "additionalContext": "Additional context here"
+  }
+}
+```
+
+### MCP 工具 Hooks
+
+MCP 工具遵循模式 `mcp__<server>__<tool>`：
 
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "PreToolUse": [
       {
-        "match": "部署",
-        "condition": {
-          "env": {
-            "ENVIRONMENT": "production"
+        "matcher": "mcp__memory__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Memory operation' >> ~/mcp.log"
           }
-        },
-        "command": "scripts/prod-check.sh"
+        ]
+      },
+      {
+        "matcher": "mcp__.*__write.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/user/scripts/validate-mcp-write.py"
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-### 动态命令
+### 插件 Hooks
 
-**使用环境变量**：
+插件可以提供与用户和项目 hooks 无缝集成的 hooks：
 
 ```json
 {
+  "description": "Automatic code formatting",
   "hooks": {
-    "postResponse": [
+    "PostToolUse": [
       {
-        "match": "提交|commit",
-        "command": "git commit -m 'Auto: ${PROMPT_TEXT}'"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/format.sh",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-### 上下文感知 Hooks
+**插件环境变量**：
+- `${CLAUDE_PLUGIN_ROOT}` - 插件目录的绝对路径
+- `${CLAUDE_PROJECT_DIR}` - 项目根目录
 
-**基于项目类型**：
+### Skills、Agents 和 Slash Commands 中的 Hooks
 
-```json
-{
-  "hooks": {
-    "prePrompt": [
-      {
-        "match": "运行测试",
-        "condition": {
-          "fileExists": "package.json"
-        },
-        "command": "npm test"
-      },
-      {
-        "match": "运行测试",
-        "condition": {
-          "fileExists": "pom.xml"
-        },
-        "command": "mvn test"
-      }
-    ]
-  }
-}
+Hooks 可以直接在组件中定义（使用 frontmatter）：
+
+**Skill 中的示例**：
+
+```markdown
+---
+name: secure-operations
+description: Perform operations with security checks
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "./scripts/security-check.sh"
+---
 ```
 
-### Hook 链
+**支持的事件**：`PreToolUse`、`PostToolUse` 和 `Stop`
 
-**多个 Hooks 顺序执行**：
-
-```json
-{
-  "hooks": {
-    "prePrompt": [
-      {
-        "match": "部署",
-        "command": "scripts/check-status.sh"
-      },
-      {
-        "match": "部署",
-        "command": "scripts/run-tests.sh"
-      },
-      {
-        "match": "部署",
-        "command": "scripts/build.sh"
-      }
-    ]
-  }
-}
-```
+**额外选项**：`once` - 在每个会话中仅运行一次 hook
 
 ---
 
 ## 实战案例
 
-### 案例1: 自动代码审查工作流
+### 案例1: 自动代码格式化
 
-**场景**：每次请求代码审查时自动执行检查
-
-**配置**：
-
-```json
-{
-  "hooks": {
-    "prePrompt": [
-      {
-        "match": "审查|review",
-        "command": "git diff HEAD~1 > /tmp/pr-changes.diff"
-      },
-      {
-        "match": "审查|review",
-        "command": "npm run lint"
-      },
-      {
-        "match": "审查|review",
-        "command": "npm run test:quick"
-      }
-    ],
-    "postResponse": [
-      {
-        "match": "审查完成",
-        "command": "scripts/save-review.sh"
-      }
-    ]
-  }
-}
-```
-
-**使用**：
-
-```markdown
-👤 你：审查这段代码的变更
-
-[执行流程]
-1. [prePrompt] 获取 Git diff
-2. [prePrompt] 运行 linter
-3. [prePrompt] 运行快速测试
-4. [Claude] 执行代码审查
-5. [postResponse] 保存审查结果
-
-✅ 完整的自动化工作流
-```
-
-### 案例2: 自动文档生成
-
-**场景**：代码修改后自动更新文档
+**场景**：每次修改文件后自动运行格式化工具
 
 **配置**：
 
 ```json
 {
   "hooks": {
-    "postResponse": [
+    "PostToolUse": [
       {
-        "match": "已生成.*函数|已添加.*方法",
-        "command": "node scripts/update-api-docs.js"
-      },
-      {
-        "match": "已修改.*README",
-        "command": "node scripts/validate-readme.js"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format.sh",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }
@@ -440,94 +577,154 @@ Linux: ~/.config/Claude Code/settings.json
 
 **脚本实现**：
 
-```javascript
-// scripts/update-api-docs.js
+```bash
+#!/bin/bash
+# .claude/hooks/format.sh
 
-const fs = require('fs');
-const { execSync } = require('child_process');
+# 获取修改的文件路径
+FILE_PATH=$(jq -r '.tool_input.file_path' < /proc/self/fd/0)
 
-function extractAPIInfo(output) {
-  // 从 Claude 响应中提取 API 信息
-  const apiRegex = /(?:函数|方法|function|method)\s+(\w+)/g;
-  const apis = new Set();
-  let match;
+# 根据文件类型运行格式化
+case "$FILE_PATH" in
+    *.py)
+        black "$FILE_PATH"
+        ;;
+    *.js|*.ts|*.tsx)
+        prettier --write "$FILE_PATH"
+        ;;
+    *.go)
+        gofmt -w "$FILE_PATH"
+        ;;
+esac
 
-  while ((match = apiRegex.exec(output)) !== null) {
-    apis.add(match[1]);
-  }
-
-  return Array.from(apis);
-}
-
-function updateDocs(apis) {
-  const readmePath = 'docs/API.md';
-  let content = '';
-
-  if (fs.existsSync(readmePath)) {
-    content = fs.readFileSync(readmePath, 'utf8');
-  }
-
-  // 添加新的 API 文档
-  const timestamp = new Date().toISOString();
-  content += `\n\n## 更新时间: ${timestamp}\n\n`;
-  content += '### 新增/修改的 API\n\n';
-
-  apis.forEach(api => {
-    content += `- \`${api}\`\n`;
-  });
-
-  fs.writeFileSync(readmePath, content);
-  console.log(`文档已更新: ${readmePath}`);
-}
-
-// 从环境变量或参数获取 Claude 响应
-const claudeOutput = process.env.CLAUDE_RESPONSE || '';
-const apis = extractAPIInfo(claudeOutput);
-
-if (apis.length > 0) {
-  updateDocs(apis);
-}
+exit 0
 ```
 
-### 案例3: 自动提交和通知
+### 案例2: 智能停止判断
 
-**场景**：修复 Bug 后自动提交并通知团队
+**场景**：使用 LLM 判断 Claude 是否应该停止工作
 
 **配置**：
 
 ```json
 {
   "hooks": {
-    "postResponse": [
+    "Stop": [
       {
-        "match": "已修复.*bug|bug.*已修复",
-        "command": "git add . && git commit -m 'fix: Auto commit - Bug fixed by Claude Code'"
-      },
-      {
-        "match": "已修复.*bug|bug.*已修复",
-        "command": "git push"
-      },
-      {
-        "match": "已修复.*bug|bug.*已修复",
-        "command": "scripts/notify-slack.sh 'Bug 已修复，已推送'"
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "You are evaluating whether Claude should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }
 }
 ```
 
-**通知脚本**：
+### 案例3: 环境变量持久化
+
+**场景**：在会话开始时设置开发环境
+
+**配置**：
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/setup-dev-env.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**脚本实现**：
 
 ```bash
 #!/bin/bash
-# scripts/notify-slack.sh
+# scripts/setup-dev-env.sh
 
-WEBHOOK_URL="https://hooks.slack.com/services/YOUR/WEBHOOK"
-MESSAGE="$1"
+# 捕获环境变更
+ENV_BEFORE=$(export -p | sort)
 
-curl -X POST -H 'Content-type: application/json' \
-  --data "{\"text\":\"${MESSAGE}\"}" \
-  "$WEBHOOK_URL"
+# 激活虚拟环境
+source .venv/bin/activate
+
+# 设置项目特定变量
+export NODE_ENV=development
+export API_URL=http://localhost:3000
+
+# 持久化所有环境变更
+if [ -n "$CLAUDE_ENV_FILE" ]; then
+  ENV_AFTER=$(export -p | sort)
+  comm -13 <(echo "$ENV_BEFORE") <(echo "$ENV_AFTER") >> "$CLAUDE_ENV_FILE"
+fi
+
+exit 0
+```
+
+### 案例4: 安全验证
+
+**场景**：阻止包含敏感信息的提示
+
+**配置**：
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/security-check.py"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**脚本实现**：
+
+```python
+#!/usr/bin/env python3
+import json
+import re
+import sys
+
+# 从 stdin 加载输入
+input_data = json.load(sys.stdin)
+prompt = input_data.get("prompt", "")
+
+# 检查敏感模式
+sensitive_patterns = [
+    (r"(?i)\b(password|secret|key|token)\s*[:=]", "提示包含潜在的敏感信息"),
+]
+
+for pattern, message in sensitive_patterns:
+    if re.search(pattern, prompt):
+        # 使用 JSON 输出阻止提示
+        output = {
+            "decision": "block",
+            "reason": f"安全策略违规：{message}。请重新表述您的请求，不要包含敏感信息。"
+        }
+        print(json.dumps(output))
+        sys.exit(0)
+
+# 允许提示继续进行
+sys.exit(0)
 ```
 
 ---
@@ -541,10 +738,15 @@ curl -X POST -H 'Content-type: application/json' \
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "PostToolUse": [
       {
-        "match": "构建|build",
-        "command": "pwsh -File scripts\\check.ps1"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -File \"$CLAUDE_PROJECT_DIR\"\\.claude\\hooks\\format.ps1\""
+          }
+        ]
       }
     ]
   }
@@ -554,43 +756,48 @@ curl -X POST -H 'Content-type: application/json' \
 **PowerShell 脚本**：
 
 ```powershell
-# scripts/check.ps1
+# .claude/hooks/format.ps1
 
 param(
-    [string]$MatchText
+    [string]$ProjectDir
 )
 
-Write-Host "Hook 触发: $MatchText" -ForegroundColor Cyan
+Write-Host "Running format hook..." -ForegroundColor Cyan
 
-# 检查 Git 状态
+# 获取当前 Git 状态
 $status = git status
 if ($status -match "modified") {
     Write-Host "检测到未提交的更改" -ForegroundColor Yellow
 }
 
-# 运行 linter
-Write-Host "运行 linter..."
-npm run lint
+# 运行格式化工具
+npm run format
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "Lint 失败，终止操作"
+    Write-Error "格式化失败"
     exit 1
 }
 
-Write-Host "检查完成" -ForegroundColor Green
+Write-Host "格式化完成" -ForegroundColor Green
+exit 0
 ```
 
 ### Windows 路径处理
 
-**使用正斜杠**：
+**使用正斜杠（推荐）**：
 
 ```json
 {
   "hooks": {
-    "prePrompt": [
+    "PreToolUse": [
       {
-        "match": "测试|test",
-        "command": "pwsh -File D:/Projects/app/scripts/check.ps1"
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -File D:/Projects/app/scripts/check.ps1"
+          }
+        ]
       }
     ]
   }
@@ -618,12 +825,12 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```json
 // ❌ 不好：太宽泛
 {
-  "match": "代码"
+  "matcher": "代码"
 }
 
 // ✅ 好：精确匹配
 {
-  "match": "重构.*代码|优化.*代码"
+  "matcher": "重构.*代码|优化.*代码"
 }
 ```
 
@@ -655,26 +862,24 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 }
 ```
 
-### 4. 日志记录
+### 4. 使用超时
 
 ```json
-// ✅ 添加日志
+// ✅ 好：设置合理的超时
 {
-  "command": "pwsh -File scripts/hook-log.ps1 -Match '部署' -Command 'prePrompt'"
+  "type": "command",
+  "command": "npm run format",
+  "timeout": 30
 }
 ```
 
-```powershell
-# scripts/hook-log.ps1
+### 5. 安全考虑
 
-param([string]$Match, [string]$Command)
-
-$LogFile = ".claude/hooks.log"
-$Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$Entry = "[$Timestamp] Hook: $Command (match: '$Match')"
-
-Add-Content -Path $LogFile -Value $Entry
-```
+- ✅ 验证和清理输入
+- ✅ 始终引用 shell 变量 `"$VAR"`
+- ✅ 阻止路径遍历
+- ✅ 使用绝对路径
+- ✅ 跳过敏感文件
 
 ---
 
@@ -693,7 +898,7 @@ Add-Content -Path $LogFile -Value $Entry
    验证: Get-Content settings.json | ConvertFrom-Json
 
 3. 检查匹配规则
-   确保关键词能匹配到你的提示词
+   确保工具名称精确匹配（区分大小写）
 
 4. 重启 Claude Code
    配置更改后需要重启
@@ -704,9 +909,7 @@ Add-Content -Path $LogFile -Value $Entry
 **A**: 调试技巧
 
 ```powershell
-# 手动测试命令
-
-# 1. 在终端直接运行命令
+# 1. 手动测试命令
 npm test
 
 # 2. 检查命令路径
@@ -721,19 +924,45 @@ $env:PATH
 
 ### Q3: 如何调试 Hooks？
 
-**A**: 使用日志
+**A**: 使用调试模式
+
+```bash
+# 启用调试模式
+claude --debug
+
+# 查看详细输出
+# [DEBUG] Executing hooks for PostToolUse:Write
+# [DEBUG] Found 1 hook matchers in settings
+# [DEBUG] Matched 1 hooks for query "Write"
+```
+
+### Q4: Stop hook 无限循环？
+
+**A**: 检查 `stop_hook_active`
 
 ```json
+// Stop hook 输入中包含
 {
-  "hooks": {
-    "prePrompt": [
-      {
-        "match": ".*",
-        "command": "echo 'Pre-prompt hook triggered' >> .claude/hooks.log"
-      }
-    ]
-  }
+  "stop_hook_active": true
 }
+
+// 检查此值以防止无限循环
+```
+
+### Q5: SessionStart hook 中环境变量不持久化？
+
+**A**: 必须使用 `CLAUDE_ENV_FILE`
+
+```bash
+#!/bin/bash
+
+# ❌ 不好：直接 export 不持久
+export MY_VAR=value
+
+# ✅ 好：写入 CLAUDE_ENV_FILE
+if [ -n "$CLAUDE_ENV_FILE" ]; then
+  echo 'export MY_VAR=value' >> "$CLAUDE_ENV_FILE"
+fi
 ```
 
 ---
@@ -762,29 +991,51 @@ $env:PATH
 ### 使用场景
 
 ```
-✅ 自动代码审查
-✅ 自动文档生成
+✅ 自动代码格式化
 ✅ 自动测试执行
 ✅ 自动提交推送
 ✅ 团队通知
 ✅ 工作流集成
+✅ 安全验证
+✅ 环境配置
+✅ 智能决策
 ```
+
+### 官方 Hook 事件总览
+
+| 事件 | 触发时机 | 用途 |
+|------|---------|------|
+| **PreToolUse** | 工具调用前 | 验证、批准、记录 |
+| **PermissionRequest** | 权限对话框 | 自动决策 |
+| **PostToolUse** | 工具调用后 | 格式化、提交、通知 |
+| **Notification** | 通知时 | 自定义通知处理 |
+| **UserPromptSubmit** | 提交提示时 | 验证、添加上下文 |
+| **Stop** | Claude 完成时 | 智能判断是否继续 |
+| **SubagentStop** | Subagent 完成时 | 评估结果 |
+| **SessionStart** | 会话开始 | 环境设置、加载上下文 |
+| **SessionEnd** | 会话结束时 | 清理、记录 |
+| **PreCompact** | 压缩前 | 优化压缩内容 |
 
 ---
 
 ## 相关资源
 
+### 官方文档
+- **[Hooks 参考文档](https://code.claude.com/docs/zh-CN/hooks)** ⭐⭐⭐⭐⭐
+- [Hooks 入门指南](https://code.claude.com/docs/zh-CN/hooks-guide)
+- [插件参考](https://code.claude.com/docs/zh-CN/plugins-reference#hooks)
+
 ### 项目文档
 - [工作流自动化](../02-automation/03-workflow-automation.md) - 工作流基础
 - [自定义命令](./01-custom-commands.md) - 自定义命令
-
-### 外部资源
-- [Git Hooks](https://git-scm.com/book/githooks/)
-- [Webhooks](https://en.wikipedia.org/wiki/Webhook)
+- [Plugins 系统](../03-advanced-topics/02-plugins.md) - 插件 hooks
 
 ---
 
-**最后更新**: 2026-01-18
+**最后更新**: 2026-01-23
 **难度**: ⭐⭐⭐⭐⭐
-**阅读时间**: 45分钟
-**重要性**: ⭐⭐⭐⭐
+**阅读时间**: 50分钟
+**重要性**: ⭐⭐⭐⭐⭐
+
+**验证状态**: ✅ 已根据官方文档更新
+**官方文档版本**: Claude Code 2.1.15

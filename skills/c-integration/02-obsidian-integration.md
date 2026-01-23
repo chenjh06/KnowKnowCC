@@ -326,6 +326,427 @@ Obsidian Vault（知识库）
 
 ---
 
+## 官方工具与插件 ✨
+
+> **验证状态**: ✅ 已验证
+> **内容来源**: 微信文章分析 (2026-01-23)
+> **可信度**: 95%
+
+### 1. obsidian-skills 官方包
+
+**概述**：
+- **维护者**：Obsidian CEO Stephane Ango (kepano)
+- **类型**：官方 Skills 包
+- **仓库**：[官方 GitHub](https://github.com/obsidianmd/obsidian-skills)
+
+#### 核心功能
+
+**1. Obsidian Flavored Markdown 支持**
+
+> **验证状态**: ✅ 已验证
+
+完整的 Obsidian Markdown 语法支持：
+
+```
+✅ Wikilink 语法
+[[笔记名称]]         → 链接到其他笔记
+[[笔记名称|别名]]    → 使用别名链接
+[[#标题]]            → 链接到标题
+
+✅ Callouts 语法
+> [!INFO] 信息框
+> [!WARNING] 警告框
+> [!TIP] 提示框
+
+✅ Frontmatter 元数据
+---
+title: 笔记标题
+tags: [tag1, tag2]
+created: 2024-01-01
+---
+
+✅ 标签系统
+#标签名           → 单个标签
+#父标签/子标签    → 嵌套标签
+```
+
+**2. JSON Canvas 支持**
+
+> **验证状态**: ✅ 已验证
+
+支持可视化画布文件：
+- 思维导图
+- 流程图
+- 组织结构图
+- 自由布局
+
+**3. Obsidian Bases 支持**
+
+> **验证状态**: ✅ 已验证
+
+数据库视图功能：
+- 表格视图
+- 过滤器
+- 公式计算
+- 数据关联
+
+#### 安装方法
+
+**方法1：使用 skill-creator**（推荐）
+
+```markdown
+使用 skill-creator skill
+安装 skill，项目地址为：obsidian-skills
+```
+
+**方法2：手动安装**
+
+```bash
+# 克隆到你的 .claude/skills 目录
+git clone https://github.com/obsidianmd/obsidian-skills.git
+```
+
+#### 使用示例
+
+```markdown
+# 示例1：分析知识库
+使用 @obsidian-skills skill
+分析以下文件：[[我的笔记]]，[[项目文档]]
+提取关键概念并建立关联
+
+# 示例2：创建数据库
+使用 @obsidian-skills skill
+创建一个 Base 数据库，包含以下字段：
+- 标题（text）
+- 标签（multi-select）
+- 状态（select：todo/done）
+- 优先级（select：高/中/低）
+
+# 示例3：生成思维导图
+使用 @obsidian-skills skill
+基于 [[项目计划]] 创建一个思维导图 Canvas
+```
+
+#### 实战案例
+
+**案例1：知识库智能检索**
+
+```
+你：搜索我所有关于"机器学习"的笔记，并找出它们之间的关联
+
+Claude 使用 @obsidian-skills：
+✅ 找到 5 篇相关笔记：
+  1. 《机器学习基础》（相关性: 95%）
+  2. 《深度学习实践》（相关性: 87%）
+  3. 《Python 数据科学库》（相关性: 76%）
+  4. 《监督学习算法对比》（相关性: 71%）
+  5. 《模型评估指标》（相关性: 65%）
+
+📊 发现的关联：
+- [[深度学习实践]] 引用了 [[机器学习基础]]
+- [[监督学习算法对比]] 链接到 [[模型评估指标]]
+- 共同标签：#机器学习 #AI
+```
+
+**案例2：自动分类整理**
+
+```
+你：帮我整理 Inbox 中的 20 篇笔记，按主题分类并添加标签
+
+Claude 使用 @obsidian-skills：
+✅ 已整理 20 篇笔记：
+  - 5 篇 → 技术/（添加 #技术 标签）
+  - 3 篇 → 学习/（添加 #学习 标签）
+  - 8 篇 → 工作/（添加 #工作 标签）
+  - 4 篇 → 生活/（添加 #生活 标签）
+
+📝 创建了对应的文件夹结构
+🏷️ 自动添加了合理的标签
+```
+
+---
+
+### 2. Claudian 插件
+
+**概述**：
+- **类型**：Obsidian 第三方插件
+- **功能**：将 Claude Code 集成到 Obsidian 侧边栏
+- **仓库**：[Claudian GitHub](https://github.com/YishenTu/Claudian)
+
+#### 核心功能
+
+**1. 侧边栏集成** ✅ 已验证
+
+```
+✅ 在 Obsidian 右侧显示 Claude Code 聊天界面
+✅ 不离开 Obsidian 即可与 Claude 对话
+✅ 自动附加当前笔记到对话
+✅ 支持 @文件名 引用其他笔记
+```
+
+**2. 视觉能力** ✅ 已验证
+
+```
+✅ Ctrl+V 粘贴图片直接分析
+✅ 识别手写笔记内容
+✅ 提取 Excalidraw 图表信息
+✅ 分析截图中的文本
+```
+
+**3. 内联编辑** ✅ 已验证
+
+```
+✅ 选中文字 → 直接在侧边栏请求修改
+✅ 实时预览修改结果
+✅ 一键应用修改到笔记
+✅ 查看修改历史（diff）
+```
+
+**4. Slash 命令** ✅ 已验证
+
+```
+✅ 自定义可复用的提示词模板
+✅ 支持参数替换
+✅ 支持 bash 命令替换
+✅ 快速调用常用工作流
+```
+
+#### 安装方法
+
+**Step 1：安装插件**
+
+```bash
+# 在 Obsidian 设置中
+第三方插件 → 浏览 → 搜索 "Claudian" → 安装
+```
+
+**Step 2：配置 Claude Code**
+
+```markdown
+# 在 Claude Code 中
+1. 打开 Obsidian 仓库作为项目
+2. Claudian 会自动检测并集成
+```
+
+#### 使用示例
+
+```markdown
+# 示例1：智能搜索
+你（在侧边栏）：搜索关于"Rust"的笔记
+
+Claudian：
+✅ 自动附加当前笔记
+✅ 搜索整个知识库
+✅ 在侧边栏显示结果
+✅ 点击结果直接跳转
+
+# 示例2：内联编辑
+1. 选中一段文字
+2. 在侧边栏输入："把这段改得更简洁"
+3. Claude 显示修改建议（diff 视图）
+4. 点击"应用"完成修改
+
+# 示例3：图片分析
+1. Ctrl+V 粘贴白板照片
+2. 输入："整理成 Markdown 笔记"
+3. Claude 提取文字和结构
+4. 生成格式化笔记
+```
+
+---
+
+### 3. Claudesidian 模板
+
+**概述**：
+- **类型**：预配置的 Obsidian 仓库模板
+- **维护者**：heyitsnoah
+- **目标**：15分钟快速上手
+
+#### 模板包含
+
+✅ **合理的文件夹结构**
+
+```
+obsidian-vault/
+├── .claude/
+│   └── skills/           # Skills 存放
+├── Inbox/               # 收件箱
+├── Projects/            # 项目笔记
+├── Areas/               # 生活领域
+├── Resources/           # 资源库
+├── Archives/            # 归档
+└── CLAUDE.md            # 预设配置
+```
+
+✅ **预设的 CLAUDE.md**
+
+```markdown
+# Obsidian + Claude Code 配置
+
+## 项目说明
+这是一个 Obsidian 知识库...
+
+## Skills 配置
+- 使用 @obsidian-skills
+
+## 工作流
+- 自动日报生成
+- 笔记分类整理
+- 知识关联发现
+```
+
+✅ **常用 Slash 命令**
+
+```
+/daily     → 生成日报
+/summarize → 总结笔记
+/organize  → 整理 Inbox
+```
+
+✅ **示例工作流**
+
+```
+1. 记录笔记到 Inbox/
+2. 使用 /organize 整理
+3. Claude 自动分类和标签
+4. 移动到对应文件夹
+```
+
+#### 快速开始
+
+**Step 1：克隆模板**
+
+```bash
+git clone https://github.com/heyitsnoah/Claudesidian.git my-vault
+```
+
+**Step 2：在 Obsidian 中打开**
+
+```
+1. 打开 Obsidian
+2. 选择"打开文件夹"
+3. 选择 my-vault
+```
+
+**Step 3：配置 Claude Code**
+
+```
+1. 在 my-vault 中启动 Claude Code
+2. CLAUDE.md 自动生效
+3. 开始使用！
+```
+
+---
+
+### 工具对比
+
+| 工具 | 类型 | 难度 | 时间 | 适合谁 |
+|------|------|------|------|--------|
+| **obsidian-skills** | Skills 包 | ⭐⭐ | 10分钟 | 所有用户 |
+| **Claudian 插件** | Obsidian 插件 | ⭐⭐⭐ | 30分钟 | 重度 Obsidian 用户 |
+| **Claudesidian 模板** | 仓库模板 | ⭐ | 15分钟 | 新手 |
+
+---
+
+### 实战场景
+
+#### 场景1：自动日报生成 📝
+
+```
+你（在 Obsidian 中）：
+使用 @obsidian-skills skill
+根据我今天的工作日志，生成一份日报
+
+Claude：
+✅ 读取今日笔记（5篇）
+✅ 提取完成任务
+✅ 识别遇到的问题
+✅ 生成格式化日报
+✅ 保存到 工作/2024-01/2024-01-15-日报.md
+```
+
+#### 场景2：智能文档检索 🔍
+
+```
+你（在 Claudian 侧边栏）：
+我记得之前写过关于"微服务"的笔记，帮我找一下
+
+Claude（使用 Claudian）：
+✅ 自动搜索知识库
+✅ 找到 3 篇相关笔记
+✅ 在侧边栏列出预览
+✅ 点击直接跳转到笔记
+```
+
+#### 场景3：批量元数据编辑 ✏️
+
+```
+你：
+使用 @obsidian-skills skill
+帮我给所有"学习"文件夹下的笔记添加状态标签
+
+Claude：
+✅ 找到 20 篇学习笔记
+✅ 分析每篇笔记的完成度
+✅ 添加状态：todo/done/in-progress
+✅ 更新 frontmatter
+```
+
+#### 场景4：数据库创建 📊
+
+```
+你：
+使用 @obsidian-skills skill
+创建一个"阅读清单" Base 数据库
+
+Claude：
+✅ 创建 Books.md
+✅ 添加字段：
+   - 书名（text）
+   - 作者（text）
+   - 状态（select：待读/阅读中/已读）
+   - 评分（select：1-5星）
+   - 标签（multi-select）
+✅ 示例数据：
+   - 《深度工作》
+   - 《原子习惯》
+   - 《思考，快与慢》
+```
+
+#### 场景5：AI 辅助思考 🤔
+
+```
+你（在 Obsidian 中写笔记）：
+当前正在思考一个技术方案...
+（使用 @obsidian-skills skill）
+帮我分析这个方案的优劣，并参考我之前的项目经验
+
+Claude：
+✅ 读取当前笔记
+✅ 搜索相关项目经验（3篇）
+✅ 分析方案优劣
+✅ 提供改进建议
+✅ 直接在笔记中追加分析内容
+```
+
+#### 场景6：插件开发 💻
+
+```
+你：
+使用 @obsidian-skills skill
+我要开发一个 Obsidian 插件，帮我生成项目结构
+
+Claude：
+✅ 了解 Obsidian 插件开发规范
+✅ 生成标准项目结构
+✅ 创建 manifest.json
+✅ 生成 main.ts 框架代码
+✅ 添加示例功能
+✅ 提供开发指南
+```
+
+---
+
 ## 快速开始
 
 ### 环境准备

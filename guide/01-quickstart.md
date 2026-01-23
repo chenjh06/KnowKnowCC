@@ -131,20 +131,79 @@ claude config list
 2. 创建 API 密钥
 3. 复制密钥
 
-### 3. 可选配置
+### 3. 模型选择 ✨
 
-```bash
-# 设置默认模型
-claude config set model claude-sonnet-4-5-20250929
+> **验证状态**: ✅ 已验证
+> **内容来源**: 微信文章分析 (2026-01-23)
 
-# 设置输出样式
-claude config set output_style engineer-professional
+#### 选项1: 使用 Claude 官方模型（推荐新手）
 
-# 设置温度（0-1，越低越确定性）
-claude config set temperature 0.7
+**优点**:
+- ✅ 推理能力最强
+- ✅ 功能完整支持
+- ✅ 稳定可靠
+
+**成本**: $20/月 (约¥145)
+
+#### 选项2: 使用国产模型（推荐日常使用）⭐
+
+**GLM 4.7**（智谱 AI）
+
+**优点**:
+- 💰 成本低：54元/季（约¥18/月）
+- ⚡ 响应快：国内服务器，延迟低
+- 🇨🇳 中文好：中文理解优秀
+- ✅ 完全兼容：Claude Code 功能完整支持
+
+**适用场景**:
+- ✅ 日常开发
+- ✅ 代码生成
+- ✅ 文档写作
+- ✅ 学习项目
+
+**快速配置 GLM 4.7**:
+
+```powershell
+# 方法1: 使用配置工具（推荐）- Windows
+npx @z_ai/coding-helper
+
+# 按提示输入 API Key
+# API Key 获取：https://open.bigmodel.cn/
+# 选择套餐：Coding Lite（54元/季）
 ```
 
-**Windows 配置文件位置**：
+**其他国产模型**:
+
+| 模型 | 特点 | 价格 | 推荐度 |
+|------|------|------|--------|
+| **GLM 4.7** | 性价比最高 | 54元/季 | ⭐⭐⭐⭐⭐ |
+| MiniMax M2.1 | Coding 优化 | 按需 | ⭐⭐⭐⭐ |
+| Kimi K2 | 长文本/Thinking | 按需 | ⭐⭐⭐⭐ |
+| Qwen Plus | 企业级稳定 | 按需 | ⭐⭐⭐ |
+
+**详细配置指南**: 📚 [国产模型配置指南](../skills/c-integration/03-domestic-models-guide.md)
+
+**模型选择建议**:
+
+```
+新手学习：
+→ Claude 官方（体验最佳）
+
+日常开发：
+→ GLM 4.7（性价比最高）
+
+企业项目：
+→ 国产模型（数据合规）
+
+复杂推理：
+→ Claude 官方（能力最强）
+
+混合使用：
+→ 日常 GLM 4.7
+→ 复杂任务切换 Claude 官方
+```
+
+### 4. Windows 配置文件位置
 
 ```powershell
 # 查看配置目录

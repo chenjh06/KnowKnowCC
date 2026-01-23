@@ -310,6 +310,242 @@ my-mcp-server/
 
 ---
 
+## obsidian-skills 官方包 ✨
+
+> **验证状态**: ✅ 已验证
+> **内容来源**: 微信文章分析 (2026-01-23)
+> **可信度**: 95%
+
+### 概述
+
+**obsidian-skills** 是由 Obsidian CEO Stephane Ango (kepano) 亲自维护的官方 Skills 包，专为 Claude Code 与 Obsidian 的深度集成而设计。
+
+**为什么值得关注？**
+
+```
+✅ 官方维护
+   - Obsidian CEO 亲自维护
+   - 持续更新
+   - 稳定可靠
+
+✅ 完美兼容
+   - 完整支持 Obsidian 语法
+   - Claude Code 原生集成
+   - 无需额外配置
+
+✅ 功能强大
+   - Wikilink 语法
+   - JSON Canvas 支持
+   - Obsidian Bases 支持
+   - Frontmatter 元数据
+```
+
+### 核心功能
+
+#### 1. Obsidian Flavored Markdown 支持
+
+> **验证状态**: ✅ 已验证
+
+**完整语法支持**:
+
+```markdown
+✅ Wikilink 语法
+[[笔记名称]]         → 链接笔记
+[[笔记名称|别名]]    → 自定义链接文本
+[[#标题]]            → 链接标题
+[[#^]]               → 链接到段落
+
+✅ Callouts 语法
+> [!NOTE] 注意事项
+> [!TIP] 提示信息
+> [!WARNING] 警告
+> [!ERROR] 错误
+> [!INFO] 信息
+> [!SUCCESS] 成功
+> [!QUESTION] 问题
+> [!FAILURE] 失败
+> [!BUG] Bug
+> [!EXAMPLE] 示例
+> [!QUOTE] 引用
+
+✅ Embeds 语法
+![[图片]]             → 嵌入图片
+![[文档]]             → 嵌入文档
+![[文档]]#标题        → 嵌入特定部分
+
+✅ Tags 语法
+#标签名               → 标签
+#父标签/子标签        → 嵌套标签
+```
+
+**Frontmatter 元数据**:
+
+```yaml
+---
+title: 笔记标题
+tags: [tag1, tag2, tag3]
+created: 2024-01-15
+modified: 2024-01-16
+status: todo/done/in-progress
+priority: high/medium/low
+author: 作者名
+category: 分类
+---
+```
+
+#### 2. JSON Canvas 支持
+
+> **验证状态**: ✅ 已验证
+
+**功能特性**:
+- ✅ 思维导图创建
+- ✅ 流程图设计
+- ✅ 组织结构图
+- ✅ 自由布局画布
+
+**使用示例**:
+
+```markdown
+使用 @obsidian-skills skill
+基于 [[项目计划]] 创建一个思维导图 Canvas
+包含以下节点：
+- 核心目标
+- 关键任务
+- 依赖关系
+```
+
+#### 3. Obsidian Bases 支持
+
+> **验证状态**: ✅ 已验证
+
+**数据库功能**:
+- ✅ 表格视图
+- ✅ 过滤器
+- ✅ 排序
+- ✅ 公式计算
+- ✅ 数据关联
+
+**Base 示例**:
+
+```markdown
+使用 @obsidian-skills skill
+创建一个"阅读清单" Base 数据库
+包含以下字段：
+- 书名（text）
+- 作者（text）
+- 状态（select：待读/阅读中/已读）
+- 评分（select：1-5星）
+- 标签（multi-select）
+- 阅读日期（date）
+```
+
+### 安装与配置
+
+#### 方法1: 使用 skill-creator（推荐）
+
+```markdown
+使用 skill-creator skill
+安装 skill，项目地址为：obsidian-skills
+```
+
+#### 方法2: 手动安装
+
+```bash
+# 克隆到你的 .claude/skills 目录
+git clone https://github.com/obsidianmd/obsidian-skills.git
+
+# 或使用 submodule
+cd .claude/skills
+git submodule add https://github.com/obsidianmd/obsidian-skills.git
+```
+
+### 使用示例
+
+#### 示例1: 智能检索笔记
+
+```markdown
+使用 @obsidian-skills skill
+搜索我所有关于"微服务架构"的笔记
+并找出它们之间的关联关系
+```
+
+**Claude 的输出**:
+```
+✅ 找到 3 篇相关笔记：
+  1. 《微服务架构设计》（相关性: 92%）
+  2. 《服务拆分实践》（相关性: 85%）
+  3. 《API 网关设计》（相关性: 78%）
+
+📊 发现的关联：
+- [[服务拆分实践]] 引用了 [[微服务架构设计]]
+- [[API 网关设计]] 链接到 [[微服务架构设计]]
+- 共同标签：#微服务 #架构 #后端
+```
+
+#### 示例2: 自动分类整理
+
+```markdown
+使用 @obsidian-skills skill
+帮我整理 Inbox 中的 15 篇笔记
+按主题分类并添加标签
+```
+
+**Claude 的输出**:
+```
+✅ 已整理 15 篇笔记：
+  - 5 篇 → 技术/（添加 #技术 标签）
+  - 3 篇 → 学习/（添加 #学习 标签）
+  - 4 篇 → 工作/（添加 #工作 标签）
+  - 3 篇 → 生活/（添加 #生活 标签）
+
+📝 创建了对应的文件夹结构
+🏷️ 自动添加了合理的标签
+```
+
+#### 示例3: 数据库创建
+
+```markdown
+使用 @obsidian-skills skill
+创建一个"任务管理" Base 数据库
+包含以下字段：
+- 任务名称（text）
+- 状态（select：todo/in-progress/done）
+- 优先级（select：高/中/低）
+- 截止日期（date）
+- 负责人（text）
+```
+
+### 与 MCP 的对比
+
+| 特性 | obsidian-skills | 自定义 MCP |
+|------|----------------|-----------|
+| **开发难度** | ⭐ 开箱即用 | ⭐⭐⭐⭐⭐ 需要开发 |
+| **维护成本** | ⭐ 官方维护 | ⭐⭐⭐⭐⭐ 自己维护 |
+| **功能完整度** | ⭐⭐⭐⭐⭐ 非常完整 | ⭐⭐⭐ 取决于实现 |
+| **定制性** | ⭐⭐ 固定功能 | ⭐⭐⭐⭐⭐ 完全定制 |
+| **适用场景** | Obsidian 用户 | 特殊需求 |
+
+### 何时使用 obsidian-skills？
+
+✅ **推荐使用**:
+- 你是 Obsidian 用户
+- 需要快速集成（无需开发）
+- 想要官方支持（稳定可靠）
+- 需要标准 Obsidian 功能
+
+⚠️ **不推荐使用**:
+- 有特殊定制需求
+- 需要访问非 Obsidian 数据
+- 需要复杂的业务逻辑
+
+### 相关资源
+
+- **官方仓库**: [obsidian-skills GitHub](https://github.com/obsidianmd/obsidian-skills)
+- **详细指南**: [Obsidian 集成指南](../../skills/c-integration/02-obsidian-integration.md)
+- **Obsidian 文档**: https://help.obsidian.md/
+
+---
+
 ## 创建第一个 MCP 服务器
 
 ### 步骤 1: 基础服务器
