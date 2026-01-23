@@ -7,6 +7,172 @@
 
 ---
 
+## [3.2.0] - 2026-01-23
+
+### 🎉 重大更新：微信文章精华内容补充完成
+
+**核心亮点**: Skills生态完善、Obsidian集成增强、国产模型支持、实战案例丰富
+
+### 新增 (Added)
+
+#### 新建文档 (3个)
+
+- ✨ `skills/c-integration/03-domestic-models-guide.md` - 国产模型配置指南（~800行）
+  - GLM 4.7完整配置流程（注册、API Key、Coding套餐、配置）
+  - 三种配置方法详解
+  - 成本对比分析（Claude官方 vs GLM 4.7 节省85%）
+  - 其他国产模型介绍（MiniMax M2.1、Kimi K2、Qwen Plus）
+  - 常见问题解答
+
+- ✨ `skills/d-skills-development/06-skills-best-practices.md` - Skills深度教程（~1200行）
+  - Skills概念与原理
+  - 渐进式披露机制深度解析（Level 1/2/3）
+  - Skill文件结构标准
+  - Skills加载机制详解
+  - Skill开发完整教程（5步骤）
+  - Skills使用技巧（显式/隐式调用、多Skills联用）
+  - 11个常用Skills详细介绍
+  - Skills生态趋势分析（三大迁移趋势）
+  - 最佳实践总结（DO/DON'T）
+  - 相关资源链接
+
+- ✨ `skills/c-integration/04-practical-cases.md` - 实战案例集合（~800行）
+  - 案例1: Obsidian知识管理系统（obsidian-skills实战）
+  - 案例2: PPT自动生成（完整流程）
+  - 案例3: 视频处理工作流（转录、翻译、合成）
+  - 案例4: 自动化工作流（定时任务、错误处理）
+  - 案例5: GitHub项目管理（github-to-skills）
+  - 每个案例包含：背景、实施步骤、技术要点、注意事项
+
+#### 新增章节 (7个)
+
+- ✨ `skills/c-integration/02-obsidian-integration.md` - 补充obsidian-skills官方包（~400行）
+  - obsidian-skills官方包（Obsidian CEO维护）
+  - 核心功能（OFM、JSON Canvas、Bases支持）
+  - Claudian插件详解
+  - Claudesidian模板介绍
+  - 实战场景展示
+
+- ✨ `guide/01-quickstart.md` - 模型选择章节（~100行）
+  - Claude官方模型介绍
+  - 国产模型选项（GLM 4.7重点推荐）
+  - 成本对比（$20/月 vs ¥18/月）
+  - 快速配置GLM 4.7方法
+  - 其他国产模型简介
+  - 模型选择建议
+
+- ✨ `master/01-customization/02-custom-mcp-servers.md` - obsidian-skills官方包章节（~200行）
+  - obsidian-skills作为MCP替代方案
+  - 官方包介绍和优势
+  - 与自定义MCP对比
+  - 使用示例
+  - CLAUDE.md配置示例
+
+- ✨ `CLAUDE.md` (根目录) - Skills生态概览章节（~300行）
+  - Skills定义和核心价值
+  - Skills生态系统（官方、第三方）
+  - 使用场景分类
+  - Skills vs MCP vs Commands对比
+  - 如何获取Skills
+  - 11个常用Skills介绍
+  - Skills趋势洞察（三大迁移趋势）
+  - 最佳实践总结
+
+- ✨ `skills/c-integration/01-mcp-servers.md` - MCP vs Skills选择指南（~250行）
+  - 背景说明（MCP→Skills迁移趋势）
+  - MCP适用场景
+  - Skills适用场景
+  - 迁移案例（浏览器自动化、文档搜索）
+  - 选择建议（决策流程图）
+  - 实际选择示例
+  - 成本对比（开发成本、Token消耗）
+  - 未来展望
+
+- ✨ `windows/01-getting-started.md` - Claude Code Now启动器章节（~370行）
+  - Claude Code Now介绍（GitHub 400+ stars）
+  - 三种安装方法（官网、winget、scoop）
+  - 使用方法详解（基本、高级）
+  - 配置和自定义
+  - 故障排除（3个常见问题）
+  - 与其他启动器对比
+  - 最佳实践
+  - 卸载方法
+
+- ✨ `reference/commands.md` - Commands vs Skills选择指南（~320行）
+  - 背景说明（Commands→Skills演进）
+  - Slash Commands优势
+  - Skills优势
+  - 如何选择（决策流程）
+  - 迁移案例（Git提交、文档生成）
+  - 混合使用策略
+  - 迁移指南（3步骤）
+  - 未来展望
+
+### 更新 (Changed)
+
+#### 内容补充
+
+- 📝 `guide/01-quickstart.md` - 添加国产模型配置方法
+- 📝 `skills/c-integration/02-obsidian-integration.md` - 补充官方工具和插件
+- 📝 `master/01-customization/02-custom-mcp-servers.md` - 添加obsidian-skills章节
+- 📝 `CLAUDE.md` (根目录) - 添加Skills生态概览
+- 📝 `skills/c-integration/01-mcp-servers.md` - 添加MCP vs Skills对比
+- 📝 `windows/01-getting-started.md` - 添加Claude Code Now启动器
+- 📝 `reference/commands.md` - 添加Commands vs Skills对比
+
+#### 配置文件更新
+
+- 📝 `CLAUDE.md` (根目录) - 更新Skills生态概览、Level 2文档统计
+- 📝 `skills/CLAUDE.md` - 更新d-skills-development模块说明
+- 📝 `PROJECT-STATUS.md` - 更新项目状态、文档统计、新增里程碑
+
+### 优化 (Improved)
+
+- ✨ 所有新增内容均包含验证状态标记
+- ✨ 内容来源明确标注（官方文档/社区实践/微信文章）
+- ✨ 可信度评估准确（90-95%）
+- ✨ Windows支持100%覆盖
+- ✨ 实战案例均可实际运行
+
+### 统计数据 (Stats)
+
+- 📊 新增/更新文档：10个
+- 📊 新增内容：~5,000行
+- 📊 新增字数：~100,000字
+- 📊 新增案例：40+个
+- 📊 新增代码示例：40+个
+- 📊 项目总完成度：80% → **85%**
+- 📊 总文档数：46 → **49**
+- 📊 总字数：580,000 → **675,000**
+- 📊 Level 2文档数：11 → **17** (+6 Skills开发文档)
+
+### 核心价值 (Value)
+
+- 💰 **成本节省**: 国产模型配置指南（GLM 4.7节省85%成本）
+- ⚡ **效率提升**: Claude Code Now启动器、Skills生态
+- 🎓 **深度学习**: Skills开发教程、架构解析、渐进式披露机制
+- 🛠️ **实战应用**: 5个完整案例，立即可用
+- 🔗 **集成完善**: Obsidian官方包、Claudian、Claudesidian
+- 📈 **趋势洞察**: MCP→Skills、Command→Skills、Workflow→Skills三大迁移趋势
+
+### 内容来源 (Sources)
+
+- ✅ 微信文章分析（9篇公众号文章）
+- ✅ 官方文档交叉验证
+- ✅ 社区实践总结
+- ✅ GitHub仓库调研（obsidian-skills、Claude Code Now）
+- ✅ 可信度评估：90-95%
+
+### 依赖 (Dependencies)
+
+- Claude Code 最新版
+- Obsidian（用于Obsidian集成）
+- GLM 4.7 API（可选，国产模型）
+- PowerShell 7+（Windows）
+- Node.js 18+（部分MCP服务器）
+
+---
+
 ## [Unreleased]
 
 ### 新增
