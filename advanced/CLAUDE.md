@@ -1,4 +1,4 @@
-# skills 模块 - Level 2 进阶提升
+# advanced 模块 - Level 2 进阶提升
 
 [根目录](../CLAUDE.md) > **skills**
 
@@ -25,7 +25,7 @@
 ### 四个技能类别
 
 ```
-skills/
+advanced/
 ├── a-productivity/     ← 生产力提升（4个技能）
 ├── b-code-quality/     ← 代码质量（5个技能）
 ├── c-integration/      ← 集成扩展（4个技能）
@@ -123,7 +123,7 @@ skills/
 ### 文档结构
 
 ```
-skills/
+advanced/
 ├── README.md                         (6KB)  - 技能地图
 │
 ├── a-productivity/                          - 生产力提升
@@ -328,7 +328,7 @@ B-子代理
 ### 2026-01-18
 
 **新增**:
-- ✨ 创建 skills 模块 CLAUDE.md
+- ✨ 创建 advanced 模块 CLAUDE.md
 - ✨ 添加模块职责说明
 - ✨ 添加学习路径建议
 - ✨ 添加常见问题解答

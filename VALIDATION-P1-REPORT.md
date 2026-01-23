@@ -124,7 +124,7 @@ plugin/
 ├── .claude-plugin/plugin.json  (清单文件)
 ├── commands/                  (斜杠命令)
 ├── agents/                    (子代理)
-├── skills/                    (代理 Skills)
+├── advanced/                    (代理 Skills)
 ├── hooks/                     (hooks.json)
 ├── .mcp.json                  (MCP 配置)
 └── .lsp.json                  (LSP 配置)
@@ -141,7 +141,7 @@ plugin/
 |------|---------|---------|------|
 | 插件清单 | plugin.json | plugin.json | ✅ 匹配 |
 | 命令目录 | commands/ | commands/ | ✅ 匹配 |
-| Skills 目录 | skills/ | skills/ | ✅ 匹配 |
+| Skills 目录 | advanced/ | advanced/ | ✅ 匹配 |
 | Hooks 配置 | hooks/hooks.json | hooks/ | ✅ 匹配 |
 | MCP 配置 | .mcp.json | .mcp.json | ✅ 匹配 |
 

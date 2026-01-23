@@ -26,7 +26,7 @@
 
 **文档总量**:
 - Level 1 (guide/): 6 个文档，~60,000 字
-- Level 2 (skills/): 17 个文档，~230,000 字
+- Level 2 (advanced/): 17 个文档，~230,000 字
 - Level 3 (master/): 16 个文档，~330,000 字
 - Windows: 4 个文档，~79,000 字
 - Reference: 3 个文档，~61,000 字
@@ -521,7 +521,7 @@ KnowKnowCC 项目能够为用户带来：
 
 已完整验证: 56 个文档 (81%)
 ├─ guide/ (6) - 100%
-├─ skills/ (17) - 100%
+├─ advanced/ (17) - 100%
 ├─ master/ (16) - 100%
 └─ windows/ (4) - 67%
 

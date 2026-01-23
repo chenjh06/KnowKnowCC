@@ -5,7 +5,7 @@
 **阅读时间**: 50分钟
 **难度**: ⭐⭐⭐⭐⭐
 **适用场景**: 定制化工具、团队集成、特殊数据源、内部系统
-**前置要求**: [Level 2 进阶提升](../../skills/), [MCP 服务器精选](../../skills/c-integration/01-mcp-servers.md), Node.js 基础
+**前置要求**: [Level 2 进阶提升](../../advanced/), [MCP 服务器精选](../../advanced/c-integration/01-mcp-servers.md), Node.js 基础
 
 ---
 
@@ -541,7 +541,7 @@ git submodule add https://github.com/obsidianmd/obsidian-skills.git
 ### 相关资源
 
 - **官方仓库**: [obsidian-skills GitHub](https://github.com/obsidianmd/obsidian-skills)
-- **详细指南**: [Obsidian 集成指南](../../skills/c-integration/02-obsidian-integration.md)
+- **详细指南**: [Obsidian 集成指南](../../advanced/c-integration/02-obsidian-integration.md)
 - **Obsidian 文档**: https://help.obsidian.md/
 
 ---
@@ -2051,8 +2051,8 @@ const normalized = filePath.replace(/\\/g, '/');
 - [Claude Code 文档](https://claude.ai/code/docs)
 
 ### 项目文档
-- [MCP 服务器精选](../../skills/c-integration/01-mcp-servers.md) - 现有服务器
-- [集成扩展](../../skills/c-integration/README.md) - 更多集成案例
+- [MCP 服务器精选](../../advanced/c-integration/01-mcp-servers.md) - 现有服务器
+- [集成扩展](../../advanced/c-integration/README.md) - 更多集成案例
 
 ### 示例项目
 - [GitHub MCP 服务器](https://github.com/modelcontextprotocol/servers)
@@ -2063,4 +2063,4 @@ const normalized = filePath.replace(/\\/g, '/');
 **最后更新**: 2026-01-18
 **难度**: ⭐⭐⭐⭐⭐
 **阅读时间**: 50分钟
-**前置要求**: [Level 2 进阶提升](../../skills/), [MCP 服务器精选](../../skills/c-integration/01-mcp-servers.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [MCP 服务器精选](../../advanced/c-integration/01-mcp-servers.md)

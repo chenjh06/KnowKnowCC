@@ -185,8 +185,8 @@ guide/02-core-features.md    → 功能详解
 ### 进阶技能
 
 ```
-skills/a-productivity/       → 效率提升
-skills/b-code-quality/       → 最佳实践
+advanced/a-productivity/       → 效率提升
+advanced/b-code-quality/       → 最佳实践
 ```
 
 ### Windows 用户
@@ -327,5 +327,5 @@ site:github.com
 
 ---
 
-**最后更新**: 2026-01-19
-**维护**: Reference 模块 ✅ 100% 完成
+**最后更新**: 2026-01-23
+**维护**: Reference 模块 ✅ 50% 完成

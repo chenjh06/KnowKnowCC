@@ -142,8 +142,8 @@
 ## 🔗 相关资源
 
 ### 前置要求
-- [Level 2 进阶提升](../../skills/)
-- [Plan 模式](../../skills/a-productivity/01-plan-mode.md)
+- [Level 2 进阶提升](../../advanced/)
+- [Plan 模式](../../advanced/a-productivity/01-plan-mode.md)
 
 ### 相关文档
 - [自定义和扩展](../01-customization/) - 定制化工具

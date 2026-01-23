@@ -988,7 +988,7 @@ winget upgrade ClaudeCode.ClaudeCode
    → [guide/02-core-features.md](../guide/02-core-features.md)
 
 4. 学习进阶技巧
-   → [skills/a-productivity/](../skills/a-productivity/README.md)
+   → [advanced/a-productivity/](../advanced/a-productivity/README.md)
 ```
 
 ### 建议安装的工具

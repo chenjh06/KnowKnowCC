@@ -740,7 +740,7 @@ rm ~/.claude/keybindings.json
 
 - [guide/01-quickstart.md](../guide/01-quickstart.md) - 10分钟快速上手
 - [guide/02-core-features.md](../guide/02-core-features.md) - 8个核心功能详解
-- [skills/a-productivity/03-keyboard-shortcuts.md](../skills/a-productivity/03-keyboard-shortcuts.md) - 快捷键深度指南
+- [advanced/a-productivity/03-keyboard-shortcuts.md](../advanced/a-productivity/03-keyboard-shortcuts.md) - 快捷键深度指南
 
 ### 其他速查表
 

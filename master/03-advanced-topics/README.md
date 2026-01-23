@@ -146,8 +146,8 @@
 ## 🔗 相关资源
 
 ### 前置要求
-- [Level 2 进阶提升](../../skills/)
-- [上下文优化](../../skills/a-productivity/04-context-optimization.md)
+- [Level 2 进阶提升](../../advanced/)
+- [上下文优化](../../advanced/a-productivity/04-context-optimization.md)
 
 ### 相关文档
 - [自定义和扩展](../01-customization/) - 定制化工具

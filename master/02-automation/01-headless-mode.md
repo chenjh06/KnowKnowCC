@@ -5,7 +5,7 @@
 **阅读时间**: 35分钟
 **难度**: ⭐⭐⭐⭐
 **适用场景**: 自动化脚本、CI/CD 集成、批处理
-**前置要求**: [Level 2 进阶提升](../../skills/), [工作流自动化](./03-workflow-automation.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [工作流自动化](./03-workflow-automation.md)
 
 ---
 

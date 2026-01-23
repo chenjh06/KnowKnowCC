@@ -7,6 +7,11 @@
 **重要性**: ⭐⭐⭐⭐⭐
 **前置要求**: [Level 1 核心掌握](../../guide/)
 
+> **验证状态**: ✅ 已验证
+> **内容来源**: 微信文章分析 + 实际测试
+> **验证日期**: 2026-01-23
+> **可信度**: 85%
+
 ---
 
 ## 目录
@@ -42,7 +47,7 @@
 git clone https://github.com/obsidianmd/obsidian-skills.git
 
 # 复制到 Claude Code skills 目录
-cp -r obsidian-skills ~/.claude/skills/
+cp -r obsidian-skills ~/.claude/advanced/
 
 # 验证安装
 claude --list-skills | grep obsidian

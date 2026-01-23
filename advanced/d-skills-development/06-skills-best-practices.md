@@ -517,7 +517,7 @@ Linux: ✅
 #### 本地使用
 
 ```
-1. 放置 Skill 到 ~/.claude/skills/
+1. 放置 Skill 到 ~/.claude/advanced/
 2. 重启 Claude Code
 3. 使用 @skill-name 调用
 ```

@@ -1100,7 +1100,7 @@ New-Item -ItemType File -Path "C:\new.txt" # 创建文件
 
 ### 核心文档
 - [快速上手](../guide/01-quickstart.md) - Claude Code 基础
-- [会话管理](../skills/a-productivity/02-session-management.md) - 会话技巧
+- [会话管理](../advanced/a-productivity/02-session-management.md) - 会话技巧
 
 ### 外部资源
 - [PowerShell 文档](https://docs.microsoft.com/en-us/powershell/)

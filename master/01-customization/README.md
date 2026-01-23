@@ -169,8 +169,8 @@
 ## 🔗 相关资源
 
 ### 前置要求
-- [Level 2 进阶提升](../../skills/)
-- [MCP 服务器精选](../../skills/c-integration/01-mcp-servers.md)
+- [Level 2 进阶提升](../../advanced/)
+- [MCP 服务器精选](../../advanced/c-integration/01-mcp-servers.md)
 
 ### 相关文档
 - [自动化和 CI/CD](../02-automation/) - 工作流自动化

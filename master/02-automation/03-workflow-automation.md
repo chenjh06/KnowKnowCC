@@ -5,7 +5,7 @@
 **阅读时间**: 45分钟
 **难度**: ⭐⭐⭐⭐⭐
 **适用场景**: 重复性任务、批量操作、CI/CD集成、团队协作
-**前置要求**: [Level 2 进阶提升](../../skills/), [Headless模式](./01-headless-mode.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [Headless模式](./01-headless-mode.md)
 
 ---
 
@@ -1711,7 +1711,7 @@ npm cache clean --force
 ### 项目文档
 - [Headless模式](./01-headless-mode.md) - 脚本化使用
 - [CI/CD集成](./02-ci-cd-integration.md) - 持续集成
-- [Plan模式](../../skills/a-productivity/01-plan-mode.md) - 任务规划
+- [Plan模式](../../advanced/a-productivity/01-plan-mode.md) - 任务规划
 
 ### 外部资源
 - [GitHub Actions 文档](https://docs.github.com/en/actions)
@@ -1723,4 +1723,4 @@ npm cache clean --force
 **最后更新**: 2026-01-18
 **难度**: ⭐⭐⭐⭐⭐
 **阅读时间**: 45分钟
-**前置要求**: [Level 2 进阶提升](../../skills/), [Headless模式](./01-headless-mode.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [Headless模式](./01-headless-mode.md)

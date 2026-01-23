@@ -233,13 +233,13 @@ guide/02-core-features.md    → 每个功能的 Windows 说明
 guide/03-first-project.md    → Windows 特定的命令
 ```
 
-### 进阶技能（skills/）
+### 进阶技能（advanced/）
 
 进阶内容也包含 Windows 专门说明：
 
 ```
-skills/a-productivity/       → PowerShell 特定技巧
-skills/c-integration/        → Windows 集成注意事项
+advanced/a-productivity/       → PowerShell 特定技巧
+advanced/c-integration/        → Windows 集成注意事项
 ```
 
 ---
@@ -347,5 +347,5 @@ skills/c-integration/        → Windows 集成注意事项
 
 ---
 
-**最后更新**: 2025-01-17
+**最后更新**: 2026-01-23
 **相关**: [Level 1 核心掌握](../guide/README.md) | [快速参考](../reference/README.md)

@@ -5,7 +5,7 @@
 **阅读时间**: 45分钟
 **难度**: ⭐⭐⭐⭐
 **适用场景**: 自动化测试、CI/CD 集成、质量保障
-**前置要求**: [Level 2 进阶提升](../../skills/), [工作流自动化](./03-workflow-automation.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [工作流自动化](./03-workflow-automation.md)
 
 ---
 

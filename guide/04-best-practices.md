@@ -1134,7 +1134,7 @@ P2 - 逐步改进：
 **继续学习**：
 
 ```
-[Level 2: 进阶提升](../skills/README.md)
+[Level 2: 进阶提升](../advanced/README.md)
 ├─ a-productivity/    生产力提升
 ├─ b-code-quality/    代码质量
 └─ c-integration/     集成扩展
@@ -1154,4 +1154,4 @@ P2 - 逐步改进：
 **记住**：避免错误本身就是提升效率！
 
 **最后更新**: 2025-01-17
-**下一阶段**: [Level 2 - 进阶提升](../skills/README.md)
+**下一阶段**: [Level 2 - 进阶提升](../advanced/README.md)

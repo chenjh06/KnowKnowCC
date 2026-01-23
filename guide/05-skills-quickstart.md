@@ -62,7 +62,7 @@ Claude: [执行部署技能]
 支持模板、示例、脚本等辅助文件:
 
 ```
-.claude/skills/deploy/
+.claude/advanced/deploy/
 ├── SKILL.md
 ├── templates/
 ├── scripts/
@@ -197,15 +197,15 @@ Test-Path "$env:USERPROFILE\.claude\skills\greet"
 
 ```bash
 # 创建技能目录
-mkdir -p ~/.claude/skills/greet
+mkdir -p ~/.claude/advanced/greet
 
 # 验证目录创建
-ls -la ~/.claude/skills/greet
+ls -la ~/.claude/advanced/greet
 ```
 
 ### 步骤 2: 编写 SKILL.md
 
-创建文件 `~/.claude/skills/greet/SKILL.md` (Windows: `%USERPROFILE%\.claude\skills\greet\SKILL.md`):
+创建文件 `~/.claude/advanced/greet/SKILL.md` (Windows: `%USERPROFILE%\.claude\skills\greet\SKILL.md`):
 
 ```markdown
 ---
@@ -442,15 +442,15 @@ allowed-tools:
 
 | 部署方式 | 路径 | 作用域 | 适用场景 | 示例 |
 |---------|------|--------|---------|------|
-| **个人级** | `~/.claude/skills/` | 仅当前用户 | 个人常用技能 | greet、todo |
-| **项目级** | `.claude/skills/` | 当前项目 | 项目特定技能 | api-conventions |
+| **个人级** | `~/.claude/advanced/` | 仅当前用户 | 个人常用技能 | greet、todo |
+| **项目级** | `.claude/advanced/` | 当前项目 | 项目特定技能 | api-conventions |
 | **插件级** | npm 包 | 全局分发 | 团队共享、开源发布 | @company/skills |
 
 ### 方式 1: 个人级技能（推荐新手）
 
 **路径**:
 - Windows: `%USERPROFILE%\.claude\skills\`
-- macOS/Linux: `~/.claude/skills/`
+- macOS/Linux: `~/.claude/advanced/`
 
 **特点**:
 - ✅ 仅对当前用户可用
@@ -467,8 +467,8 @@ New-Item -Path "$env:USERPROFILE\.claude\skills\my-skill\SKILL.md" -ItemType Fil
 
 ```bash
 # macOS/Linux
-mkdir -p ~/.claude/skills/my-skill
-touch ~/.claude/skills/my-skill/SKILL.md
+mkdir -p ~/.claude/advanced/my-skill
+touch ~/.claude/advanced/my-skill/SKILL.md
 ```
 
 **验证**:
@@ -485,7 +485,7 @@ ls ~/.claude/skills
 
 ### 方式 2: 项目级技能
 
-**路径**: `.claude/skills/`（项目根目录）
+**路径**: `.claude/advanced/`（项目根目录）
 
 **特点**:
 - ✅ 项目团队成员共享
@@ -496,14 +496,14 @@ ls ~/.claude/skills
 
 ```powershell
 # Windows PowerShell
-mkdir ".claude/skills/project-conventions"
-New-Item -Path ".claude/skills/project-conventions/SKILL.md" -ItemType File
+mkdir ".claude/advanced/project-conventions"
+New-Item -Path ".claude/advanced/project-conventions/SKILL.md" -ItemType File
 ```
 
 ```bash
 # macOS/Linux
-mkdir -p .claude/skills/project-conventions
-touch .claude/skills/project-conventions/SKILL.md
+mkdir -p .claude/advanced/project-conventions
+touch .claude/advanced/project-conventions/SKILL.md
 ```
 
 **推荐项目技能**:
@@ -524,10 +524,10 @@ touch .claude/skills/project-conventions/SKILL.md
 **基本结构**:
 
 ```
-@my-company/skills/
+@my-company/advanced/
 ├── package.json
 ├── README.md
-└── skills/
+└── advanced/
     ├── deploy/
     │   └── SKILL.md
     └── test/
@@ -556,7 +556,7 @@ npm install -g @my-company/skills
 npm install -g git+https://github.com/my-company/skills.git
 ```
 
-**详细说明**: 详见 [skills/d-skills-development/04-deployment-distribution.md](../skills/d-skills-development/04-deployment-distribution.md)
+**详细说明**: 详见 [advanced/d-skills-development/04-deployment-distribution.md](../advanced/d-skills-development/04-deployment-distribution.md)
 
 ---
 
@@ -583,12 +583,12 @@ mkdir "$env:USERPROFILE\.claude\skills\todo"
 
 ```bash
 # macOS/Linux
-mkdir -p ~/.claude/skills/todo
+mkdir -p ~/.claude/advanced/todo
 ```
 
 ### 步骤 2: 编写 SKILL.md
 
-创建文件 `~/.claude/skills/todo/SKILL.md`:
+创建文件 `~/.claude/advanced/todo/SKILL.md`:
 
 ```markdown
 ---
@@ -734,7 +734,7 @@ winget install Microsoft.PowerShell
 
 ```powershell
 # SKILL.md 中使用
-$env:USERPROFILE/.claude/skills/
+$env:USERPROFILE/.claude/advanced/
 ```
 
 **⚠️ 备选: 双反斜杠**
@@ -856,7 +856,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 - 限制: 功能较简单
 
 **新系统** (Skills):
-- 路径: `.claude/skills/review/SKILL.md`
+- 路径: `.claude/advanced/review/SKILL.md`
 - 功能: 命令 + 目录 + 配置 + 自动加载
 - 优势: 更强大、更灵活
 
@@ -933,7 +933,7 @@ description: 管理待办事项。支持添加、列表、完成、删除操作�
 **A**: 可以！技能目录可以包含辅助文件:
 
 ```
-.claude/skills/deploy/
+.claude/advanced/deploy/
 ├── SKILL.md              # 主技能文件
 ├── templates/            # 模板文件
 │   ├── deploy.yml.j2
@@ -962,8 +962,8 @@ description: 管理待办事项。支持添加、列表、完成、删除操作�
 **方式 1: 项目级技能** (推荐)
 
 ```bash
-# 将技能放入项目的 .claude/skills/
-git add .claude/skills/
+# 将技能放入项目的 .claude/advanced/
+git add .claude/advanced/
 git commit -m "Add team skills"
 git push
 ```
@@ -972,13 +972,13 @@ git push
 
 **方式 2: 创建 npm 包**
 
-详见 [skills/d-skills-development/04-deployment-distribution.md](../skills/d-skills-development/04-deployment-distribution.md)
+详见 [advanced/d-skills-development/04-deployment-distribution.md](../advanced/d-skills-development/04-deployment-distribution.md)
 
 **方式 3: 直接分享文件**
 
 ```bash
 # 打包技能目录
-zip -r my-skill.zip .claude/skills/my-skill/
+zip -r my-skill.zip .claude/advanced/my-skill/
 
 # 分发给团队成员，让他们解压到自己的技能目录
 ```
@@ -1046,14 +1046,14 @@ description: 完整的部署流程，包括测试、构建、部署、验证
 
 ### 继续学习
 
-**Level 2: Skills 开发实战** → [skills/d-skills-development/](../skills/d-skills-development/README.md)
+**Level 2: Skills 开发实战** → [advanced/d-skills-development/](../advanced/d-skills-development/README.md)
 
 **学习路径**:
-1. [01-skill-fundamentals.md](../skills/d-skills-development/01-skill-fundamentals.md) - 基础概念深入
-2. [02-practical-skills.md](../skills/d-skills-development/02-practical-skills.md) - 5 个实战案例
-3. [03-advanced-features.md](../skills/d-skills-development/03-advanced-features.md) - 高级特性
-4. [04-deployment-distribution.md](../skills/d-skills-development/04-deployment-distribution.md) - 部署和分发
-5. [05-testing-validation.md](../skills/d-skills-development/05-testing-validation.md) - 测试和验证
+1. [01-skill-fundamentals.md](../advanced/d-skills-development/01-skill-fundamentals.md) - 基础概念深入
+2. [02-practical-skills.md](../advanced/d-skills-development/02-practical-skills.md) - 5 个实战案例
+3. [03-advanced-features.md](../advanced/d-skills-development/03-advanced-features.md) - 高级特性
+4. [04-deployment-distribution.md](../advanced/d-skills-development/04-deployment-distribution.md) - 部署和分发
+5. [05-testing-validation.md](../advanced/d-skills-development/05-testing-validation.md) - 测试和验证
 
 **预计学习时间**: 4-6 周（系统学习）或 1-2 周（快速浏览）
 
@@ -1084,8 +1084,8 @@ description: 完整的部署流程，包括测试、构建、部署、验证
    - Markdown 内容: 指令
 
 4. **三种部署方式**
-   - 个人级: `~/.claude/skills/`
-   - 项目级: `.claude/skills/`
+   - 个人级: `~/.claude/advanced/`
+   - 项目级: `.claude/advanced/`
    - 插件级: npm 包
 
 ### 实战成果
@@ -1118,4 +1118,4 @@ description: 完整的部署流程，包括测试、构建、部署、验证
 **最后更新**: 2026-01-22
 **文档版本**: v1.0
 **验证状态**: ✅ 已验证（Windows 11 + Claude Code v3.0）
-**下一文档**: [skills/d-skills-development/README.md](../skills/d-skills-development/README.md)
+**下一文档**: [advanced/d-skills-development/README.md](../advanced/d-skills-development/README.md)

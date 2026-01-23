@@ -1044,7 +1044,7 @@ ${HOME}/.claude/sessions/${CLAUDE_SESSION_ID}.md
 
 **推荐格式**:
 ```
-C:/Users/YourName/.claude/skills/
+C:/Users/YourName/.claude/advanced/
 ```
 
 **备选格式**:
@@ -1081,7 +1081,7 @@ $env:USERPROFILE
 # 输出: C:\Users\YourName
 
 # 在技能中引用
-$env:USERPROFILE/.claude/skills/
+$env:USERPROFILE/.claude/advanced/
 # 或
 $env:USERPROFILE\\.claude\\skills\\
 ```
@@ -1098,12 +1098,12 @@ $env:USERPROFILE\\.claude\\skills\\
 
 **macOS / Linux**:
 ```
-~/.claude/skills/
+~/.claude/advanced/
 ```
 
 **跨平台推荐**:
 ```
-~/.claude/skills/  # Claude Code 会自动展开
+~/.claude/advanced/  # Claude Code 会自动展开
 ```
 ```
 
@@ -1113,7 +1113,7 @@ $env:USERPROFILE\\.claude\\skills\\
 
 ### 案例 1: api-conventions（参考内容型）
 
-**文件**: `.claude/skills/api-conventions/SKILL.md`
+**文件**: `.claude/advanced/api-conventions/SKILL.md`
 
 **完整代码**: 参见 [Skills 的两种类型](#类型-1-参考内容型-reference-content)
 
@@ -1145,7 +1145,7 @@ $env:USERPROFILE\\.claude\\skills\\
 
 ### 案例 2: deploy-production（任务型）
 
-**文件**: `.claude/skills/deploy-production/SKILL.md`
+**文件**: `.claude/advanced/deploy-production/SKILL.md`
 
 **完整代码**: 参见 [Skills 的两种类型](#类型-2-任务型-task-content)
 
@@ -1185,7 +1185,7 @@ $env:USERPROFILE\\.claude\\skills\\
 
 这是一个**官方提供的技能**，用于帮助用户创建其他技能。
 
-**文件**: `~/.claude/skills/skill-creator/SKILL.md`
+**文件**: `~/.claude/advanced/skill-creator/SKILL.md`
 
 **完整代码**:
 
@@ -1364,13 +1364,13 @@ command
 
 **基础结构**:
 ```
-~/.claude/skills/your-skill/
+~/.claude/advanced/your-skill/
 └── SKILL.md
 ```
 
 **完整结构**（可选）:
 ```
-~/.claude/skills/your-skill/
+~/.claude/advanced/your-skill/
 ├── SKILL.md              # 必需：主技能文件
 ├── README.md             # 推荐：说明文档
 ├── test.md               # 推荐：测试方法
@@ -1393,10 +1393,10 @@ New-Item -ItemType File -Path "$env:USERPROFILE\.claude\skills\your-skill\SKILL.
 **macOS / Linux**:
 ```bash
 # 创建目录
-mkdir -p ~/.claude/skills/your-skill
+mkdir -p ~/.claude/advanced/your-skill
 
 # 创建 SKILL.md
-touch ~/.claude/skills/your-skill/SKILL.md
+touch ~/.claude/advanced/your-skill/SKILL.md
 ```
 
 ### 步骤 7: 测试技能
@@ -1580,7 +1580,7 @@ description: 在用户要求"部署"、"发布"、"上线"时使用
 
 **示例**:
 ```
-目录: ~/.claude/skills/deploy-prod/
+目录: ~/.claude/advanced/deploy-prod/
 省略 name → 技能名称为 "deploy-prod"
 ```
 

@@ -5,7 +5,7 @@
 **阅读时间**: 5分钟
 **难度**: ⭐⭐⭐⭐⭐
 **前置要求**:
-- 完成 [Level 2 进阶提升](../skills/README.md)
+- 完成 [Level 2 进阶提升](../advanced/README.md)
 - 熟练掌握 Claude Code 核心功能
 - 有 6+ 个月的使用经验
 
@@ -373,7 +373,7 @@ Level 3: 专家之道
 
 ```
 [Level 1: 核心掌握](../guide/README.md)
-[Level 2: 进阶提升](../skills/README.md)
+[Level 2: 进阶提升](../advanced/README.md)
 ```
 
 ---
@@ -392,5 +392,5 @@ Level 3: 专家之道
 
 ---
 
-**最后更新**: 2025-01-17
-**上一级**: [Level 2 进阶提升](../skills/README.md)
+**最后更新**: 2026-01-23
+**上一级**: [Level 2 进阶提升](../advanced/README.md)

@@ -188,7 +188,7 @@ Windows 支持：100% 覆盖
 
 ### 相关模块
 
-- [skills/](../skills/CLAUDE.md) - Level 2 进阶提升
+- [advanced/](../advanced/CLAUDE.md) - Level 2 进阶提升
 - [windows/](../windows/CLAUDE.md) - Windows 专属支持
 - [reference/](../reference/CLAUDE.md) - 快速参考
 

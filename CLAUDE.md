@@ -31,7 +31,7 @@ knowknowcc/
 ├── guide/          ← Level 1: 核心掌握（100% 完成 ✅）
 │   └── 5个文档，50,000字，30+案例
 │
-├── skills/         ← Level 2: 进阶提升（100% 完成 ✅）
+├── advanced/         ← Level 2: 进阶提升（100% 完成 ✅）
 │   ├── a-productivity/  (生产力提升，4个文档)
 │   ├── b-code-quality/  (代码质量，5个文档)
 │   ├── c-integration/   (集成扩展，4个文档)
@@ -71,7 +71,7 @@ graph TD
     Root["<b>knowknowcc</b><br/>看懂Claude Code"]
 
     Root --> Guide["<b>guide/</b><br/>Level 1: 核心掌握<br/>✅ 100%"]
-    Root --> Skills["<b>skills/</b><br/>Level 2: 进阶提升<br/>✅ 100%"]
+    Root --> Skills["<b>advanced/</b><br/>Level 2: 进阶提升<br/>✅ 100%"]
     Root --> Master["<b>master/</b><br/>Level 3: 专家之道<br/>📋 5%"]
     Root --> Windows["<b>windows/</b><br/>Windows 专属<br/>📋 10%"]
     Root --> Reference["<b>reference/</b><br/>快速参考<br/>📋 5%"]
@@ -117,7 +117,7 @@ graph TD
     Reference --> R4["changelog.md"]
 
     click Guide "./guide/CLAUDE.md" "查看 guide 模块文档"
-    click Skills "./skills/CLAUDE.md" "查看 skills 模块文档"
+    click Skills "./advanced/CLAUDE.md" "查看 skills 模块文档"
     click Master "./master/CLAUDE.md" "查看 master 模块文档"
     click Windows "./windows/CLAUDE.md" "查看 windows 模块文档"
     click Reference "./reference/CLAUDE.md" "查看 reference 模块文档"
@@ -130,11 +130,11 @@ graph TD
 | 模块 | 路径 | 职责 | 完成度 | 入口文件 |
 |------|------|------|--------|----------|
 | **guide** | `guide/` | Level 1 核心掌握，新手入门 | ✅ 100% | [00-introduction.md](guide/00-introduction.md) |
-| **skills** | `skills/` | Level 2 进阶提升，效率优化 | ✅ 100% | [README.md](skills/README.md) |
-| ├─ a-productivity | `skills/a-productivity/` | 生产力提升技能 | ✅ 100% | [01-plan-mode.md](skills/a-productivity/01-plan-mode.md) |
-| ├─ b-code-quality | `skills/b-code-quality/` | 代码质量提升 | ✅ 100% | [README.md](skills/b-code-quality/README.md) |
-| ├─ c-integration | `skills/c-integration/` | 集成和扩展 | ✅ 100% | [README.md](skills/c-integration/README.md) |
-| └─ d-skills-development | `skills/d-skills-development/` | Skills 开发教学 | ✅ 100% ✨ | [README.md](skills/d-skills-development/README.md) |
+| **advanced** | `advanced/` | Level 2 进阶提升，效率优化 | ✅ 100% | [README.md](advanced/README.md) |
+| ├─ a-productivity | `advanced/a-productivity/` | 生产力提升技能 | ✅ 100% | [01-plan-mode.md](advanced/a-productivity/01-plan-mode.md) |
+| ├─ b-code-quality | `advanced/b-code-quality/` | 代码质量提升 | ✅ 100% | [README.md](advanced/b-code-quality/README.md) |
+| ├─ c-integration | `advanced/c-integration/` | 集成和扩展 | ✅ 100% | [README.md](advanced/c-integration/README.md) |
+| └─ d-skills-development | `advanced/d-skills-development/` | Skills 开发教学 | ✅ 100% ✨ | [README.md](advanced/d-skills-development/README.md) |
 | **master** | `master/` | Level 3 专家之道，深度定制 | 📋 5% | [README.md](master/README.md) |
 | **windows** | `windows/` | Windows 平台专属支持 | 📋 10% | [README.md](windows/README.md) |
 | **reference** | `reference/` | 快速参考和速查表 | 📋 5% | [README.md](reference/README.md) |
@@ -150,8 +150,8 @@ graph TD
 查看 README.md 获取项目概览
 
 # 2. 选择学习路径
-新手: guide/ → skills/ → master/
-进阶: skills/ → 选择需要的技能
+新手: guide/ → advanced/ → master/
+进阶: advanced/ → 选择需要的技能
 专家: master/ → 深入高级主题
 
 # 3. Windows 用户
@@ -165,7 +165,7 @@ reference/ → 快速查找解决方案
 
 ```bash
 # 1. 确定位置
-选择: guide/ 或 skills/ 或 master/
+选择: guide/ 或 advanced/ 或 master/
 
 # 2. 遵循模板
 包含: 概念、价值、方法、案例、Windows支持、FAQ
@@ -327,7 +327,7 @@ reference/ → 快速查找解决方案
 4. 分享发布
 ```
 
-**详细教程**: 📚 [Skills 开发教学](skills/d-skills-development/)
+**详细教程**: 📚 [Skills 开发教学](advanced/d-skills-development/)
 
 ### Skills 趋势洞察
 
@@ -396,7 +396,7 @@ N8N Workflow → Skills
 | 10 | PPT 生成 | PPT 自动生成 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | 11 | skill-creator | 创建 Skills | ⭐⭐ | ⭐⭐⭐⭐⭐ |
 
-**详细教程**: 📚 [Skills 深度教程](skills/d-skills-development/06-skills-best-practices.md)
+**详细教程**: 📚 [Skills 深度教程](advanced/d-skills-development/06-skills-best-practices.md)
 
 ### 最佳实践
 
@@ -425,7 +425,7 @@ N8N Workflow → Skills
 
 - **官方文档**: https://claude.ai/code/docs
 - **GitHub**: https://github.com/anthropics/claude-code
-- **Skills 教学**: [Skills 开发教学](skills/d-skills-development/)
+- **Skills 教学**: [Skills 开发教学](advanced/d-skills-development/)
 - **社区分享**: skillsmp.com
 
 ---
@@ -638,7 +638,7 @@ const x: string = "hello";
 
 ### 模块文档
 - [guide/CLAUDE.md](guide/CLAUDE.md) - Level 1 模块指南
-- [skills/CLAUDE.md](skills/CLAUDE.md) - Level 2 模块指南
+- [advanced/CLAUDE.md](advanced/CLAUDE.md) - Level 2 模块指南
 - [master/CLAUDE.md](master/CLAUDE.md) - Level 3 模块指南
 - [windows/CLAUDE.md](windows/CLAUDE.md) - Windows 模块指南
 - [reference/CLAUDE.md](reference/CLAUDE.md) - 参考模块指南

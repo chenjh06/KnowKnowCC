@@ -181,7 +181,7 @@ npx @z_ai/coding-helper
 | Kimi K2 | 长文本/Thinking | 按需 | ⭐⭐⭐⭐ |
 | Qwen Plus | 企业级稳定 | 按需 | ⭐⭐⭐ |
 
-**详细配置指南**: 📚 [国产模型配置指南](../skills/c-integration/03-domestic-models-guide.md)
+**详细配置指南**: 📚 [国产模型配置指南](../advanced/c-integration/03-domestic-models-guide.md)
 
 **模型选择建议**:
 

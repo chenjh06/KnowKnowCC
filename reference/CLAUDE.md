@@ -338,7 +338,7 @@ Level 4: 自定义优化
 ### 相关模块
 
 - [guide/](../guide/CLAUDE.md) - Level 1 核心掌握
-- [skills/](../skills/CLAUDE.md) - Level 2 进阶提升
+- [advanced/](../advanced/CLAUDE.md) - Level 2 进阶提升
 - [windows/](../windows/CLAUDE.md) - Windows 专属支持
 
 ---

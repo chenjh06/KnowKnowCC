@@ -386,7 +386,7 @@ $env:MY_PROJECT
 ### 相关模块
 
 - [guide/](../guide/CLAUDE.md) - Level 1 核心掌握（所有文档含 Windows 支持）
-- [skills/](../skills/CLAUDE.md) - Level 2 进阶提升（所有文档含 Windows 支持）
+- [advanced/](../advanced/CLAUDE.md) - Level 2 进阶提升（所有文档含 Windows 支持）
 - [reference/](../reference/CLAUDE.md) - 快速参考
 
 ---

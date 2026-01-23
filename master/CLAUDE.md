@@ -329,7 +329,7 @@ Level 3 更注重深度和实践，不是快速上手。
 ### 相关模块
 
 - [guide/](../guide/CLAUDE.md) - Level 1 核心掌握
-- [skills/](../skills/CLAUDE.md) - Level 2 进阶提升（前置）
+- [advanced/](../advanced/CLAUDE.md) - Level 2 进阶提升（前置）
 - [windows/](../windows/CLAUDE.md) - Windows 专属支持
 
 ---

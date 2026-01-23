@@ -809,7 +809,7 @@ NO  → 使用 Slash Command
 
 **Skills 参考:**
 - [Skills 生态概览](../CLAUDE.md#skills-生态概览)
-- [Skills 开发教程](../skills/d-skills-development/README.md)
+- [Skills 开发教程](../advanced/d-skills-development/README.md)
 
 ---
 
@@ -1091,7 +1091,7 @@ $env:MY_VAR = "value"
 
 - [guide/01-quickstart.md](../guide/01-quickstart.md) - 10分钟快速上手
 - [guide/02-core-features.md](../guide/02-core-features.md) - 8个核心功能详解
-- [skills/a-productivity/01-plan-mode.md](../skills/a-productivity/01-plan-mode.md) - Plan 模式深度指南
+- [advanced/a-productivity/01-plan-mode.md](../advanced/a-productivity/01-plan-mode.md) - Plan 模式深度指南
 
 ### 其他速查表
 

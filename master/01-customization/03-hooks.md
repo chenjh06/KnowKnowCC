@@ -5,7 +5,7 @@
 **阅读时间**: 50分钟
 **难度**: ⭐⭐⭐⭐⭐
 **适用场景**: 自动化工作流、自定义行为、团队协作
-**前置要求**: [Level 2 进阶提升](../../skills/), [工作流自动化](../02-automation/03-workflow-automation.md)
+**前置要求**: [Level 2 进阶提升](../../advanced/), [工作流自动化](../02-automation/03-workflow-automation.md)
 
 ---
 
