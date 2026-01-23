@@ -2871,7 +2871,7 @@ Level 2 其他技能：
 [03 - Browser Automation](./03-browser-automation.md) - 浏览器自动化实战
 
 Level 3 专家之道：
-[Master 01 - Customization](../../master/01-customization/) - 自定义和扩展
+[Master 01 - Customization](../01-customization/README.md) - 自定义和扩展
 ```
 
 ---

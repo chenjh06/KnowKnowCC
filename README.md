@@ -62,12 +62,12 @@
 
 | 目标 | 推荐路径 | 预计时间 |
 |------|---------|---------|
-| 🎓 **从零开始** | [guide/](./guide/) → 完整阅读 Level 1 | 1周 |
+| 🎓 **从零开始** | [guide/](./guide/README.md) → 完整阅读 Level 1 | 1周 |
 | ⚡ **快速上手** | [guide/01-quickstart.md](./guide/01-quickstart.md) → 10分钟上手 | 10分钟 |
-| 🔧 **解决具体问题** | [reference/](./reference/) → 按需查阅 | 即时 |
-| 🪟 **Windows用户** | [windows/](./windows/) → Windows专属指南 | 1天 |
-| 📈 **提升效率** | [skills/](./skills/) → 进阶技能 | 2-4周 |
-| 🚀 **深度掌握** | [master/](./master/) → 专家之道 | 持续学习 |
+| 🔧 **解决具体问题** | [reference/](./reference/README.md) → 按需查阅 | 即时 |
+| 🪟 **Windows用户** | [windows/](./windows/README.md) → Windows专属指南 | 1天 |
+| 📈 **提升效率** | [skills/](./skills/README.md) → 进阶技能 | 2-4周 |
+| 🚀 **深度掌握** | [master/](./master/README.md) → 专家之道 | 持续学习 |
 
 ---
 
@@ -92,7 +92,7 @@ guide/
 - ✅ 完整的实战项目
 - ✅ Windows用户有完整支持
 
-[→ 进入 Level 1 学习](./guide/)
+[→ 进入 Level 1 学习](./guide/README.md)
 
 ---
 
@@ -128,7 +128,7 @@ skills/
 - ✅ 2-3个完整案例/技能
 - ✅ 可立即应用到工作
 
-[→ 进入 Level 2 学习](./skills/)
+[→ 进入 Level 2 学习](./skills/README.md)
 
 ---
 
@@ -164,7 +164,7 @@ master/
 - ✅ 完整的配置示例
 - ✅ 性能和安全考虑
 
-[→ 进入 Level 3 学习](./master/)
+[→ 进入 Level 3 学习](./master/README.md)
 
 ---
 
@@ -186,7 +186,7 @@ windows/
 - ✅ 所有示例都有PowerShell版本
 - ✅ Windows特定的问题和解决方案
 
-[→ Windows 用户入口](./windows/)
+[→ Windows 用户入口](./windows/README.md)
 
 ---
 
@@ -203,7 +203,7 @@ reference/
 └── changelog.md               → 更新日志
 ```
 
-[→ 快速参考](./reference/)
+[→ 快速参考](./reference/README.md)
 
 ---
 
@@ -403,12 +403,12 @@ Windows支持：100%覆盖
 选择你的学习路径：
 
 ```
-🎓 新手 → [guide/](./guide/) → 完整阅读 Level 1
+🎓 新手 → [guide/](./guide/README.md) → 完整阅读 Level 1
 ⚡ 快速 → [guide/01-quickstart.md](./guide/01-quickstart.md) → 10分钟上手
-🪟 Windows → [windows/](./windows/) → Windows专属指南
-📈 进阶 → [skills/](./skills/) → 进阶技能
-🚀 专家 → [master/](./master/) → 专家之道
-📖 参考 → [reference/](./reference/) → 快速查阅
+🪟 Windows → [windows/](./windows/README.md) → Windows专属指南
+📈 进阶 → [skills/](./skills/README.md) → 进阶技能
+🚀 专家 → [master/](./master/README.md) → 专家之道
+📖 参考 → [reference/](./reference/README.md) → 快速查阅
 ```
 
 **最后更新**: 2026-01-18

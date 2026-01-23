@@ -5,7 +5,7 @@
 **阅读时间**: 5分钟
 **难度**: ⭐⭐⭐⭐⭐
 **前置要求**:
-- 完成 [Level 2 进阶提升](../skills/)
+- 完成 [Level 2 进阶提升](../skills/README.md)
 - 熟练掌握 Claude Code 核心功能
 - 有 6+ 个月的使用经验
 
@@ -52,7 +52,7 @@ Level 3: 专家之道
 - 开发自定义工具
 - 构建团队工作流
 
-[→ 进入自定义和扩展](./01-customization/)
+[→ 进入自定义和扩展](./01-customization/README.md)
 
 ---
 
@@ -71,7 +71,7 @@ Level 3: 专家之道
 - 需要自动化的团队
 - 企业级应用
 
-[→ 进入自动化和 CI/CD](./02-automation/)
+[→ 进入自动化和 CI/CD](./02-automation/README.md)
 
 ---
 
@@ -90,7 +90,7 @@ Level 3: 专家之道
 - 关注安全性和合规性
 - 系统架构师
 
-[→ 进入高级主题](./03-advanced-topics/)
+[→ 进入高级主题](./03-advanced-topics/README.md)
 
 ---
 
@@ -362,9 +362,9 @@ Level 3: 专家之道
 选择一个主题开始：
 
 ```
-[自定义和扩展](./01-customization/)
-[自动化和 CI/CD](./02-automation/)
-[高级主题](./03-advanced-topics/)
+[自定义和扩展](./01-customization/README.md)
+[自动化和 CI/CD](./02-automation/README.md)
+[高级主题](./03-advanced-topics/README.md)
 ```
 
 ### 回顾
@@ -372,8 +372,8 @@ Level 3: 专家之道
 需要回顾基础？
 
 ```
-[Level 1: 核心掌握](../guide/)
-[Level 2: 进阶提升](../skills/)
+[Level 1: 核心掌握](../guide/README.md)
+[Level 2: 进阶提升](../skills/README.md)
 ```
 
 ---
@@ -393,4 +393,4 @@ Level 3: 专家之道
 ---
 
 **最后更新**: 2025-01-17
-**上一级**: [Level 2 进阶提升](../skills/)
+**上一级**: [Level 2 进阶提升](../skills/README.md)

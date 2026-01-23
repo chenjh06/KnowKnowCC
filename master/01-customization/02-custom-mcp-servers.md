@@ -1816,7 +1816,7 @@ const normalized = filePath.replace(/\\/g, '/');
 
 ### 项目文档
 - [MCP 服务器精选](../../skills/c-integration/01-mcp-servers.md) - 现有服务器
-- [集成扩展](../../skills/c-integration/) - 更多集成案例
+- [集成扩展](../../skills/c-integration/README.md) - 更多集成案例
 
 ### 示例项目
 - [GitHub MCP 服务器](https://github.com/modelcontextprotocol/servers)

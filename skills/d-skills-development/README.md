@@ -576,7 +576,7 @@ examples/ (随时参考)
 ### 内部资源
 
 - [guide/05-skills-quickstart.md](../../guide/05-skills-quickstart.md) - Skills 快速入门（前置）
-- [master/04-skills-mastery/](../../master/04-skills-mastery/) - Skills 精通（进阶）
+- [master/04-skills-mastery/](../../master/04-skills-mastery/README.md) - Skills 精通（进阶）
 - [Claude-Code-Skills-官方文档整理.md](../../Claude-Code-Skills-官方文档整理.md) - 官方文档
 
 ### 外部资源
@@ -598,7 +598,7 @@ examples/ (随时参考)
 ### 完成后进入 Level 3
 
 ```
-[master/04-skills-mastery/](../../master/04-skills-mastery/) → Skills 精通
+[master/04-skills-mastery/](../../master/04-skills-mastery/README.md) → Skills 精通
 ```
 
 ---

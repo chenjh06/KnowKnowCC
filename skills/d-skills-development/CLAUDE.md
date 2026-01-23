@@ -454,7 +454,7 @@ guide/05-skills-quickstart.md → 01-skill-fundamentals.md → 02-practical-skil
 
 - [guide/05-skills-quickstart.md](../../guide/05-skills-quickstart.md) - Skills 快速入门(前置)
 - [skills/CLAUDE.md](../CLAUDE.md) - Level 2 模块指南
-- [master/04-skills-mastery/](../../master/04-skills-mastery/) - Skills 精通(进阶)
+- [master/04-skills-mastery/](../../master/04-skills-mastery/README.md) - Skills 精通(进阶)
 - [Claude-Code-Skills-官方文档整理.md](../../Claude-Code-Skills-官方文档整理.md) - 官方文档
 
 ---

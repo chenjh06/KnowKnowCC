@@ -1046,7 +1046,7 @@ description: 完整的部署流程，包括测试、构建、部署、验证
 
 ### 继续学习
 
-**Level 2: Skills 开发实战** → [skills/d-skills-development/](../skills/d-skills-development/)
+**Level 2: Skills 开发实战** → [skills/d-skills-development/](../skills/d-skills-development/README.md)
 
 **学习路径**:
 1. [01-skill-fundamentals.md](../skills/d-skills-development/01-skill-fundamentals.md) - 基础概念深入

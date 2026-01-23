@@ -4,7 +4,7 @@
 
 **阅读时间**: 5分钟
 **难度**: ⭐⭐⭐
-**前置要求**: 完成 [Level 1 核心掌握](../guide/)
+**前置要求**: 完成 [Level 1 核心掌握](../guide/README.md)
 **状态**: ✅ 100% 完成（17/17 文档）✨ 新增 Skills 开发模块
 
 ---
@@ -81,7 +81,7 @@ plan-mode → session-management → context-optimization
 keyboard-shortcuts (随时学习)
 ```
 
-[→ 进入生产力提升](./a-productivity/)
+[→ 进入生产力提升](./a-productivity/README.md)
 
 ---
 
@@ -102,7 +102,7 @@ claude-md-guide → prompt-engineering → code-review
 subagents (进阶使用)
 ```
 
-[→ 进入代码质量](./b-code-quality/)
+[→ 进入代码质量](./b-code-quality/README.md)
 
 ---
 
@@ -121,7 +121,7 @@ subagents (进阶使用)
 obsidian-integration → mcp-servers → browser-automation
 ```
 
-[→ 进入集成扩展](./c-integration/)
+[→ 进入集成扩展](./c-integration/README.md)
 
 ---
 
@@ -146,7 +146,7 @@ obsidian-integration → mcp-servers → browser-automation
 examples/ (随时参考)
 ```
 
-[→ 进入 Skills 开发](./d-skills-development/)
+[→ 进入 Skills 开发](./d-skills-development/README.md)
 
 ---
 
@@ -348,7 +348,7 @@ B-子代理
 
 如果你有使用经验和技巧，欢迎贡献！
 
-详见：[贡献指南](../../modules-archive/templates/contribution-guide.md)
+请通过 GitHub Issues 或 Pull Requests 提交你的建议。
 
 ---
 
@@ -359,7 +359,7 @@ B-子代理
 选择一个技能类别开始：
 
 ```
-[生产力提升](./a-productivity/) → [代码质量](./b-code-quality/) → [集成扩展](./c-integration/)
+[生产力提升](./a-productivity/README.md) → [代码质量](./b-code-quality/README.md) → [集成扩展](./c-integration/README.md)
 ```
 
 ### 或进入 Level 3
@@ -367,11 +367,11 @@ B-子代理
 完成 Level 2 后，可以进入：
 
 ```
-[Level 3: 专家之道](../master/)
+[Level 3: 专家之道](../master/README.md)
 ```
 
 ---
 
 **最后更新**: 2025-01-17
-**上一级**: [Level 1 核心掌握](../guide/)
-**下一级**: [Level 3 专家之道](../master/)
+**上一级**: [Level 1 核心掌握](../guide/README.md)
+**下一级**: [Level 3 专家之道](../master/README.md)
