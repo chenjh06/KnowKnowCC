@@ -25,17 +25,27 @@
 
 > **⏱️ 预计时间**: 3分钟
 
-#### 方式 1：使用 winget（推荐）
+#### 方式 1：使用官方安装脚本（推荐）
 
 ```powershell
 # 以管理员身份打开 PowerShell 或 Windows Terminal
-winget install Claude.ClaudeCode
+irm https://claude.ai/install.ps1 | iex
 
 # 验证安装
 claude --version
 ```
 
-#### 方式 2：使用 scoop
+#### 方式 2：使用 winget
+
+```powershell
+# 以管理员身份打开 PowerShell 或 Windows Terminal
+winget install Anthropic.ClaudeCode
+
+# 验证安装
+claude --version
+```
+
+#### 方式 3：使用 scoop
 
 ```powershell
 # 安装 scoop（如果未安装）
