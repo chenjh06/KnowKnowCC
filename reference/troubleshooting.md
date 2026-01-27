@@ -156,7 +156,7 @@ Test-Connection github.com
 
 | 方案 | 适用场景 | 步骤 |
 |------|---------|------|
-| 使用 winget | Windows 10 21H2+ / Windows 11 | `winget install Claude.ClaudeCode` |
+| 使用 winget | Windows 10 21H2+ / Windows 11 | `winget install Anthropic.ClaudeCode` |
 | 使用 scoop | 已安装 Scoop | `scoop bucket add extras && scoop install claude-code` |
 | 手动安装 | 以上都失败 | 下载 .exe 运行安装程序 |
 | 使用 WSL | Linux 环境偏好 | 在 WSL 中安装 Linux 版本 |

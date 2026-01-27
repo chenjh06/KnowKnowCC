@@ -74,7 +74,7 @@ winver
 winget search Claude Code
 
 # 安装
-winget install ClaudeCode.ClaudeCode
+winget install Anthropic.ClaudeCode
 
 # 验证安装
 claude --version
@@ -95,7 +95,7 @@ claude --version
 
 🤖 Claude：[提供安装指令]
 1. 打开 PowerShell
-2. 运行: winget install ClaudeCode.ClaudeCode
+2. 运行: winget install Anthropic.ClaudeCode
 3. 等待安装完成
 ```
 

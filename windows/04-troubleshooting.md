@@ -436,7 +436,7 @@ winget uninstall ClaudeCode
 Remove-Item "$env:APPDATA\Claude Code" -Recurse -Force
 
 # 重新安装
-winget install ClaudeCode
+winget install Anthropic.ClaudeCode
 ```
 ```
 
@@ -941,7 +941,7 @@ Get-ChildItem $logs -Filter "*.log" | Sort-Object LastWriteTime -Descending | Se
 ```powershell
 winget uninstall ClaudeCode
 Remove-Item "$env:APPDATA\Claude Code" -Recurse -Force
-winget install ClaudeCode
+winget install Anthropic.ClaudeCode
 ```
 ```
 

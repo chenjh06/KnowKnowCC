@@ -95,7 +95,7 @@ claude --version
 
 ```bash
 # 使用安装脚本
-curl -fsSL https://claude.ai/install.sh | sh
+curl -fsSL https://claude.ai/install.sh | bash
 
 # 或使用包管理器（Ubuntu）
 sudo apt install claude-code
@@ -127,6 +127,19 @@ Please sign in to continue:
 ```
 
 ### 2. 配置 API 密钥
+
+**方式1：使用 /login 登录（推荐）** ⭐
+
+首次启动 Claude Code 时，系统会自动提示登录：
+
+```bash
+claude
+# 首次使用时系统会提示您登录
+```
+
+按照提示完成登录流程，自动配置API密钥。
+
+**方式2：手动设置 API 密钥（高级用户）**
 
 ```bash
 # 设置 API 密钥
