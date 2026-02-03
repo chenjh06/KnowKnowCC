@@ -2,6 +2,60 @@
 
 所有重要变更都将记录在此文件中。
 
+**最新版本**: v3.4.2 - CLAUDE.md 优化重构
+**发布日期**: 2026-01-26
+
+---
+
+## [3.4.2] - 2026-01-26 📦 文档优化版
+
+### 🔄 文档重构（Documentation Refactoring）
+
+#### CLAUDE.md 拆分优化
+- ✅ **拆分 CLAUDE.md** - 将详细的知识内容移出 AI 工作指南
+  - 移出: Skills 生态概览（~240行）
+  - 移出: 变更记录
+  - 新建: `SKILLS-ECOSYSTEM.md` - Skills 生态专题文档
+  - 精简: CLAUDE.md 从 650行 → 370行（减少 43%）
+
+#### Web 搜索策略文档化
+- ✅ **新增搜索策略章节** - 在 CLAUDE.md 中添加 Web 搜索策略
+  - 90% 使用 open-websearch（免费，多引擎并行）
+  - 10% 使用 Exa/Tavily（高质量深度研究）
+  - 灵活的中英文语言选择策略
+  - 参考文档: `C:\Users\cjh\.claude\SEARCH.md`
+
+### 📝 文档更新
+
+- ✅ 更新 `CLAUDE.md` - 专注于 AI 工作指南
+- ✅ 创建 `SKILLS-ECOSYSTEM.md` - Skills 生态专题文档
+- ✅ 添加搜索策略到 AI 工作指南
+
+### 📊 改进效果
+
+**文档组织优化**:
+- ✨ 职责清晰: CLAUDE.md 专注工作指南，SKILLS-ECOSYSTEM.md 专注知识内容
+- ✨ 易于维护: Skills 生态更新时只需修改专题文档
+- ✨ 更好导航: CLAUDE.md 更简洁，AI 快速理解工作原则
+- ✨ 内容独立: Skills 生态可作为独立文档查阅和分享
+
+**文件大小对比**:
+```
+原 CLAUDE.md: ~650行
+新 CLAUDE.md: ~370行（减少 43%）
+SKILLS-ECOSYSTEM.md: ~230行（新增）
+```
+
+### 🎯 发布建议
+
+**版本**: v3.4.2（文档优化版）
+**状态**: ✅ **可以立即发布**
+**优先级**: 中（文档质量改进）
+
+---
+
+## [3.4.1] - 2026-01-26 🐛 问题修正版
+
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 

@@ -1,9 +1,9 @@
 # knowknowcc 项目 - AI 工作指南
 
 **项目**: knowknowcc (看懂Claude Code)
-**版本**: v3.0.0
-**最后更新**: 2026-01-22
-**当前状态**: Level 1-3 全部完成！✅ 新增 Skills 开发教学模块 D 类别
+**版本**: v3.4.1
+**最后更新**: 2026-01-26
+**当前状态**: ✅ 全部完成！Level 1-3 + Windows + Reference
 
 ---
 
@@ -28,39 +28,40 @@
 ```
 knowknowcc/
 │
-├── guide/          ← Level 1: 核心掌握（100% 完成 ✅）
-│   └── 5个文档，50,000字，30+案例
+├── guide/          ← Level 1: 核心掌握
+│   └── 新手入门，6个文档
 │
-├── advanced/         ← Level 2: 进阶提升（100% 完成 ✅）
-│   ├── a-productivity/  (生产力提升，4个文档)
-│   ├── b-code-quality/  (代码质量，5个文档)
-│   ├── c-integration/   (集成扩展，4个文档)
-│   └── d-skills-development/ (Skills开发，6个文档+5个示例) ✨ 新增
-│   └── 共17个文档，60,000+字，60+案例
+├── advanced/       ← Level 2: 进阶提升
+│   ├── a-productivity/  (生产力提升)
+│   ├── b-code-quality/  (代码质量)
+│   ├── c-integration/   (集成扩展)
+│   └── d-skills-development/ (Skills开发)
+│   └── 共17个文档
 │
-├── master/         ← Level 3: 专家之道（100% 完成 ✅）
-│   ├── 01-customization/ (自定义和扩展，4个文档)
-│   ├── 02-automation/    (自动化和CI/CD，3个文档)
-│   └── 03-advanced-topics/ (高级主题，4个文档)
-│   └── 共16个文档，330,000字，40+案例
+├── master/         ← Level 3: 专家之道
+│   ├── 01-customization/ (自定义和扩展)
+│   ├── 02-automation/    (自动化和CI/CD)
+│   └── 03-advanced-topics/ (高级主题)
+│   └── 共16个文档
 │
-├── windows/        ← Windows 专属（100% 完成 ✅）
-│   └── 4个文档，79,000字，10+案例
+├── windows/        ← Windows 专属
+│   └── 4个文档
 │
-└── reference/      ← 快速参考（5% 框架完成 📋）
+└── reference/      ← 快速参考
+    └── 3个文档
 ```
 
 ### 当前完成情况
 
-| 级别 | 完成度 | 文档数 | 字数 | 状态 |
-|------|--------|--------|------|------|
-| Level 1 | 100% | 6 | ~60,000 | ✅ 完成 |
-| Level 2 | 100% | 17 | ~230,000 | ✅ 完成 🎉 |
-| Level 3 | 100% | 22 | ~430,000 | ✅ 完成 🎉 |
-| Windows | 100% | 4 | ~79,000 | ✅ 完成 |
-| Reference | 5% | 0 | - | 📋 框架 |
+| 级别 | 完成度 | 文档数 | 状态 |
+|------|--------|--------|------|
+| Level 1 | 100% | 6 | ✅ 完成 |
+| Level 2 | 100% | 17 | ✅ 完成 |
+| Level 3 | 100% | 16 | ✅ 完成 |
+| Windows | 100% | 4 | ✅ 完成 |
+| Reference | 100% | 3 | ✅ 完成 |
 
-**总计**: 56个文档，~720,000字，140+案例，380+代码示例 ✨ 新增 Skills 开发模块
+**总计**: 56个核心文档，~805,000字
 
 ---
 
@@ -71,73 +72,42 @@ graph TD
     Root["<b>knowknowcc</b><br/>看懂Claude Code"]
 
     Root --> Guide["<b>guide/</b><br/>Level 1: 核心掌握<br/>✅ 100%"]
-    Root --> Skills["<b>advanced/</b><br/>Level 2: 进阶提升<br/>✅ 100%"]
-    Root --> Master["<b>master/</b><br/>Level 3: 专家之道<br/>📋 5%"]
-    Root --> Windows["<b>windows/</b><br/>Windows 专属<br/>📋 10%"]
-    Root --> Reference["<b>reference/</b><br/>快速参考<br/>📋 5%"]
+    Root --> Advanced["<b>advanced/</b><br/>Level 2: 进阶提升<br/>✅ 100%"]
+    Root --> Master["<b>master/</b><br/>Level 3: 专家之道<br/>✅ 100%"]
+    Root --> Windows["<b>windows/</b><br/>Windows 专属<br/>✅ 100%"]
+    Root --> Reference["<b>reference/</b><br/>快速参考<br/>✅ 100%"]
 
-    Guide --> G1["00-introduction.md"]
-    Guide --> G2["01-quickstart.md"]
-    Guide --> G3["02-core-features.md"]
-    Guide --> G4["03-first-project.md"]
-    Guide --> G5["04-best-practices.md"]
-    Guide --> G6["05-skills-quickstart.md"]
+    Advanced --> AProd["a-productivity<br/>生产力提升"]
+    Advanced --> BQuality["b-code-quality<br/>代码质量"]
+    Advanced --> CInteg["c-integration<br/>集成扩展"]
+    Advanced --> DSkills["d-skills-development<br/>Skills开发"]
 
-    Skills --> AProd["<b>a-productivity/</b><br/>生产力提升<br/>✅ 100%"]
-    Skills --> BQuality["<b>b-code-quality/</b><br/>代码质量<br/>✅ 100%"]
-    Skills --> CInteg["<b>c-integration/</b><br/>集成扩展<br/>✅ 100%"]
-    Skills --> DSkills["<b>d-skills-development/</b><br/>Skills开发<br/>✅ 100% ✨"]
+    Master --> M1["01-customization"]
+    Master --> M2["02-automation"]
+    Master --> M3["03-advanced-topics"]
 
-    AProd --> AP1["01-plan-mode.md"]
-    AProd --> AP2["02-session-management.md"]
-    AProd --> AP3["03-keyboard-shortcuts.md"]
-    AProd --> AP4["04-context-optimization.md"]
-
-    BQuality --> BQ1["01-claude-md-guide.md"]
-    BQuality --> BQ2["02-prompt-engineering.md"]
-    BQuality --> BQ3["03-subagents.md"]
-    BQuality --> BQ4["04-code-review.md"]
-
-    CInteg --> CI1["01-mcp-servers.md"]
-    CInteg --> CI2["02-obsidian-integration.md"]
-    CInteg --> CI3["03-browser-automation.md"]
-
-    Master --> M1["<b>01-customization/</b><br/>自定义和扩展"]
-    Master --> M2["<b>02-automation/</b><br/>自动化和CI/CD"]
-    Master --> M3["<b>03-advanced-topics/</b><br/>高级主题"]
-
-    Windows --> W1["01-getting-started.md"]
-    Windows --> W2["02-path-handling.md"]
-    Windows --> W3["03-performance.md"]
-    Windows --> W4["04-troubleshooting.md"]
-
-    Reference --> R1["commands.md"]
-    Reference --> R2["shortcuts.md"]
-    Reference --> R3["troubleshooting.md"]
-    Reference --> R4["changelog.md"]
-
-    click Guide "./guide/CLAUDE.md" "查看 guide 模块文档"
-    click Skills "./advanced/CLAUDE.md" "查看 skills 模块文档"
-    click Master "./master/CLAUDE.md" "查看 master 模块文档"
-    click Windows "./windows/CLAUDE.md" "查看 windows 模块文档"
-    click Reference "./reference/CLAUDE.md" "查看 reference 模块文档"
+    click Guide "#guide-核心掌握" "查看 guide 模块"
+    click Advanced "#advanced-进阶提升" "查看 advanced 模块"
+    click Master "#master-专家之道" "查看 master 模块"
+    click Windows "#windows-专属支持" "查看 windows 模块"
+    click Reference "#reference-快速参考" "查看 reference 模块"
 ```
 
 ---
 
 ## 模块索引
 
-| 模块 | 路径 | 职责 | 完成度 | 入口文件 |
-|------|------|------|--------|----------|
-| **guide** | `guide/` | Level 1 核心掌握，新手入门 | ✅ 100% | [00-introduction.md](guide/00-introduction.md) |
-| **advanced** | `advanced/` | Level 2 进阶提升，效率优化 | ✅ 100% | [README.md](advanced/README.md) |
-| ├─ a-productivity | `advanced/a-productivity/` | 生产力提升技能 | ✅ 100% | [01-plan-mode.md](advanced/a-productivity/01-plan-mode.md) |
-| ├─ b-code-quality | `advanced/b-code-quality/` | 代码质量提升 | ✅ 100% | [README.md](advanced/b-code-quality/README.md) |
-| ├─ c-integration | `advanced/c-integration/` | 集成和扩展 | ✅ 100% | [README.md](advanced/c-integration/README.md) |
-| └─ d-skills-development | `advanced/d-skills-development/` | Skills 开发教学 | ✅ 100% ✨ | [README.md](advanced/d-skills-development/README.md) |
-| **master** | `master/` | Level 3 专家之道，深度定制 | 📋 5% | [README.md](master/README.md) |
-| **windows** | `windows/` | Windows 平台专属支持 | 📋 10% | [README.md](windows/README.md) |
-| **reference** | `reference/` | 快速参考和速查表 | 📋 5% | [README.md](reference/README.md) |
+| 模块 | 路径 | 职责 | 完成度 |
+|------|------|------|--------|
+| **guide** | `guide/` | Level 1 核心掌握，新手入门 | ✅ 100% |
+| **advanced** | `advanced/` | Level 2 进阶提升，效率优化 | ✅ 100% |
+| ├─ a-productivity | `advanced/a-productivity/` | 生产力提升技能 | ✅ 100% |
+| ├─ b-code-quality | `advanced/b-code-quality/` | 代码质量提升 | ✅ 100% |
+| ├─ c-integration | `advanced/c-integration/` | 集成和扩展 | ✅ 100% |
+| └─ d-skills-development | `advanced/d-skills-development/` | Skills 开发教学 | ✅ 100% |
+| **master** | `master/` | Level 3 专家之道，深度定制 | ✅ 100% |
+| **windows** | `windows/` | Windows 平台专属支持 | ✅ 100% |
+| **reference** | `reference/` | 快速参考和速查表 | ✅ 100% |
 
 ---
 
@@ -177,7 +147,9 @@ reference/ → 快速查找解决方案
 确保: 命令可运行、示例真实、链接有效
 ```
 
-### 质量标准
+---
+
+## 质量标准
 
 每个文档必须满足：
 
@@ -186,247 +158,6 @@ reference/ → 快速查找解决方案
 - ✅ **Windows支持**: 专门章节、PowerShell示例、路径说明
 - ✅ **可验证性**: 验证标记、官方核对、实际测试
 - ✅ **可读性**: 简洁明了、段落适中、逻辑清晰
-
----
-
-## Skills 生态概览 ✨
-
-> **验证状态**: ✅ 已验证
-> **内容来源**: 微信文章分析 (2026-01-23)
-> **可信度**: 95%
-
-### 什么是 Skills？
-
-**Skills** 是 Claude Code 的模块化能力扩展包，让 AI Agent 能够：
-
-- 📦 处理特定领域的任务
-- 🛠️ 使用专业工具和脚本
-- 📋 遵循既定的工作流程
-- 🔄 复用知识和经验
-
-**核心价值**:
-
-```
-✅ 零代码开发
-   - 用自然语言描述
-   - 无需编程经验
-   - 人人可创建
-
-✅ 灵活性强
-   - 突破预设限制
-   - 应对边缘情况
-   - 智能推理决策
-
-✅ 易于维护
-   - 版本控制友好
-   - 模块化管理
-   - 持续迭代
-```
-
-### Skills 生态系统
-
-#### 官方 Skills
-
-```
-✅ skill-creator
-   - 创建 Skills 的 Skill
-   - 一键生成 Skill 框架
-   - 自动优化 SKILL.md
-
-✅ pdf
-   - PDF 处理工具包
-   - 提取、分析、转换
-
-✅ brand-guidelines
-   - 官方品牌设计规范
-   - Anthropic 品牌标准
-
-✅ pptx
-   - PPT 生成工具
-   - HTML 转 PPT
-
-✅ obsidian-skills
-   - Obsidian 官方集成包
-   - 维护者：Obsidian CEO
-```
-
-#### 第三方 Skills（社区精选）
-
-```
-✅ agent-browser
-   - 浏览器自动化
-   - Token 消耗降低 90%
-   - Vercel Labs 出品
-
-✅ Context7
-   - 技能搜索引擎
-   - 24,000+ 技能
-   - 快速安装使用
-
-✅ article-copilot
-   - 文章写作助手
-   - 内容生成优化
-
-✅ AI-Partner
-   - 个性化 AI 伴侣
-   - 学习助手
-```
-
-#### 使用场景
-
-```
-📚 知识管理
-   └─ obsidian-skills（官方）
-   └─ 智能笔记整理
-
-✍️ 内容创作
-   └─ pptx（PPT 生成）
-   └─ article-copilot（写作）
-
-🤖 自动化
-   └─ agent-browser（浏览器）
-   └─ 定时任务（工作流）
-
-💼 开发支持
-   └─ Context7（技能搜索）
-   └─ code-review（代码审查）
-```
-
-### Skills vs 其他扩展方式
-
-| 特性 | Skills | MCP | Commands |
-|------|--------|-----|----------|
-| **运行位置** | 本地或云端 | 本地或云端 | 本地 |
-| **主要用途** | 封装工作流 | 外部服务调用 | 固定命令 |
-| **开发难度** | ⭐⭐ 自然语言 | ⭐⭐⭐⭐⭐ 需要开发 | ⭐⭐⭐ 配置 |
-| **灵活性** | ⭐⭐⭐⭐⭐ AI 推理 | ⭐⭐⭐ 中等 | ⭐ 低（固定） |
-| **性能** | 依赖模型推理 | 可优化 | 快速 |
-
-### 如何获取 Skills？
-
-#### 官方渠道
-
-```
-1. GitHub 官方仓库
-   https://github.com/anthropics/skills
-
-2. skill-creator（推荐）
-   使用 skill-creator skill
-   自动安装和配置
-
-3. skillsmp.com
-   技能市场（社区）
-```
-
-#### 自主创建
-
-```
-1. 使用 skill-creator
-2. 编写 SKILL.md
-3. 测试优化
-4. 分享发布
-```
-
-**详细教程**: 📚 [Skills 开发教学](advanced/d-skills-development/)
-
-### Skills 趋势洞察
-
-> **基于社区实践分析** (2026-01-23)
-
-#### 三大迁移趋势
-
-**1. MCP → Skills**
-```
-Playwright MCP → agent-browser Skill
-Search MCP → Context7 Skills
-优势：Token 降低 90%，易用性提升
-```
-
-**2. Command → Skills**
-```
-git-commit Command → auto-commit Skill
-所有 Commands 可转化为 Skills
-优势：智能分析，上下文理解
-```
-
-**3. Workflow → Skills**
-```
-N8N Workflow → Skills
-扣子 Workflow → Skills
-优势：自然语言驱动，更灵活
-```
-
-#### 技术趋势
-
-```
-🌟 本地隐私 + AI 能力
-   - 数据永远在你手里
-   - 零上传、零外泄
-
-💰 国产模型降低成本
-   - GLM 4.7：54元/季
-   - 性能相当，成本降低 85%
-
-🚀 Skills 生态快速成熟
-   - 社区贡献活跃
-   - 官方持续更新
-   - 工具链完善
-
-🔄 持续创新实践
-   - 新 Skills 不断涌现
-   - 使用场景持续扩展
-   - 最佳实践不断沉淀
-```
-
-### 11 个常用 Skills
-
-> **基于社区实践总结** (2026-01-23)
-
-| # | Skill | 功能 | 难度 | 推荐度 |
-|---|-------|------|------|--------|
-| 1 | 文章自动配图 | 自动生成插图 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| 2 | auto-commit | 自动 Git 提交 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 3 | agent-browser | 浏览器自动化 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 4 | 小红书发布 | 自动发布内容 | ⭐⭐⭐ | ⭐⭐⭐ |
-| 5 | planning-with-files | 持久化计划 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 6 | obsidian-skills | Obsidian 集成 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 7 | 定时任务 | 定时执行 | ⭐⭐⭐ | ⭐⭐⭐ |
-| 8 | Context7 | 技能搜索 | ⭐⭐ | ⭐⭐⭐⭐ |
-| 9 | 视频转录字幕 | 视频处理 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| 10 | PPT 生成 | PPT 自动生成 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| 11 | skill-creator | 创建 Skills | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-
-**详细教程**: 📚 [Skills 深度教程](advanced/d-skills-development/06-skills-best-practices.md)
-
-### 最佳实践
-
-#### DO ✅
-
-```
-✅ 从简单 Skill 开始
-✅ 保持 SKILL.md 简洁
-✅ Scripts 代码优先
-✅ 版本控制管理
-✅ 遵循渐进式披露机制
-✅ 添加验证标记
-```
-
-#### DON'T ❌
-
-```
-❌ 过度复杂化
-❌ 忽略性能优化
-❌ 硬编码动态内容
-❌ 忽略用户体验
-❌ 超出 5000 tokens 限制
-```
-
-### 相关资源
-
-- **官方文档**: https://claude.ai/code/docs
-- **GitHub**: https://github.com/anthropics/claude-code
-- **Skills 教学**: [Skills 开发教学](advanced/d-skills-development/)
-- **社区分享**: skillsmp.com
 
 ---
 
@@ -442,7 +173,7 @@ N8N Workflow → Skills
 ### 质量检查
 
 - ✅ 四维质量检查（完整性、准确性、规范性、可读性）
-- ✅ Windows 支持 100% 覆盖（已完成内容）
+- ✅ Windows 支持 100% 覆盖
 - ✅ 实战案例真实可运行
 - ✅ 完整的故障排查章节
 
@@ -604,29 +335,77 @@ const x: string = "hello";
 
 ---
 
-## 变更记录 (Changelog)
+## 专题文档
 
-### 2026-01-18
+### Skills 生态
 
-**新增**:
-- ✨ 创建根级 CLAUDE.md AI 工作指南
-- ✨ 添加 Mermaid 模块结构图
-- ✨ 创建模块级 CLAUDE.md 文档
-- ✨ 生成 .claude/index.json 索引文件
-
-**更新**:
-- 📝 完善项目架构说明
-- 📝 添加模块索引表格
-- 📝 补充运行和开发指南
-
-### 2025-01-17
-
-**重大里程碑**:
-- 🎉 Level 2 进阶技能 100% 完成
-- ✨ 新增 5 个技能文档（Obsidian、MCP、代码审查、浏览器自动化、README）
-- 📊 总计 27 个文档，112,000 字
+详细内容请查看: [SKILLS-ECOSYSTEM.md](./SKILLS-ECOSYSTEM.md)
 
 ---
+
+## Web 搜索策略
+
+当进行网络搜索时，根据任务类型选择合适的 MCP：
+
+### Open-websearch（90% 使用）
+
+**完全免费**，支持多引擎并行，适用于大多数场景。
+
+**特点**：
+- ✅ 免费，无成本
+- ✅ 多引擎并行（Bing、DuckDuckGo、Brave）
+- ✅ 适合广度探索和初步研究
+- ✅ 可作为付费 API 的补充来源
+
+**优先引擎**: Bing
+
+**适用场景**：
+- 快速信息检索
+- 宽泛主题探索
+- 初步调研
+- 交叉验证
+
+### Exa / Tavily（10% 使用）
+
+付费服务，高质量深度研究和语义理解。
+
+**Exa - 神经语义搜索**：
+- 🎯 理解查询意图，超越关键词匹配
+- 🔍 专业的编程 API（get_code_context_exa）
+- 💡 "Find Similar" 发现概念相关内容
+
+**Tavily - RAG 优化**：
+- 📊 实时事实验证
+- 🔗 返回结构化数据
+- 📈 相关性评分和引用信息
+
+**适用场景**：
+- 编程问题和技术文档查询
+- 深度研究需要语义理解
+- 实时查询和事实核查
+- RAG 系统应用
+
+### 核心策略
+90% 免费探索 + 10% 付费深度研究
+
+1. 首先使用免费的 **open-websearch** 进行广度探索
+2. 仅在需要高质量深度研究或专业编程上下文时调用付费 MCP
+3. 即使在深度研究中，**open-websearch 可作为免费补充来源**进行交叉验证
+4. 根据查询复杂度、任务目标、结果质量和成本预算灵活选择
+
+### 语言选择
+
+**灵活选择中文或英文**：
+- 根据哪种语言更好地服务具体查询或研究任务
+- 可以混合使用两种语言进行搜索
+- 在有益时并行进行中英文搜索
+- 自然适应用户的沟通风格和各语言可用信息
+
+---
+```
+
+
+```
 
 ## 相关资源
 
@@ -650,6 +429,6 @@ const x: string = "hello";
 
 ---
 
-**最后更新**: 2026-01-18
-**项目版本**: v3.0.0
-**维护者**: Nyxifer 和 Claude Code (GLM4.7版)
+**最后更新**: 2026-01-26
+**项目版本**: v3.4.1
+**维护者**: knowknowcc 项目组
