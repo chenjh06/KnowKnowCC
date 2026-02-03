@@ -257,4 +257,4 @@ N8N Workflow → Skills
 ---
 
 **最后更新**: 2026-01-26
-**维护者**: knowknowcc 项目组
+**维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)

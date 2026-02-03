@@ -1847,6 +1847,6 @@ Level 4: 命令生态
 
 ---
 
-**最后更新**: 2026-01-18
-**维护者**: knowknowcc 项目组
+**最后更新**: 2026-02-04
+**维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)
 **反馈**: [GitHub Issues](https://github.com/anthropics/claude-code/issues)

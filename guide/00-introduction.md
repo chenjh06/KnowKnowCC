@@ -427,5 +427,5 @@ DB_HOST、DB_USER、DB_PASSWORD"
 
 ---
 
-**最后更新**: 2025-01-17
+**最后更新**: 2026-02-04
 **下一章节**: [01 - Quickstart](./01-quickstart.md)

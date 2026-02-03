@@ -1,9 +1,9 @@
 # knowknowcc 项目 - AI 工作指南
 
 **项目**: knowknowcc (看懂Claude Code)
-**版本**: v3.4.1
-**最后更新**: 2026-01-26
-**当前状态**: ✅ 全部完成！Level 1-3 + Windows + Reference
+**版本**: v3.5.0
+**最后更新**: 2026-02-04
+**当前状态**: ✅ 深度重构完成 + 官方更新同步！
 
 ---
 
@@ -431,4 +431,4 @@ const x: string = "hello";
 
 **最后更新**: 2026-01-26
 **项目版本**: v3.4.1
-**维护者**: knowknowcc 项目组
+**维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)

@@ -757,7 +757,7 @@ Remove-Item "$env:APPDATA\Claude Code\cache" -Recurse -Force
 
 ---
 
-**最后更新**: 2026-01-18
+**最后更新**: 2026-02-04
 **难度**: ⭐⭐⭐
 **阅读时间**: 35分钟
 **重要性**: ⭐⭐⭐⭐

@@ -815,6 +815,6 @@ Unblock-File .\configure-glm.ps1
 
 ---
 
-**最后更新**: 2026-01-23
+**最后更新**: 2026-02-04
 **文档版本**: v1.0
-**维护者**: KnowKnowCC 项目组
+**维护者**: Nyxifer 和他的 ClaudeCode (GML4.7)

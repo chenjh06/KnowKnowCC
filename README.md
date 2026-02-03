@@ -6,14 +6,15 @@
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blue.svg)](https://claude.ai/code)
 [![Windows](https://img.shields.io/badge/Platform-Windows-blue)](https://www.microsoft.com/windows)
 
-**版本**: 3.4.2 (全面审核完成 + 文档优化重构) 🎉
-**更新**: 2026-01-26
-**基于**: Claude Code v3.0
+**版本**: 3.5.0 (深度重构 + 官方更新同步) 🎉
+**更新**: 2026-02-04
+**跟踪官方**: Claude Code v2.1.29 (2026-01-31)
 **完成度**: 98% ✨
 **质量评级**: A+ (4.9/5.0) ⭐⭐⭐⭐⭐
-**新增**: 文档结构优化、SKILLS-ECOSYSTEM.md 专题文档、搜索策略文档化
+**新增**: 深度重构、官方更新同步、新功能文档化（--from-pr、任务管理、PR状态）
 
-> **📌 文档说明**: 本文档基于 Claude Code v3.0 编写。功能和命令可能随版本更新而变化，建议访问官方文档获取最新信息。
+> **📌 文档说明**: 本文档跟踪 Claude Code 官方最新版本（当前 v2.1.29）。
+> 功能和命令可能随版本更新而变化，建议访问[官方文档](https://claude.ai/code/docs)获取最新信息。
 
 ---
 
@@ -69,6 +70,7 @@
 | 🔧 **解决具体问题** | [reference/](./reference/README.md) → 按需查阅 | 即时 |
 | 🪟 **Windows用户** | [windows/](./windows/README.md) → Windows专属指南 | 1天 |
 | 📈 **提升效率** | [advanced/](./advanced/README.md) → 进阶技能 | 2-4周 |
+| 🆕 **新功能** | [NEW-FEATURES-GUIDE-v2.1.md](./advanced/NEW-FEATURES-GUIDE-v2.1.md) → v2.1 新功能 | 即时 |
 | 🚀 **深度掌握** | [master/](./master/README.md) → 专家之道 | 持续学习 |
 
 ---
@@ -141,6 +143,7 @@ advanced/
 - ✅ **新增**: Skills开发教学模块(6个文档)
 - ✅ **新增**: 国产模型配置指南(GLM 4.7)
 - ✅ **新增**: Obsidian官方集成(obsidian-skills)
+- ✅ **新增**: v2.1 新功能指南（--from-pr、任务管理、PR状态）
 
 [→ 进入 Level 2 学习](./advanced/README.md)
 
@@ -218,6 +221,39 @@ reference/
 ```
 
 [→ 快速参考](./reference/README.md)
+
+---
+
+### 🆕 Claude Code v2.1 新功能（NEW-FEATURES-GUIDE-v2.1.md）
+
+**目标**：了解最新版本的新功能和改进
+
+**内容概览**：
+- 🔄 **Git PR 集成** - `--from-pr` 标志使用
+- 📋 **任务管理系统** - 依赖跟踪和删除任务
+- 🎯 **PR 状态指示器** - 实时查看 PR 审查状态
+- 🔒 **权限系统变更** - content-level vs tool-level
+- ⚡ **性能改进** - 启动、渲染、搜索优化
+- 🪟 **Windows 修复** - bash 和控制台问题
+
+**为什么需要了解**：
+- ✅ 使用最新功能提高效率
+- ✅ 避免已修复的问题
+- ✅ 了解权限系统的重要变更
+- ✅ 充分利用性能改进
+
+**适合人群**：
+- 🎯 想使用最新功能的用户
+- 🎯 遇到 Windows 问题的用户
+- 🎯 需要任务管理和 PR 集成的用户
+- 🎯 想提升效率的进阶用户
+
+**如何使用**：
+1. 快速浏览：阅读功能概览，了解有哪些新功能
+2. 按需学习：根据需要查看特定功能的详细说明
+3. 实践应用：跟随示例和案例实践新功能
+
+[→ 查看新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.md)
 
 ---
 

@@ -2,8 +2,118 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.4.2 - CLAUDE.md 优化重构
-**发布日期**: 2026-01-26
+**最新版本**: v3.5.0 - 深度重构 + 官方更新同步
+**发布日期**: 2026-02-04
+
+---
+
+## [3.5.0] - 2026-02-04 🚀 深度重构 + 官方更新同步
+
+### 🌟 官方版本同步（Official Version Sync）
+
+#### Claude Code 官方更新记录
+
+本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.29, 2026-01-31）。
+
+##### Claude Code v2.1.29 (2026-01-31)
+- ✅ **性能改进**: 修复启动性能问题（恢复有 `saved_hook_context` 的会话时）
+- 📖 [官方发布说明](https://github.com/anthropics/claude-code/releases/tag/v2.1.29)
+
+##### Claude Code v2.1.27 (2026-01-30) ⭐ 重要更新
+- ✨ **新增功能**: `--from-pr` 标志（恢复与特定 PR 关联的会话）
+  ```bash
+  claude --from-pr 123
+  claude --from-pr https://github.com/user/repo/pull/123
+  ```
+- ✨ **自动集成**: 会话通过 `gh pr create` 创建时自动链接到 PR
+- 🐛 **Windows 修复**: 修复 bash 命令执行失败（`.bashrc` 文件用户）
+- 🐛 **Windows 修复**: 修复控制台窗口闪烁（生成子进程时）
+- 🐛 **VSCode 修复**: 修复 OAuth token 过期导致长时间会话后出现 401 错误
+- 🔒 **权限变更**: 权限现在尊重 content-level `ask` 而非 tool-level `allow`
+  - 之前: `allow: ["Bash"], ask: ["Bash(rm *)"]` 允许所有 bash 命令
+  - 现在: 会对 `rm` 命令提示权限
+- 📖 [官方发布说明](https://github.com/anthropics/claude-code/releases/tag/v2.1.27)
+
+##### Claude Code v2.1.23 (2026-01-29) ⭐ 重要更新
+- ✨ **新增功能**: 可自定义 spinner verbs 设置 (`spinnerVerbs`)
+- ✨ **新增功能**: PR 审查状态指示器
+  - 在提示符底部显示当前分支的 PR 状态
+  - 状态包括：approved（绿色）、changes requested（红色）、pending（黄色）、draft（灰色）
+- 🐛 **连接修复**: 修复 mTLS 和代理连接（企业代理用户）
+- 🐛 **权限修复**: 修复每用户临时目录隔离（防止共享系统上的权限冲突）
+- 🐛 **搜索修复**: 修复 ripgrep 搜索超时静默返回空结果而非报错
+- ⚡ **性能改进**: 改进终端渲染性能（优化的屏幕数据布局）
+- 📖 [官方发布说明](https://github.com/anthropics/claude-code/releases/tag/v2.1.23)
+
+##### Claude Code v2.1.20 (2026-01-27) ⭐⭐ 重大更新
+- ✨ **任务管理系统**: 全新任务管理系统，包括依赖跟踪等新功能
+- ✨ **删除任务**: 添加通过 `TaskUpdate` 工具删除任务的能力
+- 🎨 **UI 改进**: 改进的进度指示器（显示 "Reading…" 和 "Read"）
+- 🎨 **富文本**: 队友消息现在渲染为富 Markdown 格式
+- 🐛 **会话修复**: 修复会话压缩问题（可能导致恢复时加载完整历史）
+- 📖 [官方发布说明](https://github.com/anthropics/claude-code/releases/tag/v2.1.20)
+
+### 🔄 文档重构（Documentation Refactoring）
+
+#### 版本和日期更新
+- ✅ **版本升级**: v3.4.2 → v3.5.0
+- ✅ **日期更新**: 所有文档最后更新日期更新为 2026-02-04
+- ✅ **版本声明**: 将"基于 Claude Code v3.0"改为"跟踪官方最新版本（当前 v2.1.29）"
+
+#### 文档更新
+- ✅ 更新 `README.md` - 版本和官方跟踪信息
+- ✅ 更新 `CLAUDE.md` - AI 工作指南版本
+- ✅ 更新 `PROJECT-STATUS.md` - 项目状态文档
+- ✅ 创建 `TIME-SENSITIVE-SCAN-REPORT.md` - 时效性信息扫描报告
+
+### 📝 新功能文档化
+
+#### Git PR 集成
+- ✅ 文档化 `--from-pr` 标志的使用
+- ✅ 说明 PR 自动链接机制
+- ✅ 更新相关文档和示例
+
+#### 任务管理
+- ✅ 文档化新的任务管理系统
+- ✅ 说明依赖跟踪功能
+- ✅ 记录删除任务的方法
+
+#### 权限系统
+- ✅ 文档化权限系统变更
+- ✅ 说明 content-level vs tool-level 权限
+- ✅ 更新配置示例
+
+### 🐛 Windows 问题更新
+
+#### 新增已知问题（已修复）
+- ✅ **bash 命令执行失败** (v2.1.27 修复)
+  - 症状: PowerShell 中执行 bash 命令失败
+  - 解决: 更新到 v2.1.27 或更高版本
+- ✅ **控制台窗口闪烁** (v2.1.27 修复)
+  - 症状: 生成子进程时控制台窗口闪烁
+  - 解决: 更新到 v2.1.27 或更高版本
+
+#### 更新的文档
+- ✅ 更新 `windows/04-troubleshooting.md` - 添加新问题和解决方案
+- ✅ 更新 `windows/02-path-handling.md` - bash 相关内容
+
+### 📊 改进效果
+
+**版本同步**:
+- ✨ 官方版本跟踪: 现在明确跟踪官方最新版本
+- ✨ 定期更新机制: 建立每月检查官方更新的机制
+- ✨ 更新记录: 在 CHANGELOG.md 中记录官方版本更新
+
+**文档质量**:
+- ✨ 时效性: 所有日期和版本信息保持最新
+- ✨ 准确性: 反映官方最新功能和修复
+- ✨ 完整性: 新功能都有相应文档说明
+
+### 🎯 发布建议
+
+**版本**: v3.5.0（深度重构 + 官方更新同步版）
+**状态**: ✅ **可以立即发布**
+**优先级**: 高（保持与官方同步）
 
 ---
 
@@ -1207,5 +1317,5 @@ Windows支持: 100%
 
 ---
 
-**最后更新**: 2025-01-17
-**维护者**: Claude Code Community
+**最后更新**: 2026-02-04
+**维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)

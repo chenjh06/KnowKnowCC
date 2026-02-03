@@ -896,6 +896,109 @@ python -m venv .venv
 
 ---
 
+## 已知问题（官方已修复）
+
+以下问题在 Claude Code 官方版本中已修复。如果您遇到这些问题，请更新到最新版本。
+
+### 问题 1: Bash 命令执行失败（v2.1.27 修复）✅
+
+**症状**：
+- PowerShell 中执行 bash 命令失败
+- 误报错误信息
+- 命令无法正常执行
+
+**影响版本**：
+- v2.1.26 及更早版本
+
+**原因**：
+- 用户的 `.bashrc` 文件导致命令执行失败
+- Windows 和 bash 环境之间的兼容性问题
+
+**解决方案**：
+
+1. **更新 Claude Code**（推荐）：
+   ```powershell
+   # 检查当前版本
+   claude --version
+
+   # 更新到最新版本（如果使用安装脚本）
+   # Windows 会自动更新
+   ```
+
+2. **临时解决方案**（如果无法更新）：
+   ```powershell
+   # 临时重命名 .bashrc 文件
+   mv ~/.bashrc ~/.bashrc.bak
+
+   # 测试命令是否正常
+   # 如果正常，说明是 .bashrc 配置问题
+   ```
+
+3. **验证修复**：
+   ```powershell
+   # 在 Claude Code 中测试 bash 命令
+   echo "test" | bash
+   ```
+
+**官方修复版本**：v2.1.27 (2026-01-30)
+**验证状态**：✅ 官方已修复并验证
+
+---
+
+### 问题 2: 控制台窗口闪烁（v2.1.27 修复）✅
+
+**症状**：
+- 生成子进程时控制台窗口闪烁
+- 频繁的窗口弹出和关闭
+- 影响用户体验
+
+**影响版本**：
+- v2.1.26 及更早版本
+
+**原因**：
+- Windows 子进程创建机制问题
+- 控制台窗口继承属性设置不当
+
+**解决方案**：
+
+1. **更新 Claude Code**（推荐）：
+   ```powershell
+   # Windows 安装版本会自动更新
+   # 手动检查更新
+   winget upgrade Anthropic.ClaudeCode
+   ```
+
+2. **验证修复**：
+   ```powershell
+   # 运行会生成子进程的命令
+   claude
+   # 观察：应该不再有窗口闪烁
+   ```
+
+**官方修复版本**：v2.1.27 (2026-01-30)
+**验证状态**：✅ 官方已修复并验证
+
+---
+
+### 其他已知问题和解决方案
+
+如果您遇到其他问题，请：
+
+1. **检查版本**：
+   ```powershell
+   claude --version
+   ```
+
+2. **查看最新更新**：
+   - [官方更新日志](https://github.com/anthropics/claude-code/releases)
+   - 项目 CHANGELOG.md 中有官方版本更新记录
+
+3. **报告问题**：
+   - [GitHub Issues](https://github.com/anthropics/claude-code/issues)
+   - [官方支持](https://support.claude.com/)
+
+---
+
 ## 实战案例
 
 ### 案例1: Claude Code 无法启动
@@ -1174,7 +1277,7 @@ Resolve-Path ".\relative"
 
 ---
 
-**最后更新**: 2026-01-18
+**最后更新**: 2026-02-04
 **难度**: ⭐⭐⭐
 **阅读时间**: 40分钟
 **重要性**: ⭐⭐⭐⭐⭐ (必备！)
