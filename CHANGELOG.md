@@ -2,18 +2,46 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.5.0 - 深度重构 + 官方更新同步
-**发布日期**: 2026-02-04
+**最新版本**: v3.6.0 - 最新官方版本同步 + 任务系统指南整合
+**发布日期**: 2026-02-05
 
 ---
 
-## [3.5.0] - 2026-02-04 🚀 深度重构 + 官方更新同步
+## [3.6.0] - 2026-02-05 🚀 最新官方版本同步 + 任务系统指南整合
 
 ### 🌟 官方版本同步（Official Version Sync）
 
 #### Claude Code 官方更新记录
 
-本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.29, 2026-01-31）。
+本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.31, 2026-02-04）。
+
+##### Claude Code v2.1.31 (2026-02-04) ⭐ 最新版本
+- ✨ **会话恢复提示**: 退出时显示如何继续对话
+- ✨ **IME 支持**: 支持日语 IME 全角空格输入（复选框选择）
+- 🐛 **PDF 错误修复**: 修复 PDF 过大错误导致会话永久锁定
+- 🐛 **Bash 修复**: 修复沙箱模式下误报的"Read-only file system"错误
+- 🐛 **Plan 模式修复**: 修复缺少默认字段时的崩溃问题
+- 🐛 **温度参数修复**: 修复流式 API 路径中 `temperatureOverride` 被忽略的问题
+- 🐛 **LSP 兼容性**: 修复与严格语言服务器的兼容性
+- ⚡ **系统提示改进**: 更明确地引导模型使用专用工具（Read, Edit, Glob, Grep）而非 bash 等效命令
+- 📖 [官方 CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
+
+##### Claude Code v2.1.30 (2026-02-03) ⭐ 重要更新
+- ✨ **PDF 分页读取**: Read 工具添加 `pages` 参数，支持读取特定页面范围
+  ```javascript
+  Read({
+    filePath: "document.pdf",
+    pages: "1-5"  // 读取第 1-5 页
+  })
+  ```
+- ✨ **MCP OAuth**: 添加预配置的 OAuth 客户端凭据支持（使用 `--client-id` 和 `--client-secret`）
+- ✨ **调试命令**: 添加 `/debug` 命令帮助排查会话问题
+- ✨ **Git 标志**: 支持额外的 `git log` 和 `git show` 标志（只读模式）
+- ✨ **任务指标**: 任务工具结果添加 token 计数、工具调用和持续时间指标
+- ✨ **减少运动**: 添加减少运动模式配置
+- 🐛 **文本块修复**: 修复幻影"(no content)"文本块
+- 🐛 **缓存修复**: 修复提示缓存未正确失效的问题
+- 📖 [官方 CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
 
 ##### Claude Code v2.1.29 (2026-01-31)
 - ✅ **性能改进**: 修复启动性能问题（恢复有 `saved_hook_context` 的会话时）
