@@ -2,10 +2,14 @@
 
 > **用代码构建强大的 AI Agent**
 
-**阅读时间**: 40分钟
+**阅读时间**: 60分钟
 **难度**: ⭐⭐⭐⭐⭐
 **重要性**: ⭐⭐⭐⭐⭐
 **前置要求**: [插件系统](../03-advanced-topics/02-plugins.md)
+
+> **📌 文档版本**: v3.5 + Claude Opus 4.6
+> **✅ 验证状态**: ✅ 已验证（2026-02-15）
+> **🔄 最后更新**: 2026-02-15 - 同步 Agent Teams、Subagent 新功能
 
 ---
 
@@ -17,6 +21,9 @@
 - [核心概念](#核心概念)
 - [开发流程](#开发流程)
 - [实战案例](#实战案例)
+- [Agent Teams API](#agent-teams-api) ⭐ NEW
+- [多智能体编程模式](#多智能体编程模式) ⭐ NEW
+- [Subagent 配置](#subagent-配置) ⭐ NEW
 - [Windows特定](#windows特定)
 - [最佳实践](#最佳实践)
 - [常见问题](#常见问题)
@@ -1189,6 +1196,960 @@ class DeploymentAgent {
 const deployer = new DeploymentAgent();
 const result = await deployer.deploy('staging');
 console.log('部署成功:', result);
+```
+
+---
+
+## Agent Teams API ⭐ NEW
+
+### 官方说明
+
+**Agent Teams** 是 Claude Opus 4.6 的重大新功能（2026-02-05 发布）：
+
+```markdown
+"You can now spin up multiple agents that work in parallel as a team
+and coordinate autonomously—best for tasks that split into independent,
+read-heavy work like codebase reviews."
+```
+
+### Agent Teams SDK 架构
+
+```
+AgentTeam
+├─ 🤖 Agent Pool（智能体池）
+│   ├─ 创建多个 Agent
+│   ├─ 配置每个 Agent 的行为
+│   └─ 管理 Agent 生命周期
+│
+├─ 📋 Task Scheduler（任务调度器）
+│   ├─ 任务分解
+│   ├─ 负载均衡
+│   └─ 并行执行
+│
+├─ 🔄 Coordinator（协调器）
+│   ├─ 智能体间通信
+│   ├─ 结果汇总
+│   └─ 冲突解决
+│
+└─ 🎮 Controller（控制器）
+    ├─ 实时监控
+    ├─ 人工介入
+    └─ 动态调整
+```
+
+### 核心 API
+
+#### 1. 创建 Agent Team
+
+```typescript
+import { AgentTeam, AgentConfig } from '@anthropic-ai/claude-sdk';
+
+// 创建 Agent Team
+const team = new AgentTeam({
+  name: 'code-review-team',
+  maxAgents: 4,           // 最大智能体数量
+  coordinatorModel: 'claude-opus-4-6-20260205',
+
+  // 全局配置
+  globalConfig: {
+    temperature: 0.2,
+    maxTokens: 4000
+  }
+});
+
+// 添加智能体
+const agent1 = await team.addAgent({
+  name: 'frontend-reviewer',
+  description: '审查前端代码（React、Vue、样式）',
+  specialization: 'frontend',
+  allowedTools: ['Read', 'Grep', 'Glob'],
+  model: 'claude-sonnet-4-5-20250929'
+});
+
+const agent2 = await team.addAgent({
+  name: 'backend-reviewer',
+  description: '审查后端代码（API、数据库、业务逻辑）',
+  specialization: 'backend',
+  allowedTools: ['Read', 'Grep', 'Glob', 'Bash'],
+  model: 'claude-sonnet-4-5-20250929'
+});
+
+const agent3 = await team.addAgent({
+  name: 'test-reviewer',
+  description: '审查测试覆盖率和测试质量',
+  specialization: 'testing',
+  allowedTools: ['Read', 'Grep', 'Glob'],
+  model: 'claude-sonnet-4-5-20250929'
+});
+
+const agent4 = await team.addAgent({
+  name: 'doc-reviewer',
+  description: '审查文档完整性',
+  specialization: 'documentation',
+  allowedTools: ['Read', 'Grep', 'Glob'],
+  model: 'claude-sonnet-4-5-20250929'
+});
+```
+
+#### 2. 任务分配与执行
+
+```typescript
+// 定义任务
+interface ReviewTask {
+  type: 'frontend' | 'backend' | 'testing' | 'documentation';
+  files: string[];
+  criteria: string[];
+}
+
+// 创建审查任务
+const tasks: ReviewTask[] = [
+  {
+    type: 'frontend',
+    files: ['src/components/**/*.tsx', 'src/styles/**/*.css'],
+    criteria: ['代码质量', '性能优化', '可访问性']
+  },
+  {
+    type: 'backend',
+    files: ['src/api/**/*.ts', 'src/services/**/*.ts'],
+    criteria: ['API设计', '安全性', '错误处理']
+  },
+  {
+    type: 'testing',
+    files: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
+    criteria: ['覆盖率', '测试质量', '边界情况']
+  },
+  {
+    type: 'documentation',
+    files: ['README.md', 'docs/**/*.md', 'src/**/*.md'],
+    criteria: ['完整性', '准确性', '可读性']
+  }
+];
+
+// 并行执行任务
+const results = await team.executeParallel(tasks, {
+  strategy: 'specialization-matching',  // 根据专长匹配
+  timeout: 30 * 60 * 1000,              // 30分钟超时
+  maxConcurrency: 4,                    // 最大并发数
+
+  // 进度回调
+  onProgress: (progress) => {
+    console.log(`进度: ${progress.completed}/${progress.total}`);
+    console.log(`Agent 1: ${progress.agents[0].status}`);
+    console.log(`Agent 2: ${progress.agents[1].status}`);
+  },
+
+  // 错误处理
+  onError: (error, task) => {
+    console.error(`任务失败: ${task.type}`, error);
+    return 'continue';  // 继续其他任务
+  }
+});
+```
+
+#### 3. 监控和控制 API
+
+```typescript
+// 实时监控
+const monitor = team.createMonitor();
+
+monitor.on('agent-status-change', (event) => {
+  console.log(`Agent ${event.agentId}: ${event.status}`);
+});
+
+monitor.on('task-complete', (event) => {
+  console.log(`任务完成: ${event.taskId}`);
+  console.log(`结果摘要: ${event.summary}`);
+});
+
+// 获取所有 Agent 状态
+const status = await team.getStatus();
+console.log(status);
+// {
+//   totalAgents: 4,
+//   activeAgents: 4,
+//   completedTasks: 2,
+//   pendingTasks: 2,
+//   agents: [
+//     { id: 'agent-1', status: 'working', progress: 75 },
+//     { id: 'agent-2', status: 'completed', progress: 100 },
+//     ...
+//   ]
+// }
+
+// 暂停/恢复特定 Agent
+await team.pauseAgent('agent-1');
+await team.resumeAgent('agent-1');
+
+// 人工介入
+await team.intervene('agent-1', {
+  action: 'provide-guidance',
+  message: '重点关注性能优化问题'
+});
+
+// 动态调整任务
+await team.reassignTask('task-3', 'agent-2');
+```
+
+#### 4. 结果汇总与报告
+
+```typescript
+// 汇总所有结果
+const report = await team.generateReport({
+  format: 'detailed',  // detailed | summary | json
+  includeMetrics: true,
+  includeSuggestions: true
+});
+
+console.log(report);
+// {
+//   summary: {
+//     totalFiles: 150,
+//     issuesFound: 23,
+//     criticalIssues: 2,
+//     recommendations: 15
+//   },
+//   byCategory: {
+//     frontend: { issues: 8, suggestions: 5 },
+//     backend: { issues: 10, suggestions: 6 },
+//     testing: { issues: 3, suggestions: 2 },
+//     documentation: { issues: 2, suggestions: 2 }
+//   },
+//   details: [...]
+// }
+
+// 导出为 Markdown
+const markdownReport = await team.exportReport('markdown');
+await fs.writeFile('review-report.md', markdownReport);
+```
+
+### 完整实战示例
+
+```typescript
+import { AgentTeam } from '@anthropic-ai/claude-sdk';
+import * as fs from 'fs/promises';
+
+class CodeReviewSystem {
+  private team: AgentTeam;
+
+  constructor() {
+    this.team = new AgentTeam({
+      name: 'comprehensive-reviewer',
+      maxAgents: 6,
+      coordinatorModel: 'claude-opus-4-6-20260205'
+    });
+  }
+
+  async initialize() {
+    // 添加不同类型的审查智能体
+    await this.team.addAgent({
+      name: 'security-expert',
+      description: '专注于安全漏洞检查',
+      specialization: 'security',
+      model: 'claude-opus-4-6-20260205',
+      instructions: `
+        你是一个安全专家。审查代码时重点关注：
+        1. SQL 注入漏洞
+        2. XSS 攻击风险
+        3. 身份验证问题
+        4. 敏感数据泄露
+        5. 不安全的依赖
+      `
+    });
+
+    await this.team.addAgent({
+      name: 'performance-expert',
+      description: '专注于性能优化',
+      specialization: 'performance',
+      model: 'claude-sonnet-4-5-20250929',
+      instructions: `
+        你是一个性能优化专家。审查代码时关注：
+        1. 算法复杂度
+        2. 数据库查询优化
+        3. 内存泄漏
+        4. 不必要的重渲染
+        5. 缓存策略
+      `
+    });
+
+    await this.team.addAgent({
+      name: 'architecture-expert',
+      description: '专注于架构设计',
+      specialization: 'architecture',
+      model: 'claude-opus-4-6-20260205',
+      instructions: `
+        你是一个架构专家。审查代码时关注：
+        1. 设计模式应用
+        2. 代码组织
+        3. 依赖关系
+        4. 可维护性
+        5. 可扩展性
+      `
+    });
+  }
+
+  async reviewProject(projectPath: string) {
+    console.log('开始全面代码审查...');
+    const startTime = Date.now();
+
+    // 1. 分析项目结构
+    const structure = await this.analyzeStructure(projectPath);
+
+    // 2. 创建审查任务
+    const tasks = this.createReviewTasks(structure);
+
+    // 3. 并行执行审查
+    const results = await this.team.executeParallel(tasks, {
+      strategy: 'specialization-matching',
+      timeout: 60 * 60 * 1000,  // 1小时超时
+
+      onProgress: (progress) => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        console.log(`[${elapsed.toFixed(1)}s] 进度: ${progress.percentage}%`);
+      }
+    });
+
+    // 4. 生成综合报告
+    const report = await this.generateComprehensiveReport(results);
+
+    // 5. 保存报告
+    await this.saveReport(report, projectPath);
+
+    const duration = (Date.now() - startTime) / 1000;
+    console.log(`审查完成！耗时: ${duration.toFixed(1)}秒`);
+
+    return report;
+  }
+
+  private async analyzeStructure(projectPath: string) {
+    // 分析项目结构，识别文件类型和模块
+    const structure = {
+      sourceFiles: [],
+      testFiles: [],
+      configFiles: [],
+      documentation: []
+    };
+    // ... 实现细节
+    return structure;
+  }
+
+  private createReviewTasks(structure: any) {
+    return [
+      {
+        type: 'security',
+        files: structure.sourceFiles,
+        priority: 'high'
+      },
+      {
+        type: 'performance',
+        files: structure.sourceFiles,
+        priority: 'medium'
+      },
+      {
+        type: 'architecture',
+        files: structure.sourceFiles,
+        priority: 'medium'
+      }
+    ];
+  }
+
+  private async generateComprehensiveReport(results: any[]) {
+    // 整合所有审查结果
+    return {
+      summary: this.generateSummary(results),
+      security: results.find(r => r.type === 'security'),
+      performance: results.find(r => r.type === 'performance'),
+      architecture: results.find(r => r.type === 'architecture'),
+      recommendations: this.prioritizeRecommendations(results)
+    };
+  }
+
+  private async saveReport(report: any, projectPath: string) {
+    const reportPath = `${projectPath}/review-report-${Date.now()}.md`;
+    await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
+    console.log(`报告已保存: ${reportPath}`);
+  }
+}
+
+// 使用示例
+async function main() {
+  const reviewer = new CodeReviewSystem();
+  await reviewer.initialize();
+
+  const report = await reviewer.reviewProject('./my-project');
+  console.log('审查摘要:', report.summary);
+}
+
+main().catch(console.error);
+```
+
+### Windows 特定 API
+
+```typescript
+// Windows 上的 Agent Team 配置
+const team = new AgentTeam({
+  name: 'windows-compatible-team',
+
+  // Windows 特定的路径处理
+  pathHandler: {
+    normalize: (path: string) => path.replace(/\\/g, '/'),
+    resolve: (path: string) => require('path').resolve(path)
+  },
+
+  // Windows 特定的进程管理
+  processManager: {
+    shell: 'powershell',  // 或 'cmd'
+    encoding: 'utf8'
+  }
+});
+
+// PowerShell 命令执行
+await team.executeCommand({
+  agent: 'agent-1',
+  command: 'Get-ChildItem -Recurse -File | Group-Object Extension',
+  shell: 'powershell'
+});
+
+// Windows Terminal 集成
+if (process.env.WT_SESSION) {
+  await team.enableWindowsTerminalIntegration({
+    splitPanes: true,
+    paneCount: 4
+  });
+}
+```
+
+### 性能优化
+
+```typescript
+// Agent Pool 优化
+const team = new AgentTeam({
+  name: 'optimized-team',
+
+  // 连接池配置
+  poolConfig: {
+    minAgents: 2,
+    maxAgents: 8,
+    idleTimeout: 5 * 60 * 1000,  // 5分钟空闲超时
+    acquireTimeout: 30 * 1000     // 30秒获取超时
+  },
+
+  // 负载均衡策略
+  loadBalancing: {
+    strategy: 'round-robin',  // 轮询
+    // 其他选项: 'least-connections', 'weighted', 'random'
+  },
+
+  // 缓存配置
+  cacheConfig: {
+    enabled: true,
+    ttl: 60 * 60 * 1000,  // 1小时缓存
+    maxSize: 100          // 最大缓存条目
+  }
+});
+```
+
+---
+
+## 多智能体编程模式 ⭐ NEW
+
+### 模式1：主从架构（Master-Worker）
+
+```
+Master Agent
+    ├─ Worker 1: 任务A
+    ├─ Worker 2: 任务B
+    ├─ Worker 3: 任务C
+    └─ Worker 4: 任务D
+```
+
+```typescript
+class MasterWorkerPattern {
+  private master: Agent;
+  private workers: Agent[];
+
+  constructor() {
+    // 创建主控 Agent
+    this.master = new Agent({
+      name: 'master',
+      model: 'claude-opus-4-6-20260205',
+      instructions: `
+        你是任务协调器。职责：
+        1. 分析复杂任务
+        2. 分解为子任务
+        3. 分配给 Worker
+        4. 汇总结果
+      `
+    });
+
+    // 创建 Worker Agents
+    this.workers = [
+      new Agent({ name: 'worker-1', specialization: 'frontend' }),
+      new Agent({ name: 'worker-2', specialization: 'backend' }),
+      new Agent({ name: 'worker-3', specialization: 'database' }),
+      new Agent({ name: 'worker-4', specialization: 'testing' })
+    ];
+  }
+
+  async executeComplexTask(task: string) {
+    // 1. Master 分析并分解任务
+    const subtasks = await this.master.decompose(task);
+
+    // 2. 分配给 Workers
+    const assignments = this.assignToWorkers(subtasks);
+
+    // 3. 并行执行
+    const results = await Promise.all(
+      assignments.map(async ({ worker, subtask }) => {
+        return worker.execute(subtask);
+      })
+    );
+
+    // 4. Master 汇总结果
+    return this.master.synthesize(results);
+  }
+}
+```
+
+### 模式2：流水线架构（Pipeline）
+
+```
+Stage 1 → Stage 2 → Stage 3 → Stage 4
+(分析)   (设计)    (实现)    (测试)
+```
+
+```typescript
+class PipelinePattern {
+  private stages: Agent[];
+
+  constructor() {
+    this.stages = [
+      new Agent({
+        name: 'analyzer',
+        instructions: '分析需求和现有代码'
+      }),
+      new Agent({
+        name: 'designer',
+        instructions: '设计解决方案'
+      }),
+      new Agent({
+        name: 'implementer',
+        instructions: '实现代码'
+      }),
+      new Agent({
+        name: 'tester',
+        instructions: '编写测试并验证'
+      })
+    ];
+  }
+
+  async execute(input: string) {
+    let data = input;
+
+    for (const stage of this.stages) {
+      console.log(`执行阶段: ${stage.name}`);
+      data = await stage.process(data);
+    }
+
+    return data;
+  }
+}
+```
+
+### 模式3：协作架构（Collaborative）
+
+```
+Agent A ←→ Agent B
+   ↑         ↓
+Agent D ←→ Agent C
+```
+
+```typescript
+class CollaborativePattern {
+  private agents: Agent[];
+  private sharedContext: SharedContext;
+
+  constructor() {
+    this.agents = [
+      new Agent({ name: 'architect', role: '设计架构' }),
+      new Agent({ name: 'developer', role: '实现功能' }),
+      new Agent({ name: 'reviewer', role: '审查代码' }),
+      new Agent({ name: 'tester', role: '验证质量' })
+    ];
+
+    this.sharedContext = new SharedContext();
+  }
+
+  async collaborate(task: string) {
+    // 初始化共享上下文
+    await this.sharedContext.initialize(task);
+
+    // 多轮协作
+    for (let round = 0; round < 5; round++) {
+      console.log(`协作轮次: ${round + 1}`);
+
+      // 每个 Agent 基于共享上下文贡献
+      for (const agent of this.agents) {
+        const contribution = await agent.contribute(
+          this.sharedContext.getCurrentState()
+        );
+
+        await this.sharedContext.update(agent.name, contribution);
+      }
+
+      // 检查是否达成共识
+      if (await this.reachedConsensus()) {
+        break;
+      }
+    }
+
+    return this.sharedContext.getFinalResult();
+  }
+}
+```
+
+### 任务分解策略
+
+```typescript
+// 按模块分解
+function decomposeByModule(project: Project): Task[] {
+  return project.modules.map(module => ({
+    type: 'module',
+    target: module.name,
+    files: module.files,
+    dependencies: module.dependencies
+  }));
+}
+
+// 按功能维度分解
+function decomposeByDimension(codebase: Codebase): Task[] {
+  return [
+    { dimension: 'security', focus: '漏洞检查' },
+    { dimension: 'performance', focus: '性能优化' },
+    { dimension: 'maintainability', focus: '可维护性' },
+    { dimension: 'testability', focus: '可测试性' }
+  ];
+}
+
+// 按时间范围分解
+function decomposeByTimeRange(history: GitHistory): Task[] {
+  return [
+    { range: 'last-week', label: '最近一周的变更' },
+    { range: 'last-month', label: '最近一个月的变更' },
+    { range: 'legacy', label: '历史遗留代码' }
+  ];
+}
+```
+
+---
+
+## Subagent 配置 ⭐ NEW
+
+### 官方说明
+
+```markdown
+"Add `context: fork` to your frontmatter when you want a skill to run
+in isolation. The skill content becomes the prompt that drives the
+subagent. It won't have access to your conversation history."
+```
+
+### Subagent SDK 配置
+
+```typescript
+import { Subagent, AgentType } from '@anthropic-ai/claude-sdk';
+
+// 创建 Subagent
+const subagent = new Subagent({
+  // 基础配置
+  name: 'code-explorer',
+  description: '代码库探索专家',
+
+  // 执行模式
+  context: 'fork',  // ⭐ 关键：隔离执行
+
+  // Agent 类型
+  agent: AgentType.Explore,  // Explore | Plan | GeneralPurpose
+
+  // 模型配置
+  model: {
+    name: 'claude-sonnet-4-5-20250929',
+    temperature: 0.2,
+    maxTokens: 4000
+  },
+
+  // 工具权限
+  allowedTools: [
+    'Read',
+    'Write',
+    'Edit',
+    'Bash',
+    'Grep',
+    'Glob'
+  ],
+
+  // 资源限制
+  limits: {
+    maxExecutionTime: 30 * 60 * 1000,  // 30分钟
+    maxTokens: 100000,
+    maxFileReads: 100
+  }
+});
+```
+
+### Agent 类型详解
+
+```typescript
+enum AgentType {
+  // 探索型：只读，适合大规模代码库分析
+  Explore = 'explore',
+
+  // 规划型：结构化思考，适合生成计划
+  Plan = 'plan',
+
+  // 通用型：灵活，可读写，适合复杂任务
+  GeneralPurpose = 'general-purpose',
+
+  // 自定义型：用户定义行为
+  Custom = 'custom'
+}
+
+// 使用示例
+const exploreAgent = new Subagent({
+  name: 'architecture-analyzer',
+  agent: AgentType.Explore,
+  allowedTools: ['Read', 'Grep', 'Glob'],  // 只读工具
+  instructions: `
+    分析项目架构：
+    1. 识别主要组件
+    2. 绘制依赖关系图
+    3. 发现架构模式
+  `
+});
+
+const planAgent = new Subagent({
+  name: 'refaction-planner',
+  agent: AgentType.Plan,
+  allowedTools: ['Read', 'Grep', 'Glob'],
+  instructions: `
+    制定重构计划：
+    1. 分析当前代码结构
+    2. 识别改进点
+    3. 生成详细执行步骤
+  `
+});
+
+const generalAgent = new Subagent({
+  name: 'feature-implementer',
+  agent: AgentType.GeneralPurpose,
+  allowedTools: ['Read', 'Write', 'Edit', 'Bash'],
+  instructions: '实现新功能，包括代码编写和测试'
+});
+```
+
+### 动态上下文注入
+
+```typescript
+// 使用 !command 语法
+const subagent = new Subagent({
+  name: 'git-analyzer',
+
+  // 动态获取 Git 信息
+  dynamicContext: {
+    // 当前分支
+    currentBranch: '!`git branch --show-current`',
+
+    // 最近提交
+    recentCommits: '!`git log -10 --oneline`',
+
+    // 修改的文件
+    changedFiles: '!`git diff --name-only HEAD~1`',
+
+    // 未提交的变更
+    uncommittedChanges: '!`git status --short`'
+  },
+
+  instructions: `
+    基于当前 Git 状态进行分析：
+
+    分支: {{currentBranch}}
+
+    最近提交:
+    {{recentCommits}}
+
+    需要审查的文件:
+    {{changedFiles}}
+  `
+});
+
+// 执行时自动注入
+const result = await subagent.execute({
+  preprocess: true,  // 启用预处理
+  injectContext: true  // 注入动态上下文
+});
+```
+
+### 完整实战示例
+
+```typescript
+import { Subagent, AgentTeam } from '@anthropic-ai/claude-sdk';
+
+class ParallelCodeAnalyzer {
+  private team: AgentTeam;
+
+  constructor() {
+    this.team = new AgentTeam({ name: 'parallel-analyzer' });
+
+    // 创建多个 Subagent，每个专注于不同维度
+    this.initializeSubagents();
+  }
+
+  private async initializeSubagents() {
+    // Subagent 1: 安全分析（隔离执行）
+    await this.team.addSubagent({
+      name: 'security-auditor',
+      context: 'fork',
+      agent: 'Explore',
+      allowedTools: ['Read', 'Grep', 'Glob'],
+
+      // 动态获取依赖信息
+      dynamicContext: {
+        dependencies: '!`cat package.json | jq ".dependencies"`',
+        vulnerabilities: '!`npm audit --json 2>/dev/null || echo "{}"`'
+      },
+
+      instructions: `
+        你是一个安全审计专家。
+
+        当前项目依赖:
+        {{dependencies}}
+
+        已知漏洞:
+        {{vulnerabilities}}
+
+        任务：
+        1. 搜索常见漏洞模式（SQL注入、XSS等）
+        2. 检查不安全的依赖版本
+        3. 审查身份验证实现
+        4. 生成安全审计报告
+      `
+    });
+
+    // Subagent 2: 性能分析
+    await this.team.addSubagent({
+      name: 'performance-analyzer',
+      context: 'fork',
+      agent: 'Explore',
+      allowedTools: ['Read', 'Grep', 'Glob'],
+
+      instructions: `
+        你是一个性能优化专家。
+
+        任务：
+        1. 识别性能瓶颈
+        2. 分析算法复杂度
+        3. 检查数据库查询效率
+        4. 发现内存泄漏风险
+        5. 生成性能优化建议
+      `
+    });
+
+    // Subagent 3: 架构分析
+    await this.team.addSubagent({
+      name: 'architecture-reviewer',
+      context: 'fork',
+      agent: 'Plan',
+      allowedTools: ['Read', 'Grep', 'Glob'],
+
+      instructions: `
+        你是一个架构专家。
+
+        任务：
+        1. 分析项目结构
+        2. 识别设计模式
+        3. 评估耦合度
+        4. 建议架构改进
+        5. 生成架构文档
+      `
+    });
+  }
+
+  async analyzeProject(projectPath: string) {
+    console.log('启动并行分析...');
+
+    // 并行执行所有 Subagent
+    const results = await this.team.executeParallel([
+      { agent: 'security-auditor', target: projectPath },
+      { agent: 'performance-analyzer', target: projectPath },
+      { agent: 'architecture-reviewer', target: projectPath }
+    ], {
+      timeout: 20 * 60 * 1000,  // 20分钟超时
+
+      // 每个 Subagent 在隔离环境中运行
+      isolation: {
+        enabled: true,
+        shareResults: false  // 不共享中间结果
+      }
+    });
+
+    // 汇总报告
+    return {
+      security: results[0],
+      performance: results[1],
+      architecture: results[2],
+      summary: this.generateSummary(results)
+    };
+  }
+
+  private generateSummary(results: any[]) {
+    return {
+      totalIssues: results.reduce((sum, r) => sum + r.issues.length, 0),
+      criticalIssues: results.reduce((sum, r) =>
+        sum + r.issues.filter((i: any) => i.severity === 'critical').length, 0
+      ),
+      recommendations: results.flatMap((r: any) => r.recommendations)
+    };
+  }
+}
+
+// 使用
+const analyzer = new ParallelCodeAnalyzer();
+const report = await analyzer.analyzeProject('./src');
+console.log('安全 issues:', report.security.issues.length);
+console.log('性能 issues:', report.performance.issues.length);
+```
+
+### Windows 特定配置
+
+```typescript
+// Windows 上的 Subagent 配置
+const windowsSubagent = new Subagent({
+  name: 'windows-compatible-agent',
+
+  // Windows 特定的命令执行
+  commandExecutor: {
+    shell: 'powershell',
+    encoding: 'utf8',
+    windowsHide: false
+  },
+
+  // 路径处理
+  pathConfig: {
+    separator: '\\',
+    normalize: true,
+    useForwardSlash: true  // 内部使用正斜杠
+  },
+
+  // 动态上下文（Windows 命令）
+  dynamicContext: {
+    // PowerShell 命令
+    fileList: '!`powershell -Command "Get-ChildItem -Recurse -File | Select-Object -First 20 FullName"`',
+
+    // 系统信息
+    systemInfo: '!`powershell -Command "Get-ComputerInfo | Select-Object WindowsVersion, TotalPhysicalMemory"`',
+
+    // Git 信息（Git Bash 或 WSL）
+    gitStatus: '!`git status --short`'
+  }
+});
 ```
 
 ---

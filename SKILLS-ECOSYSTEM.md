@@ -1,9 +1,9 @@
 # Skills 生态概览
 
-> **验证状态**: ✅ 已验证
-> **内容来源**: 微信文章分析 (2026-01-23)
-> **可信度**: 95%
-> **最后更新**: 2026-01-26
+> **📌 文档版本**: v3.5 + Agent Skills 开放标准
+> **✅ 验证状态**: ✅ 已验证（2026-02-15）
+> **🔄 最后更新**: 2026-02-15 - 同步 Claude Opus 4.6 重大功能
+> **内容来源**: 官方文档 + 社区实践
 
 ---
 
@@ -34,6 +34,243 @@
    - 模块化管理
    - 持续迭代
 ```
+
+---
+
+## Agent Skills 开放标准 ⭐ NEW
+
+### 官方声明
+
+**Claude Code Skills 现在遵循 Agent Skills 开放标准**：
+
+```markdown
+"Claude Code skills follow the Agent Skills open standard,
+which works across multiple AI tools."
+```
+
+### 战略意义
+
+**1. 跨工具兼容性**
+- ✅ Skills 不再是 Claude Code 专属
+- ✅ 可以在多个 AI 工具中使用相同的 Skill
+- ✅ 标准化 = 生态系统爆发
+
+**2. 社区生态**
+- ✅ 社区 Skills 库将快速增长
+- ✅ 可复用性大幅提升
+- ✅ 跨平台 Skills 开发成为可能
+
+**3. 开发价值**
+- ✅ 一次开发，多平台使用
+- ✅ 标准化的结构和配置
+- ✅ 更广泛的适用范围
+
+### 标准化内容
+
+**统一的 SKILL.md 结构**：
+
+```markdown
+---
+# YAML Frontmatter
+name: skill-name
+description: Standard description format
+argument-hint: [param1] [param2]
+allowed-tools: Read, Write
+context: fork  # ⭐ NEW: Subagent 模式
+agent: Explore # ⭐ NEW: Agent 类型
+---
+
+# Markdown Content
+Standardized instructions...
+
+## Dynamic Context ⭐ NEW
+- Data: !`command`  # 动态上下文注入
+```
+
+**Claude Code 扩展功能**：
+- 🔀 **Subagent 执行**：`context: fork` 在隔离环境中运行
+- 💉 **动态上下文注入**：`!command` 预处理机制
+- 🎯 **Agent 类型选择**：Explore、Plan、general-purpose
+- 🛡️ **工具权限控制**：精细化的 `allowed-tools`
+
+### 实际影响
+
+**对现有项目**：
+- ✅ 现有 Skills 继续有效
+- ✅ 无需修改现有配置
+- ✅ 自动符合新标准
+
+**对未来开发**：
+- ✅ 可以设计跨平台 Skills
+- ✅ 参考标准化的最佳实践
+- ✅ 贡献到社区生态
+
+---
+
+## Custom Slash Commands 合并说明 ⭐ NEW
+
+### 官方变更
+
+**Custom slash commands 已合并到 Skills**：
+
+```markdown
+"Custom slash commands have been merged into skills.
+A file at .claude/commands/review.md and a skill at
+.claude/skills/review/SKILL.md both create /review
+and work the same way.
+
+Your existing .claude/commands/ files keep working."
+```
+
+### 关键变化
+
+**两种方式现在等价**：
+
+```bash
+# 方式 1: Commands（旧方式，仍然有效）
+.claude/commands/
+└── review.md
+
+# 方式 2: Skills（新方式，推荐）
+.claude/skills/
+└── review/
+    └── SKILL.md
+
+# 两者都创建 /review 命令
+/review  # ✅ 两种方式效果相同
+```
+
+### Skills 的额外优势
+
+| 功能 | Commands | Skills |
+|------|---------|--------|
+| **创建 /command** | ✅ | ✅ |
+| **Frontmatter 配置** | ✅ 有限 | ✅ 完整 |
+| **Supporting files** | ❌ | ✅ 支持模板、示例、脚本 |
+| **自动发现** | ❌ | ✅ Claude 可自动激活 |
+| **Subagent 执行** | ❌ | ✅ `context: fork` |
+| **动态上下文** | ❌ | ✅ `!command` 注入 |
+| **工具限制** | ❌ | ✅ `allowed-tools` |
+
+### 迁移建议
+
+**推荐迁移到 Skills**：
+
+```bash
+# 步骤 1: 创建 Skills 目录
+mkdir -p .claude/skills/review
+
+# 步骤 2: 移动文件
+mv .claude/commands/review.md .claude/skills/review/SKILL.md
+
+# 步骤 3: 添加 frontmatter
+---
+name: review
+description: 代码审查技能
+---
+
+# 原有内容...
+```
+
+**何时保留 Commands**：
+- ⚠️ 简单的静态命令
+- ⚠️ 不需要高级功能
+- ⚠️ 快速原型测试
+
+---
+
+## Skills 新功能 ⭐ NEW
+
+### 1. Subagent 执行模式 (`context: fork`)
+
+**官方说明**：
+
+```markdown
+"Add `context: fork` to your frontmatter when you want a skill to run
+in isolation. The skill content becomes the prompt that drives the
+subagent. It won't have access to your conversation history."
+```
+
+**使用方法**：
+
+```yaml
+---
+name: deep-research
+description: Research a topic thoroughly
+context: fork           # ⭐ 关键：启用 subagent 模式
+agent: Explore          # ⭐ 指定 subagent 类型
+allowed-tools: Read, Grep, Glob
+---
+
+Research $ARGUMENTS thoroughly:
+
+1. Find relevant files using Glob and Grep
+2. Read and analyze the code
+3. Summarize findings with specific file references
+```
+
+**优势**：
+- ✅ 上下文隔离（不污染主会话）
+- ✅ 独立的工具权限
+- ✅ 专注执行（减少干扰）
+
+**适用场景**：
+- ✅ 大规模代码库探索
+- ✅ 批量只读分析
+- ✅ 研究类任务
+
+### 2. 动态上下文注入 (`!command`)
+
+**官方说明**：
+
+```markdown
+"The `!`command` syntax runs shell commands before the skill content
+is sent to Claude. The command output replaces the placeholder, so
+Claude receives actual data, not the command itself.
+
+This is preprocessing, not something Claude executes."
+```
+
+**使用方法**：
+
+```yaml
+---
+name: pr-summary
+description: Summarize changes in a pull request
+allowed-tools: Bash(gh *)
+---
+
+## Pull request context
+
+- PR diff: !`gh pr diff`
+- PR comments: !`gh pr view --comments`
+- Changed files: !`gh pr diff --name-only`
+
+## Your task
+Summarize this pull request...
+```
+
+**执行流程**：
+
+```
+1. Skill 被调用
+2. 预处理执行（!command）
+3. 命令输出替换占位符
+4. 完整内容发送给 Claude
+5. Claude 看到实际数据
+```
+
+**优势**：
+- ✅ 实时数据获取
+- ✅ 外部工具集成
+- ✅ 简化提示词
+
+**适用场景**：
+- ✅ Git/GitHub 集成
+- ✅ 系统信息获取
+- ✅ 项目依赖分析
+
+**详细教程**: 📚 [Skills 基础概念](advanced/d-skills-development/01-skill-fundamentals.md)
 
 ---
 
@@ -108,15 +345,43 @@
 
 ---
 
-## Skills vs 其他扩展方式
+## Skills vs 其他扩展方式 ⭐ UPDATED
 
-| 特性 | Skills | MCP | Commands |
-|------|--------|-----|----------|
+### 对比表格
+
+| 特性 | Skills ⭐ | MCP | Commands ⚠️ |
+|------|----------|-----|-------------|
 | **运行位置** | 本地或云端 | 本地或云端 | 本地 |
-| **主要用途** | 封装工作流 | 外部服务调用 | 固定命令 |
+| **主要用途** | 封装工作流 + 智能推理 | 外部服务调用 | 固定命令 |
 | **开发难度** | ⭐⭐ 自然语言 | ⭐⭐⭐⭐⭐ 需要开发 | ⭐⭐⭐ 配置 |
-| **灵活性** | ⭐⭐⭐⭐⭐ AI 推理 | ⭐⭐⭐ 中等 | ⭐ 低（固定） |
-| **性能** | 依赖模型推理 | 可优化 | 快速 |
+| **灵活性** | ⭐⭐⭐⭐⭐ AI 推理 + Subagent | ⭐⭐⭐ 中等 | ⭐ 低（固定） |
+| **Subagent 执行** | ✅ `context: fork` | ❌ | ❌ |
+| **动态上下文** | ✅ `!command` | ❌ | ❌ |
+| **Supporting Files** | ✅ 模板、示例、脚本 | ⚠️ 有限 | ❌ |
+| **自动发现** | ✅ Claude 可自动激活 | ❌ | ❌ |
+| **跨工具兼容** | ✅ Agent Skills 标准 | ❌ | ❌ |
+| **状态** | 🟢 **推荐** | 🟡 特定场景 | 🟡 已合并到 Skills |
+
+**重要更新**：
+- ⚠️ **Commands 已合并到 Skills**：现有 Commands 继续工作，但推荐迁移到 Skills
+- ⭐ **Skills 是首选**：功能最完整，灵活性最高
+
+### 迁移趋势
+
+**Commands → Skills**（官方推荐）：
+
+```bash
+# 所有 Commands 都可以迁移到 Skills
+.claude/commands/review.md
+    ↓
+.claude/skills/review/SKILL.md
+
+# 优势：
+✅ Supporting files 支持
+✅ Subagent 执行模式
+✅ 动态上下文注入
+✅ 自动发现和激活
+```
 
 ---
 
@@ -256,5 +521,12 @@ N8N Workflow → Skills
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-15
+**文档版本**: v3.5 + Agent Skills 开放标准
 **维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)
+
+**重大更新**：
+- ⭐ Agent Skills 开放标准（跨工具兼容）
+- ⭐ Custom Slash Commands 合并到 Skills
+- ⭐ Subagent 执行模式（`context: fork`）
+- ⭐ 动态上下文注入（`!command`）

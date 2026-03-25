@@ -2,18 +2,42 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.6.0 - 最新官方版本同步 + 任务系统指南整合
-**发布日期**: 2026-02-05
+**最新版本**: v3.7.0 - 2026年3月官方更新同步（v2.1.83）
+**发布日期**: 2026-03-25
 
 ---
 
-## [3.6.0] - 2026-02-05 🚀 最新官方版本同步 + 任务系统指南整合
+## [3.7.0] - 2026-03-25 🚀 2026年3月官方更新同步
 
 ### 🌟 官方版本同步（Official Version Sync）
 
 #### Claude Code 官方更新记录
 
-本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.31, 2026-02-04）。
+本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.83, 2026-03-25）。
+
+##### 核心新功能摘要（v2.1.41-v2.1.83）
+
+| 功能 | 版本 | 说明 |
+|------|------|------|
+| `/loop` | v2.1.71 | 循环任务调度（Cron-style） |
+| `/voice` | v2.1.69 | Push-to-Talk 语音编程 |
+| 1M Context | v2.1.75 | 百万 token 上下文窗口 |
+| `/effort` | v2.1.76 | 分析深度控制（Low/Medium/High） |
+| MCP Elicitation | v2.1.76 | 结构化输入请求 |
+| Opus 4.6 | v2.1.68 | 新默认模型，64K-128K 输出 |
+| Computer Use | v2.1.70+ | 远程桌面控制（研究预览） |
+| `--bare` | v2.1.81 | 脚本模式标志 |
+| `--channels` | v2.1.80 | MCP 消息推送（研究预览） |
+
+📖 [完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.83.md)
+
+##### Claude Code v2.1.83 (2026-03-25) ⭐ 最新版本
+- ✨ **managed-settings.d/**: 独立团队策略片段合并
+- ✨ **Hooks 扩展**: `CwdChanged` 和 `FileChanged` 事件
+- ✨ **Transcripts 搜索**: 按 `/` 搜索，`n`/`N` 浏览匹配
+- 🔒 **环境变量清理**: `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` 剥离子进程凭证
+- 🐛 **多项修复**: macOS 退出挂起、大文件 diff 超时、非 ASCII 剪贴板
+- 📖 [官方 CHANGELOG](https://code.claude.com/docs/en/changelog)
 
 ##### Claude Code v2.1.31 (2026-02-04) ⭐ 最新版本
 - ✨ **会话恢复提示**: 退出时显示如何继续对话

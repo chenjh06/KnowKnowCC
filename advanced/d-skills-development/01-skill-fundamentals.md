@@ -7,13 +7,18 @@
 **重要性**: ⭐⭐⭐⭐⭐
 **前置要求**: [guide/05-skills-quickstart.md](../../guide/05-skills-quickstart.md)
 
-> **📌 文档版本**: 基于 Claude Code v3.0
-> **✅ 验证状态**: ✅ 已验证
+> **📌 文档版本**: 基于 Claude Code v3.5 + Agent Skills 开放标准
+> **✅ 验证状态**: ✅ 已验证（2026-02-15）
+> **🔄 最后更新**: 2026-02-15 - 同步 Claude Opus 4.6 官方更新
 
 ---
 
 ## 目录
 
+- [Agent Skills 开放标准](#agent-skills-开放标准) ⭐ NEW
+- [Custom Slash Commands 合并说明](#custom-slash-commands-合并说明) ⭐ NEW
+- [Subagent 执行模式 (`context: fork`)](#subagent-执行模式-context-fork) ⭐ NEW
+- [动态上下文注入 (`!command`)](#动态上下文注入-command) ⭐ NEW
 - [Skills 的两种类型](#skills-的两种类型)
 - [SKILL.md 完整结构](#skillmd-完整结构)
 - [核心字段详解](#核心字段详解)
@@ -23,6 +28,920 @@
 - [实战案例分析](#实战案例分析)
 - [常见问题](#常见问题)
 - [下一步](#下一步)
+
+---
+
+## Agent Skills 开放标准 ⭐ NEW
+
+### 官方声明
+
+Claude Code Skills 现在遵循 **Agent Skills 开放标准**：
+
+```markdown
+"Claude Code skills follow the Agent Skills open standard,
+which works across multiple AI tools."
+```
+
+### 深度解读
+
+#### 战略意义
+
+1. **跨工具兼容性**
+   - Skills 不再是 Claude Code 专属
+   - 可以在多个 AI 工具中使用相同的 Skill
+   - 标准化 = 生态系统爆发
+
+2. **社区生态**
+   - 社区 Skills 库将快速增长
+   - 可复用性大幅提升
+   - 跨平台 Skills 开发成为可能
+
+3. **开发价值**
+   - 一次开发，多平台使用
+   - 标准化的结构和配置
+   - 更广泛的适用范围
+
+#### 实际影响
+
+**对现有项目**：
+- ✅ 现有 Skills 继续有效
+- ✅ 无需修改现有配置
+- ✅ 自动符合新标准
+
+**对未来开发**：
+- ✅ 可以设计跨平台 Skills
+- ✅ 参考标准化的最佳实践
+- ✅ 贡献到社区生态
+
+### 标准化内容
+
+Agent Skills 开放标准定义了：
+
+1. **统一的 SKILL.md 结构**
+   ```markdown
+   ---
+   # YAML Frontmatter
+   name: skill-name
+   description: Standard description format
+   ---
+
+   # Markdown Content
+   Standardized instructions...
+   ```
+
+2. **标准化的 frontmatter 字段**
+   - name: 技能名称
+   - description: 功能描述
+   - argument-hint: 参数提示
+   - 等等（详见后文）
+
+3. **跨平台兼容性要求**
+   - 使用标准 Markdown
+   - 避免工具特定的功能
+   - 清晰的文档说明
+
+#### 最佳实践
+
+**✅ 推荐做法**：
+
+```yaml
+---
+name: code-review
+description: Cross-platform code review skill
+# 标准字段，所有工具都支持
+---
+```
+
+**❌ 避免做法**：
+
+```yaml
+---
+name: claude-specific-skill
+description: Only works in Claude Code
+# 工具特定的配置可能降低兼容性
+---
+```
+
+---
+
+## Custom Slash Commands 合并说明 ⭐ NEW
+
+### 官方变更
+
+**Custom slash commands 已合并到 Skills**：
+
+```markdown
+"Custom slash commands have been merged into skills.
+A file at .claude/commands/review.md and a skill at
+.claude/skills/review/SKILL.md both create /review
+and work the same way.
+
+Your existing .claude/commands/ files keep working."
+```
+
+### 迁移指南
+
+#### 现有 Commands 继续有效
+
+**位置 1**: `.claude/commands/`
+```bash
+.claude/commands/
+└── review.md  # ✅ 仍然有效
+```
+
+**位置 2**: `.claude/skills/`
+```bash
+.claude/skills/
+└── review/
+    └── SKILL.md  # ✅ 新的推荐方式
+```
+
+**两者效果相同**：
+```bash
+/review  # 两种方式都创建相同的命令
+```
+
+#### 为什么要迁移？
+
+Skills 提供更多高级功能：
+
+| 功能 | Commands | Skills |
+|------|---------|--------|
+| **创建 /command** | ✅ | ✅ |
+| **Frontmatter 配置** | ✅ 有限 | ✅ 完整 |
+| **Supporting files** | ❌ | ✅ 支持模板、示例、脚本 |
+| **自动发现** | ❌ | ✅ Claude 可自动激活 |
+| **Subagent 执行** | ❌ | ✅ `context: fork` |
+| **动态上下文** | ❌ | ✅ `!command` 注入 |
+| **工具限制** | ❌ | ✅ `allowed-tools` |
+
+#### 迁移步骤
+
+**步骤 1**: 创建 Skills 目录结构
+```bash
+# 创建 skill 目录
+mkdir -p .claude/skills/review
+```
+
+**步骤 2**: 移动文件
+```bash
+# 移动 command 文件
+mv .claude/commands/review.md .claude/skills/review/SKILL.md
+```
+
+**步骤 3**: 添加 frontmatter（如果原来没有）
+```markdown
+---
+name: review
+description: 代码审查技能。在用户要求 code review 时使用
+---
+
+# 原有的 command 内容...
+```
+
+**步骤 4**: 测试
+```bash
+/review  # 验证功能正常
+```
+
+#### 迁移决策树
+
+```
+现有 Command 需要迁移吗？
+│
+├─ 需要自动激活
+│   └─ ✅ 迁移到 Skills
+│       - 添加 description
+│       - Claude 可自动调用
+│
+├─ 需要模板/示例文件
+│   └─ ✅ 迁移到 Skills
+│       - 创建 supporting files
+│       - 更好的组织结构
+│
+├─ 需要在子代理中运行
+│   └─ ✅ 迁移到 Skills
+│       - 添加 context: fork
+│       - 隔离执行环境
+│
+└─ 简单的静态命令
+    └─ ⚠️ 可选迁移
+        - 保持现状也OK
+        - 但推荐迁移以保持一致性
+```
+
+#### 迁移示例
+
+**原 Command** (`.claude/commands/greet.md`):
+```markdown
+# Greet Command
+
+Greet the user warmly.
+
+1. Ask for the user's name
+2. Say hello with their name
+3. Offer help
+```
+
+**迁移后的 Skill** (`.claude/skills/greet/SKILL.md`):
+```markdown
+---
+name: greet
+description: 友好地问候用户。在用户说"hello"、"hi"、"你好"时使用
+---
+
+# Greet Skill
+
+## 问候流程
+
+1. **询问姓名**: 礼貌地询问用户的名字
+2. **个性化问候**: 使用用户的名字说你好
+3. **提供帮助**: 主动询问是否需要帮助
+
+## 示例对话
+
+```
+Claude: 你好！我是 Claude。请问你叫什么名字？
+User: 我叫张三
+Claude: 张三，你好！很高兴认识你。有什么我可以帮助你的吗？
+```
+
+## 注意事项
+
+- ✅ 保持友好和专业
+- ✅ 使用用户提供的名字
+- ✅ 主动提供帮助
+```
+
+**改进点**：
+- ✅ 添加了 description（支持自动激活）
+- ✅ 更详细的流程说明
+- ✅ 示例对话
+- ✅ 注意事项
+
+---
+
+## Subagent 执行模式 (`context: fork`) ⭐ NEW
+
+### 官方说明
+
+**在隔离的子代理中运行 Skills**：
+
+```markdown
+"Add `context: fork` to your frontmatter when you want a skill to run
+in isolation. The skill content becomes the prompt that drives the
+subagent. It won't have access to your conversation history."
+```
+
+### 深度解读
+
+#### 工作原理
+
+**传统 Skills 执行**：
+```
+主会话上下文
+    ↓
+加载 Skill 内容
+    ↓
+在当前会话中执行
+    ↓
+可能污染主上下文
+```
+
+**Subagent 执行 (`context: fork`)**：
+```
+创建隔离上下文
+    ↓
+Skill 内容成为系统提示词
+    ↓
+在独立的 subagent 中执行
+    ↓
+返回结果到主会话
+```
+
+#### 核心优势
+
+1. **上下文隔离**
+   - 不污染主会话上下文
+   - 独立的工具权限
+   - 独立的执行环境
+
+2. **专注执行**
+   - Skill 内容成为明确的任务指令
+   - Subagent 专注于单一任务
+   - 减少干扰和混淆
+
+3. **自动协调**
+   - Claude 自主决定何时调用
+   - 结果自动返回主会话
+   - 无需人工干预
+
+### 配置方法
+
+#### Frontmatter 配置
+
+```yaml
+---
+name: deep-research
+description: Research a topic thoroughly
+context: fork           # ⭐ 关键：启用 subagent 模式
+agent: Explore          # ⭐ 指定 subagent 类型
+allowed-tools: Read, Grep, Glob  # 限制工具访问
+---
+```
+
+#### `agent` 字段选项
+
+| Agent 类型 | 适用场景 | 默认工具 | 性能特点 |
+|-----------|---------|---------|---------|
+| **Explore** | 研究、探索、分析 | Read, Grep, Glob | 只读、快速、适合大规模探索 |
+| **Plan** | 规划、架构设计 | Read, Grep, Glob | 结构化思考、生成计划 |
+| **general-purpose** | 通用任务 | 所有工具 | 灵活、可写、适合复杂任务 |
+| **自定义 Agent** | 特定领域 | 自定义 | 可配置模型、工具、权限 |
+
+### 使用场景
+
+#### ✅ 推荐使用 Subagent 模式的场景
+
+1. **大规模代码库探索**
+   ```yaml
+   ---
+   name: analyze-architecture
+   description: Analyze project architecture and dependencies
+   context: fork
+   agent: Explore
+   ---
+
+   Analyze the architecture of $ARGUMENTS:
+
+   1. Identify main components and their relationships
+   2. Map dependency graph
+   3. Document architectural patterns
+   4. Identify potential improvements
+   ```
+
+2. **批量只读分析**
+   ```yaml
+   ---
+   name: security-audit
+   description: Audit codebase for security vulnerabilities
+   context: fork
+   agent: Explore
+   ---
+
+   Perform security audit on $ARGUMENTS:
+
+   1. Search for common vulnerability patterns
+   2. Check authentication/authorization implementations
+   3. Review data validation
+   4. Generate security report
+   ```
+
+3. **研究类任务**
+   ```yaml
+   ---
+   name: deep-research
+   description: Research a topic thoroughly
+   context: fork
+   agent: Explore
+   ---
+
+   Research $ARGUMENTS thoroughly:
+
+   1. Find relevant files using Glob and Grep
+   2. Read and analyze the code
+   3. Summarize findings with specific file references
+   ```
+
+#### ❌ 不适合 Subagent 模式的场景
+
+1. **参考内容型 Skills**
+   ```yaml
+   # ❌ 错误示例
+   ---
+   name: api-conventions
+   description: API design patterns for this codebase
+   context: fork  # ❌ 不应该用 fork
+   ---
+
+   # 这只是参考知识，不是可执行任务
+   When writing API endpoints:
+   - Use RESTful naming conventions
+   - Return consistent error formats
+   ```
+
+   **原因**：Subagent 会接收到指南但没有可执行任务，会返回空结果。
+
+2. **需要主会话上下文的 Skills**
+   ```yaml
+   # ❌ 错误示例
+   ---
+   name: continue-work
+   description: Continue the current work
+   context: fork  # ❌ 无法访问主会话
+   ---
+
+   Continue from where we left off...
+   # 无法访问主会话的历史对话
+   ```
+
+### 执行流程详解
+
+#### 完整执行流程
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant MainSession
+    participant Subagent
+
+    User->>MainSession: /deep-research "authentication"
+    MainSession->>MainSession: 读取 Skill 配置
+    MainSession->>MainSession: 检测到 context: fork
+    MainSession->>Subagent: 创建隔离上下文
+    MainSession->>Subagent: 注入 SKILL.md 内容作为任务
+    MainSession->>Subagent: 配置 agent: Explore
+    Subagent->>Subagent: 执行 Read/Grep/Glob
+    Subagent->>Subagent: 分析代码库
+    Subagent->>MainSession: 返回研究结果
+    MainSession->>User: 展示研究结果
+```
+
+#### 关键时序说明
+
+1. **预处理阶段**
+   - Claude 检测到 `context: fork`
+   - 准备创建隔离环境
+   - 解析 `$ARGUMENTS` 等变量
+
+2. **Subagent 创建**
+   - 根据指定的 `agent` 类型配置环境
+   - Skill 内容成为系统提示词
+   - 主会话上下文不可见
+
+3. **执行阶段**
+   - Subagent 独立执行任务
+   - 使用 `allowed-tools` 限制的工具集
+   - 不受主会话干扰
+
+4. **结果返回**
+   - Subagent 完成任务后返回结果
+   - 结果摘要展示在主会话
+   - Subagent 上下文销毁
+
+### 最佳实践
+
+#### 1. 明确任务导向
+
+**✅ 好的 Skill 内容**：
+```markdown
+---
+name: find-dead-code
+description: Find unused code in the codebase
+context: fork
+agent: Explore
+---
+
+Find dead code in $ARGUMENTS:
+
+1. Search for all exported functions/classes
+2. Check if they are imported elsewhere
+3. Identify code with no references
+4. Report findings with file:line references
+```
+
+**❌ 不好的 Skill 内容**：
+```markdown
+---
+name: code-quality
+description: Code quality guidelines
+context: fork
+agent: Explore
+---
+
+# Code Quality Guidelines
+
+Follow these principles:
+- Write clean code
+- Use meaningful names
+- Keep functions small
+
+# ❌ 这是指南，不是任务
+```
+
+#### 2. 选择正确的 Agent 类型
+
+| 任务类型 | 推荐 Agent | 原因 |
+|---------|-----------|------|
+| 只读探索 | Explore | 性能好，不会意外修改 |
+| 规划设计 | Plan | 结构化输出，适合生成计划 |
+| 复杂操作 | general-purpose | 需要写文件或执行命令 |
+| 特定领域 | 自定义 Agent | 领域特定的工具和知识 |
+
+#### 3. 合理限制工具访问
+
+```yaml
+# ✅ 研究任务：只读工具
+allowed-tools: Read, Grep, Glob
+
+# ✅ 生成任务：允许写入
+allowed-tools: Read, Write, Edit
+
+# ✅ 安全限制：避免危险操作
+allowed-tools: Read, Grep, Glob, Bash(ls *)
+```
+
+### Windows 特别说明
+
+#### PowerShell 路径处理
+
+在 Subagent 中使用路径时，确保使用正斜杠：
+
+```yaml
+---
+name: windows-research
+description: Research Windows-specific code
+context: fork
+agent: Explore
+---
+
+Research Windows implementation in $ARGUMENTS:
+
+# ✅ 使用正斜杠
+Search in: src/windows/components
+# ❌ 避免反斜杠
+# Search in: src\windows\components
+```
+
+#### Bash 命令在 Windows
+
+如果 Skill 需要执行命令，使用 PowerShell 语法：
+
+```yaml
+---
+name: windows-analysis
+description: Analyze Windows project structure
+context: fork
+agent: general-purpose
+allowed-tools: Bash(powershell *)
+---
+
+Analyze project structure:
+
+```bash
+powershell -Command "Get-ChildItem -Recurse -File | Group-Object Extension | Sort-Object Count -Descending"
+```
+```
+
+---
+
+## 动态上下文注入 (`!command`) ⭐ NEW
+
+### 官方说明
+
+**预处理命令执行**：
+
+```markdown
+"The `!`command` syntax runs shell commands before the skill content
+is sent to Claude. The command output replaces the placeholder, so
+Claude receives actual data, not the command itself.
+
+This is preprocessing, not something Claude executes."
+```
+
+### 深度解读
+
+#### 工作原理
+
+**执行时机**：
+```
+Skill 激活
+    ↓
+预处理阶段（!command 执行）
+    ↓
+命令输出替换占位符
+    ↓
+完整内容发送给 Claude
+    ↓
+Claude 看到实际数据
+```
+
+**关键区别**：
+- **不是 Claude 执行命令**
+- **是预处理机制**
+- **Claude 只看到结果**
+
+#### 核心优势
+
+1. **实时数据获取**
+   - 每次运行获取最新数据
+   - 不需要手动更新
+   - 保证数据新鲜度
+
+2. **外部工具集成**
+   - 集成 Git、GitHub CLI、npm 等
+   - 执行系统命令
+   - 获取动态上下文
+
+3. **简化提示词**
+   - Claude 不需要执行命令
+   - 直接看到数据
+   - 减少出错可能
+
+### 语法详解
+
+#### 基本语法
+
+```markdown
+---
+name: pr-summary
+description: Summarize changes in a pull request
+---
+
+## Pull request context
+
+- PR diff: !`gh pr diff`
+- PR comments: !`gh pr view --comments`
+- Changed files: !`gh pr diff --name-only`
+
+## Your task
+Summarize this pull request...
+```
+
+#### 执行流程
+
+1. **Skill 被调用**
+   ```
+   User: /pr-summary
+   Claude: 激活 pr-summary skill
+   ```
+
+2. **预处理执行**
+   ```bash
+   # 这些命令立即执行（不是 Claude 执行）
+   gh pr diff              # 获取 PR diff
+   gh pr view --comments   # 获取 PR 评论
+   gh pr diff --name-only  # 获取修改文件列表
+   ```
+
+3. **内容替换**
+   ```markdown
+   ## Pull request context
+
+   - PR diff: <实际的 diff 内容>
+   - PR comments: <实际的评论内容>
+   - Changed files: <实际的文件列表>
+
+   ## Your task
+   Summarize this pull request...
+   ```
+
+4. **Claude 接收**
+   ```
+   Claude 看到完整的实际数据，不是命令
+   ```
+
+### 使用场景
+
+#### ✅ 推荐场景
+
+1. **Git/GitHub 集成**
+   ```markdown
+   ---
+   name: git-status-report
+   description: Generate current git status report
+   allowed-tools: Bash(git *), Bash(gh *)
+   ---
+
+   ## Current repository status
+
+   - Branch: !`git branch --show-current`
+   - Status: !`git status --short`
+   - Last commit: !`git log -1 --oneline`
+   - Remotes: !`git remote -v`
+
+   Analyze the repository status and provide recommendations...
+   ```
+
+2. **系统信息获取**
+   ```markdown
+   ---
+   name: system-info
+   description: Gather system information for debugging
+   ---
+
+   ## System information
+
+   - OS: !`uname -a`
+   - Node version: !`node --version`
+   - npm version: !`npm --version`
+   - Disk usage: !`df -h`
+
+   Based on this system info, identify potential issues...
+   ```
+
+3. **项目依赖分析**
+   ```markdown
+   ---
+   name: dependency-audit
+   description: Audit project dependencies
+   ---
+
+   ## Dependencies
+
+   - package.json: !`cat package.json`
+   - Outdated packages: !`npm outdated`
+   - Vulnerabilities: !`npm audit`
+
+   Review dependencies and suggest updates...
+   ```
+
+4. **PR/Issue 上下文**
+   ```markdown
+   ---
+   name: pr-review-context
+   description: Load PR context for review
+   context: fork
+   agent: Explore
+   allowed-tools: Bash(gh *)
+   ---
+
+   ## Pull request context
+
+   - PR diff: !`gh pr diff`
+   - PR comments: !`gh pr view --comments`
+   - Changed files: !`gh pr diff --name-only`
+   - CI status: !`gh pr checks`
+
+   Review this PR thoroughly:
+   1. Check code quality
+   2. Verify tests
+   3. Identify potential issues
+   ```
+
+#### ❌ 不推荐场景
+
+1. **需要 Claude 决策的命令**
+   ```markdown
+   # ❌ 错误示例
+   ---
+   name: smart-deploy
+   ---
+
+   # Claude 无法决定部署哪个分支
+   Deploy branch: !`git checkout $(claude-decide-branch)`
+   ```
+
+2. **长时间运行的命令**
+   ```markdown
+   # ❌ 错误示例
+   ---
+   name: full-test
+   ---
+
+   # 可能运行数分钟
+   Test results: !`npm test -- --all`
+   ```
+
+3. **交互式命令**
+   ```markdown
+   # ❌ 错误示例
+   ---
+   name: interactive-setup
+   ---
+
+   # 需要用户输入
+   Setup: !`npm init`
+   ```
+
+### 最佳实践
+
+#### 1. 错误处理
+
+**使用 fallback 值**：
+```markdown
+---
+name: git-branch-info
+---
+
+## Current branch
+
+- Name: !`git branch --show-current 2>/dev/null || echo "Not a git repository"`
+- Status: !`git status --short 2>/dev/null || echo "Git not available"`
+```
+
+#### 2. 命令组合
+
+**组合多个命令**：
+```markdown
+---
+name: project-overview
+---
+
+## Project overview
+
+- Languages: !`find . -name "*.js" -o -name "*.ts" -o -name "*.py" | head -20`
+- File count: !`find . -type f | wc -l`
+- Size: !`du -sh .`
+```
+
+#### 3. 格式化输出
+
+**使用 jq 格式化 JSON**：
+```markdown
+---
+name: package-analysis
+---
+
+## Package information
+
+- Name: !`cat package.json | jq -r '.name'`
+- Version: !`cat package.json | jq -r '.version'`
+- Dependencies: !`cat package.json | jq -r '.dependencies | keys | .[]'`
+```
+
+### Windows 特别说明
+
+#### PowerShell 命令
+
+在 Windows 上，使用 PowerShell 语法：
+
+```markdown
+---
+name: windows-system-info
+---
+
+## System information
+
+- OS: !`powershell -Command "(Get-CimInstance Win32_OperatingSystem).Caption"`
+- CPU: !`powershell -Command "(Get-CimInstance Win32_Processor).Name"`
+- Memory: !`powershell -Command "(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB"`
+```
+
+#### 路径处理
+
+确保路径使用正斜杠或转义反斜杠：
+
+```markdown
+---
+name: windows-file-list
+---
+
+## Project files
+
+- Files: !`powershell -Command "Get-ChildItem -Recurse -File | Select-Object -First 20 FullName"`
+```
+
+#### Git 命令兼容性
+
+Git Bash 命令在 Windows 上可用：
+
+```markdown
+---
+name: git-info
+---
+
+## Git information
+
+- Branch: !`git branch --show-current`
+- Status: !`git status --short`
+- Log: !`git log -5 --oneline`
+```
+
+### 调试技巧
+
+#### 查看预处理结果
+
+如果 Skill 执行有问题，检查预处理命令：
+
+1. **手动测试命令**
+   ```bash
+   # 在终端中运行命令看输出
+   gh pr diff
+   gh pr view --comments
+   ```
+
+2. **检查命令权限**
+   ```bash
+   # 确保命令可执行
+   which gh
+   gh auth status
+   ```
+
+3. **验证输出格式**
+   ```bash
+   # 检查输出是否符合预期
+   gh pr diff | head -20
+   ```
+
+#### 常见问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|---------|
+| 命令找不到 | 未安装工具 | 安装所需 CLI 工具 |
+| 权限错误 | 未授权 | 运行 auth 命令（如 `gh auth login`） |
+| 输出为空 | 命令失败 | 添加错误处理和 fallback |
+| 超时 | 命令运行时间长 | 优化命令或使用异步处理 |
 
 ---
 
@@ -693,68 +1612,187 @@ allowed-tools:
 
 **为什么**: 部署是危险操作，严格限制可用工具
 
-### 7. model（可选）
+### 7. model（可选）⭐ UPDATED
 
 **作用**: 指定技能使用的模型
 
-**可用值**: `sonnet`、`opus`、`haiku`
+**可用值**（Claude Opus 4.6 更新）：
+- `haiku`: 快速响应，成本最低，适合简单任务
+- `sonnet`: 平衡模式，默认选择
+- `opus`: 最强推理能力，适合复杂任务
 
-**示例**:
+**Claude Opus 4.6 新特性**：
 
+支持通过 **Effort 参数** 控制推理深度：
 ```yaml
 ---
-name: quick-task
-description: 快速简单任务
-model: haiku  # 使用快速模型
+name: complex-analysis
+description: 深度代码分析
+model: opus
+# Claude Opus 4.6 自动使用 Adaptive Thinking
 ---
 ```
 
 **何时使用**:
-- 简单任务使用 `haiku`（更快、更便宜）
-- 复杂任务使用 `opus`（更强大、更慢）
-- 默认使用 `sonnet`（平衡）
 
-### 8. context（可选）
-
-**作用**: 指定技能运行模式
-
-| 值 | 效果 | 适用场景 |
-|---|------|---------|
-| 不设置 | 在当前会话运行 | 参考内容型 |
-| `fork` | 在子代理中运行 | 任务型 |
-
-**何时使用 `context: fork`**:
-
-1. **危险操作**: 部署、删除、数据库操作
-2. **隔离任务**: 不想污染当前会话
-3. **独立环境**: 需要不同的工具权限
-4. **长时间任务**: 避免阻塞主会话
+| 任务类型 | 推荐模型 | 原因 |
+|---------|---------|------|
+| 快速查询、格式转换 | `haiku` | 速度快、成本低 |
+| 常规开发任务 | `sonnet` | 性价比高、足够用 |
+| 复杂重构、架构设计 | `opus` | 推理能力强、质量高 |
+| 研究探索、多文件分析 | `opus` | 1M token context 支持 |
 
 **示例**:
 
 ```yaml
+# 快速任务
 ---
-name: deploy-production
-description: 部署到生产环境
-context: fork  # 在子代理中运行
-disable-model-invocation: true
+name: format-code
+description: 格式化代码
+model: haiku
+---
+
+# 常规任务（默认）
+---
+name: implement-feature
+description: 实现新功能
+# model: sonnet（默认，可不设置）
+---
+
+# 复杂任务
+---
+name: analyze-architecture
+description: 分析系统架构
+model: opus
 ---
 ```
 
-### 9. agent（可选）
+### 8. context（可选）⭐ UPDATED
 
-**作用**: 当 `context: fork` 时，指定子代理类型
+**作用**: 指定技能运行模式
 
-**可用值**: `Explore`、`Plan`、`general-purpose` 等
+| 值 | 效果 | 适用场景 | 上下文访问 |
+|---|------|---------|-----------|
+| 不设置 | 在当前会话运行 | 参考内容型 | ✅ 可访问主会话 |
+| `fork` | 在子代理中运行 | 任务型 | ❌ 独立上下文 |
+
+**官方说明**：
+
+```markdown
+"Add `context: fork` to your frontmatter when you want a skill to run
+in isolation. The skill content becomes the prompt that drives the
+subagent. It won't have access to your conversation history."
+```
+
+**何时使用 `context: fork`**:
+
+1. **大规模探索**: 代码库分析、依赖关系研究
+2. **隔离任务**: 不想污染当前会话上下文
+3. **独立环境**: 需要不同的工具权限
+4. **研究任务**: 只读操作、批量分析
+
+**重要提示**：
+
+⚠️ `context: fork` 只适合有明确任务的 Skills。如果 Skill 内容是参考知识而非可执行任务，Subagent 会返回空结果。
+
+**详细使用指南**: 参见 [Subagent 执行模式 (`context: fork`)](#subagent-执行模式-context-fork) 章节
 
 **示例**:
 
 ```yaml
 ---
-name: explore-codebase
-description: 探索代码库结构
+name: deep-research
+description: Research a topic thoroughly
 context: fork
-agent: Explore  # 使用 Explore 子代理
+agent: Explore
+---
+
+Research $ARGUMENTS thoroughly:
+
+1. Find relevant files using Glob and Grep
+2. Read and analyze the code
+3. Summarize findings with specific file references
+```
+
+### 9. agent（可选）⭐ UPDATED
+
+**作用**: 当 `context: fork` 时，指定子代理类型
+
+**可用值**：
+
+| Agent 类型 | 适用场景 | 默认工具 | 性能特点 |
+|-----------|---------|---------|---------|
+| **Explore** | 研究、探索、分析 | Read, Grep, Glob | 只读、快速、适合大规模探索 |
+| **Plan** | 规划、架构设计 | Read, Grep, Glob | 结构化思考、生成计划 |
+| **general-purpose** | 通用任务 | 所有工具 | 灵活、可写、适合复杂任务 |
+| **自定义 Agent** | 特定领域 | 自定义 | 可配置模型、工具、权限 |
+
+**官方说明**：
+
+```markdown
+"The `agent` field specifies which subagent configuration to use.
+Options include built-in agents (Explore, Plan, general-purpose)
+or any custom subagent from .claude/agents/. If omitted, uses
+general-purpose."
+```
+
+**选择指南**：
+
+```yaml
+# 只读探索任务
+---
+name: analyze-architecture
+description: 分析项目架构
+context: fork
+agent: Explore  # ⭐ 推荐：只读、快速
+allowed-tools: Read, Grep, Glob
+---
+
+# 规划设计任务
+---
+name: design-api
+description: 设计 API 架构
+context: fork
+agent: Plan  # ⭐ 推荐：结构化输出
+---
+
+# 复杂操作任务
+---
+name: refactor-module
+description: 重构模块
+context: fork
+agent: general-purpose  # ⭐ 推荐：需要写权限
+allowed-tools: Read, Write, Edit, Bash
+---
+```
+
+**自定义 Agent**：
+
+可以创建领域特定的 Agent：
+
+```yaml
+# .claude/agents/frontend-expert.md
+---
+name: frontend-expert
+description: Frontend development specialist
+model: opus
+allowed-tools: Read, Write, Edit, Bash(npm *), Bash(node *)
+---
+
+Focus on frontend best practices:
+- React/Vue component patterns
+- CSS/Tailwind styling
+- Performance optimization
+```
+
+然后在 Skills 中使用：
+
+```yaml
+---
+name: optimize-components
+description: 优化 React 组件
+context: fork
+agent: frontend-expert  # ⭐ 使用自定义 Agent
 ---
 ```
 

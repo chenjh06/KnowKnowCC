@@ -6,9 +6,9 @@
 **难度**: ⭐ 新手友好
 **前置要求**: 无
 
-> **📌 文档版本**: 基于 Claude Code v3.0
-> **✅ 验证状态**: 已验证核心功能准确
-> **⚠️ 注意**: 功能和命令可能随版本更新而变化
+> **📌 文档版本**: 基于 Claude Code v3.5 + Claude Opus 4.6
+> **✅ 验证状态**: ✅ 已验证（2026-02-15）
+> **🔄 最后更新**: 2026-02-15 - 同步 Claude Opus 4.6 重大发布
 
 ---
 
@@ -218,6 +218,167 @@ Claude Code：
 5. 添加单元测试
 ```
 
+### 6. Agent Teams - 多智能体协作 ⭐ NEW
+
+**官方说明**：
+
+```markdown
+"You can now spin up multiple agents that work in parallel as a team
+and coordinate autonomously—best for tasks that split into independent,
+read-heavy work like codebase reviews."
+```
+
+**核心价值**：
+
+- 🚀 **并行执行**：多个 AI 智能体同时工作，效率倍增
+- 🤝 **自主协调**：智能体之间自动分配任务和协调工作
+- 🧠 **独立上下文**：每个智能体有独立的执行环境，避免干扰
+- 🔄 **灵活控制**：可随时切换控制权（Shift+Up/Down）
+
+**适用场景**：
+
+| 场景 | 效率提升 | 示例 |
+|------|---------|------|
+| **大型代码审查** | 5-10倍 | 同时审查前端、后端、测试代码 |
+| **多仓库分析** | 3-5倍 | 并行分析多个微服务仓库 |
+| **批量重构** | 4-8倍 | 独立模块并行重构 |
+| **文档生成** | 3-6倍 | 不同模块的文档同时生成 |
+
+**使用示例**：
+
+```markdown
+你：审查整个项目，包括前端、后端、测试、文档
+
+Claude Code：
+[自动启动 Agent Team]
+├─ Agent 1: 审查前端代码（React 组件、样式、性能）
+├─ Agent 2: 审查后端代码（API、数据库、安全性）
+├─ Agent 3: 审查测试覆盖率（单元测试、集成测试）
+└─ Agent 4: 审查文档完整性（README、API 文档、注释）
+
+[所有智能体并行工作]
+[自动汇总报告]
+```
+
+**性能表现**（官方数据）：
+
+- **Terminal-Bench 2.0**：行业最高分 🏆
+- **Humanity's Last Exam**：领先所有前沿模型 🎯
+- **GDPval-AA**：比 GPT-5.2 高 144 Elo 点（70% 时间得分更高）📈
+
+**权威评价**：
+
+> **Notion**："Claude Opus 4.6 is the strongest model Anthropic has shipped. It takes complicated requests and actually follows through, breaking them into concrete steps, executing, and producing polished work even when the task is ambitious."
+
+> **GitHub**："Early testing shows Claude Opus 4.6 delivering on the complex, multi-step coding work developers face every day—especially agentic workflows that demand planning and tool calling."
+
+> **Replit**："Claude Opus 4.6 is a huge leap for agentic planning. It breaks complex tasks into independent subtasks, runs tools and subagents in parallel, and identifies blockers with real precision."
+
+### 7. 大规模上下文理解 ⭐ NEW
+
+**官方数据**：
+
+```markdown
+1M Token Context Window（Beta）
+- 8-needle 1M MRCR v2：Opus 4.6 得分 76%
+- Sonnet 4.5 得分：18.5%
+- 这是质的飞跃，不是简单数量增加
+```
+
+**核心能力**：
+
+- 📚 **百万级 Token 上下文**：可处理超大型代码库
+- 🎯 **精准记忆**：MRCR v2 76% vs 18.5%（质的飞跃）
+- 🧹 **上下文压缩**：Context Compaction 自动管理上下文
+- 💰 **灵活定价**：
+  - 标准定价：$5/$25 per million tokens
+  - 超 200k tokens：$10/$37.50 per million tokens
+
+**实际应用**：
+
+```markdown
+传统 AI：
+- 上下文限制：~200K tokens
+- 只能理解：单个模块或几个文件
+- 问题：大型项目理解不完整
+
+Claude Opus 4.6：
+- 上下文容量：1M tokens（Beta）
+- 可以理解：整个代码库、多个微服务
+- 优势：完整的项目上下文，精准的分析
+```
+
+**使用场景**：
+
+| 场景 | 传统 AI | Claude Opus 4.6 |
+|------|---------|----------------|
+| **单体应用分析** | ❌ 上下文不足 | ✅ 完整分析 |
+| **微服务架构理解** | ❌ 只能单个服务 | ✅ 多服务并行 |
+| **大型重构** | ⚠️ 分段进行 | ✅ 全局视图 |
+| **历史代码审查** | ❌ 无法完整 | ✅ 完整上下文 |
+
+**技术突破**：
+
+```markdown
+"8-needle 1M MRCR v2：Opus 4.6 得分 76%"
+
+这意味着：
+- ✅ 在百万 token 中精准定位信息
+- ✅ 解决了"context rot"（上下文衰减）问题
+- ✅ 百万 token 下仍保持峰值性能
+```
+
+### 8. Adaptive Thinking + Effort 控制 ⭐ NEW
+
+**官方说明**：
+
+```markdown
+四个 Effort 级别：
+- low：快速响应，成本最低
+- medium：平衡模式
+- high（默认）：自动判断何时深度思考
+- max：最大推理能力，成本最高
+```
+
+**核心机制**：
+
+- 🧠 **Adaptive Thinking**：模型自己决定何时需要深度推理
+- ⚖️ **Effort 控制**：手动调整成本/质量/速度平衡
+- 💡 **避免浪费**：解决"简单任务过度复杂化"问题
+- 🎯 **精准分配**：复杂任务获得更多资源
+
+**使用场景对比**：
+
+| Effort 级别 | 响应速度 | 成本 | 适用场景 |
+|-----------|---------|------|---------|
+| **low** | ⚡⚡⚡ | 💰 | 简单查询、格式转换、文档生成 |
+| **medium** | ⚡⚡ | 💰💰 | 常规开发、Bug 修复、小重构 |
+| **high**（默认） | ⚡ | 💰💰💰 | 大多数场景，自动优化 |
+| **max** | 🐢 | 💰💰💰💰 | 架构设计、复杂重构、性能优化 |
+
+**实际案例**：
+
+```markdown
+场景：重构一个大型模块
+
+low effort：
+- 快速生成代码
+- 可能不够精准
+- 成本：$1
+
+high effort（默认）：
+- 自动判断需要深度思考
+- 精准分析依赖关系
+- 生成高质量代码
+- 成本：$3
+
+max effort：
+- 最深度的推理
+- 考虑所有边界情况
+- 最优化的解决方案
+- 成本：$5
+```
+
 ---
 
 ## 适用场景
@@ -232,6 +393,9 @@ Claude Code：
 | **编写测试** | 重复性工作，AI 善长 | "为所有 services 编写单元测试" |
 | **Bug 修复** | 需要定位和分析 | "这个端点返回 500 错误，帮我修复" |
 | **文档编写** | 结构化内容生成 | "为 README 添加快速开始指南" |
+| **大型项目分析** ⭐ NEW | Agent Teams + 1M 上下文 | "审查整个微服务架构" |
+| **多任务并行** ⭐ NEW | Agent Teams 自动协调 | "同时重构前端、后端、测试" |
+| **复杂架构设计** ⭐ NEW | Max Effort + 深度推理 | "设计高可用分布式系统" |
 
 ### ⚠️ 需要谨慎的场景
 
@@ -256,16 +420,18 @@ Claude Code：
 
 ### 功能对比表
 
-| 维度 | 传统 AI 助手（网页版） | Claude Code（CLI） |
-|------|---------------------|-------------------|
-| **上下文** | 手动粘贴，不完整 | 自动读取，完整准确 |
-| **操作** | 复制粘贴 | 直接操作文件系统 |
-| **工作流** | 需要切换窗口 | 无缝集成终端 |
-| **项目理解** | 依赖你的描述 | 读取整个代码库 |
-| **执行命令** | 无法执行 | 可运行 shell 命令 |
-| **版本控制** | 手动提交 | 可执行 Git 操作 |
-| **学习成本** | 低（开箱即用） | 中（需要配置） |
-| **适用场景** | 简单问答 | 完整开发工作流 |
+| 维度 | 传统 AI 助手（网页版） | Claude Code（CLI） | Claude Opus 4.6 ⭐ |
+|------|---------------------|-------------------|-------------------|
+| **上下文** | 手动粘贴，不完整 | 自动读取，完整准确 | **1M Token 上下文** 🔥 |
+| **操作** | 复制粘贴 | 直接操作文件系统 | **多智能体并行** 🚀 |
+| **工作流** | 需要切换窗口 | 无缝集成终端 | **自动协调** 🤝 |
+| **项目理解** | 依赖你的描述 | 读取整个代码库 | **完整大型项目** 📚 |
+| **执行命令** | 无法执行 | 可运行 shell 命令 | **Subagent 执行** ⚡ |
+| **版本控制** | 手动提交 | 可执行 Git 操作 | 同 CLI |
+| **推理能力** | 固定 | 固定 | **Adaptive Thinking** 🧠 |
+| **成本控制** | 固定 | 固定 | **Effort 级别调整** 💰 |
+| **学习成本** | 低（开箱即用） | 中（需要配置） | 中（需要配置） |
+| **适用场景** | 简单问答 | 完整开发工作流 | **企业级复杂项目** 🏢 |
 
 ### 真实案例对比
 
@@ -305,6 +471,61 @@ Claude Code：
     [确认]
 
 总计：5-10分钟
+```
+
+**新案例对比**（Agent Teams）⭐ NEW：
+
+**任务**：审查整个微服务项目（前端、后端、测试、文档）
+
+**传统 AI 助手**：
+
+```
+你：审查前端代码
+AI：[给出建议]
+你：审查后端代码
+AI：[给出建议]
+你：审查测试
+AI：[给出建议]
+你：审查文档
+AI：[给出建议]
+你：[手动汇总报告]
+
+总计：2-3小时（串行处理）
+```
+
+**Claude Code（传统模式）**：
+
+```
+你：审查整个项目
+
+Claude Code：
+1. [读取前端代码] → 分析
+2. [读取后端代码] → 分析
+3. [读取测试代码] → 分析
+4. [读取文档] → 分析
+5. [生成汇总报告]
+
+总计：30-60分钟（串行处理）
+```
+
+**Claude Opus 4.6（Agent Teams）**：
+
+```
+你：审查整个项目
+
+Claude Opus 4.6：
+[自动启动 Agent Team]
+├─ Agent 1: 审查前端（并行）
+├─ Agent 2: 审查后端（并行）
+├─ Agent 3: 审查测试（并行）
+└─ Agent 4: 审查文档（并行）
+
+[所有智能体同时工作]
+[自动汇总报告]
+
+总计：10-15分钟（并行处理）🔥
+
+效率提升：传统 AI 的 12-18 倍！
 ```
 
 ---
@@ -427,5 +648,6 @@ DB_HOST、DB_USER、DB_PASSWORD"
 
 ---
 
-**最后更新**: 2026-02-04
+**最后更新**: 2026-02-15
+**文档版本**: v3.5 + Claude Opus 4.6
 **下一章节**: [01 - Quickstart](./01-quickstart.md)

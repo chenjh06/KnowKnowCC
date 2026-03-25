@@ -6,14 +6,14 @@
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blue.svg)](https://claude.ai/code)
 [![Windows](https://img.shields.io/badge/Platform-Windows-blue)](https://www.microsoft.com/windows)
 
-**版本**: 3.5.0 (深度重构 + 官方更新同步) 🎉
-**更新**: 2026-02-04
-**跟踪官方**: Claude Code v2.1.29 (2026-01-31)
+**版本**: 3.6.0 (2026年3月官方更新同步) 🎉
+**更新**: 2026-03-25
+**跟踪官方**: Claude Code v2.1.83 (2026-03-25)
 **完成度**: 98% ✨
 **质量评级**: A+ (4.9/5.0) ⭐⭐⭐⭐⭐
-**新增**: 深度重构、官方更新同步、新功能文档化（--from-pr、任务管理、PR状态）
+**新增**: /loop循环任务、/voice语音模式、1M上下文、/effort控制、MCP Elicitation
 
-> **📌 文档说明**: 本文档跟踪 Claude Code 官方最新版本（当前 v2.1.29）。
+> **📌 文档说明**: 本文档跟踪 Claude Code 官方最新版本（当前 v2.1.83）。
 > 功能和命令可能随版本更新而变化，建议访问[官方文档](https://claude.ai/code/docs)获取最新信息。
 
 ---
@@ -70,7 +70,7 @@
 | 🔧 **解决具体问题** | [reference/](./reference/README.md) → 按需查阅 | 即时 |
 | 🪟 **Windows用户** | [windows/](./windows/README.md) → Windows专属指南 | 1天 |
 | 📈 **提升效率** | [advanced/](./advanced/README.md) → 进阶技能 | 2-4周 |
-| 🆕 **新功能** | [NEW-FEATURES-GUIDE-v2.1.md](./advanced/NEW-FEATURES-GUIDE-v2.1.md) → v2.1 新功能 | 即时 |
+| 🆕 **新功能** | [NEW-FEATURES-GUIDE-v2.1.83.md](./advanced/NEW-FEATURES-GUIDE-v2.1.83.md) → v2.1.41-83 新功能 | 即时 |
 | 🚀 **深度掌握** | [master/](./master/README.md) → 专家之道 | 持续学习 |
 
 ---
@@ -224,17 +224,18 @@ reference/
 
 ---
 
-### 🆕 Claude Code v2.1 新功能（NEW-FEATURES-GUIDE-v2.1.md）
+### 🆕 Claude Code v2.1.41-83 新功能（NEW-FEATURES-GUIDE-v2.1.83.md）
 
-**目标**：了解最新版本的新功能和改进
+**目标**：了解最新版本的新功能和改进（2026年2-3月更新）
 
 **内容概览**：
-- 🔄 **Git PR 集成** - `--from-pr` 标志使用
-- 📋 **任务管理系统** - 依赖跟踪和删除任务
-- 🎯 **PR 状态指示器** - 实时查看 PR 审查状态
-- 🔒 **权限系统变更** - content-level vs tool-level
-- ⚡ **性能改进** - 启动、渲染、搜索优化
-- 🪟 **Windows 修复** - bash 和控制台问题
+- 🔁 **/loop 循环任务** - Cron-style 定时任务调度
+- 🎤 **Voice Mode** - Push-to-Talk 语音编程（20种语言）
+- 🧠 **1M Context Window** - 百万 token 上下文窗口
+- ⚡ **/effort 控制** - 三级分析深度控制
+- 🖥️ **Computer Use** - 远程桌面控制（研究预览）
+- 📱 **Remote Control** - 移动端远程控制
+- 📋 **MCP Elicitation** - 结构化输入请求
 
 **为什么需要了解**：
 - ✅ 使用最新功能提高效率
@@ -253,7 +254,7 @@ reference/
 2. 按需学习：根据需要查看特定功能的详细说明
 3. 实践应用：跟随示例和案例实践新功能
 
-[→ 查看新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.md)
+[→ 查看新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.83.md)
 
 ---
 
