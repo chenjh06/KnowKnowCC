@@ -2,8 +2,41 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.0 - 2026年3月官方更新同步（v2.1.83）
-**发布日期**: 2026-03-25
+**最新版本**: v3.7.1 - Agent SDK 文档同步更新
+**发布日期**: 2026-03-26
+
+---
+
+## [3.7.1] - 2026-03-26 📝 Agent SDK 文档同步
+
+### 🔄 Agent SDK 更新（v3.5 → v3.7）
+
+#### SDK 更名
+- ✅ **Claude Code SDK → Claude Agent SDK** - 官方 SDK 更名
+- ✅ 更新包名：
+  - TypeScript: `@anthropic-ai/claude-agent-sdk`
+  - Python: `claude-agent-sdk`
+
+#### 新增文档内容
+- ✅ **query() API** - 核心流式查询接口
+  - Python 和 TypeScript 示例代码
+  - 完整参数说明
+- ✅ **Hooks 系统** - 6 种 Hook 类型
+  - PreToolUse, PostToolUse, Stop
+  - SessionStart, SessionEnd, UserPromptSubmit
+- ✅ **Session Management** - 跨查询上下文保持
+- ✅ **Permission Modes** - 三种权限模式
+  - default, acceptEdits, bypassPermissions
+- ✅ **MCP Server Integration** - 外部系统集成
+- ✅ **setting_sources** - Skills、Commands、Memory 配置
+
+#### 更新的文件
+- 📝 `master/01-customization/04-agent-sdk.md` - Agent SDK 文档
+- 📝 `MEMORY.md` - 项目状态记忆文件（新建）
+
+#### Git 提交
+- Commit: `7ab1224`
+- 消息: `docs: Agent SDK 文档同步官方更新 - v3.7`
 
 ---
 
