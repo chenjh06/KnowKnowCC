@@ -7,9 +7,12 @@
 **重要性**: ⭐⭐⭐⭐⭐
 **前置要求**: [插件系统](../03-advanced-topics/02-plugins.md)
 
-> **📌 文档版本**: v3.5 + Claude Opus 4.6
-> **✅ 验证状态**: ✅ 已验证（2026-02-15）
-> **🔄 最后更新**: 2026-02-15 - 同步 Agent Teams、Subagent 新功能
+> **📌 文档版本**: v3.7 + Claude Opus 4.6
+> **✅ 验证状态**: ✅ 已验证（2026-03-25）
+> **🔄 最后更新**: 2026-03-25 - 同步官方 Agent SDK 重命名、query() API、Hooks 系统
+
+> ⚠️ **重要变更**: Claude Code SDK 已重命名为 **Claude Agent SDK**（2026-02）。
+> 如果你从旧版本迁移，请查看[官方迁移指南](https://platform.claude.com/docs/en/agent-sdk/migration-guide)。
 
 ---
 
@@ -266,21 +269,39 @@ agent.on('tool.use', async (tool) => {
 
 ### 系统要求
 
-- Node.js 18+ 或 TypeScript 5.0+
-- npm 或 yarn 或 pnpm
+- **TypeScript**: Node.js 18+ 或 Bun Runtime
+- **Python**: Python 3.10+（推荐使用 uv 包管理器）
 - Claude API 密钥
 
 ### 安装 SDK
 
+> ⚠️ **包名更新**: Claude Code SDK 已重命名为 **Claude Agent SDK**。
+
+#### TypeScript
+
 ```bash
 # npm
-npm install @anthropic-ai/claude-sdk
+npm install @anthropic-ai/claude-agent-sdk
 
 # yarn
-yarn add @anthropic-ai/claude-sdk
+yarn add @anthropic-ai/claude-agent-sdk
 
 # pnpm
-pnpm add @anthropic-ai/claude-sdk
+pnpm add @anthropic-ai/claude-agent-sdk
+
+# bun（更快）
+bun add @anthropic-ai/claude-agent-sdk
+```
+
+#### Python
+
+```bash
+# 使用 pip（需要先创建虚拟环境）
+python3 -m venv .venv && source .venv/bin/activate
+pip install claude-agent-sdk
+
+# 使用 uv（推荐，自动管理虚拟环境）
+uv init && uv add claude-agent-sdk
 ```
 
 ### 配置认证
@@ -510,6 +531,310 @@ agent.on('tool.use', async (toolCall) => {
 agent.on('error', async (error) => {
   console.error('发生错误:', error);
 });
+```
+
+---
+
+## query() API - 核心流式接口 ⭐ NEW
+
+### 什么是 query() API？
+
+`query()` 是 Agent SDK 的核心流式接口，让你以最简洁的方式创建 Agent 并获取结果。
+
+**与 Client SDK 的关键区别**：
+
+```python
+# Client SDK: 你需要自己实现工具循环
+response = client.messages.create(...)
+while response.stop_reason == "tool_use":
+    result = your_tool_executor(response.tool_use)
+    response = client.messages.create(tool_result=result, **params)
+
+# Agent SDK: Claude 自动处理工具调用
+async for message in query(prompt="Fix the bug in auth.py"):
+    print(message)  # Claude 自动读取文件、分析问题、修复代码
+```
+
+### Python 示例
+
+```python
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    async for message in query(
+        prompt="Find and fix the bug in auth.py",
+        options=ClaudeAgentOptions(
+            allowed_tools=["Read", "Edit", "Bash"]
+        ),
+    ):
+        if hasattr(message, "result"):
+            print(message.result)
+
+asyncio.run(main())
+```
+
+### TypeScript 示例
+
+```typescript
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Find and fix the bug in auth.py",
+  options: {
+    allowedTools: ["Read", "Edit", "Bash"]
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
+### ClaudeAgentOptions 配置
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| `allowed_tools` | string[] | 允许使用的工具列表 |
+| `permission_mode` | string | 权限模式：`default`、`acceptEdits`、`bypassPermissions` |
+| `resume` | string | 恢复会话的 session_id |
+| `setting_sources` | string[] | 配置来源：`["project"]` 启用 Skills 等 |
+| `mcp_servers` | object | MCP 服务器配置 |
+| `hooks` | object | 生命周期钩子配置 |
+| `agents` | object | Subagent 定义 |
+
+### 内置工具列表
+
+| 工具 | 功能 |
+|------|------|
+| **Read** | 读取工作目录中的文件 |
+| **Write** | 创建新文件 |
+| **Edit** | 精确编辑现有文件 |
+| **Bash** | 运行终端命令、脚本、git 操作 |
+| **Glob** | 按模式查找文件（`**/*.ts`） |
+| **Grep** | 使用正则搜索文件内容 |
+| **WebSearch** | 搜索网络获取最新信息 |
+| **WebFetch** | 获取并解析网页内容 |
+| **AskUserQuestion** | 向用户提问（带选项） |
+
+### 只读 Agent 示例
+
+```python
+# 只读 Agent：搜索 TODO 注释
+async for message in query(
+    prompt="Find all TODO comments and create a summary",
+    options=ClaudeAgentOptions(
+        allowed_tools=["Read", "Glob", "Grep"]
+    ),
+):
+    if hasattr(message, "result"):
+        print(message.result)
+```
+
+---
+
+## Hooks 系统 - 自定义 Agent 行为 ⭐ NEW
+
+### 可用的 Hooks
+
+| Hook | 触发时机 |
+|------|---------|
+| `PreToolUse` | 工具执行前 |
+| `PostToolUse` | 工具执行后 |
+| `Stop` | Agent 结束时 |
+| `SessionStart` | 会话开始时 |
+| `SessionEnd` | 会话结束时 |
+| `UserPromptSubmit` | 用户提交输入时 |
+
+### Python Hooks 示例
+
+```python
+import asyncio
+from datetime import datetime
+from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher
+
+async def log_file_change(input_data, tool_use_id, context):
+    """记录所有文件变更到审计日志"""
+    file_path = input_data.get("tool_input", {}).get("file_path", "unknown")
+    with open("./audit.log", "a") as f:
+        f.write(f"{datetime.now()}: modified {file_path}\n")
+    return {}
+
+async def main():
+    async for message in query(
+        prompt="Refactor utils.py to improve readability",
+        options=ClaudeAgentOptions(
+            permission_mode="acceptEdits",
+            hooks={
+                "PostToolUse": [
+                    HookMatcher(
+                        matcher="Edit|Write",
+                        hooks=[log_file_change]
+                    )
+                ]
+            },
+        ),
+    ):
+        if hasattr(message, "result"):
+            print(message.result)
+
+asyncio.run(main())
+```
+
+### TypeScript Hooks 示例
+
+```typescript
+import { query, HookCallback } from "@anthropic-ai/claude-agent-sdk";
+import { appendFile } from "fs/promises";
+
+const logFileChange: HookCallback = async (input) => {
+  const filePath = (input as any).tool_input?.file_path ?? "unknown";
+  await appendFile(
+    "./audit.log",
+    `${new Date().toISOString()}: modified ${filePath}\n`
+  );
+  return {};
+};
+
+for await (const message of query({
+  prompt: "Refactor utils.py to improve readability",
+  options: {
+    permissionMode: "acceptEdits",
+    hooks: {
+      PostToolUse: [
+        { matcher: "Edit|Write", hooks: [logFileChange] }
+      ]
+    }
+  }
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
+---
+
+## Session Management - 会话管理 ⭐ NEW
+
+### 跨查询保持上下文
+
+使用 `session_id` 在多个查询之间保持上下文：
+
+```python
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    session_id = None
+
+    # 第一次查询：获取 session_id
+    async for message in query(
+        prompt="Read the authentication module",
+        options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
+    ):
+        if hasattr(message, "subtype") and message.subtype == "init":
+            session_id = message.session_id
+
+    # 恢复会话：Claude 记得上次读取的内容
+    async for message in query(
+        prompt="Now find all places that call it",
+        options=ClaudeAgentOptions(resume=session_id),
+    ):
+        if hasattr(message, "result"):
+            print(message.result)
+
+asyncio.run(main())
+```
+
+**效果**：Claude 理解 "it" 指的是上一次查询中读取的认证模块。
+
+---
+
+## Permission Modes - 权限控制 ⭐ NEW
+
+### 三种权限模式
+
+| 模式 | 说明 |
+|------|------|
+| `default` | 每个操作都需要单独批准 |
+| `acceptEdits` | 自动批准文件编辑 |
+| `bypassPermissions` | 自动批准所有操作（谨慎使用） |
+
+### 使用示例
+
+```python
+# 只读 Agent
+options = ClaudeAgentOptions(
+    allowed_tools=["Read", "Glob", "Grep"]
+)
+
+# 自动批准编辑
+options = ClaudeAgentOptions(
+    permission_mode="acceptEdits",
+    allowed_tools=["Read", "Edit", "Bash"]
+)
+
+# 完全自动（生产环境慎用）
+options = ClaudeAgentOptions(
+    permission_mode="bypassPermissions",
+    allowed_tools=["Read", "Write", "Edit", "Bash"]
+)
+```
+
+---
+
+## MCP Server 集成 ⭐ NEW
+
+### 连接外部系统
+
+通过 MCP 协议连接数据库、浏览器、API 等：
+
+```python
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    async for message in query(
+        prompt="Open example.com and describe what you see",
+        options=ClaudeAgentOptions(
+            mcp_servers={
+                "playwright": {
+                    "command": "npx",
+                    "args": ["@playwright/mcp@latest"]
+                }
+            }
+        ),
+    ):
+        if hasattr(message, "result"):
+            print(message.result)
+
+asyncio.run(main())
+```
+
+### 常用 MCP 服务器
+
+| 服务器 | 用途 |
+|--------|------|
+| `@playwright/mcp` | 浏览器自动化 |
+| `@modelcontextprotocol/server-postgres` | PostgreSQL 数据库 |
+| `@modelcontextprotocol/server-github` | GitHub API |
+| `@modelcontextprotocol/server-slack` | Slack 集成 |
+
+---
+
+## Claude Code 功能集成
+
+启用 `setting_sources=["project"]` 来使用 Claude Code 的文件系统配置：
+
+| 功能 | 位置 |
+|------|------|
+| **Skills** | `.claude/skills/SKILL.md` |
+| **Slash Commands** | `.claude/commands/*.md` |
+| **Memory** | `CLAUDE.md` 或 `.claude/CLAUDE.md` |
+| **Plugins** | 通过 `plugins` 选项配置 |
+
+```python
+options = ClaudeAgentOptions(
+    setting_sources=["project"],
+    allowed_tools=["Read", "Edit", "Bash"]
+)
 ```
 
 ---
@@ -2649,6 +2974,23 @@ Level 4: 高级应用
 
 ---
 
-**最后更新**: 2026-02-04
+**最后更新**: 2026-03-25
 **维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)
 **反馈**: [GitHub Issues](https://github.com/anthropics/claude-code/issues)
+
+---
+
+## 📚 相关资源
+
+### 官方文档
+- [Agent SDK Overview](https://platform.claude.com/docs/en/agent-sdk/overview)
+- [Agent SDK Quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart)
+- [Agent Loop 原理](https://platform.claude.com/docs/en/agent-sdk/agent-loop)
+
+### 示例代码
+- [TypeScript SDK](https://github.com/anthropics/claude-agent-sdk-typescript)
+- [Python SDK](https://github.com/anthropics/claude-agent-sdk-python)
+- [示例 Agents](https://github.com/anthropics/claude-agent-sdk-demos)
+
+### 迁移指南
+- [Claude Code SDK → Agent SDK 迁移](https://platform.claude.com/docs/en/agent-sdk/migration-guide)
