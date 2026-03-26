@@ -2,8 +2,37 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.2 - Claude Code v2.1.84 同步更新
+**最新版本**: v3.7.3 - /loop 和 /voice 详细文档
 **发布日期**: 2026-03-26
+
+---
+
+## [3.7.3] - 2026-03-26 📚 生产力功能详细文档
+
+### 🌟 新增详细文档
+
+#### 📖 /loop 循环任务调度 (v2.1.71)
+
+- ✨ **完整指南** - `advanced/a-productivity/06-loop.md`
+  - 基本语法和时间格式详解
+  - 6 个实战场景（PR监控、部署监控、安全审计等）
+  - 限制与最佳实践
+  - 常见问题解答
+
+#### 🎤 /voice 语音编程模式 (v2.1.69)
+
+- ✨ **完整指南** - `advanced/a-productivity/07-voice.md`
+  - Push-to-Talk 机制详解
+  - 20 种支持语言（含中文）
+  - Windows 配置指南
+  - 4 个实战场景
+
+#### 📋 更新的文件
+
+- 📝 `advanced/a-productivity/06-loop.md` - 新建
+- 📝 `advanced/a-productivity/07-voice.md` - 新建
+- 📝 `advanced/README.md` - 文档统计更新 (17→19)
+- 📝 `reference/commands.md` - 添加 /loop /voice /effort /color 命令
 
 ---
 
