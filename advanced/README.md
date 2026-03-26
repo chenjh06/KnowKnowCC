@@ -5,7 +5,7 @@
 **阅读时间**: 5分钟
 **难度**: ⭐⭐⭐
 **前置要求**: 完成 [Level 1 核心掌握](../guide/README.md)
-**状态**: ✅ 100% 完成（17/17 文档）✨ 新增 Skills 开发模块
+**状态**: ✅ 100% 完成（19/19 文档）✨ 新增 /loop 和 /voice 详细文档
 
 ---
 
@@ -16,11 +16,11 @@
 🎊 Level 2 进阶技能 100% 完成！🎊
 ███████████████████████████████████████████
 
-总文档数：17个 (✨ 新增 6 个 Skills 开发文档)
-├── a-productivity/：4个 ✅
+总文档数：19个 (✨ 新增 2 个 /loop 和 /voice 文档)
+├── a-productivity/：6个 ✅
 ├── b-code-quality/：5个 ✅
 ├── c-integration/：4个 ✅
-└── d-skills-development/：6个 + 5个示例 ✅ 新增
+└── d-skills-development/：6个 + 5个示例 ✅
 
 总字数：约 230,000 字
 实战案例：80+ 个
@@ -74,11 +74,14 @@ Level 3: 专家之道
 | **02-session-management** | 会话管理技巧 | 20分钟 | ⭐⭐ |
 | **03-keyboard-shortcuts** | 常用快捷键 | 15分钟 | ⭐ |
 | **04-context-optimization** | Token 使用优化 | 25分钟 | ⭐⭐⭐ |
+| **06-loop** | 循环任务调度 (/loop) | 15分钟 | ⭐⭐⭐ |
+| **07-voice** | 语音编程模式 (/voice) | 12分钟 | ⭐⭐ |
 
 **学习路径**:
 ```
 plan-mode → session-management → context-optimization
 keyboard-shortcuts (随时学习)
+/loop + /voice (进阶)
 ```
 
 [→ 进入生产力提升](./a-productivity/README.md)
@@ -372,6 +375,6 @@ B-子代理
 
 ---
 
-**最后更新**: 2026-02-04
+**最后更新**: 2026-03-26
 **上一级**: [Level 1 核心掌握](../guide/README.md)
 **下一级**: [Level 3 专家之道](../master/README.md)

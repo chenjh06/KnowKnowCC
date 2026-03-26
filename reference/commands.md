@@ -398,6 +398,18 @@ src/
 | `/compact` | 压缩对话上下文 | `/compact` |
 | `/export [file]` | 导出对话到文件 | `/export chat.md` |
 
+### v2.1.71+ 循环任务命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `/loop <interval> <task>` | 设置循环任务调度 | `/loop 5m check PR status` |
+
+### v2.1.69+ 语音命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `/voice` | 激活语音编程模式 | `/voice` |
+
 ### 诊断和帮助命令
 
 | 命令 | 说明 | 示例 |
@@ -416,6 +428,8 @@ src/
 | `/model` | 选择或切换模型 | `/model` |
 | `/output-style [style]` | 设置输出风格 | `/output-style professional` |
 | `/permissions` | 查看或更新权限 | `/permissions` |
+| `/effort` | 控制分析深度 (v2.1.76) | `/effort medium` |
+| `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
 
 ### 配置和管理命令
 
@@ -1100,6 +1114,6 @@ $env:MY_VAR = "value"
 
 ---
 
-**最后更新**: 2026-02-04
+**最后更新**: 2026-03-26
 **版本**: v1.0
 **验证状态**: ✅ 已基于官方文档和已完成文档验证
