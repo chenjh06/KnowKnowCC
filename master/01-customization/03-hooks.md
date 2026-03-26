@@ -183,10 +183,18 @@ Claude Code 支持以下官方 Hook 事件：
 
 **触发时机**：在通过 `TaskCreate` 工具创建任务时运行
 
+**环境变量**：
+- `TASK_NAME` - 任务名称
+- `TASK_DESCRIPTION` - 任务描述
+- `TASK_ID` - 任务 ID
+
 **用途**：
 - ✅ 记录任务创建
 - ✅ 自动分配任务
 - ✅ 发送任务通知
+- ✅ 触发外部工作流
+
+**实战案例**：见 [案例5：TaskCreated 任务创建通知](#案例5-taskcreated-任务创建通知--v2184)
 
 #### 11. PreCompact
 
@@ -735,6 +743,93 @@ for pattern, message in sensitive_patterns:
 # 允许提示继续进行
 sys.exit(0)
 ```
+
+### 案例5: TaskCreated 任务创建通知 ✨ v2.1.84
+
+**场景**：在创建 Subagent 任务时自动发送通知（如 Slack/邮件）
+
+**配置**：
+
+```json
+{
+  "hooks": {
+    "TaskCreated": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/task-notify.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**脚本实现**：
+
+```bash
+#!/bin/bash
+# .claude/hooks/task-notify.sh
+
+# 从 stdin 加载 TaskCreate 输入
+INPUT=$(cat /dev/stdin)
+TASK_NAME=$(echo "$INPUT" | jq -r '.task_name // "未命名任务"')
+TASK_DESCRIPTION=$(echo "$INPUT" | jq -r '.description // "无描述"')
+TASK_ID=$(echo "$INPUT" | jq -r '.task_id // "unknown"')
+
+# 发送到 Slack
+SLACK_WEBHOOK="https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+
+curl -s -X POST "$SLACK_WEBHOOK" \
+  -H 'Content-Type: application/json' \
+  -d "{
+    \"text\": \"📋 新任务已创建\",
+    \"attachments\": [{
+      \"color\": \"#36a64f\",
+      \"fields\": [
+        { \"title\": \"任务名称\", \"value\": \"$TASK_NAME\", \"short\": true },
+        { \"title\": \"任务ID\", \"value\": \"$TASK_ID\", \"short\": true },
+        { \"title\": \"描述\", \"value\": \"$TASK_DESCRIPTION\" }
+      ]
+    }]
+  }"
+
+exit 0
+```
+
+**Windows PowerShell 版本**：
+
+```powershell
+# .claude/hooks/task-notify.ps1
+$INPUT = Get-Content -Raw
+$TASK_NAME = ($INPUT | ConvertFrom-Json).task_name ?? "未命名任务"
+$TASK_DESCRIPTION = ($INPUT | ConvertFrom-Json).description ?? "无描述"
+$TASK_ID = ($INPUT | ConvertFrom-Json).task_id ?? "unknown"
+
+$SLACK_WEBHOOK = "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+$BODY = @{
+    text = "📋 新任务已创建"
+    attachments = @(@{
+        color = "#36a64f"
+        fields = @(
+            @{ title = "任务名称"; value = $TASK_NAME; short = $true },
+            @{ title = "任务ID"; value = $TASK_ID; short = $true },
+            @{ title = "描述"; value = $TASK_DESCRIPTION }
+        )
+    })
+} | ConvertTo-Json -Depth 10
+
+Invoke-RestMethod -Uri $SLACK_WEBHOOK -Method Post -Body $BODY -ContentType "application/json"
+exit 0
+```
+
+**使用场景**：
+- ✅ 团队协作通知
+- ✅ 项目管理集成（JIRA、Trello）
+- ✅ 自动化工作流触发
+- ✅ 任务审计日志
 
 ---
 
