@@ -179,7 +179,16 @@ Claude Code 支持以下官方 Hook 事件：
 
 ### 系统事件
 
-#### 10. PreCompact
+#### 10. TaskCreated ✨ v2.1.84
+
+**触发时机**：在通过 `TaskCreate` 工具创建任务时运行
+
+**用途**：
+- ✅ 记录任务创建
+- ✅ 自动分配任务
+- ✅ 发送任务通知
+
+#### 11. PreCompact
 
 **触发时机**：在 Claude Code 即将运行压缩操作之前
 

@@ -2,8 +2,54 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.1 - Agent SDK 文档同步更新
+**最新版本**: v3.7.2 - Claude Code v2.1.84 同步更新
 **发布日期**: 2026-03-26
+
+---
+
+## [3.7.2] - 2026-03-26 🪟 PowerShell 工具与 Windows 增强
+
+### 🌟 Claude Code v2.1.84 同步
+
+#### 🪟 Windows 重大更新：PowerShell 工具（预览）
+
+- ✨ **PowerShell 工具** - Windows 原生 PowerShell 支持（选择加入预览）
+  - 专为 Windows 用户优化的工具
+  - 直接执行 PowerShell 命令
+  - 文档: https://code.claude.com/docs/en/tools-reference#powershell-tool
+
+#### 🔧 新增环境变量
+
+- ✨ `ANTHROPIC_DEFAULT_{OPUS,SONNET,HAIKU}_MODEL_SUPPORTS` - 覆盖第三方提供商的 effort/thinking 检测
+- ✨ `ANTHROPIC_DEFAULT_{OPUS,SONNET,HAIKU}_MODEL_NAME`/`_DESCRIPTION` - 自定义 /model 选择器标签
+- ✨ `CLAUDE_STREAM_IDLE_TIMEOUT_MS` - 配置流式空闲看门狗阈值（默认 90s）
+
+#### 🪝 Hooks 扩展
+
+- ✨ **TaskCreated Hook** - TaskCreate 创建任务时触发
+- ✨ **WorktreeCreate HTTP 支持** - 支持 `type: "http"` 的 Hook，通过 `hookSpecificOutput.worktreePath` 返回路径
+
+#### 🏢 企业/团队功能
+
+- ✨ `allowedChannelPlugins` - 团队/企业管理员定义通道插件白名单
+- ✨ `x-client-request-id` - API 请求调试超时的新头部
+
+#### 🎯 用户体验改进
+
+- ✨ **空闲返回提示** - 75+ 分钟后返回时提示用户 `/clear`，减少不必要的 token 重缓存
+- ✨ **深度链接优化** - `claude-cli://` 链接在首选终端打开，而非第一个检测到的终端
+- ✨ **paths: frontmatter** - Rules 和 Skills 的 `paths:` 支持 YAML glob 列表
+
+#### 🔌 MCP 改进
+
+- ✨ **MCP 工具描述限制** - 限制为 2KB，防止 OpenAPI 生成的服务器膨胀上下文
+- ✨ **MCP 服务器去重** - 本地和 claude.ai 连接器同时配置时，本地配置优先
+
+#### 📝 更新的文件
+
+- 📝 `CHANGELOG.md` - 版本更新日志
+- 📝 `CLAUDE.md` - 版本号更新
+- 📝 `windows/` - PowerShell 工具文档（待添加）
 
 ---
 
@@ -46,12 +92,13 @@
 
 #### Claude Code 官方更新记录
 
-本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.83, 2026-03-25）。
+本项目现在跟踪 Claude Code 官方最新版本（当前 v2.1.84, 2026-03-26）。
 
-##### 核心新功能摘要（v2.1.41-v2.1.83）
+##### 核心新功能摘要（v2.1.41-v2.1.84）
 
 | 功能 | 版本 | 说明 |
 |------|------|------|
+| **PowerShell 工具** | v2.1.84 | Windows 原生 PowerShell（预览） |
 | `/loop` | v2.1.71 | 循环任务调度（Cron-style） |
 | `/voice` | v2.1.69 | Push-to-Talk 语音编程 |
 | 1M Context | v2.1.75 | 百万 token 上下文窗口 |
@@ -62,9 +109,19 @@
 | `--bare` | v2.1.81 | 脚本模式标志 |
 | `--channels` | v2.1.80 | MCP 消息推送（研究预览） |
 
-📖 [完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.83.md)
+📖 [完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.84.md)
 
-##### Claude Code v2.1.83 (2026-03-25) ⭐ 最新版本
+##### Claude Code v2.1.84 (2026-03-26) ⭐ 最新版本
+
+- 🪟 **PowerShell 工具**: Windows 原生 PowerShell 支持（选择加入预览）
+- 🔧 **新环境变量**: `ANTHROPIC_DEFAULT_*_MODEL_SUPPORTS`, `CLAUDE_STREAM_IDLE_TIMEOUT_MS`
+- 🪝 **Hooks 扩展**: `TaskCreated` 事件, `WorktreeCreate` HTTP 支持
+- 🏢 **企业管理**: `allowedChannelPlugins` 白名单设置
+- 🎯 **空闲提示**: 75+ 分钟后返回时建议 `/clear`
+- 🔌 **MCP 优化**: 工具描述 2KB 限制, 服务器配置去重
+- 📖 [官方 CHANGELOG](https://code.claude.com/docs/en/changelog)
+
+##### Claude Code v2.1.83 (2026-03-25)
 - ✨ **managed-settings.d/**: 独立团队策略片段合并
 - ✨ **Hooks 扩展**: `CwdChanged` 和 `FileChanged` 事件
 - ✨ **Transcripts 搜索**: 按 `/` 搜索，`n`/`N` 浏览匹配

@@ -1,7 +1,7 @@
-# Claude Code v2.1.41-v2.1.83 新功能指南
+# Claude Code v2.1.41-v2.1.84 新功能指南
 
-**文档日期**: 2026-03-25
-**跟踪版本**: v2.1.41 → v2.1.83
+**文档日期**: 2026-03-26
+**跟踪版本**: v2.1.41 → v2.1.84
 **官方文档**: [Changelog](https://code.claude.com/docs/en/changelog)
 
 ---
@@ -12,6 +12,7 @@
 
 | 版本 | 发布日期 | 核心更新 |
 |------|---------|---------|
+| **v2.1.84** | 2026-03-26 | PowerShell 工具（Windows 预览）、TaskCreated Hook、MCP 优化 |
 | **v2.1.83** | 2026-03-25 | managed-settings.d/ 目录、Hooks 事件扩展、 transcripts 搜索 |
 | **v2.1.81** | 2026-03-20 | `--bare` 标志、`--channels` 权限中继 |
 | **v2.1.80** | 2026-03-19 | rate_limits 状态栏、`--channels` 研究预览 |
@@ -27,6 +28,48 @@
 | **v2.1.69** | 2026-03-05 | `/claude-api` skill、10 种新语音语言 |
 | **v2.1.68** | 2026-03-04 | Opus 4.6 默认、ultrathink、1M 上下文 |
 | **v2.1.63** | 2026-02-28 | `/simplify`、`/batch`、HTTP hooks |
+
+---
+
+## 🆕 v2.1.84 新功能速览 (2026-03-26)
+
+### 🪟 PowerShell 工具（Windows 预览）⭐⭐⭐⭐⭐
+
+**重大更新**: Windows 用户专属的 PowerShell 工具，目前为选择加入预览。
+
+```powershell
+# 启用预览
+# 文档: https://code.claude.com/docs/en/tools-reference#powershell-tool
+```
+
+**价值**:
+- 原生 Windows PowerShell 支持
+- 无需 bash 兼容层
+- 更好的 Windows 集成
+
+### 🔧 新增环境变量
+
+| 变量 | 用途 |
+|------|------|
+| `ANTHROPIC_DEFAULT_{OPUS,SONNET,HAIKU}_MODEL_SUPPORTS` | 覆盖第三方提供商的 effort/thinking 检测 |
+| `ANTHROPIC_DEFAULT_*_MODEL_NAME`/`_DESCRIPTION` | 自定义 /model 选择器标签 |
+| `CLAUDE_STREAM_IDLE_TIMEOUT_MS` | 流式空闲看门狗阈值（默认 90s） |
+
+### 🪝 Hooks 扩展
+
+- **TaskCreated**: `TaskCreate` 创建任务时触发
+- **WorktreeCreate HTTP**: 支持 `type: "http"`，通过 `hookSpecificOutput.worktreePath` 返回路径
+
+### 🎯 用户体验改进
+
+- **空闲返回提示**: 75+ 分钟后返回时建议 `/clear`，减少 token 重缓存
+- **深度链接优化**: `claude-cli://` 在首选终端打开
+- **paths frontmatter**: Rules 和 Skills 支持 YAML glob 列表
+
+### 🔌 MCP 优化
+
+- **工具描述限制**: 2KB 上限，防止 OpenAPI 服务器膨胀上下文
+- **服务器去重**: 本地和 claude.ai 连接器同时配置时，本地配置优先
 
 ---
 

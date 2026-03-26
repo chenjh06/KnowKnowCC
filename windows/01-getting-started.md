@@ -812,6 +812,39 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Get-ExecutionPolicy -List
 ```
 
+### 🆕 PowerShell 工具（v2.1.84 预览）
+
+**重大更新**: Claude Code v2.1.84 添加了原生 PowerShell 工具支持（选择加入预览）。
+
+**什么是 PowerShell 工具？**
+
+这是专为 Windows 用户设计的新工具，让 Claude 可以直接执行 PowerShell 命令，无需通过 bash 兼容层。
+
+**启用方式**：
+
+```powershell
+# 查看官方文档了解如何启用预览
+# 文档: https://code.claude.com/docs/en/tools-reference#powershell-tool
+```
+
+**优势**：
+
+```
+✅ 原生 Windows 支持
+✅ 无需 bash 兼容层
+✅ 更好的 Windows 集成
+✅ 直接使用 PowerShell cmdlet
+```
+
+**示例使用场景**：
+
+```powershell
+# Claude 可以直接执行
+Get-ChildItem -Recurse -Filter *.ps1
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 5
+Get-Service | Where-Object {$_.Status -eq 'Running'}
+```
+
 ---
 
 ## 验证安装
