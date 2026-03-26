@@ -115,6 +115,31 @@
 
 ---
 
+### 05 - MCP Elicitation（结构化输入请求）⭐⭐⭐⭐
+
+**文件**: [05-mcp-elicitation.md](./05-mcp-elicitation.md)
+
+**状态**: ✅ 已完成
+
+**内容**:
+- MCP Elicitation 概述
+- 工作原理（表单、URL 打开）
+- Elicitation Hooks（Elicitation、ElicitationResult）
+- 使用场景（OAuth、JIRA、Webhook）
+- 实现示例（Node.js）
+- 最佳实践
+- 常见问题
+
+**适合**: 需要交互式 MCP 工具的开发者
+**难度**: ⭐⭐⭐⭐
+**重要性**: ⭐⭐⭐⭐
+
+**版本**: v2.1.76+
+
+**字数**: ~8,000 字
+
+---
+
 ## 🎯 学习路径
 
 ### 路径 1: 快速定制
@@ -159,9 +184,10 @@
 ├── 01-custom-commands.md       📋 计划中
 ├── 02-custom-mcp-servers.md    ✅ 已完成 (28,000字)
 ├── 03-hooks.md                 ✅ 已完成 (23,000字)
-└── 04-agent-sdk.md             📋 计划中
+├── 04-agent-sdk.md             📋 计划中
+└── 05-mcp-elicitation.md       ✅ 已完成 (8,000字)
 
-完成度: 50% (2/4)
+完成度: 60% (3/5)
 ```
 
 ---
@@ -182,5 +208,5 @@
 
 ---
 
-**最后更新**: 2026-02-04
-**模块版本**: Customization v0.25
+**最后更新**: 2026-03-26
+**模块版本**: Customization v0.26

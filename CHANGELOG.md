@@ -2,8 +2,32 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.3 - /loop 和 /voice 详细文档
+**最新版本**: v3.7.4 - MCP Elicitation 详细文档
 **发布日期**: 2026-03-26
+
+---
+
+## [3.7.4] - 2026-03-26 🔌 MCP Elicitation 详细文档
+
+### 🌟 新增详细文档
+
+#### 🔌 MCP Elicitation 结构化输入请求 (v2.1.76)
+
+- ✨ **完整指南** - `master/01-customization/05-mcp-elicitation.md`
+  - MCP Elicitation 核心概念
+  - 工作原理（表单、URL 打开）
+  - Elicitation Hooks（Elicitation、ElicitationResult）
+  - 4 个实战场景（OAuth、JIRA、Webhook、数据库确认）
+  - Node.js 实现示例
+  - 最佳实践与常见问题
+
+#### 📋 更新的文件
+
+- 📝 `master/01-customization/05-mcp-elicitation.md` - 新建
+- 📝 `master/01-customization/README.md` - 文档统计更新 (3/5)
+- 📝 `PROJECT-STATUS.md` - 版本更新至 v3.7.4
+- 📝 `PROJECT-SUMMARY.md` - 统计数据更新
+- 📝 `README.md` - 版本更新至 v3.7.4
 
 ---
 
