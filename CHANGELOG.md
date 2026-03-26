@@ -67,9 +67,10 @@
 - ✅ **query() API** - 核心流式查询接口
   - Python 和 TypeScript 示例代码
   - 完整参数说明
-- ✅ **Hooks 系统** - 6 种 Hook 类型
+- ✅ **Hooks 系统** - 7 种 Hook 类型
   - PreToolUse, PostToolUse, Stop
   - SessionStart, SessionEnd, UserPromptSubmit
+  - TaskCreated (v2.1.84)
 - ✅ **Session Management** - 跨查询上下文保持
 - ✅ **Permission Modes** - 三种权限模式
   - default, acceptEdits, bypassPermissions
