@@ -97,6 +97,68 @@ cd "D:\Projects\MyApp"  ❌ 避免单反斜杠
 
 ---
 
+## AI 协作配置
+
+> 本节记录此项目继承的全局 AI 配置（`~/.claude/CLAUDE.md`）
+
+### Skills 使用原则
+
+**原则**: 任务开始前评估 Skill 适用性。流程类(调试/计划)优先于实现类。
+
+| Skill | 用途 | 触发场景 |
+|-------|------|---------|
+| **web-access** | 联网统一入口 | 搜索、抓取、登录态操作、反爬站点 |
+| **commit** | Git 提交规范 | 任何代码提交 |
+| **docx** | Word 文档 | .docx 文件操作 |
+| **pdf** | PDF 处理 | .pdf 文件操作 |
+
+### MCP 工具选择
+
+#### 搜索
+- `open-websearch` - Bing/DDG/Brave 免费，**首选**
+- `web-search-prime` - 智谱免费，中文优化
+- `tavily` / `exa` - 付费深度搜索
+
+#### 抓取
+- `web-reader-local` - 免费 URL 转 Markdown
+- `context7` - 免费官方库文档
+- `mcp-deepwiki` / `zread` - GitHub 仓库文档
+
+#### 浏览器
+- `Playwright` - 本地标准浏览器
+- `stealth-browser` - 反检测，Cloudflare/登录态
+
+#### 代码
+- `serena` - IDE 级符号分析
+- `spec-workflow` - 规格驱动开发
+
+### 工作流程
+
+```
+探索 → 计划 → 实现
+  ↓        ↓        ↓
+Grep/Glob  Plan    Edit/Write
+```
+
+**上下文管理**:
+- 50% 时提醒 `/compact`
+- 切换任务提醒 `/clear`
+
+### 快速参考
+
+```
+联网 → web-access (统一入口)
+搜索 → open-websearch → tavily
+抓取 → web-reader-local
+文档 → context7
+GitHub → mcp-deepwiki / zread
+浏览器 → Playwright → stealth-browser
+重构 → serena
+图像 → zai-mcp-server
+```
+
+---
+
 ## Web搜索策略
 
 1. **open-websearch** (90%): 免费，Bing/DDG/Brave，广度探索
@@ -106,4 +168,4 @@ cd "D:\Projects\MyApp"  ❌ 避免单反斜杠
 
 ---
 
-**最后更新**: 2026-03-26
+**最后更新**: 2026-03-27
