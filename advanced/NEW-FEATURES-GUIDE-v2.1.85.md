@@ -560,6 +560,136 @@ claude --version
 
 ---
 
-**最后更新**: 2026-03-25
-**文档版本**: v1.0
+---
+
+## 💡 最佳实践 (2026)
+
+### 性能优化
+
+| 策略 | 实现 | 效果 |
+|------|------|------|
+| **频繁使用 /clear** | 切换任务时清空上下文 | 维持性能，减少混乱 |
+| **使用 /compact** | 长对话时压缩 | 节省上下文窗口 |
+| **委托给子代理** | 使用 Task 工具处理冗长操作 | 减少主会话负担 |
+| **明确指令** | 避免模糊请求，提供清晰提示 | 更准确的结果 |
+
+### 成本管理
+
+| 策略 | 实现 | 影响 |
+|------|------|------|
+| **监控使用** | 使用 `/cost` 命令 | 实时追踪消费 |
+| **减少 thinking tokens** | `MAX_THINKING_TOKENS=8000` | 简单任务降低成本 |
+| **大多数任务用 Sonnet** | `/model sonnet` | 比 Opus 节省 40% |
+| **复杂工作才用 Opus** | 仅架构决策 | 优化成本/质量权衡 |
+
+### 订阅建议
+
+**Claude Max ($100-200/月)** 提供无限使用，推荐重度用户。
+混合方案：订阅用于交互工作，API 用于自动化。
+
+### 安全最佳实践
+
+#### 沙盒模式
+
+```bash
+# 启用沙盒增强安全
+/sandbox
+```
+
+**沙盒优势**:
+- **文件系统隔离**: 仅访问特定目录
+- **网络隔离**: 只能访问批准的服务器
+- **84% 减少权限提示**: 预批准安全操作
+- **OS 级安全**: Linux bubblewrap, macOS Seatbelt
+
+#### 安全建议
+
+1. **最小权限**: 只授予 Claude 实际需要的权限
+2. **使用拒绝规则**: 用显式拒绝规则限制网络命令
+3. **外部扫描**: 在 CI/CD 管道中实现 SAST/DAST
+4. **生产环境保持权限模式**: 不要在生产环境绕过安全
+
+### 高效提示技巧
+
+**专业提示**:
+- 使用文件引用 (`@file.ts`) 而非粘贴代码
+- 明确你想要什么: "重构以提高可读性" vs "修复这个"
+- 提供上下文: "这是一个处理...的 React 组件"
+- 将复杂任务分解为更小的步骤
+- 使用 `/init` 引导项目上下文
+
+### 自动运行模式
+
+对于希望 Claude 自主工作无需确认提示的资深用户:
+
+#### 方法 1: 跳过权限 (CLI 标志)
+
+```bash
+# 自动接受所有权限
+claude --dangerously-skip-permissions
+# 或简写
+claude -y
+```
+
+**警告**: 此模式绕过所有安全提示。仅在可信环境中使用。
+
+#### 方法 2: 白名单特定命令
+
+```json
+// .claude/settings.local.json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(npm run *)",
+      "Bash(npx *)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ]
+  }
+}
+```
+
+#### 方法 3: VS Code 自动接受
+
+1. 打开 Claude Code 面板
+2. 点击设置齿轮
+3. 启用 "Auto-accept edits"
+
+#### 方法 4: Headless CI/CD
+
+```bash
+# 非交互模式
+claude -p "run tests and fix any failures" --output-format stream-json
+
+# 全自动
+claude -p "refactor auth module" -y --output-format json
+```
+
+| 模式 | 标志/设置 | 使用场景 | 安全级别 |
+|------|----------|---------|---------|
+| **全自动** | `-y` | 可信本地开发 | 低 |
+| **白名单** | `permissions.allow` | 团队环境 | 中 |
+| **VS Code 自动** | Auto-accept 切换 | IDE 工作流 | 中 |
+| **Headless** | `-p` 配合 `-y` | CI/CD 管道 | 低 |
+| **正常** | 默认 | 生产、学习 | 高 |
+
+---
+
+## 🔗 相关资源
+
+- [官方 Changelog](https://code.claude.com/docs/en/changelog)
+- [Claude Code 官网](https://claude.ai/code)
+- [Agent SDK 文档](https://platform.claude.com/docs/en/agent-sdk/overview)
+- [Anthropic Academy 免费课程](https://code.claude.com/docs/en/academy)
+- [MCP 协议文档](https://modelcontextprotocol.io)
+- [GitHub 最佳实践](https://github.com/shanraisshan/claude-code-best-practice)
+
+---
+
+**最后更新**: 2026-03-27
+**文档版本**: v1.1
 **维护者**: knowknowcc 项目组

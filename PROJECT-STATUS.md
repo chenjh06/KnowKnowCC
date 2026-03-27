@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.7.4
-**更新**: 2026-03-26
-**跟踪官方**: Claude Code v2.1.84
+**版本**: v3.7.6
+**更新**: 2026-03-27
+**跟踪官方**: Claude Code v2.1.85
 **状态**: 100% 完成
 
 ---
@@ -40,6 +40,15 @@ KnowKnowCC/
 
 ## 最近更新
 
+### v3.7.6 (2026-03-27)
+- 整合最佳实践指南（性能优化、成本管理、安全）
+- 添加权威资源链接
+- 更新 NEW-FEATURES-GUIDE 文档
+
+### v3.7.5 (2026-03-27)
+- Claude Code v2.1.85 同步
+- Hooks 条件过滤、MCP 环境变量、PreToolUse 增强
+
 ### v3.7.4 (2026-03-26)
 - 新增 MCP Elicitation 详细文档（master/01-customization/05-mcp-elicitation.md）
 
@@ -67,9 +76,9 @@ KnowKnowCC/
 ## 相关链接
 
 - [CHANGELOG.md](CHANGELOG.md) — 完整版本记录
-- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.84.md)
+- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.85.md)
 - [CLAUDE.md](CLAUDE.md) — AI 协作指南
 
 ---
 
-**最后更新**: 2026-03-26
+**最后更新**: 2026-03-27
