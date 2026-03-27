@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **knowknowcc（看懂Claude Code）** 是一个 Claude Code 中文知识体系，不是功能手册，而是精心设计的学习体系。
 
-**版本**: v3.7.2 | **跟踪官方**: Claude Code v2.1.84 | **状态**: 100% 完成
+**版本**: v3.7.5 | **跟踪官方**: Claude Code v2.1.85 | **状态**: 100% 完成
 
 ### 核心哲学
 
@@ -168,4 +168,4 @@ GitHub → mcp-deepwiki / zread
 
 ---
 
-**最后更新**: 2026-03-27
+**最后更新**: 2026-03-27 (v2.1.85)

@@ -2,8 +2,71 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.4 - MCP Elicitation 详细文档
-**发布日期**: 2026-03-26
+**最新版本**: v3.7.5 - Claude Code v2.1.85 同步
+**发布日期**: 2026-03-27
+
+---
+
+## [3.7.5] - 2026-03-27 🔄 Claude Code v2.1.85 同步
+
+### 🌟 Claude Code v2.1.85 同步
+
+#### 🔗 MCP 增强
+
+- ✨ **MCP 环境变量** - `CLAUDE_CODE_MCP_SERVER_NAME` 和 `CLAUDE_CODE_MCP_SERVER_URL`
+  - 允许一个 headersHelper 脚本服务多个 MCP 服务器
+  - 动态识别当前请求的服务器
+
+#### 🪝 Hooks 条件过滤
+
+- ✨ **条件 `if` 字段** - 使用权限规则语法过滤触发条件
+  - 示例: `"if": "Bash(git *)"` 只在 Git 命令时触发
+  - 减少不必要的进程开销
+  - 更精细的 Hook 控制
+
+#### 📋 计划任务增强
+
+- ✨ **时间戳标记** - `/loop` 和 `CronCreate` 触发时在 transcripts 中添加时间戳
+- ✨ **深度链接扩展** - `claude-cli://open?q=…` 支持最多 5,000 字符
+
+#### 🔌 PreToolUse Hooks 增强
+
+- ✨ **AskUserQuestion 满足** - 可通过 `updatedInput` 满足 `AskUserQuestion`
+  - 支持 headless 集成
+  - 自定义 UI 收集答案
+
+#### 🛡️ 企业安全
+
+- ✨ **插件组织策略** - `managed-settings.json` 阻止的插件不能安装/启用
+- ✨ **MCP OAuth RFC 9728** - 遵循 Protected Resource Metadata discovery
+
+#### ⚡ 性能优化
+
+- 🚀 **@-mention 自动补全** - 大型仓库性能提升
+- 🚀 **滚动性能** - 纯 TypeScript 替代 WASM yoga-layout
+- 🚀 **压缩 UI** - 减少大型会话压缩时的卡顿
+- 🚀 **PowerShell** - 改进危险命令检测
+
+#### 🐛 Bug 修复
+
+- 🩹 `/compact` 超大对话失败
+- 🩹 `/plugin enable/disable` 路径不匹配
+- 🩹 `--worktree` 非仓库错误处理
+- 🩹 `deniedMcpServers` 未阻止 claude.ai MCP
+- 🩹 多显示器 `switch_display` 问题
+- 🩹 OTEL 导出器设为 `none` 时崩溃
+- 🩹 MCP 步进授权失败
+- 🩹 远程会话内存泄漏
+- 🩹 ECONNRESET 错误重试
+- 🩹 SSH/VS Code 终端原始键序显示
+- 🩹 终端退出后键盘模式问题（Ghostty/Kitty/WezTerm）
+
+### 📋 更新的文件
+
+- 📝 `CHANGELOG.md` - 添加 v3.7.5 版本
+- 📝 `CLAUDE.md` - 版本更新至 v2.1.85
+- 📝 `.claude/CLAUDE.md` - 版本更新，添加 AI 协作配置
+- 📝 `advanced/NEW-FEATURES-GUIDE-v2.1.84.md` - 添加 v2.1.85 新功能速览
 
 ---
 

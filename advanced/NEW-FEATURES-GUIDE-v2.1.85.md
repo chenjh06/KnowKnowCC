@@ -1,7 +1,7 @@
-# Claude Code v2.1.41-v2.1.84 新功能指南
+# Claude Code v2.1.41-v2.1.85 新功能指南
 
-**文档日期**: 2026-03-26
-**跟踪版本**: v2.1.41 → v2.1.84
+**文档日期**: 2026-03-27
+**跟踪版本**: v2.1.41 → v2.1.85
 **官方文档**: [Changelog](https://code.claude.com/docs/en/changelog)
 
 ---
@@ -12,6 +12,7 @@
 
 | 版本 | 发布日期 | 核心更新 |
 |------|---------|---------|
+| **v2.1.85** | 2026-03-27 | Hooks 条件过滤、MCP 环境变量、PreToolUse 增强、性能优化 |
 | **v2.1.84** | 2026-03-26 | PowerShell 工具（Windows 预览）、TaskCreated Hook、MCP 优化 |
 | **v2.1.83** | 2026-03-25 | managed-settings.d/ 目录、Hooks 事件扩展、 transcripts 搜索 |
 | **v2.1.81** | 2026-03-20 | `--bare` 标志、`--channels` 权限中继 |
@@ -28,6 +29,79 @@
 | **v2.1.69** | 2026-03-05 | `/claude-api` skill、10 种新语音语言 |
 | **v2.1.68** | 2026-03-04 | Opus 4.6 默认、ultrathink、1M 上下文 |
 | **v2.1.63** | 2026-02-28 | `/simplify`、`/batch`、HTTP hooks |
+
+---
+
+## 🆕 v2.1.85 新功能速览 (2026-03-27)
+
+### 🪝 Hooks 条件过滤 ⭐⭐⭐⭐⭐
+
+**重大更新**: Hooks 新增 `if` 字段，使用权限规则语法过滤触发条件。
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/git-logger.sh",
+            "if": "Bash(git *)"  // 只在 Git 命令时触发
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**价值**:
+- 减少不必要的进程开销
+- 更精细的 Hook 控制
+- 按工具类型/命令模式过滤
+
+### 🔗 MCP 环境变量
+
+| 变量 | 用途 |
+|------|------|
+| `CLAUDE_CODE_MCP_SERVER_NAME` | headersHelper 脚本中识别当前服务器名 |
+| `CLAUDE_CODE_MCP_SERVER_URL` | headersHelper 脚本中识别当前服务器 URL |
+
+**价值**: 一个 headersHelper 脚本可服务多个 MCP 服务器
+
+### 📋 PreToolUse Hooks 增强
+
+- **AskUserQuestion 满足**: 可通过 `updatedInput` 满足 `AskUserQuestion`
+- **Headless 集成**: 自定义 UI 收集答案后传递给 Claude
+
+```json
+{
+  "permissionDecision": "allow",
+  "updatedInput": {
+    "answer": "用户选择的答案"
+  }
+}
+```
+
+### ⚡ 性能优化
+
+- **@-mention 自动补全**: 大型仓库性能提升
+- **滚动性能**: 纯 TypeScript 替代 WASM yoga-layout
+- **压缩 UI**: 减少大型会话压缩时的卡顿
+- **PowerShell**: 改进危险命令检测
+
+### 🛡️ 企业安全
+
+- **插件组织策略**: `managed-settings.json` 阻止的插件不能安装/启用
+- **MCP OAuth RFC 9728**: 遵循 Protected Resource Metadata discovery
+
+### 📋 其他改进
+
+- **时间戳标记**: `/loop` 和 `CronCreate` 触发时在 transcripts 中添加时间戳
+- **深度链接扩展**: `claude-cli://open?q=…` 支持最多 5,000 字符
+- **OpenTelemetry**: `tool_parameters` 需要 `OTEL_LOG_TOOL_DETAILS=1`
 
 ---
 
