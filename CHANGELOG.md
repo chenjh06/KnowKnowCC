@@ -2,8 +2,44 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.6 - 最佳实践与权威资源整合
+**最新版本**: v3.7.7 - web-access Skill 文档
 **发布日期**: 2026-03-27
+
+---
+
+## [3.7.7] - 2026-03-27 🌐 web-access Skill 扩展技能文档
+
+### 🌟 新增内容
+
+#### 📚 第三方 Skill 文档
+
+- ✨ **web-access Skill 详解** (`advanced/d-skills-development/07-web-access-skill.md`)
+  - 完整联网能力扩展技能介绍
+  - CDP Proxy 浏览器操作 API
+  - 联网工具链选择策略
+  - 并行调研子 Agent 分治
+  - 站点经验积累系统
+
+#### 🔧 核心能力覆盖
+
+| 能力 | 说明 |
+|------|------|
+| 联网工具自动选择 | WebSearch / WebFetch / curl / Jina / CDP |
+| CDP Proxy 浏览器操作 | 直连 Chrome，天然登录态 |
+| 三种点击方式 | /click、/clickAt、/setFiles |
+| 并行分治 | 多子 Agent 共享 Proxy |
+| 站点经验积累 | 按域名存储，跨 session 复用 |
+
+### 📋 更新的文件
+
+- 📝 `advanced/d-skills-development/07-web-access-skill.md` - 新增
+- 📝 `advanced/d-skills-development/README.md` - 更新文档列表
+- 📝 `CHANGELOG.md` - 添加 v3.7.7 版本
+
+### 🔗 相关资源
+
+- GitHub: https://github.com/eze-is/web-access
+- 作者: 一泽 Eze
 
 ---
 

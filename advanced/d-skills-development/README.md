@@ -61,9 +61,11 @@
 | **03-advanced-features** | 20KB | 60分钟 | ⭐⭐⭐⭐ | 高级特性详解 |
 | **04-deployment-distribution** | 22KB | 50分钟 | ⭐⭐⭐ | 部署和分发 |
 | **05-testing-validation** | 18KB | 40分钟 | ⭐⭐⭐ | 测试和验证 |
+| **06-skills-best-practices** | 15KB | 30分钟 | ⭐⭐⭐ | 最佳实践和优化 |
+| **07-web-access-skill** | 12KB | 20分钟 | ⭐⭐⭐ | web-access 联网技能详解 |
 | **examples/** | 60KB | - | ⭐⭐⭐ | 5个完整示例 |
 
-**总计**: 6 个文档 + 5 个示例，约 160KB 内容
+**总计**: 7 个核心文档 + 1 个官方指南 + 5 个示例，约 180KB 内容
 
 ---
 
