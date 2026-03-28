@@ -2,8 +2,44 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.8 - 同步 Claude Code v2.1.86
+**最新版本**: v3.7.9 - 文档质量审查修复
 **发布日期**: 2026-03-28
+
+---
+
+## [3.7.9] - 2026-03-28 🔧 文档质量审查修复
+
+### 📝 文档修复
+
+#### P0: 缺失 README 文件（2个）
+- ✨ 新增 `guide/README.md` — Level 1 技能地图（被5处引用）
+- ✨ 新增 `advanced/a-productivity/README.md` — 生产力提升技能地图（被3处引用）
+
+#### P1: 缺失内容文件（5个）
+- ⏳ 标记 `d-skills-development/` 下4个文件为"计划中"：02-practical-skills、03-advanced-features、04-deployment-distribution、05-testing-validation
+- ⏳ 标记 `master/04-skills-mastery/` 目录为"计划中"
+
+#### P2: 跨目录路径错误（6处）
+- 修正 `advanced/c-integration/` 和 `b-code-quality/` 中引用 master/ 的相对路径
+
+#### P3: 根目录路径错误（4处）
+- 修正 CHANGELOG.md 和 reference/README.md 的路径引用
+
+#### P4: 文件名拼写错误（4处）
+- 修正 `01-headless.md` → `01-headless-mode.md`
+- 修正 `04-security-models.md` → `04-security-best-practices.md`
+- 修正 `06-automated-workflows.md` → `05-agent-teams.md`
+- 修正 `../07-voice.md` → `./07-voice.md`
+
+#### P5+P6+P7: 零散问题（9处）
+- 替换3处外部文件引用为内部/官方链接
+- 修正 NEW-FEATURES-GUIDE 路径层级
+- 修正路径层级过多问题
+
+### 📊 统计更新
+- 总文档数：59 → 63 个
+- 修复无效链接：44 处
+- 涉及文件：19 个
 
 ---
 
