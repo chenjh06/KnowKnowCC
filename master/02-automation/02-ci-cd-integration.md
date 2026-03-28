@@ -1300,7 +1300,7 @@ CI/CD 失败
 
 ### 项目文档
 
-- [Headless 模式](./01-headless.md) - 脚本化使用
+- [Headless 模式](./01-headless-mode.md) - 脚本化使用
 - [工作流自动化](./03-workflow-automation.md) - 工作流设计
 - [测试自动化](./02-testing-automation.md) - 测试集成
 

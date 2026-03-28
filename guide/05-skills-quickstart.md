@@ -1050,10 +1050,10 @@ description: 完整的部署流程，包括测试、构建、部署、验证
 
 **学习路径**:
 1. [01-skill-fundamentals.md](../advanced/d-skills-development/01-skill-fundamentals.md) - 基础概念深入
-2. [02-practical-skills.md](../advanced/d-skills-development/02-practical-skills.md) - 5 个实战案例
-3. [03-advanced-features.md](../advanced/d-skills-development/03-advanced-features.md) - 高级特性
-4. [04-deployment-distribution.md](../advanced/d-skills-development/04-deployment-distribution.md) - 部署和分发
-5. [05-testing-validation.md](../advanced/d-skills-development/05-testing-validation.md) - 测试和验证
+2. [02-practical-skills.md](../advanced/d-skills-development/02-practical-skills.md) - 5 个实战案例 ⏳ 计划中
+3. [03-advanced-features.md](../advanced/d-skills-development/03-advanced-features.md) - 高级特性 ⏳ 计划中
+4. [04-deployment-distribution.md](../advanced/d-skills-development/04-deployment-distribution.md) - 部署和分发 ⏳ 计划中
+5. [05-testing-validation.md](../advanced/d-skills-development/05-testing-validation.md) - 测试和验证 ⏳ 计划中
 
 **预计学习时间**: 4-6 周（系统学习）或 1-2 周（快速浏览）
 

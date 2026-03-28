@@ -2569,10 +2569,10 @@ description: 在用户要求"部署"、"发布"、"上线"时使用
 
 ## 相关资源
 
-- [guide/05-skills-quickstart.md](../../../guide/05-skills-quickstart.md) - Skills 快速入门
+- [guide/05-skills-quickstart.md](../../guide/05-skills-quickstart.md) - Skills 快速入门
 - [01-skill-fundamentals.md](./01-skill-fundamentals.md) - 基础概念（本文档）
-- [02-practical-skills.md](./02-practical-skills.md) - 实战案例
-- [Claude-Code-Skills-官方文档整理.md](../../Claude-Code-Skills-官方文档整理.md) - 官方文档
+- [02-practical-skills.md](./02-practical-skills.md) - 实战案例 ⏳ 计划中
+- [官方 Skills 文档](https://docs.anthropic.com/en/docs/claude-code/skills) - Anthropic 官方文档
 ```
 
 **分析要点**:

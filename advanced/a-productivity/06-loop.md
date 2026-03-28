@@ -408,7 +408,7 @@ stop
 
 ### 下一步
 
-- 学习 [/voice 语音模式](../07-voice.md) 实现 hands-free 编程
+- 学习 [/voice 语音模式](./07-voice.md) 实现 hands-free 编程
 - 了解 [Plan 模式](./01-plan-mode.md) 进行复杂任务规划
 - 探索 [Agent Teams](./05-agent-teams.md) 多Agent协作
 

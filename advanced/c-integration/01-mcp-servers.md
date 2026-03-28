@@ -905,7 +905,7 @@ MCP 服务器生态
 
 ##### 3. Obsidian Knowledge MCP ⭐⭐⭐⭐⭐
 
-**仓库**：[参考本项目完整方案](../../Obsidian知识库集成完整方案.md)
+**仓库**：[参考 Obsidian 集成详细方案](./02-obsidian-integration.md)
 
 **用途**：集成 Obsidian 知识库
 
@@ -3116,7 +3116,7 @@ Level 2 其他技能：
 [03 - Browser Automation](./03-browser-automation.md) - 浏览器自动化实战
 
 Level 3 专家之道：
-[Master 01 - Customization](../01-customization/README.md) - 自定义和扩展
+[Master 01 - Customization](../../master/01-customization/README.md) - 自定义和扩展
 ```
 
 ---

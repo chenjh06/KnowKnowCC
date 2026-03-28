@@ -74,7 +74,7 @@
 
 ### 04 - Security Models（安全模型）
 
-**文件**: [04-security-models.md](./04-security-models.md)
+**文件**: [04-security-models.md](./04-security-best-practices.md)
 
 **状态**: 📋 计划中
 

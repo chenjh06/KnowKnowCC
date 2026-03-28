@@ -1419,9 +1419,9 @@ Set-Acl $path $acl
 
 ```
 Level 3 专家之道：
-[Master 01 - Customization](../01-customization/README.md) - 自定义和扩展
-[Master 02 - Automation](../02-automation/README.md) - 自动化和 CI/CD
-[Master 03 - Advanced Topics](../03-advanced-topics/README.md) - 高级主题
+[Master 01 - Customization](../../master/01-customization/README.md) - 自定义和扩展
+[Master 02 - Automation](../../master/02-automation/README.md) - 自动化和 CI/CD
+[Master 03 - Advanced Topics](../../master/03-advanced-topics/README.md) - 高级主题
 ```
 
 ---

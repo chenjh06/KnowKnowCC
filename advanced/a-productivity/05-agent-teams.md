@@ -1000,4 +1000,4 @@ Subagent Skills：
 
 **最后更新**: 2026-02-15
 **文档版本**: v3.5 + Claude Opus 4.6
-**下一章节**: [06-automated-workflows](./06-automated-workflows.md)
+**下一章节**: [06-automated-workflows](./05-agent-teams.md)

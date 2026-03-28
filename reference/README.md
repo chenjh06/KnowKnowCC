@@ -69,7 +69,7 @@
 
 ---
 
-### [changelog.md](./changelog.md) - 更新日志
+### [changelog.md](../CHANGELOG.md) - 更新日志
 
 **内容**:
 - 版本历史
@@ -94,7 +94,7 @@
 命令相关问题     → [commands.md](./commands.md)
 快捷键问题       → [shortcuts.md](./shortcuts.md)
 错误和异常       → [troubleshooting.md](./troubleshooting.md)
-版本更新         → [changelog.md](./changelog.md)
+版本更新         → [changelog.md](../CHANGELOG.md)
 ```
 
 ### 按使用场景
@@ -323,7 +323,7 @@ site:github.com
 
 请贡献或反馈！
 
-详见：[贡献指南](../../modules-archive/templates/contribution-guide.md)
+详见：[贡献指南](../README.md)
 
 ---
 

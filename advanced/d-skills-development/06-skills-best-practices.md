@@ -1274,7 +1274,7 @@ Level 3: 资源 (按需加载)
 ### 学习资源
 
 - **官方教程**: [Skills 开发指南](./README.md)
-- **实战案例**: [02 - Practical Skills](./02-practical-skills.md)
+- **实战案例**: [02 - Practical Skills](./02-practical-skills.md) ⏳ 计划中
 - **最佳实践**: 本文档
 
 ---

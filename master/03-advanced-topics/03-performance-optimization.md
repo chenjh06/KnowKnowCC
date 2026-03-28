@@ -1091,7 +1091,7 @@ Token 使用：2000-3000
 ### 项目文档
 - [上下文优化](../../advanced/a-productivity/04-context-optimization.md) - Token 使用优化
 - [Plan 模式](../../advanced/a-productivity/01-plan-mode.md) - 任务规划优化
-- [Windows 性能](../windows/03-performance.md) - Windows 系统优化
+- [Windows 性能](../../windows/03-performance.md) - Windows 系统优化
 
 ### 外部资源
 - [Claude Code 官方文档](https://claude.ai/code/docs)

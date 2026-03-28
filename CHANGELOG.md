@@ -333,7 +333,7 @@
 | `--bare` | v2.1.81 | 脚本模式标志 |
 | `--channels` | v2.1.80 | MCP 消息推送（研究预览） |
 
-📖 [完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.84.md)
+📖 [完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md)
 
 ##### Claude Code v2.1.84 (2026-03-26) ⭐ 最新版本
 

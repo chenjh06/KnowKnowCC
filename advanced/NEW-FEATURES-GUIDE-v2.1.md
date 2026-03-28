@@ -537,9 +537,9 @@ ps aux | grep claude
 
 ### 项目文档
 
-- [会话管理](../a-productivity/02-session-management.md)
-- [Git/CI-CD 集成](../c-integration/04-practical-cases.md)
-- [Windows 故障排查](../../windows/04-troubleshooting.md)
+- [会话管理](./a-productivity/02-session-management.md)
+- [Git/CI-CD 集成](./c-integration/04-practical-cases.md)
+- [Windows 故障排查](../windows/04-troubleshooting.md)
 
 ---
 
