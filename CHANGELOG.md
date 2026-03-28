@@ -2,8 +2,54 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.7 - web-access Skill 文档
-**发布日期**: 2026-03-27
+**最新版本**: v3.7.8 - 同步 Claude Code v2.1.86
+**发布日期**: 2026-03-28
+
+---
+
+## [3.7.8] - 2026-03-28 🔄 同步 Claude Code v2.1.86
+
+### 🌟 官方更新同步
+
+#### 🤖 Auto Mode 自动模式 (v2.1.84, 2026-03-25)
+
+- ✨ **Auto Mode** (`--enable-auto-mode`) — "第三种选择"
+  - 内置独立风险分类器判断操作安全性
+  - 安全操作自动执行，危险操作自动拦截
+  - 介于逐条审批与全跳过之间
+
+#### 📋 v2.1.85 (2026-03-26)
+
+- ✨ Hooks 条件 `if` 字段（权限规则语法 `Bash(git *)`）
+- ✨ `CLAUDE_CODE_MCP_SERVER_NAME` / `CLAUDE_CODE_MCP_SERVER_URL` 环境变量
+- ✨ MCP OAuth RFC 9728 Protected Resource Metadata
+- ✨ PreToolUse hooks 可满足 `AskUserQuestion`
+- 🔧 修复 `/compact` 超大会话 "context exceeded"
+- 🔧 修复 PowerShell 危险命令检测改进
+- 🔧 替换 WASM yoga-layout 为 TS（滚动性能提升）
+
+#### 📋 v2.1.86 (2026-03-27)
+
+- ✨ `X-Claude-Code-Session-Id` 请求头（代理会话聚合）
+- ✨ `.jj` / `.sl` VCS 排除（Jujutsu / Sapling 支持）
+- ✨ Memory 文件名可点击
+- ✨ `/skills` 菜单按字母排序
+- ✨ Read tool 紧凑行号格式（减少 token）
+- ✨ `@` 引用文件不再 JSON 转义（减少 token 开销）
+- 🔧 修复 Windows 不必要配置磁盘写入（防损坏）
+- 🔧 修复 `--bare` 模式丢失 MCP 工具
+- 🔧 修复 OAuth URL 复制截断
+- 🔧 修复长会话内存增长
+- 🔧 VSCode: 修复长时间操作 "Not responding"
+- 🔧 VSCode: 修复 Max 用户 token 刷新后默认 Sonnet
+
+### 📋 更新的文件
+
+- 📝 `OFFICIAL-UPDATES-TRACKING.md` - 追踪范围扩展至 v2.1.86
+- 📝 `CHANGELOG.md` - 添加 v3.7.8 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
+- 📝 `README.md` - 版本号更新
+- 📝 `CLAUDE.md` - 版本号更新
 
 ---
 
