@@ -65,6 +65,28 @@ Hooks 模式：
 项目设置: .claude/settings.json
 本地设置: .claude/settings.local.json
 托管设置: managed-settings.json
+
+```
+
+> **v2.1.83+**: 扦托管设置现在支持 `managed-settings.d/` drop-in 目录，实现分文件策略片段合并
+
+```
+managed-settings.d/ (v2.1.83+)
+├── macOS: `/Library/Application Support/ClaudeCode/managed-settings.d/`
+├── Linux/WSL: `/etc/claude-code/managed-settings.d/`
+├── Windows: `C:\Program Files\ClaudeCode\managed-settings.d\`
+```
+
+工作方式：
+- 先加载 `managed-settings.json` 作为基础
+- 按字母顺序排序加载 `managed-settings.d/*.json` 文件
+- 后加载的文件覆盖先加载的标量值
+- 数组连接并去重
+- 对象深度合并
+- 以 `.` 开头的隐藏文件被忽略
+- 可用数字前缀控制顺序：如 `10-telemetry.json`、`20-security.json`
+
+**用途**: 让不同团队独立部署策略片段，无需协调编辑单一文件
 ```
 
 ---
@@ -1166,6 +1188,9 @@ fi
 | **SessionStart** | 会话开始 | 环境设置、加载上下文 |
 | **SessionEnd** | 会话结束时 | 清理、记录 |
 | **PreCompact** | 压缩前 | 优化压缩内容 |
+| **CwdChanged** | 目录变化时 (v2.1.83+) | 噺应式环境管理 (direnv) |
+| **FileChanged** | 文件变更时 (v2.1.83+) | 响应文件变更通知 |
+| **TaskCreated** | 任务创建时 (v2.1.84+) | 任务通知、自动化 |
 
 ---
 
@@ -1188,5 +1213,5 @@ fi
 **阅读时间**: 50分钟
 **重要性**: ⭐⭐⭐⭐⭐
 
-**验证状态**: ✅ 已根据官方文档更新
-**官方文档版本**: Claude Code 2.1.15
+**验证状态**: ✅ 已根据官方文档验证（Claude Code 2.1.84+)
+**官方文档版本**: Claude Code v2.1.86

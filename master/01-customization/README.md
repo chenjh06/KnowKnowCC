@@ -6,141 +6,24 @@
 
 ---
 
-## 📚 内容目录
+## 内容目录
 
-### 02 - Custom MCP Servers（自定义 MCP 服务器）✅
+| # | 文档 | 状态 | 难度 | 说明 |
+|---|------|------|------|------|
+| 01 | [Custom Commands](./01-custom-commands.md) | 📋 计划中 | ⭐⭐⭐⭐ | 自定义命令 |
+| 02 | [Custom MCP Servers](./02-custom-mcp-servers.md) | ✅ 已完成 | ⭐⭐⭐⭐⭐ | 自定义 MCP 服务器 (~28,000字) |
+| 03 | [Hooks](./03-hooks.md) | ✅ 已完成 | ⭐⭐⭐⭐⭐ | Hooks 机制 (~23,000字) |
+| 04 | [Agent SDK](./04-agent-sdk.md) | 📋 计划中 | ⭐⭐⭐⭐⭐ | Agent SDK 开发 |
+| 05 | [MCP Elicitation](./05-mcp-elicitation.md) | ✅ 已完成 | ⭐⭐⭐⭐ | 结构化输入请求 (~8,000字) |
+| 06 | Plugins 系统 | 📋 计划中 | ⭐⭐⭐⭐ | 插件扩展 (v2.1.83+) |
+| 07 | [managed-settings.d/](./07-managed-settings.md) | ✅ 已完成 | ⭐⭐⭐ | 策略片段化管理 (v2.1.83+) |
+| 08 | [Auto Mode](./08-auto-mode.md) | ✅ 已完成 | ⭐⭐⭐⭐ | 自动模式 (v2.1.84+) |
 
-**文件**: [02-custom-mcp-servers.md](./02-custom-mcp-servers.md)
-
-**状态**: ✅ 已完成
-
-**内容**:
-- MCP 服务器概述
-- MCP 协议基础
-- 开发环境搭建
-- 创建第一个 MCP 服务器
-- 高级功能：
-  - 数据库集成
-  - 文件资源
-  - 提示模板
-- 实战案例：
-  - 企业知识库 MCP 服务器
-  - Git 操作 MCP 服务器
-  - 监控告警 MCP 服务器
-- Windows 专属开发
-- 部署和发布
-- 最佳实践
-
-**适合**: 需要扩展 Claude Code 能力的开发者
-**难度**: ⭐⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐⭐⭐
-
-**字数**: ~28,000 字
+**完成度**: 62% (5/8)
 
 ---
 
-### 01 - Custom Commands（自定义命令）
-
-**文件**: [01-custom-commands.md](./01-custom-commands.md)
-
-**状态**: 📋 计划中
-
-**内容**:
-- 自定义命令概述
-- 命令创建方法
-- 命令参数和选项
-- 命令链和组合
-- 实战案例
-- Windows 特定命令
-
-**适合**: 所有用户
-**难度**: ⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐⭐
-
----
-
-### 03 - Hooks（钩子机制）⭐⭐⭐⭐⭐
-
-**文件**: [03-hooks.md](./03-hooks.md)
-
-**状态**: ✅ 已完成
-
-**内容**:
-- Hooks 概述（定义、价值、使用场景）
-- Hook 类型（prePrompt、postResponse、preCommand、postCommand）
-- 配置 Hooks（基本配置、match、command、条件）
-- 高级用法（条件、动态命令、上下文感知、Hook 链）
-- 实战案例（自动审查、自动文档、自动提交通知）
-- Windows 专属（PowerShell Hooks、路径处理、权限）
-- 最佳实践（精确匹配、幂等性、错误处理、日志记录）
-
-**适合**: 需要自动化工作流的用户
-**难度**: ⭐⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐⭐
-
-**字数**: ~23,000 字
-
-**内容**:
-- Hooks 概述
-- prePrompt Hooks
-- postResponse Hooks
-- Hooks 配置
-- 实战案例
-- 高级用法
-- 最佳实践
-
-**适合**: 需要自动化工作流的用户
-**难度**: ⭐⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐⭐⭐
-
----
-
-### 04 - Agent SDK（Agent SDK 使用）
-
-**文件**: [04-agent-sdk.md](./04-agent-sdk.md)
-
-**状态**: 📋 计划中
-
-**内容**:
-- Agent SDK 概述
-- SDK 架构
-- 开发自定义 Agent
-- 集成和部署
-- 实战案例
-- 最佳实践
-
-**适合**: 高级开发者
-**难度**: ⭐⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐
-
----
-
-### 05 - MCP Elicitation（结构化输入请求）⭐⭐⭐⭐
-
-**文件**: [05-mcp-elicitation.md](./05-mcp-elicitation.md)
-
-**状态**: ✅ 已完成
-
-**内容**:
-- MCP Elicitation 概述
-- 工作原理（表单、URL 打开）
-- Elicitation Hooks（Elicitation、ElicitationResult）
-- 使用场景（OAuth、JIRA、Webhook）
-- 实现示例（Node.js）
-- 最佳实践
-- 常见问题
-
-**适合**: 需要交互式 MCP 工具的开发者
-**难度**: ⭐⭐⭐⭐
-**重要性**: ⭐⭐⭐⭐
-
-**版本**: v2.1.76+
-
-**字数**: ~8,000 字
-
----
-
-## 🎯 学习路径
+## 学习路径
 
 ### 路径 1: 快速定制
 
@@ -156,7 +39,7 @@
 ### 路径 2: 深度扩展
 
 ```
-02-Custom MCP Servers → 04-Agent SDK
+02-Custom MCP Servers → 05-MCP Elicitation → 04-Agent SDK
     ├─ 理解 MCP 协议
     ├─ 开发自定义服务器
     └─ 构建复杂集成
@@ -167,32 +50,17 @@
 ### 路径 3: 自动化工作流
 
 ```
-03-Hooks → 02-Custom MCP Servers
-    ├─ 配置 Hooks
-    ├─ 自动触发操作
-    └─ 集成外部系统
+03-Hooks → 07-managed-settings.d/ → 08-Auto Mode
+    ├─ 配置 Hooks 自动触发
+    ├─ 团队级策略管理
+    └─ 自动执行安全操作
 
 目标：完全自动化工作流
 ```
 
 ---
 
-## 📊 完成进度
-
-```
-01-customization/
-├── 01-custom-commands.md       📋 计划中
-├── 02-custom-mcp-servers.md    ✅ 已完成 (28,000字)
-├── 03-hooks.md                 ✅ 已完成 (23,000字)
-├── 04-agent-sdk.md             📋 计划中
-└── 05-mcp-elicitation.md       ✅ 已完成 (8,000字)
-
-完成度: 60% (3/5)
-```
-
----
-
-## 🔗 相关资源
+## 相关资源
 
 ### 前置要求
 - [Level 2 进阶提升](../../advanced/)
@@ -208,5 +76,5 @@
 
 ---
 
-**最后更新**: 2026-03-26
-**模块版本**: Customization v0.26
+**最后更新**: 2026-03-28
+**模块版本**: Customization v0.27

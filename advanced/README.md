@@ -16,8 +16,8 @@
 🎊 Level 2 进阶技能 100% 完成！🎊
 ███████████████████████████████████████████
 
-总文档数：19个 (✨ 新增 2 个 /loop 和 /voice 文档)
-├── a-productivity/：6个 ✅
+总文档数：19个 (✨ 新增 3 个 /loop, /voice 和 08-auto-mode 文档)
+├── a-productivity/：7个 ✅ (含 08-auto-mode)
 ├── b-code-quality/：5个 ✅
 ├── c-integration/：4个 ✅
 └── d-skills-development/：6个 + 5个示例 ✅
@@ -76,6 +76,7 @@ Level 3: 专家之道
 | **04-context-optimization** | Token 使用优化 | 25分钟 | ⭐⭐⭐ |
 | **06-loop** | 循环任务调度 (/loop) | 15分钟 | ⭐⭐⭐ |
 | **07-voice** | 语音编程模式 (/voice) | 12分钟 | ⭐⭐ |
+| **08-auto-mode** | 自动模式 (v2.1.84+) | 30分钟 | ⭐⭐⭐⭐
 
 **学习路径**:
 ```

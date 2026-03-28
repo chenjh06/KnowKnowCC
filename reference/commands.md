@@ -430,7 +430,7 @@ src/
 | `/permissions` | 查看或更新权限 | `/permissions` |
 | `/effort` | 控制分析深度 (v2.1.76) | `/effort medium` |
 | `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
-| `--enable-auto-mode` | 启用自动模式 (v2.1.84) | `claude --enable-auto-mode` |
+| `--enable-auto-mode` | 启用 Auto Mode 自动模式 (v2.1.84) | `claude --enable-auto-mode` |
 
 ### 配置和管理命令
 
@@ -447,6 +447,32 @@ src/
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/mcp` | 管理 MCP 服务器连接 | `/mcp` |
+
+### 远程和协作命令
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `/remote-control` | 让当前会话可从 claude.ai 远程控制 (v2.1.79+) | `/remote-control` |
+| `/rc` | `/remote-control` 的别名 | `/rc` |
+
+### Bundled Skills（内置技能）
+
+> **说明**: Bundled Skills 是随 Claude Code 附带的基于提示的技能，不是内置命令。它们给 Claude 详细的操作手册，让 Claude 用自己的工具编排工作。
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `/simplify [focus]` | 审查最近更改的文件，检查代码复用、质量和效率问题并修复。生成 3 个并行审查代理 | `/simplify` |
+| `/batch <instruction>` | 编排大规模并行变更。将工作分解为独立单元，每个在隔离 git worktree 中执行并开 PR | `/batch migrate from Solid to React` |
+
+**`/simplify` vs `/batch` 区别**：
+
+| 维度 | `/simplify` | `/batch` |
+|------|-------------|----------|
+| **目标** | 优化已有代码 | 大规模迁移/变更 |
+| **范围** | 最近修改的文件 | 整个代码库 |
+| **并行度** | 3 个审查代理 | 5-30 个独立单元 |
+| **输出** | 直接修复 | 每个单元开 PR |
+| **需要 Git** | 否 | 是 |
 
 ### 其他命令
 
@@ -1116,5 +1142,5 @@ $env:MY_VAR = "value"
 ---
 
 **最后更新**: 2026-03-28
-**版本**: v1.1
-**验证状态**: ✅ 已基于官方文档和已完成文档验证
+**版本**: v1.2
+**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.86）
