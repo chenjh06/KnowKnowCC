@@ -17,7 +17,7 @@
 | 05 | [MCP Elicitation](./05-mcp-elicitation.md) | ✅ 已完成 | ⭐⭐⭐⭐ | 结构化输入请求 (~8,000字) |
 | 06 | Plugins 系统 | 📋 计划中 | ⭐⭐⭐⭐ | 插件扩展 (v2.1.83+) |
 | 07 | [managed-settings.d/](./07-managed-settings.md) | ✅ 已完成 | ⭐⭐⭐ | 策略片段化管理 (v2.1.83+) |
-| 08 | [Auto Mode](./08-auto-mode.md) | ✅ 已完成 | ⭐⭐⭐⭐ | 自动模式 (v2.1.84+) |
+| 08 | [Auto Mode](../../advanced/a-productivity/08-auto-mode.md) | ✅ 已完成 | ⭐⭐⭐⭐ | 自动模式 (v2.1.84+) |
 
 **完成度**: 62% (5/8)
 

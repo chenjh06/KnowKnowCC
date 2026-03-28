@@ -5,7 +5,7 @@
 **阅读时间**: 20分钟
 **难度**: ⭐⭐⭐
 **适用场景**: 团队协作、企业部署、多策略管理
-**前置要求**: [Hooks 机制](./03-hooks.md), [Level 2 进阶提升](../../advanced/)
+**前置要求**: [Hooks 机制](./03-hooks.md), [Level 2 进阶提升](../../advanced/README.md)
 **版本**: v2.1.83+
 
 ---
@@ -31,16 +31,20 @@
 **定义**：`managed-settings.json` 是管理员级别的配置文件，用于统一部署 Claude Code 的安全策略、权限规则和 Hooks，用户无法通过本地设置覆盖。
 
 ```
-用户设置层级：
+设置优先级（从高到低）：
 
-managed-settings.json     ← 管理员策略（最高优先级）
-managed-settings.d/*.json ← 策略片段（模块化管理）
+1. Managed Settings（最高优先级，用户无法覆盖）
+   ├─ Server-managed（通过 Claude.ai 管理控制台）
+   ├─ MDM/OS-level（macOS 配置描述文件 / Windows 注册表）
+   └─ File-based（managed-settings.json + managed-settings.d/）
         ↓
-settings.json             ← 用户全局设置
+2. 命令行参数
         ↓
-.claude/settings.json     ← 项目共享设置
+3. .claude/settings.local.json  ← 用户本地项目设置
         ↓
-.claude/settings.local.json ← 用户本地设置
+4. .claude/settings.json        ← 项目共享设置
+        ↓
+5. ~/.claude/settings.json      ← 用户全局设置
 ```
 
 ### 为什么需要 managed-settings.d/？
@@ -75,7 +79,7 @@ managed-settings.d/
 |------|------|
 | **macOS** | `/Library/Application Support/ClaudeCode/managed-settings.json` |
 | **Linux/WSL** | `/etc/claude-code/managed-settings.json` |
-| **Windows** | `C:\Program Files\ClaudeCode\managed-settings.json` |
+| **Windows** | `C:/Program Files/ClaudeCode/managed-settings.json` |
 
 ### managed-settings.d/ 目录位置
 
@@ -83,13 +87,36 @@ managed-settings.d/
 |------|------|
 | **macOS** | `/Library/Application Support/ClaudeCode/managed-settings.d/` |
 | **Linux/WSL** | `/etc/claude-code/managed-settings.d/` |
-| **Windows** | `C:\Program Files\ClaudeCode\managed-settings.d\` |
+| **Windows** | `C:/Program Files/ClaudeCode/managed-settings.d/` |
 
 > **注意**: 这些是系统级目录，通常需要管理员/root 权限才能修改。
 
----
+### 托管设置的四种投递机制
 
-## 工作原理
+除了本文重点介绍的 File-based 方式外，Claude Code 还支持以下托管设置投递机制：
+
+| 投递方式 | 平台 | 说明 |
+|---------|------|------|
+| **Server-managed** | 全平台 | 通过 Claude.ai 管理控制台远程推送，无需本地文件 |
+| **MDM/OS-level** | macOS | 通过 `com.anthropic.claudecode` 配置描述文件部署 |
+| **File-based** | 全平台 | `managed-settings.json` + `managed-settings.d/`（本文重点） |
+| **Windows 注册表** | Windows | `HKLM\SOFTWARE\Policies\ClaudeCode` 或 `HKCU\SOFTWARE\Policies\ClaudeCode` |
+
+> **重要**: 不同托管来源之间**不会合并**，只使用优先级最高的那一个。在同一来源层级内，才会进行合并。
+
+### managed-mcp.json
+
+除了 `managed-settings.json`，系统目录还支持 `managed-mcp.json`，用于管理员统一管理 MCP 服务器配置：
+
+```
+macOS:   /Library/Application Support/ClaudeCode/managed-mcp.json
+Linux:   /etc/claude-code/managed-mcp.json
+Windows: C:/Program Files/ClaudeCode/managed-mcp.json
+```
+
+与 `managed-settings.json` 类似，`managed-mcp.json` 也支持 `managed-mcp.d/` drop-in 目录进行模块化管理。
+
+---
 
 ### 加载顺序
 
@@ -128,63 +155,73 @@ managed-settings.json          ← 基础
 
 **字符串、数字、布尔值** — 后加载的覆盖先加载的
 
+*managed-settings.json:*
 ```json
-// managed-settings.json
 {
   "autoUpdaterStatus": "disabled"
 }
+```
 
-// managed-settings.d/10-update.json
+*managed-settings.d/10-update.json:*
+```json
 {
   "autoUpdaterStatus": "enabled"
 }
-
-// 最终结果：enabled（后者覆盖前者）
 ```
+
+**最终结果**：`enabled`（后者覆盖前者）
 
 ### 规则 2：数组（连接并去重）
 
+*managed-settings.json:*
 ```json
-// managed-settings.json
 {
   "deny": ["Bash(rm -rf *)"]
 }
+```
 
-// managed-settings.d/20-security.json
+*managed-settings.d/20-security.json:*
+```json
 {
   "deny": ["Bash(*production*)"]
 }
+```
 
-// 最终结果：
-// deny = ["Bash(rm -rf *)", "Bash(*production*)"]
+**最终结果**：
+```
+deny = ["Bash(rm -rf *)", "Bash(*production*)"]
 ```
 
 ### 规则 3：对象（深度合并）
 
+*managed-settings.json:*
 ```json
-// managed-settings.json
 {
   "hooks": {
     "PreToolUse": [
-      { "matcher": "Write", "hooks": [...] }
+      { "matcher": "Write", "hooks": ["..."] }
     ]
   }
 }
+```
 
-// managed-settings.d/30-ci-cd.json
+*managed-settings.d/30-ci-cd.json:*
+```json
 {
   "hooks": {
     "PostToolUse": [
-      { "matcher": "Bash", "hooks": [...] }
+      { "matcher": "Bash", "hooks": ["..."] }
     ]
   }
 }
+```
 
-// 最终结果：
-// hooks = {
-//   "PreToolUse": [...],  ← 来自基础
-//   "PostToolUse": [...]  ← 来自片段
-// }
+**最终结果**：
+```
+hooks = {
+  "PreToolUse": [...],   ← 来自基础
+  "PostToolUse": [...]   ← 来自片段
+}
 ```
 
 ### 规则 4：隐藏文件忽略
@@ -458,10 +495,24 @@ Get-ChildItem $dropinDir -Filter "*.json" | ForEach-Object {
 
 ```
 Windows 路径规则：
-├─ 使用正斜杠或双反斜杠
-├─ 脚本中的路径需要引号包裹
+├─ 文档正文中使用正斜杠：C:/Program Files/ClaudeCode/
+├─ PowerShell 代码块中可用反斜杠：C:\Program Files\ClaudeCode\
 ├─ Program Files 目录需要管理员权限
 └─ 路径中包含空格时必须使用引号
+```
+
+### 旧路径迁移
+
+> **重要**: v2.1.75 起，Windows 旧路径 `C:/ProgramData/ClaudeCode/` 已**废弃**。
+> 如果你从旧版本升级，请将配置迁移到新路径 `C:/Program Files/ClaudeCode/`。
+
+```powershell
+# 检查是否使用了旧路径
+$oldPath = "C:\ProgramData\ClaudeCode"
+if (Test-Path $oldPath) {
+    Write-Warning "检测到旧路径 $oldPath，请迁移到新路径"
+    Write-Host "新路径: C:\Program Files\ClaudeCode\" -ForegroundColor Green
+}
 ```
 
 ---
@@ -549,12 +600,19 @@ policies/
 **A**: 使用配置查看命令：
 
 ```bash
-# 查看当前生效的配置
-claude config list
+# 方法1: 在 Claude Code 内使用 /status 查看活跃的设置来源
+# 输入 /status 即可看到当前加载的配置层级
 
-# 或直接检查合并结果
+# 方法2: 直接检查原始文件（不会显示合并结果）
 cat /etc/claude-code/managed-settings.json
 ls /etc/claude-code/managed-settings.d/
+
+# macOS
+ls "/Library/Application Support/ClaudeCode/managed-settings.d/"
+
+# Windows PowerShell
+Get-Content "C:/Program Files/ClaudeCode/managed-settings.json"
+Get-ChildItem "C:/Program Files/ClaudeCode/managed-settings.d/" -Filter "*.json"
 ```
 
 ### Q3: 片段之间有冲突怎么办？
@@ -572,11 +630,18 @@ ls /etc/claude-code/managed-settings.d/
 
 ### Q4: managed-settings.json 和 .d/ 哪个优先？
 
-**A**: managed-settings.json 先加载，.d/ 中的文件后加载并覆盖：
+**A**: managed-settings.json 先加载，.d/ 中的文件后加载：
 
 ```
 加载顺序：managed-settings.json → .d/*.json（按字母排序）
-覆盖规则：后加载的覆盖先加载的（标量值）
+
+具体覆盖规则：
+├─ 标量值（字符串/数字/布尔）：后加载的覆盖先加载的
+├─ 数组：连接合并并去重，不会互相覆盖
+└─ 对象：深度合并，同名键则后者覆盖
+
+建议：用数字前缀控制覆盖行为
+如需要覆盖基础配置，使用更大的数字前缀（如 50-override.json）
 ```
 
 ### Q5: 如何在不重启的情况下重新加载？
