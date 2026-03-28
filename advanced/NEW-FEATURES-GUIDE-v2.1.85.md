@@ -1,7 +1,7 @@
-# Claude Code v2.1.41-v2.1.85 新功能指南
+# Claude Code v2.1.41-v2.1.86 新功能指南
 
-**文档日期**: 2026-03-27
-**跟踪版本**: v2.1.41 → v2.1.85
+**文档日期**: 2026-03-28
+**跟踪版本**: v2.1.41 → v2.1.86
 **官方文档**: [Changelog](https://code.claude.com/docs/en/changelog)
 
 ---
@@ -12,7 +12,8 @@
 
 | 版本 | 发布日期 | 核心更新 |
 |------|---------|---------|
-| **v2.1.85** | 2026-03-27 | Hooks 条件过滤、MCP 环境变量、PreToolUse 增强、性能优化 |
+| **v2.1.86** | 2026-03-27 | Session-Id 请求头、Jujutsu/Sapling VCS、性能优化（token/内存）、VSCode 修复 |
+| **v2.1.85** | 2026-03-26 | Hooks 条件过滤、MCP 环境变量、PreToolUse 增强、性能优化 |
 | **v2.1.84** | 2026-03-26 | PowerShell 工具（Windows 预览）、TaskCreated Hook、MCP 优化 |
 | **v2.1.83** | 2026-03-25 | managed-settings.d/ 目录、Hooks 事件扩展、 transcripts 搜索 |
 | **v2.1.81** | 2026-03-20 | `--bare` 标志、`--channels` 权限中继 |
@@ -29,6 +30,72 @@
 | **v2.1.69** | 2026-03-05 | `/claude-api` skill、10 种新语音语言 |
 | **v2.1.68** | 2026-03-04 | Opus 4.6 默认、ultrathink、1M 上下文 |
 | **v2.1.63** | 2026-02-28 | `/simplify`、`/batch`、HTTP hooks |
+
+---
+
+## 🆕 v2.1.86 新功能速览 (2026-03-28)
+
+### 🤖 Auto Mode 自动模式 ⭐⭐⭐⭐⭐
+
+**重大更新**: Claude Code 新增 Auto Mode，内置独立风险分类器判断操作安全性。
+
+```bash
+# 启用自动模式
+claude --enable-auto-mode
+
+# 效果：安全操作自动执行，危险操作自动拦截
+# 不再需要 --dangerously-skip-permissions
+```
+
+**三种权限模式对比**:
+
+| 模式 | 安全操作 | 危险操作 | 适用场景 |
+|------|---------|---------|---------|
+| **默认模式** | 需确认 | 需确认 | 初学者、敏感项目 |
+| **Auto Mode** | 自动执行 | 自动拦截 | 日常开发 |
+| **bypassPermissions** | 全自动 | 全自动 | CI/CD、受信任环境 |
+
+---
+
+### 📡 请求头与会话追踪
+
+新增 `X-Claude-Code-Session-Id` 请求头，代理服务器可按会话聚合请求。
+
+```bash
+# 代理服务器可以通过此 header 聚合同一会话的所有请求
+X-Claude-Code-Session-Id: <unique-session-id>
+```
+
+**用途**: 中转站/代理可精确统计每会话用量，无需解析请求体。
+
+---
+
+### 🧹 性能与稳定性优化
+
+| 优化项 | 说明 |
+|--------|------|
+| **Read 紧凑行号** | 新格式减少 token 消耗 |
+| **@引用优化** | 原始字符串不再 JSON 转义，减少 token 开销 |
+| **内存泄漏修复** | 修复长会话 markdown/highlight 渲染缓存导致的内存增长 |
+| **Windows 配置写入** | 修复不必要的磁盘写入，防止配置损坏 |
+| **启动性能** | macOS keychain 缓存从 5s 延长至 30s |
+| **VSCode "Not responding"** | 修复长时间操作误报 |
+| **VSCode Max 用户** | 修复 token 刷新后默认 Sonnet 而非 Opus |
+| **Bedrock/Vertex 缓存** | 移除工具描述中的动态内容，提高缓存命中率 |
+
+---
+
+### 🔧 其他修复
+
+- 修复 `--resume` 在 v2.1.85 前创建的会话上失败
+- 修复 Write/Edit/Read 对项目根目录外文件的处理
+- 修复 `--bare` 模式丢失 MCP 工具
+- 修复 OAuth URL 复制只截取约20个字符
+- 修复隐藏输入（OAuth 代码粘贴）在窄终端泄漏
+- 修复 `/plugin` 卸载对话框逻辑反转
+- 修复 `/skills` 菜单按字母排序
+- 修复 Memory 文件名可点击打开
+- 修复 `ultrathink` 提示残留
 
 ---
 
@@ -690,6 +757,6 @@ claude -p "refactor auth module" -y --output-format json
 
 ---
 
-**最后更新**: 2026-03-27
-**文档版本**: v1.1
+**最后更新**: 2026-03-28
+**文档版本**: v1.2
 **维护者**: knowknowcc 项目组

@@ -430,6 +430,7 @@ src/
 | `/permissions` | 查看或更新权限 | `/permissions` |
 | `/effort` | 控制分析深度 (v2.1.76) | `/effort medium` |
 | `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
+| `--enable-auto-mode` | 启用自动模式 (v2.1.84) | `claude --enable-auto-mode` |
 
 ### 配置和管理命令
 
@@ -1114,6 +1115,6 @@ $env:MY_VAR = "value"
 
 ---
 
-**最后更新**: 2026-03-26
-**版本**: v1.0
+**最后更新**: 2026-03-28
+**版本**: v1.1
 **验证状态**: ✅ 已基于官方文档和已完成文档验证

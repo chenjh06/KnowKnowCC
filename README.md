@@ -32,7 +32,7 @@
 |------|------|------|
 | 从零开始 | [guide/](./guide/README.md) | 1 周 |
 | 10 分钟上手 | [guide/01-quickstart.md](./guide/01-quickstart.md) | 10 分钟 |
-| 掌握新功能 | [NEW-FEATURES-GUIDE-v2.1.85.md](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md) | 即时 |
+| 掌握新功能 | [NEW-FEATURES-GUIDE-v2.1.86.md](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md) | 即时 |
 | Windows 用户 | [windows/](./windows/README.md) | 1 天 |
 | 提升效率 | [advanced/](./advanced/README.md) | 2-4 周 |
 | 深度掌握 | [master/](./master/README.md) | 持续学习 |
@@ -60,7 +60,7 @@ advanced/
 ├── b-code-quality/            代码质量
 ├── c-integration/             集成扩展
 ├── d-skills-development/      Skills 开发
-└── NEW-FEATURES-GUIDE-v2.1.84.md   新功能指南
+└── NEW-FEATURES-GUIDE-v2.1.85.md   新功能指南 (覆盖到 v2.1.86)
 ```
 
 ### Level 3 - 专家之道（master/）
@@ -93,20 +93,22 @@ reference/
 
 ---
 
-## 最新更新（v2.1.84）
+## 最新更新（v2.1.86）
 
 ### 核心新功能
 
 | 功能 | 版本 | 说明 |
 |------|------|------|
+| **Auto Mode** | v2.1.84 | 内置风险分类器，安全操作自动执行 |
 | PowerShell 工具 | v2.1.84 | Windows 原生支持（预览） |
+| Hooks 条件过滤 | v2.1.85 | `if` 字段支持权限规则语法 |
+| 性能优化 | v2.1.86 | Read 紧凑行号、@引用减少 token |
 | `/loop` | v2.1.71 | 循环任务调度 |
 | `/voice` | v2.1.69 | Push-to-Talk 语音编程 |
 | 1M Context | v2.1.75 | 百万 token 上下文 |
-| `/effort` | v2.1.76 | 分析深度控制 |
 | MCP Elicitation | v2.1.76 | 结构化输入请求 |
 
-[完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.84.md)
+[完整新功能指南](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md)
 
 ---
 

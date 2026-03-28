@@ -306,6 +306,12 @@ Hooks 按匹配器组织，其中每个匹配器可以有多个 hooks：
 }
 ```
 
+### 条件过滤 ✨ v2.1.85
+
+**新功能**: Hooks 新增 `if` 字段，使用权限规则语法过滤触发条件，只有匹配 `if` 条件的 Hook 才会执行，减少进程开销。
+
+
+
 #### UserPromptSubmit Hook
 
 ```json
@@ -344,6 +350,47 @@ Hooks 按匹配器组织，其中每个匹配器可以有多个 hooks：
   }
 }
 ```
+
+---
+
+### 条件过滤 `if` 字段 ✨ v2.1.85
+
+**新功能**: Hooks 新增 `if` 字段，使用权限规则语法过滤触发条件，只有匹配的 Hook 才会执行。
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/git-logger.sh",
+            "if": "Bash(git push*)"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**`if` 字段语法**（与权限规则语法相同）:
+```
+ToolPattern(pattern)        # 例如: Bash(git *), Edit(write)
+```
+
+**常用示例**:
+| `if` 值 | 匹配目标 |
+|---------|---------|
+| `Bash(git *)` | 只匹配 git 开头的 Bash 命令 |
+| `Bash(git push --force)` | 只匹配强制推送（危险操作） |
+| `Bash(npm *)` | 只匹配 npm 开头的命令 |
+| `Edit\|Write` | 只匹配 Edit 或 Write 操作 |
+| `Bash(git commit*)` | 只匹配 git commit 命令 |
+
+**效果**: 只有匹配 `if` 条件的 Hook 才执行，减少不必要的进程调用开销。
 
 ---
 

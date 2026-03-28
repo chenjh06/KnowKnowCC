@@ -40,6 +40,13 @@ KnowKnowCC/
 
 ## 最近更新
 
+### v3.7.8 (2026-03-28)
+- Claude Code v2.1.86 同步
+- Auto Mode 自动模式 (--enable-auto-mode)
+- v2.1.84-v2.1.86 三个版本变更追踪
+- 性能优化：Read 紧凑行号、@引用减少 token
+- Windows 配置写入修复
+
 ### v3.7.7 (2026-03-27)
 - 新增 web-access Skill 详解文档
 - 第三方联网扩展技能完整介绍
@@ -80,9 +87,9 @@ KnowKnowCC/
 ## 相关链接
 
 - [CHANGELOG.md](CHANGELOG.md) — 完整版本记录
-- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.85.md)
+- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.86.md)
 - [CLAUDE.md](CLAUDE.md) — AI 协作指南
 
 ---
 
-**最后更新**: 2026-03-27
+**最后更新**: 2026-03-28
