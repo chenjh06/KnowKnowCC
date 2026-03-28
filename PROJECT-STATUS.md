@@ -87,7 +87,7 @@ KnowKnowCC/
 ## 相关链接
 
 - [CHANGELOG.md](CHANGELOG.md) — 完整版本记录
-- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.86.md)
+- [新功能指南](advanced/NEW-FEATURES-GUIDE-v2.1.85.md)
 - [CLAUDE.md](CLAUDE.md) — AI 协作指南
 
 ---

@@ -32,7 +32,7 @@
 |------|------|------|
 | 从零开始 | [guide/](./guide/README.md) | 1 周 |
 | 10 分钟上手 | [guide/01-quickstart.md](./guide/01-quickstart.md) | 10 分钟 |
-| 掌握新功能 | [NEW-FEATURES-GUIDE-v2.1.86.md](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md) | 即时 |
+| 掌握新功能 | [NEW-FEATURES-GUIDE](./advanced/NEW-FEATURES-GUIDE-v2.1.85.md) | 即时 |
 | Windows 用户 | [windows/](./windows/README.md) | 1 天 |
 | 提升效率 | [advanced/](./advanced/README.md) | 2-4 周 |
 | 深度掌握 | [master/](./master/README.md) | 持续学习 |
