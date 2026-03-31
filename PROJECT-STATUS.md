@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.7.9
-**更新**: 2026-03-28
-**跟踪官方**: Claude Code v2.1.86
+**版本**: v3.8.0
+**更新**: 2026-03-31
+**跟踪官方**: Claude Code v2.1.88
 **状态**: 100% 完成
 
 ---
@@ -40,11 +40,12 @@ KnowKnowCC/
 
 ## 最近更新
 
-### v3.7.9 (2026-03-28)
-- 修复44处无效链接和文档质量问题
-- 新增 guide/README.md 和 a-productivity/README.md
-- P1 缺失内容文件标记为"计划中"
-- 全面交叉引用审查和路径修正
+### v3.8.0 (2026-03-31)
+- Claude Code v2.1.88 同步
+- PermissionDenied Hook、无闪烁渲染、命名子Agent
+- 修复 Windows CRLF/PowerShell/Shift+Enter/语音模式
+- 修复 Prompt Cache/内存泄漏/大文件 OOM 等核心问题
+- v2.1.87 Cowork Dispatch 消息投递修复
 
 ### v3.7.9 (2026-03-28)
 - 修复44处无效链接和文档质量问题
@@ -104,4 +105,4 @@ KnowKnowCC/
 
 ---
 
-**最后更新**: 2026-03-28
+**最后更新**: 2026-03-31

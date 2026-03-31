@@ -2,8 +2,56 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.7.9 - 文档质量审查修复
-**发布日期**: 2026-03-28
+**最新版本**: v3.8.0 - Claude Code v2.1.88 同步
+**发布日期**: 2026-03-31
+
+---
+
+## [3.8.0] - 2026-03-31 🔄 Claude Code v2.1.88 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.88 (2026-03-31)
+
+- ✨ **`CLAUDE_CODE_NO_FLICKER=1`** - 无闪烁 alt-screen 渲染（虚拟滚动缓冲）
+- ✨ **`PermissionDenied` Hook** - Auto Mode 拒绝后触发，可返回 `{retry: true}` 让模型重试
+- ✨ **命名子 Agent @提及** - `@` 补全建议中显示已命名子 Agent
+- 🔧 修复 Edit/Write 工具在 Windows 上 CRLF 双倍问题
+- 🔧 修复 Prompt Cache 在长会话中因工具 schema 变化导致 miss
+- 🔧 修复嵌套 CLAUDE.md 在长会话中被重复注入数十次
+- 🔧 修复 `StructuredOutput` schema 缓存 bug（~50% 失败率）
+- 🔧 修复大 JSON 输入作为 LRU cache key 的内存泄漏
+- 🔧 修复 Edit 工具处理超大文件(>1GiB)的 OOM 崩溃
+- 🔧 修复 `--resume` 在旧版本 transcript 上的崩溃
+- 🔧 修复误导性 "Rate limit reached" 消息（实际是 entitlement 错误）
+- 🔧 修复 LSP 服务器崩溃后进入僵尸状态
+- 🔧 修复 Hooks `if` 条件不匹配复合命令（`ls && git push`）
+- 🔧 修复 CJK/Emoji 在 prompt 历史中被 4KB 边界截断
+- 🔧 修复 `/stats` 低估 token 用量（未含子 Agent/fork）
+- 🔧 修复 Windows PowerShell 5.1 误报失败（stderr 输出）
+- 🔧 修复 Windows Terminal Preview 1.25 Shift+Enter 行为
+- 🔧 修复 Windows 语音模式 WebSocket "HTTP 101" 错误
+- 📝 思考摘要默认关闭，需设 `showThinkingSummaries: true` 恢复
+- 📝 Auto Mode 拒绝命令现在显示通知
+- 📝 `/env` 现在作用于 PowerShell 工具命令
+- 📝 图片粘贴不再插入尾部空格
+- 📝 粘贴 `!command` 到空提示符现在进入 bash 模式
+
+#### 📋 v2.1.87 (2026-03-29)
+
+- 🩹 修复 **Cowork Dispatch** 消息无法投递的问题
+  - Cowork Dispatch 连接终端会话与 claude.ai/iOS/Android
+  - 修复后远程编排和多设备工作流恢复正常
+
+### 📋 更新的文件
+
+- 📝 `CHANGELOG.md` - 添加 v3.8.0 版本
+- 📝 `CLAUDE.md` - 版本号更新
+- 📝 `README.md` - 版本号和新功能表更新
+- 📝 `PROJECT-STATUS.md` - 版本号更新
+- 📝 `PROJECT-SUMMARY.md` - 版本号更新
+- 📝 `advanced/NEW-FEATURES-GUIDE-v2.1.85.md` - 添加 v2.1.87/v2.1.88 新功能
+- 📝 `.claude/CLAUDE.md` - 版本号更新
 
 ---
 
@@ -1719,5 +1767,5 @@ Windows支持: 100%
 
 ---
 
-**最后更新**: 2026-02-04
+**最后更新**: 2026-03-31
 **维护者**: Nyxifer 和他的 ClaudeCode (GLM4.7)

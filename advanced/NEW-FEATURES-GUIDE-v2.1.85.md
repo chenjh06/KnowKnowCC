@@ -1,7 +1,7 @@
-# Claude Code v2.1.41-v2.1.86 新功能指南
+# Claude Code v2.1.41-v2.1.88 新功能指南
 
-**文档日期**: 2026-03-28
-**跟踪版本**: v2.1.41 → v2.1.86
+**文档日期**: 2026-03-31
+**跟踪版本**: v2.1.41 → v2.1.88
 **官方文档**: [Changelog](https://code.claude.com/docs/en/changelog)
 
 ---
@@ -12,6 +12,8 @@
 
 | 版本 | 发布日期 | 核心更新 |
 |------|---------|---------|
+| **v2.1.88** | 2026-03-31 | PermissionDenied Hook、无闪烁渲染、命名子Agent、Windows CRLF/语音修复、内存泄漏修复 |
+| **v2.1.87** | 2026-03-29 | Cowork Dispatch 消息投递修复 |
 | **v2.1.86** | 2026-03-27 | Session-Id 请求头、Jujutsu/Sapling VCS、性能优化（token/内存）、VSCode 修复 |
 | **v2.1.85** | 2026-03-26 | Hooks 条件过滤、MCP 环境变量、PreToolUse 增强、性能优化 |
 | **v2.1.84** | 2026-03-26 | PowerShell 工具（Windows 预览）、TaskCreated Hook、MCP 优化 |
@@ -30,6 +32,81 @@
 | **v2.1.69** | 2026-03-05 | `/claude-api` skill、10 种新语音语言 |
 | **v2.1.68** | 2026-03-04 | Opus 4.6 默认、ultrathink、1M 上下文 |
 | **v2.1.63** | 2026-02-28 | `/simplify`、`/batch`、HTTP hooks |
+
+---
+
+## 🆕 v2.1.88 新功能速览 (2026-03-31)
+
+### 🪝 PermissionDenied Hook ⭐⭐⭐⭐⭐
+
+**重大更新**: Auto Mode 拒绝操作后，现在会触发 `PermissionDenied` Hook，可以返回 `{retry: true}` 让模型自动重试。
+
+```json
+// settings.json
+{
+  "hooks": {
+    "PermissionDenied": [{
+      "command": "handler.sh",
+      "retry": true
+    }]
+  }
+}
+```
+
+**应用场景**:
+- Auto Mode 拒绝后自动降级为更安全操作
+- 拒绝操作后发送通知
+- 记录被拒绝的操作用于安全审计
+
+### 🖥️ 无闪烁渲染 ⭐⭐⭐⭐
+
+```bash
+# 启用无闪烁模式
+export CLAUDE_CODE_NO_FLICKER=1
+```
+
+使用虚拟滚动缓冲区替代传统 alt-screen 切换，消除终端闪烁。
+
+### 📝 命名子 Agent @提及
+
+`@` 补全建议中现在显示已命名的子 Agent，方便在多 Agent 协作中快速引用。
+
+### 🔧 关键修复（Windows 用户重点关注）
+
+| 修复 | 说明 |
+|------|------|
+| **Edit/Write CRLF** | Windows 上不再出现 CRLF 双倍问题 |
+| **PowerShell 5.1 误报** | `git push` 等写 stderr 的命令不再被误判为失败 |
+| **Shift+Enter** | Windows Terminal Preview 1.25 不再错误提交 |
+| **语音模式 WebSocket** | Windows 不再报 "HTTP 101" 错误 |
+
+### 🔧 关键修复（通用）
+
+| 修复 | 说明 |
+|------|------|
+| Prompt Cache miss | 工具 schema 变化导致的缓存失效已修复 |
+| 嵌套 CLAUDE.md 重复 | 长会话中不再重复注入数十次 |
+| StructuredOutput 失败 | 多 schema 工作流 ~50% 失败率已修复 |
+| 内存泄漏 | 大 JSON 输入作为 LRU cache key 的问题 |
+| Edit 大文件 OOM | >1GiB 文件不再崩溃 |
+| CJK/Emoji 历史丢失 | 4KB 边界截断问题已修复 |
+| `/stats` 统计偏低 | 现在包含子 Agent/fork 用量 |
+
+### 📝 行为变更
+
+| 变更 | 说明 |
+|------|------|
+| 思考摘要默认关闭 | 需设 `showThinkingSummaries: true` 恢复 |
+| Auto Mode 拒绝通知 | 被拒绝命令显示通知，出现在 `/permissions` |
+| `/env` 作用域扩大 | 现在同时影响 PowerShell 工具命令 |
+
+---
+
+## 🆕 v2.1.87 修复 (2026-03-29)
+
+### 🩹 Cowork Dispatch 消息投递
+
+修复 Cowork Dispatch 消息无法投递的问题。Cowork Dispatch 是连接终端会话与 claude.ai/iOS/Android 的桥梁，修复后远程编排和多设备工作流恢复正常。
 
 ---
 

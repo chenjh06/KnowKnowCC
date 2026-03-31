@@ -8,7 +8,7 @@
 
 | 项目版本 | 跟踪版本 | 更新日期 | 完成度 |
 |---------|---------|---------|--------|
-| **v3.7.9** | Claude Code v2.1.86 | 2026-03-28 | 100% |
+| **v3.8.0** | Claude Code v2.1.88 | 2026-03-31 | 100% |
 
 ---
 
@@ -60,7 +60,7 @@ advanced/
 ├── b-code-quality/            代码质量
 ├── c-integration/             集成扩展
 ├── d-skills-development/      Skills 开发
-└── NEW-FEATURES-GUIDE-v2.1.85.md   新功能指南 (覆盖到 v2.1.86)
+└── NEW-FEATURES-GUIDE-v2.1.85.md   新功能指南 (覆盖到 v2.1.88)
 ```
 
 ### Level 3 - 专家之道（master/）
@@ -93,12 +93,15 @@ reference/
 
 ---
 
-## 最新更新（v2.1.86）
+## 最新更新（v2.1.88）
 
 ### 核心新功能
 
 | 功能 | 版本 | 说明 |
 |------|------|------|
+| **PermissionDenied Hook** | v2.1.88 | Auto Mode 拒绝后可重试 |
+| **无闪烁渲染** | v2.1.88 | `CLAUDE_CODE_NO_FLICKER=1` |
+| **命名子 Agent @提及** | v2.1.88 | @ 补全显示已命名子 Agent |
 | **Auto Mode** | v2.1.84 | 内置风险分类器，安全操作自动执行 |
 | PowerShell 工具 | v2.1.84 | Windows 原生支持（预览） |
 | Hooks 条件过滤 | v2.1.85 | `if` 字段支持权限规则语法 |
