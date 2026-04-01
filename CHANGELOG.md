@@ -2,8 +2,92 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.8.0 - Claude Code v2.1.88 同步
-**发布日期**: 2026-03-31
+**最新版本**: v3.10.0 - Claude Code 源码泄露事件深度分析
+**发布日期**: 2026-04-01
+
+---
+
+## [3.10.0] - 2026-04-01 🔍 Claude Code 源码泄露事件深度分析
+
+### 🌟 新增文档
+
+#### 📋 源码泄露事件深度分析 (master/04-source-analysis/)
+
+**新增文件**:
+- ✨ **01-source-leak-analysis.md** — 22维度深度分析（~18,000字）
+- ✨ **README.md** — 模块导航
+
+**覆盖维度** (22个):
+- 🔵 **事件概述与时间线**: 完整事件梳理，关键时间节点
+- 🔵 **泄露根因分析**: .npmignore 配置错误、Bun 已知 bug、AI 自写代码盲区
+- 🔵 **泄露内容全景**: 512K+ 行代码、1,900 文件、关键文件分析
+- 🔵 **核心架构深度**: 五层架构、QueryEngine 46,000行、上下文六层注入、四层压缩防线
+- 🔵 **门机制与安全**: 反蒸馏、HTTP层DRM、Undercover Mode、Bash 23道检查
+- 🔵 **未发布功能**: KAIROS自主Agent(150+引用)、ULTRAPLAN远程规划、Buddy电子宠物(18物种)
+- 🔵 **代码质量与技术债务**: print.ts 3167行怪物函数、零测试、5.4%工具调用孤儿率
+- 🔵 **开源生态**: claw-code 74K stars、claurst Rust重写、DMCA法律问题
+- 🔵 **竞争对手与行业**: OpenCode事件完整时间线、Cursor/Windsurf/Aider反应
+- 🔵 **社区讨论精华**: HN 4个讨论串(最高1994分)、Reddit 10+帖、知名人物反应
+- 🔵 **安全影响评估**: CVE详情、供应链攻击、2026年3月安全灾难月
+- 🔵 **官方回应**: Anthropic发言人声明、Boris Cherny无责文化
+- 🔵 **行业影响与启示**: 战略路线图泄露、法律先例、技术启示
+
+**信息源**: 30+篇深度分析、4个HN讨论串、10+Reddit帖、5份安全报告
+
+---
+
+## [3.9.0] - 2026-04-01 🔄 Claude Code v2.1.89 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.89 (2026-04-01)
+
+**新功能**:
+- ✨ **`"defer"` 权限决策** - PreToolUse hooks 可返回 `{permissionDecision: "defer"}` 暂停 headless 会话，通过 `-p --resume` 恢复
+- ✨ **`MCP_CONNECTION_NONBLOCKING=true`** - `-p` 模式跳过 MCP 连接等待，`--mcp-config` 服务器连接超时限制 5s
+- ✨ **`/buddy`** - 愚人节彩蛋：孵化一只小型生物陪你编程
+
+**关键修复**:
+- 🔧 修复 **autocompact 抖动循环** — 检测上下文压缩后立即重新填满（连续3次）并停止，避免浪费 API 调用
+- 🔧 修复 `-p --resume` 挂起（deferred 输入超过 64KB 或无 deferred 标记）
+- 🔧 修复 LSP 服务器崩溃后僵尸状态，现在在下次请求时自动重启
+- 🔧 修复 `claude-cli://` 深度链接在 macOS 上无法打开
+- 🔧 修复 MCP 工具错误截断为第一个内容块（多元素错误内容丢失）
+- 🔧 修复 skill 提醒通过 SDK 发送图片时丢失
+- 🔧 修复 PreToolUse/PostToolUse hooks 接收 Write/Edit/Read 的 `file_path` 为绝对路径
+- 🔧 修复 hooks `if` 条件不匹配复合命令（`ls && git push`）或环境变量前缀（`FOO=bar git push`）
+- 🔧 修复 macOS Apple Silicon 语音模式麦克风权限请求
+- 🔧 修复 iTerm2/tmux 中流式输出时的 UI 抖动
+- 🔧 修复提交后提示符短暂消失（后台消息到达时）
+- 🔧 修复天城文(Devanagari)等组合标记文本被截断
+- 🔧 修复主屏幕终端布局变化后的渲染伪影
+- 🔧 修复折叠搜索/读取组徽章在重度并行工具使用时重复
+
+**改进**:
+- 📈 改进折叠工具摘要：`ls`/`tree`/`du` 显示"Listed N directories"
+- 📈 改进 Bash 工具：格式化器修改已读文件时发出警告
+- 📈 改进 `@` 补全：源代码文件排名高于相似名称的 MCP 资源
+- 📈 改进 PowerShell 工具提示：区分 5.1 和 7+ 语法
+
+**行为变更**:
+- 📝 `Edit` 现在可直接编辑通过 `Bash`(sed -n/cat)查看的文件，无需先 `Read`
+- 📝 Hook 输出超过 50K 字符时保存到磁盘，注入路径+预览而非直接注入上下文
+- 📝 `cleanupPeriodDays: 0` 现在被拒绝并报验证错误（之前静默禁用 transcript 持久化）
+- 📝 记录 `TaskCreated` hook 事件及其阻塞行为
+- 📝 Ctrl+B 后台运行命令时保留任务通知
+- 📝 PowerShell 参数拆分加固（PS 5.1 双引号+空白参数触发确认）
+- 📝 `/usage` 隐藏 Pro/Enterprise 的冗余 Sonnet 条
+- 📝 图片粘贴不再插入尾部空格
+
+### 📋 更新的文件
+
+- 📝 `CHANGELOG.md` - 添加 v3.9.0 版本
+- 📝 `CLAUDE.md` - 版本号更新
+- 📝 `README.md` - 版本号和新功能表更新
+- 📝 `PROJECT-STATUS.md` - 版本号更新
+- 📝 `PROJECT-SUMMARY.md` - 版本号更新
+- 📝 `advanced/NEW-FEATURES-GUIDE-v2.1.85.md` - 添加 v2.1.89 新功能
+- 📝 `.claude/CLAUDE.md` - 版本号更新
 
 ---
 

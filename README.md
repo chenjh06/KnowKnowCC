@@ -8,7 +8,7 @@
 
 | 项目版本 | 跟踪版本 | 更新日期 | 完成度 |
 |---------|---------|---------|--------|
-| **v3.8.0** | Claude Code v2.1.88 | 2026-03-31 | 100% |
+| **v3.10.0** | Claude Code v2.1.89 | 2026-04-01 | 100% |
 
 ---
 
@@ -93,19 +93,21 @@ reference/
 
 ---
 
-## 最新更新（v2.1.88）
+## 最新更新（v2.1.89）
 
 ### 核心新功能
 
 | 功能 | 版本 | 说明 |
 |------|------|------|
+| **`"defer"` 权限决策** | v2.1.89 | PreToolUse hooks 可暂停 headless 会话 |
+| **MCP 非阻塞连接** | v2.1.89 | `MCP_CONNECTION_NONBLOCKING=true` |
+| **Autocompact 循环修复** | v2.1.89 | 检测压缩后立即回填并停止 |
 | **PermissionDenied Hook** | v2.1.88 | Auto Mode 拒绝后可重试 |
 | **无闪烁渲染** | v2.1.88 | `CLAUDE_CODE_NO_FLICKER=1` |
 | **命名子 Agent @提及** | v2.1.88 | @ 补全显示已命名子 Agent |
-| **Auto Mode** | v2.1.84 | 内置风险分类器，安全操作自动执行 |
+| **Auto Mode** | v2.1.86 | 内置风险分类器，安全操作自动执行 |
 | PowerShell 工具 | v2.1.84 | Windows 原生支持（预览） |
 | Hooks 条件过滤 | v2.1.85 | `if` 字段支持权限规则语法 |
-| 性能优化 | v2.1.86 | Read 紧凑行号、@引用减少 token |
 | `/loop` | v2.1.71 | 循环任务调度 |
 | `/voice` | v2.1.69 | Push-to-Talk 语音编程 |
 | 1M Context | v2.1.75 | 百万 token 上下文 |
