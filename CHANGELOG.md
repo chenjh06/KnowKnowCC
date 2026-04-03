@@ -2,8 +2,45 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.10.0 - Claude Code 源码泄露事件深度分析
-**发布日期**: 2026-04-01
+**最新版本**: v3.11.0 - Claude Code v2.1.91 同步
+**发布日期**: 2026-04-03
+
+---
+
+## [3.11.0] - 2026-04-03 🔄 Claude Code v2.1.91 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.91 (2026-04-02)
+
+**新功能**:
+- ✨ **MCP tool result 持久化覆盖** - 通过 `_meta["anthropic/maxResultSizeChars"]` annotation 配置最大结果大小（最高 500K）
+- ✨ **`disableSkillShellExecution` 设置** - 禁用 skills、slash commands、plugin commands 的内联 shell 执行
+- ✨ **多行 prompt 支持** - `claude-cli://open?q=` deep links 现在支持编码换行符 `%0A`
+- ✨ **插件可执行文件** - 插件可将可执行文件放在 `bin/` 目录并作为裸命令调用
+
+**关键修复**:
+- 🔧 修复 `--resume` 时 transcript chain 中断导致会话历史丢失（async transcript writes 失败静默）
+- 🔧 修复 cmd+delete 在 iTerm2/kitty/WezTerm/Ghostty/Windows Terminal 上无法删除到行首
+- 🔧 修复远程会话中 plan mode 在容器重启后丢失 plan 文件跟踪
+- 🔧 修复 Windows 版本清理未保护活动版本的回滚副本
+- 🔧 `/feedback` 现在解释为何不可用而非从菜单消失
+
+**改进**:
+- 📈 改进 `/claude-api` 技能指导（agent 设计模式、工具决策、上下文管理、缓存策略）
+- 📈 改进 Bun 上 `stripAnsi` 性能（通过 `Bun.stripANSI`）
+- 📈 Edit tool 使用更短的 `old_string` 锚点，减少输出 token
+
+#### 📋 v2.1.90 (2026-04-02)
+
+*(内部版本，详情见 GitHub)*
+
+### 📋 更新的文件
+
+- 📝 `CHANGELOG.md` - 添加 v3.11.0 版本
+- 📝 `CLAUDE.md` - 版本号更新 v2.1.89 → v2.1.91
+- 📝 `README.md` - 版本号更新
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 

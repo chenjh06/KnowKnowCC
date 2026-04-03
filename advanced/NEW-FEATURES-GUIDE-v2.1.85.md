@@ -1,7 +1,7 @@
-# Claude Code v2.1.41-v2.1.89 新功能指南
+# Claude Code v2.1.85-v2.1.91 新功能最佳实践指南
 
-**文档日期**: 2026-04-01
-**跟踪版本**: v2.1.41 → v2.1.89
+**文档日期**: 2026-04-03
+**跟踪版本**: v2.1.85 → v2.1.91
 **官方文档**: [Changelog](https://code.claude.com/docs/en/changelog)
 
 ---
@@ -12,6 +12,8 @@
 
 | 版本 | 发布日期 | 核心更新 |
 |------|---------|---------|
+| **v2.1.91** | 2026-04-02 | MCP结果持久化(500K)、disableSkillShellExecution、多行DeepLinks、插件可执行文件、性能优化 |
+| **v2.1.90** | 2026-04-01 | `/powerup` 交互课程、Resume改进、PowerShell加固、4项性能优化、`.husky`保护 |
 | **v2.1.89** | 2026-04-01 | `"defer"` 权限决策、MCP 非阻塞连接、autocompact 循环修复、LSP 僵尸状态修复、Hook 输出磁盘缓存 |
 | **v2.1.88** | 2026-03-31 | PermissionDenied Hook、无闪烁渲染、命名子Agent、Windows CRLF/语音修复、内存泄漏修复 |
 | **v2.1.87** | 2026-03-29 | Cowork Dispatch 消息投递修复 |
@@ -33,6 +35,201 @@
 | **v2.1.69** | 2026-03-05 | `/claude-api` skill、10 种新语音语言 |
 | **v2.1.68** | 2026-03-04 | Opus 4.6 默认、ultrathink、1M 上下文 |
 | **v2.1.63** | 2026-02-28 | `/simplify`、`/batch`、HTTP hooks |
+
+---
+
+## 🆕 v2.1.91 新功能速览 (2026-04-02)
+
+### 📦 MCP 工具结果持久化 ⭐⭐⭐⭐⭐
+
+**重大更新**: MCP 工具结果现在支持通过 `_meta["anthropic/maxResultSizeChars"]` annotation 配置最大结果大小，最高可达 500K 字符。
+
+```json
+// MCP 服务器返回时添加 annotation
+{
+  "result": "large database schema content...",
+  "_meta": {
+    "anthropic/maxResultSizeChars": 500000
+  }
+}
+```
+
+**应用场景**:
+- 数据库 Schema 传输（需要完整结构不能截断）
+- 大型日志文件分析
+- 完整配置文件内容传递
+- API 响应完整内容保留
+
+**最佳实践**:
+| 场景 | 建议值 | 说明 |
+|------|--------|------|
+| 数据库 Schema | 100K-500K | 根据 Schema 大小调整 |
+| 日志分析 | 200K-500K | 日志文件通常较大 |
+| 标准 API 响应 | 50K-100K | 避免过大影响上下文 |
+| 实时数据 | <50K | 保持上下文效率 |
+
+### 🔒 disableSkillShellExecution ⭐⭐⭐⭐
+
+**安全加固**: 新增 `disableSkillShellExecution` 设置，禁用 skills、slash commands、plugin commands 的内联 shell 执行。
+
+```json
+// settings.json
+{
+  "disableSkillShellExecution": true
+}
+```
+
+**价值**:
+- **企业安全**: 防止恶意 skills 执行任意命令
+- **沙箱环境**: 提供更严格的执行控制
+- **审计合规**: 满足安全审计要求
+
+**适用场景**:
+- 企业环境需要严格的安全策略
+- 多人共享的 Claude Code 实例
+- 处理不受信任的第三方 skills
+
+### 🔗 多行 Deep Links ⭐⭐⭐
+
+**功能增强**: `claude-cli://open?q=` 现在支持多行 prompt，编码换行符 `%0A` 不再被拒绝。
+
+```bash
+# 单行（之前支持）
+claude-cli://open?q=explain this code
+
+# 多行（新增支持）
+claude-cli://open?q=First line%0ASecond line%0AThird line
+
+# 实际应用：复杂指令
+claude-cli://open?q=Analyze the following:%0A1. Performance%0A2. Security%0A3. Maintainability
+```
+
+**应用场景**:
+- 从外部应用传递复杂分析任务
+- 预设的多步骤检查清单
+- 结构化的代码审查请求
+
+### 📁 插件可执行文件 ⭐⭐⭐
+
+**扩展能力**: 插件可将可执行文件放在 `bin/` 目录，作为裸命令从 Bash 工具调用。
+
+```
+my-plugin/
+├── plugin.json
+└── bin/
+    ├── my-tool          # Linux/macOS
+    └── my-tool.exe      # Windows
+```
+
+```json
+// plugin.json
+{
+  "commands": [
+    {
+      "name": "my-tool",
+      "command": "bin/my-tool"
+    }
+  ]
+}
+```
+
+**价值**:
+- 插件可以自带原生工具
+- 无需单独安装系统级依赖
+- 跨平台打包更简单
+
+### 📈 性能优化 ⭐⭐⭐
+
+| 优化项 | 改进 |
+|--------|------|
+| **Bun stripAnsi** | 通过 `Bun.stripANSI` 加速 ANSI  stripping |
+| **Edit 锚点优化** | 使用更短的 `old_string` 锚点，减少输出 token |
+| **/claude-api 改进** | Agent 设计模式、工具决策、上下文管理指导增强 |
+
+### 🔧 关键修复
+
+| 修复 | 说明 |
+|------|------|
+| **Resume chain 中断** | `--resume` 时 async transcript writes 失败导致历史丢失 |
+| **cmd+delete 失效** | iTerm2/kitty/WezTerm/Ghostty/Windows Terminal |
+| **远程 Plan mode** | 容器重启后丢失 plan 文件跟踪 |
+| **Windows 版本清理** | 未保护活动版本的回滚副本 |
+| **/feedback 消失** | 现在解释为何不可用 |
+
+---
+
+## 🆕 v2.1.90 新功能速览 (2026-04-01)
+
+### 🎓 `/powerup` 交互课程 ⭐⭐⭐⭐⭐
+
+**重大更新**: 全新的交互式学习系统，通过动画演示教授 Claude Code 功能。
+
+```bash
+# 激活 /powerup
+/powerup
+
+# 选择课程开始学习
+# 包含动画演示和实操练习
+```
+
+**功能特点**:
+- 交互式动画演示
+- 实操练习环节
+- 即时反馈学习效果
+- 覆盖高级功能使用技巧
+
+**适用人群**:
+- 新用户快速上手
+- 中级用户进阶提升
+- 高级用户发现隐藏技巧
+
+### 🔄 Resume 改进 ⭐⭐⭐⭐
+
+**体验优化**: Resume 功能多项改进，提升会话恢复体验。
+
+| 改进 | 说明 |
+|------|------|
+| **并行加载** | 项目会话并行加载，减少等待时间 |
+| **过滤假会话** | 不再显示 `-p` 和 SDK 创建的会话 |
+| **Prompt Cache** | 修复 deferred tools/MCP/自定义 agents 导致的缓存未命中 |
+| **编辑冲突** | 修复 PostToolUse format-on-save 导致 "File content has changed" |
+
+### 🛡️ PowerShell 安全加固 ⭐⭐⭐⭐
+
+**重大修复**: PowerShell 工具多项安全改进，修复多个高危漏洞。
+
+| 漏洞类型 | 修复内容 |
+|----------|----------|
+| **Trailing `&` 绕过** | 后台任务现在正确拦截 |
+| **-ErrorAction Break** | 调试器不再挂起 |
+| **Archive TOCTOU** | 归档文件提取时序漏洞 |
+| **Parse Fail 降级** | 解析失败时回退到拒绝规则 |
+
+**PowerShell 5.1 用户注意**:
+```powershell
+# 现在会触发确认提示的场景
+# 包含双引号和空格的参数
+Invoke-Command -ScriptBlock { param($msg) Write-Output $msg } -ArgumentList '"hello world"'
+```
+
+### ⚡ 性能优化（3项重大改进）⭐⭐⭐⭐
+
+| 优化项 | 改进幅度 | 说明 |
+|--------|----------|------|
+| **MCP Schema 缓存** | ~50% 提升 | 消除每轮 JSON.stringify 开销 |
+| **SSE 大帧处理** | O(n²) → O(n) | 大型流式帧现线性处理 |
+| **Transcript 写入** | 无 quadratics 降级 | SDK 长会话不再变慢 |
+
+### 🔧 其他修复
+
+| 修复 | 说明 |
+|------|------|
+| **Rate limit 对话框循环** | 修复无限自动打开导致崩溃 |
+| **Auto Mode 边界** | 现在尊重 "don't push" 等用户明确边界 |
+| **悬停文本可见性** | 修复浅色终端主题几乎不可见 |
+| **UI 崩溃防护** | 畸形工具输入不再导致界面崩溃 |
+| **Headers 消失** | `/model`、`/config` 选择界面标题不再消失 |
+| **DNS 缓存隐私** | `Get-DnsClientCache` 和 `ipconfig /displaydns` 移出自动允许 |
 
 ---
 
