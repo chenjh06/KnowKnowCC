@@ -174,6 +174,31 @@ Claude Code 支持以下官方 Hook 事件：
 - ✅ 评估 subagent 结果
 - ✅ 决定是否需要更多上下文
 
+#### 7.5 PreCompact *(v2.1.105+)*
+
+**触发时机**：在上下文压缩（compact）即将执行前运行
+
+**用途**：
+- ✅ 阻止压缩（退出码 2 或返回 `{"decision":"block"}`）
+- ✅ 在压缩前保存关键上下文
+- ✅ 记录压缩事件
+
+**阻止压缩示例**：
+```json
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": ["node save-context.js"]
+      }
+    ]
+  }
+}
+```
+
+> **注意**: `PreCompact` 只在手动 `/compact` 或自动压缩时触发。如果 hook 以退出码 2 退出或返回 `{"decision":"block"}`，压缩将被取消。
+
 #### 8. SessionStart
 
 **触发时机**：在 Claude Code 启动新会话或恢复现有会话时运行

@@ -415,10 +415,12 @@ src/
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/help` | 获取使用帮助 | `/help` |
-| `/doctor` | 诊断安装健康 | `/doctor` |
+| `/doctor` | 诊断安装健康（按 `f` 自动修复） | `/doctor` |
 | `/cost` | 显示 token 使用统计（订阅用户可查看按模型/缓存命中细分） | `/cost` |
 | `/context` | 可视化上下文使用 | `/context` |
 | `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
+| `/team-onboarding` | 生成团队上手指南（基于本地 Claude Code 使用习惯） | `/team-onboarding` |
+| `/proactive` | `/loop` 的别名，设置循环任务 | `/proactive 5m check status` |
 
 ### 模式控制命令
 

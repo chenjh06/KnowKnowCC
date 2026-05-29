@@ -2,8 +2,60 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.13.0 - Claude Code v2.1.94~v2.1.97 同步
-**发布日期**: 2026-04-08
+**最新版本**: v3.14.0 - Claude Code v2.1.101~v2.1.105 同步
+**发布日期**: 2026-04-13
+
+---
+
+## [3.14.0] - 2026-04-13 🔄 Claude Code v2.1.101~v2.1.105 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.105 (2026-04-13) — 大版本（37条）
+
+**新功能**:
+- ✨ **PreCompact hook** - 压缩前触发，可阻止压缩（退出码 2 或 `{"decision":"block"}`）
+- ✨ **`EnterWorktree` path 参数** - 可切换到已有 worktree
+- ✨ **Plugin `monitors`** - 插件可通过 manifest key 注册后台监控，session 启动或 skill 调用时自动激活
+- ✨ **`/proactive`** — `/loop` 的别名
+
+**改进**:
+- 📈 API 流 5 分钟无数据自动中止并重试非流式请求
+- 📈 `/doctor` 布局改进，按 `f` 让 Claude 自动修复问题
+- 📈 `/config` 标签和描述更清晰
+- 📈 Skill 描述上限从 250 提升到 1,536 字符
+- 📈 `WebFetch` 自动剥离 `<style>`/`<script>` 内容
+- 📈 MCP 大输出截断提示增加格式特定建议（如 `jq` for JSON）
+
+#### 📋 v2.1.101 (2026-04-10) — 大版本（46条）
+
+**新功能**:
+- ✨ **`/team-onboarding`** - 基于本地使用习惯生成团队上手指南
+- ✨ **OS CA 证书信任** - 企业 TLS 代理开箱即用（`CLAUDE_CODE_CERT_STORE=bundled` 仅用内置 CA）
+- ✨ **`/ultraplan` 自动创建云环境** - 不再需要预先设置 web 端
+
+**改进**:
+- 📈 Focus mode 改进摘要生成（因为只看到最终消息）
+- 📈 Rate-limit 重试消息显示具体限制和重置时间
+- 📈 `claude -p --resume <name>` 接受通过 `/rename` 设置的会话标题
+- 📈 Settings 韧性：无法识别的 hook 事件名不再导致整个 settings.json 被忽略
+- 📈 Plugin hooks 从 managed settings 强制启用时支持 `allowManagedHooksOnly`
+- 📈 SDK `query()` 在 `break` from `for await` 时正确清理子进程和临时文件
+
+**关键修复**:
+- 🔧 修复 POSIX `which` 回退中的命令注入漏洞（安全）
+- 🔧 修复长会话虚拟滚动器内存泄漏
+- 🔧 修复 `--resume` 大会话丢失对话上下文
+- 🔧 修复硬编码 5 分钟请求超时导致慢后端被中止
+
+**跳过版本**: v2.1.100/104 纯修复版本
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` - 添加 /team-onboarding、/proactive、/doctor 改进
+- 📝 `master/01-customization/03-hooks.md` - 添加 PreCompact hook
+- 📝 `CHANGELOG.md` - 添加 v3.14.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 
