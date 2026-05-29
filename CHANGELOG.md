@@ -2,8 +2,45 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.11.0 - Claude Code v2.1.91 同步
-**发布日期**: 2026-04-03
+**最新版本**: v3.12.0 - Claude Code v2.1.92 同步
+**发布日期**: 2026-04-04
+
+---
+
+## [3.12.0] - 2026-04-04 🔄 Claude Code v2.1.92 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.92 (2026-04-04)
+
+**新功能**:
+- ✨ **`/cost` 按模型/缓存命中细分** - 订阅用户可查看各模型的 token 使用和缓存命中率
+- ✨ **`/release-notes` 交互式版本选择器** - 不再只显示最新版本，可选择查看任意版本
+- ✨ **`forceRemoteSettingsRefresh` 策略** - 强制 CLI 启动时等待远程托管设置刷新（fail-closed）
+- ✨ **Bedrock 交互式设置向导** - 登录界面选择"3rd-party platform"后引导 AWS 认证和区域配置
+- ✨ **Remote Control 会话命名改进** - 使用主机名作为默认前缀（如 `myhost-graceful-unicorn`）
+
+**改进**:
+- 📈 Pro 用户返回过期会话时显示缓存过期提示和预计 uncached token 数
+- 📈 Write 工具 diff 计算速度提升 60%（针对含 tabs/`&`/`$` 的大文件）
+- 📈 Linux sandbox 在 npm 和原生构建中均附带 `apply-seccomp` 助手
+
+**移除**:
+- 🗑️ 移除 `/tag` 命令
+- 🗑️ 移除 `/vim` 命令（通过 `/config` → Editor mode 切换 Vim 模式）
+
+**关键修复**:
+- 🔧 修复 subagent 在 tmux 窗口被杀/重编号后永久失败
+- 🔧 修复 Stop hooks 在 fast model 返回 `ok:false` 时错误失败
+- 🔧 修复 tool input streaming 时 array/object 字段验证失败
+- 🔧 修复 extended thinking 产生空白文本块导致 API 400 错误
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` - 更新 /cost、/release-notes 描述，版本号更新
+- 📝 `master/01-customization/07-managed-settings.md` - 添加 forceRemoteSettingsRefresh 策略
+- 📝 `CHANGELOG.md` - 添加 v3.12.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 

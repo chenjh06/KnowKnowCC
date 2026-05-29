@@ -416,9 +416,9 @@ src/
 |------|------|------|
 | `/help` | 获取使用帮助 | `/help` |
 | `/doctor` | 诊断安装健康 | `/doctor` |
-| `/cost` | 显示 token 使用统计 | `/cost` |
+| `/cost` | 显示 token 使用统计（订阅用户可查看按模型/缓存命中细分） | `/cost` |
 | `/context` | 可视化上下文使用 | `/context` |
-| `/release-notes` | 查看版本更新日志 | `/release-notes` |
+| `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
 
 ### 模式控制命令
 
@@ -1141,6 +1141,6 @@ $env:MY_VAR = "value"
 
 ---
 
-**最后更新**: 2026-03-28
-**版本**: v1.2
-**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.86）
+**最后更新**: 2026-04-04
+**版本**: v1.3
+**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.92）

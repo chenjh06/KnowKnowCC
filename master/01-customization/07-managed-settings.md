@@ -276,6 +276,30 @@ team.json
 
 ---
 
+### 特殊策略：forceRemoteSettingsRefresh
+
+> **v2.1.92+** 新增
+
+**`forceRemoteSettingsRefresh`** 策略强制 CLI 在启动时阻塞等待远程托管设置（Server-managed）刷新完成：
+
+```json
+{
+  "forceRemoteSettingsRefresh": true
+}
+```
+
+**行为**：
+- 设置为 `true` 时，CLI 启动会阻塞，直到从 Claude.ai 管理控制台获取最新的远程设置
+- 如果获取失败，CLI 将直接退出（fail-closed 安全模式）
+- 适用于对策略合规性要求严格的企业环境
+
+**适用场景**：
+- ✅ 金融/医疗等合规要求严格的环境
+- ✅ 需要确保策略实时生效的企业
+- ❌ 个人开发者（无需配置）
+
+---
+
 ## 实战案例
 
 ### 案例 1: 多团队协作配置

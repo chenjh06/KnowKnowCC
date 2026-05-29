@@ -23,18 +23,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 架构
 
 ```
-knowknowcc/
-├── guide/              ← Level 1: 核心掌握 (6个文档)
-├── advanced/           ← Level 2: 进阶提升 (17个文档)
-│   ├── a-productivity/     生产力提升
-│   ├── b-code-quality/     代码质量
-│   ├── c-integration/      集成扩展
-│   └── d-skills-development/ Skills开发
-├── master/             ← Level 3: 专家之道 (16个文档)
-├── windows/            ← Windows 专属 (4个文档)
-└── reference/          ← 快速参考 (3个文档)
+KnowKnowCC/
+├── guide/              ← Level 1: 核心掌握 (7个文档，含README)
+├── advanced/           ← Level 2: 进阶提升 (30个文档)
+│   ├── a-productivity/     生产力提升 (9)
+│   ├── b-code-quality/     代码质量 (5)
+│   ├── c-integration/      集成扩展 (7)
+│   ├── d-skills-development/ Skills开发 (5)
+│   └── 其他专题文档 (4)
+├── master/             ← Level 3: 专家之道 (20个文档)
+│   ├── 01-customization/   定制化 (7)
+│   ├── 02-automation/      自动化 (5)
+│   ├── 03-advanced-topics/ 高级主题 (5)
+│   └── 04-source-analysis/ 源码分析 (2)
+├── windows/            ← Windows 专属 (5个文档，含README)
+├── reference/          ← 快速参考 (4个文档，含README)
+└── reports/            ← 审核报告 (14个文档)
 
-总计: 65个核心文档, ~890,000字
+总计: ~90个md文件, ~890,000字
 ```
 
 ---
