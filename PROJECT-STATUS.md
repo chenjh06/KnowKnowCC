@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.20.0
+**版本**: v3.21.0
 **更新**: 2026-05-30
-**跟踪官方**: Claude Code v2.1.146
+**跟踪官方**: Claude Code v2.1.147
 **状态**: 100% 完成
 
 ---
@@ -39,6 +39,13 @@ KnowKnowCC/
 ---
 
 ## 最近更新
+
+### v3.21.0 (2026-05-30)
+- Claude Code v2.1.147 同步（~33条变更）
+- Pinned 后台会话（Ctrl+T 固定，闲置保活）
+- `/code-review --comment` GitHub PR 行内评论
+- `/effort` 滑块从当前级别开始
+- Prompt 历史去重、Hook 条件匹配修复
 
 ### v3.20.0 (2026-05-30)
 - Claude Code v2.1.144~v2.1.146 同步（~87条变更）

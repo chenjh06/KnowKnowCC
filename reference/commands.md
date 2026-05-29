@@ -436,7 +436,7 @@ src/
 | `/permissions` | 查看或更新权限 | `/permissions` |
 | `/tui` | 切换渲染模式（如 `/tui fullscreen` 无闪烁） | `/tui fullscreen` |
 | `/focus` | 切换焦点视图（仅显示 prompt + 工具摘要 + 最终回复） | `/focus` |
-| `/effort` | 控制分析深度（默认 medium，API/Bedrock/Team/Enterprise 用户默认 high） | `/effort medium` |
+| `/effort` | 控制分析深度（默认 medium；面板从当前级别开始，v2.1.147+） | `/effort medium` |
 | `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
 | `--enable-auto-mode` | 启用 Auto Mode 自动模式 (v2.1.84) | `claude --enable-auto-mode` |
 
@@ -472,6 +472,7 @@ claude agents --model claude-sonnet-4-5-20250929
 claude agents --effort high
 claude agents --dangerously-skip-permissions
 claude agents --json                     # 列出会话 JSON（脚本集成，v2.1.145+）
+claude agents → Ctrl+T                  # 固定后台会话（闲置保活，v2.1.147+）
 ```
 
 ### `/bg` 后台化命令
@@ -506,6 +507,7 @@ claude agents --json                     # 列出会话 JSON（脚本集成，v2
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/code-review [effort]` | 审查最近更改的文件，检查代码复用、质量和效率问题并修复（原 `/simplify`，v2.1.146+ 重命名） | `/code-review high` |
+| `/code-review --comment` | 审查并将结果发布为 GitHub PR 行内评论（v2.1.147+） | `/code-review --comment` |
 | `/batch <instruction>` | 编排大规模并行变更。将工作分解为独立单元，每个在隔离 git worktree 中执行并开 PR | `/batch migrate from Solid to React` |
 
 **`/code-review` vs `/batch` 区别**：
