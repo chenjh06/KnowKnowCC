@@ -436,9 +436,11 @@ src/
 | `/permissions` | 查看或更新权限 | `/permissions` |
 | `/tui` | 切换渲染模式（如 `/tui fullscreen` 无闪烁） | `/tui fullscreen` |
 | `/focus` | 切换焦点视图（仅显示 prompt + 工具摘要 + 最终回复） | `/focus` |
-| `/effort` | 控制分析深度（默认 medium；面板从当前级别开始，v2.1.147+） | `/effort medium` |
+| `/effort` | 控制分析深度（标签：Faster↔Smarter；Opus 4.8 默认 high，v2.1.154+） | `/effort medium` |
 | `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
-| `--enable-auto-mode` | 启用 Auto Mode 自动模式 (v2.1.84) | `claude --enable-auto-mode` |
+| `--enable-auto-mode` | 启用 Auto Mode 自动模式（v2.1.152+ 免 opt-in） | `claude --enable-auto-mode` |
+| `/reload-skills` | 重新扫描 Skill 目录（无需重启，v2.1.152+） | `/reload-skills` |
+| `/workflows` | 查看 Dynamic Workflows 运行状态（v2.1.154+ ✨） | `/workflows` |
 
 ### 配置和管理命令
 
@@ -473,6 +475,7 @@ claude agents --effort high
 claude agents --dangerously-skip-permissions
 claude agents --json                     # 列出会话 JSON（脚本集成，v2.1.145+）
 claude agents → Ctrl+T                  # 固定后台会话（闲置保活，v2.1.147+）
+claude agents → ! <command>             # 后台运行 shell 命令（v2.1.154+）
 ```
 
 ### `/bg` 后台化命令
@@ -506,22 +509,22 @@ claude agents → Ctrl+T                  # 固定后台会话（闲置保活，
 
 | 命令 | 说明 | 示例 |
 |------|------|------|
-| `/code-review [effort]` | 审查最近更改的文件，检查代码复用、质量和效率问题并修复（原 `/simplify`，v2.1.146+ 重命名） | `/code-review high` |
-| `/code-review --comment` | 审查并将结果发布为 GitHub PR 行内评论（v2.1.147+） | `/code-review --comment` |
+| `/code-review [effort]` | 审查代码，报告正确性 bug（原 `/simplify`，v2.1.146+ 重命名）；`--fix` 应用修复（v2.1.152+）；`--comment` 发布 PR 评论（v2.1.147+） | `/code-review high --fix` |
 | `/batch <instruction>` | 编排大规模并行变更。将工作分解为独立单元，每个在隔离 git worktree 中执行并开 PR | `/batch migrate from Solid to React` |
 
-**`/code-review` vs `/batch` 区别**：
+**`/code-review` vs `/batch` vs `/workflows` 区别**：
 
-| 维度 | `/code-review` | `/batch` |
-|------|-------------|----------|
-| **目标** | 审查优化已有代码 | 大规模迁移/变更 |
-| **范围** | 最近修改的文件 | 整个代码库 |
-| **并行度** | 3 个审查代理 | 5-30 个独立单元 |
-| **输出** | 直接修复 | 每个单元开 PR |
-| **需要 Git** | 否 | 是 |
-| **effort** | `/code-review high` | N/A |
+| 维度 | `/code-review` | `/batch` | `/workflows` |
+|------|-------------|----------|-------------|
+| **目标** | 审查优化已有代码 | 大规模迁移/变更 | 复杂多步编排 |
+| **范围** | 最近修改的文件 | 整个代码库 | 任意规模 |
+| **并行度** | 3 个审查代理 | 5-30 个独立单元 | 10-100+ agents |
+| **输出** | 直接修复/PR 评论 | 每个单元开 PR | 自定义 |
+| **需要 Git** | `--comment` 需要 | 是 | 否 |
+| **effort** | `/code-review high` | N/A | 脚本控制 |
+| **版本** | v2.1.146+ | v2.1.69+ | v2.1.154+ ✨ |
 
-> **历史**: v2.1.146 前 `/code-review` 名为 `/simplify`（旧名仍可用）。
+> **历史**: v2.1.146 前 `/code-review` 名为 `/simplify`（旧名仍可用，v2.1.154 起仅运行清理审查）。
 
 ### 其他命令
 
@@ -1192,4 +1195,4 @@ $env:MY_VAR = "value"
 
 **最后更新**: 2026-04-04
 **版本**: v1.3
-**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.146）
+**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.154）

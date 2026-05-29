@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.22.0
+**版本**: v4.0.0
 **更新**: 2026-05-30
-**跟踪官方**: Claude Code v2.1.150
+**跟踪官方**: Claude Code v2.1.156
 **状态**: 100% 完成
 
 ---
@@ -39,6 +39,15 @@ KnowKnowCC/
 ---
 
 ## 最近更新
+
+### v4.0.0 (2026-05-30) 🚀
+- Claude Code v2.1.152~v2.1.156 同步（~114条变更）
+- **Opus 4.8 发布** + Fast Mode 大降价（2x→2.5x speed）
+- **Dynamic Workflows** — 编排数十到数百个 agents
+- **Lean prompt 默认启用**
+- MessageDisplay hook、disallowed-tools frontmatter
+- `/reload-skills`、`/workflows` 新命令
+- `/code-review --fix`、Auto mode 免 opt-in
 
 ### v3.22.0 (2026-05-30)
 - Claude Code v2.1.149 同步（~26条变更）

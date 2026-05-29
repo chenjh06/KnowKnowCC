@@ -2,8 +2,51 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.22.0 - Claude Code v2.1.148~v2.1.150 同步
+**最新版本**: v4.0.0 - Claude Code v2.1.152~v2.1.156 同步（Opus 4.8 + Dynamic Workflows）
 **发布日期**: 2026-05-30
+
+---
+
+## [4.0.0] - 2026-05-30 🚀 Claude Code v2.1.152~v2.1.156
+
+### 🌟 官方更新同步
+
+> **说明**: v2.1.152~v2.1.156 共 4 个版本，合计 ~114 条变更。Opus 4.8 发布、Dynamic Workflows 系统、Fast Mode 大降价。
+
+#### 📋 v2.1.154 (2026-05-27) — 🚀 Opus 4.8 + Dynamic Workflows（44条）
+
+**重大变更**:
+- 🚀 **Opus 4.8** — 默认 high effort，`/effort xhigh` 最难任务
+- 🚀 **Dynamic Workflows** — 编排数十到数百 agents，`/workflows` 查看
+- 🚀 **Fast Mode 2x 标准费率获 2.5x 速度**（Opus 4.8）
+- 🚀 **Lean prompt 默认**（除 Haiku/Sonnet/Opus 4.7）
+
+**新功能**:
+- ✨ `/effort` 标签 → "Faster"/"Smarter"
+- ✨ `/simplify` 改为仅清理审查
+- ✨ `! <command>` 在 claude agents 后台运行 shell
+- ✨ 插件 `defaultEnabled: false`
+- ✨ 流式工具执行全面启用
+- ✨ `claude mcp list` 显示 `⏸ Pending approval`
+
+#### 📋 v2.1.152 (2026-05-25) — 超大版本（33条）
+
+- ✨ `/code-review --fix`、`/reload-skills`
+- ✨ **MessageDisplay hook** — 转换/隐藏助手消息
+- ✨ **disallowed-tools frontmatter**
+- ✨ SessionStart: `reloadSkills`/`sessionTitle`
+- ✨ Auto mode 免 opt-in、Vim `/` 搜索
+- ✨ `--fallback-model` 自动切换
+
+#### 📋 v2.1.153 (2026-05-26) — 超大版本（36条）
+
+- ✨ `skipLfs` marketplace 选项
+- ✨ 状态栏 `COLUMNS`/`LINES` 环境变量
+- ✨ `--strict-mcp-config` 不剥离显式 agent MCP
+
+#### 📋 v2.1.156 (2026-05-29) — 修复
+
+- 🔧 Opus 4.8 thinking block API 错误修复
 
 ---
 

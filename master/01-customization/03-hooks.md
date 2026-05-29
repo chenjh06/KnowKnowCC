@@ -177,7 +177,15 @@ Claude Code 支持以下官方 Hook 事件：
 - ✅ 决定是否需要更多上下文
 - ✅ 检查后台任务和定时任务状态（v2.1.145+）
 
-#### 7.5 PreCompact *(v2.1.105+)*
+#### 7.6 MessageDisplay ✨ v2.1.152+
+
+**触发时机**：助手消息文本显示时
+
+**用途**：
+- ✅ 转换或隐藏助手消息文本
+- ✅ 自定义消息显示格式
+
+#### 7.7 PreCompact *(v2.1.105+)*
 
 **触发时机**：在上下文压缩（compact）即将执行前运行
 
@@ -211,6 +219,8 @@ Claude Code 支持以下官方 Hook 事件：
 - `resume` - 从 --resume、--continue 或 /resume 调用
 - `clear` - 从 /clear 调用
 - `compact` - 从自动或手动压缩调用
+
+**输出字段** *(v2.1.152+)*：`reloadSkills: true` 重新扫描 Skill 目录；`hookSpecificOutput.sessionTitle` 设置会话标题
 
 **用途**：
 - ✅ 加载开发上下文
@@ -1295,4 +1305,4 @@ fi
 **重要性**: ⭐⭐⭐⭐⭐
 
 **验证状态**: ✅ 已根据官方文档验证（Claude Code 2.1.84+)
-**官方文档版本**: Claude Code v2.1.146
+**官方文档版本**: Claude Code v2.1.154
