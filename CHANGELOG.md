@@ -1178,12 +1178,7 @@ SKILLS-ECOSYSTEM.md: ~230行（新增）
 
 ## [3.4.1] - 2026-01-26 🐛 问题修正版
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
-
----
-
-## [3.4.1] - 2026-01-26 🐛 问题修正版
+> 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 ### 🔴 严重问题修正（P0 - Critical Fixes）
 
