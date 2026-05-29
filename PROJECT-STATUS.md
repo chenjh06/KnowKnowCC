@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.18.0
-**更新**: 2026-05-12
-**跟踪官方**: Claude Code v2.1.140
+**版本**: v3.19.0
+**更新**: 2026-05-15
+**跟踪官方**: Claude Code v2.1.143
 **状态**: 100% 完成
 
 ---
@@ -39,6 +39,14 @@ KnowKnowCC/
 ---
 
 ## 最近更新
+
+### v3.19.0 (2026-05-15)
+- Claude Code v2.1.141~v2.1.143 同步（118条变更）
+- Hook terminalSequence 输出、Stop hook block cap
+- Plugin 依赖管理、预估 token 成本
+- `claude agents` 大量新标志
+- `/bg` 保留 MCP/Settings/Plugin 配置
+- PowerShell 工具默认启用（Bedrock/Vertex/Foundry）
 
 ### v3.10.0 (2026-04-01)
 - 新增 Claude Code 源码泄露事件深度分析文档（22维度）

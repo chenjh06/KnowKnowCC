@@ -313,12 +313,24 @@ Hooks 执行时可获取以下信息：
 | Effort 级别 | `effort.level` | `$CLAUDE_EFFORT` | v2.1.133+ |
 | 插件根目录 | — | `$CLAUDE_PLUGIN_ROOT` | — |
 | 会话标题 | `hookSpecificOutput.sessionTitle` | — | v2.1.94+ |
-        ]
-      }
-    ]
+
+### Hook 输出字段 ✨ v2.1.141+
+
+**`terminalSequence`**: Hooks 可通过 JSON 输出发送终端控制序列，无需控制终端即可：
+
+```json
+{
+  "hookSpecificOutput": {
+    "terminalSequence": {
+      "notify": "任务完成",
+      "title": "Claude Code - 编译中...",
+      "bell": true
+    }
   }
 }
 ```
+
+> **用途**: 发送桌面通知、设置窗口标题、响铃提醒。适用于后台任务完成通知。
 
 ### 字段说明
 
@@ -1175,7 +1187,7 @@ claude --debug
 
 ### Q4: Stop hook 无限循环？
 
-**A**: 检查 `stop_hook_active`
+**A**: 检查 `stop_hook_active`，以及 block cap 限制
 
 ```json
 // Stop hook 输入中包含
@@ -1185,6 +1197,8 @@ claude --debug
 
 // 检查此值以防止无限循环
 ```
+
+> **v2.1.143+**: Stop hook 连续阻止超过 8 次后，turn 会自动结束并显示警告。可通过环境变量 `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` 调整上限。
 
 ### Q5: SessionStart hook 中环境变量不持久化？
 
@@ -1278,4 +1292,4 @@ fi
 **重要性**: ⭐⭐⭐⭐⭐
 
 **验证状态**: ✅ 已根据官方文档验证（Claude Code 2.1.84+)
-**官方文档版本**: Claude Code v2.1.86
+**官方文档版本**: Claude Code v2.1.143

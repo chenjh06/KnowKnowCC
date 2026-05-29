@@ -2,8 +2,67 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.18.0 - Claude Code v2.1.136~v2.1.140 同步
-**发布日期**: 2026-05-12
+**最新版本**: v3.19.0 - Claude Code v2.1.141~v2.1.143 同步
+**发布日期**: 2026-05-15
+
+---
+
+## [3.19.0] - 2026-05-15 🔄 Claude Code v2.1.141~v2.1.143 同步
+
+### 🌟 官方更新同步
+
+> **说明**: v2.1.141~v2.1.143 共 3 个版本，合计 118 条变更，是信息密度最高的批次。核心变更：Plugin 依赖管理、Hook terminalSequence、claude agents 大量新标志。
+
+#### 📋 v2.1.141 (2026-05-13) — 超大版本（61条）
+
+**新功能**:
+- ✨ **Hook `terminalSequence` 输出** — Hook 可发送桌面通知、窗口标题、响铃，无需控制终端
+- ✨ **`claude agents --cwd`** — 限定会话列表到指定目录
+- ✨ **`/feedback` 包含近期会话** — 可附加 24h 或 7d 内的会话记录
+- ✨ **Rewind "Summarize up to here"** — 压缩早期上下文，保留最近对话
+- ✨ **Plugin 菜单导航增强** — `→`/Tab 切换标签页，`↑` 跳到标签栏
+- ✨ **Spinner 思考指示** — 思考超过 10 秒后 spinner 变琥珀色
+
+**改进**:
+- 📈 Auto mode 权限提示解释 `permissions.ask` 规则来源
+- 📈 `/bg` 保留当前权限模式（不再回退默认）
+- 📈 `claude agents` 完成工作的后台 agent 正确移到 Completed
+- 📈 `CLAUDE_CODE_PLUGIN_PREFER_HTTPS` — 无 SSH key 环境用 HTTPS 克隆插件
+
+#### 📋 v2.1.142 (2026-05-14) — 大版本（24条）
+
+**新功能**:
+- ✨ **`claude agents` 大量新标志** — `--add-dir`, `--settings`, `--mcp-config`, `--plugin-dir`, `--permission-mode`, `--model`, `--effort`, `--dangerously-skip-permissions`
+- ✨ **Fast mode 升级 Opus 4.7** — 原 Opus 4.6，可用 `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1` 锁定旧版
+- ✨ **根级 `SKILL.md` 插件** — 无 `skills/` 子目录的插件也被识别为 Skill
+- ✨ **`/plugin` 显示 LSP 服务器** — 详情面板展示插件提供的 LSP 服务器
+
+**改进**:
+- 📈 Hook 配置错误提示改进 — 不支持的事件类型给出明确建议
+- 📈 `/web-setup` 替换 GitHub App 前警告
+
+#### 📋 v2.1.143 (2026-05-15) — 大版本（33条）
+
+**新功能**:
+- ✨ **Plugin 依赖管理** — `disable` 拒绝被依赖的插件，`enable` 自动启用传递依赖
+- ✨ **`/plugin` 显示预估 token 成本** — 浏览面板展示每轮/每次调用的 token 估算
+- ✨ **`worktree.bgIsolation: "none"`** — 后台会话直接编辑工作副本，无需 worktree
+- ✨ **PowerShell `-ExecutionPolicy Bypass`** — 默认绕过执行策略（可配置）
+- ✨ **Stop hook block cap** — 连续阻止超 8 次自动结束 turn（可配置上限）
+- ✨ **PowerShell 工具默认启用** — Bedrock/Vertex/Foundry Windows 用户
+
+**改进**:
+- 📈 `/bg` 保留 `--mcp-config`、`--settings`、`--add-dir`、`--plugin-dir`、`--fallback-model` 等标志
+- 📈 后台会话唤醒后保持 model/effort 设置
+- 📈 `NO_COLOR`/`FORCE_COLOR` 仅影响子进程，不剥掉 Claude Code 自身 UI 颜色
+- 📈 后台会话 honor `permissions.defaultMode`（之前被覆盖为 auto）
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` — `/feedback` 会话包含、`claude agents` 标志、`/bg` 保留标志
+- 📝 `master/01-customization/03-hooks.md` — terminalSequence 输出、stop hook block cap
+- 📝 `CHANGELOG.md` — 添加 v3.19.0 版本
+- 📝 `PROJECT-STATUS.md` — 版本号更新
 
 ---
 

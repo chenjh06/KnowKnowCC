@@ -421,6 +421,7 @@ src/
 | `/stats` | `/usage` 的快捷入口（跳转到统计标签） | `/stats` |
 | `/context` | 可视化上下文使用 | `/context` |
 | `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
+| `/feedback` | 反馈报告（可包含近 24h/7d 会话，v2.1.141+） | `/feedback` |
 | `/team-onboarding` | 生成团队上手指南（基于本地 Claude Code 使用习惯） | `/team-onboarding` |
 | `/proactive` | `/loop` 的别名，设置循环任务 | `/proactive 5m check status` |
 
@@ -446,8 +447,42 @@ src/
 | `/theme` | 创建/切换自定义主题（`~/.claude/themes/`） | `/theme` |
 | `/memory` | 编辑 CLAUDE.md 文件 | `/memory` |
 | `/hooks` | 管理 hook 配置 | `/hooks` |
-| `/plugin` | 管理插件 | `/plugin` |
+| `/plugin` | 管理插件（含依赖管理，v2.1.143+） | `/plugin` |
 | `/agents` | 管理自定义 AI 子代理 | `/agents` |
+
+### `claude agents` 后台会话命令 ✨ v2.1.142+
+
+> **说明**: `claude agents` 支持 Dash 访问后台会话，可配置调度会话的默认参数。
+
+```bash
+# 启动 agents 仪表板
+claude agents
+
+# 指定工作目录范围
+claude agents --cwd <path>              # 仅显示该目录的会话 (v2.1.141+)
+
+# 配置调度会话默认参数 (v2.1.142+)
+claude agents --add-dir ../libs
+claude agents --settings ./settings.json
+claude agents --mcp-config ./mcp.json
+claude agents --plugin-dir ./plugins
+claude agents --permission-mode auto
+claude agents --model claude-sonnet-4-5-20250929
+claude agents --effort high
+claude agents --dangerously-skip-permissions
+```
+
+### `/bg` 后台化命令
+
+> **v2.1.143+**: `/bg` 现在保留 `--mcp-config`、`--settings`、`--add-dir`、`--plugin-dir`、`--strict-mcp-config`、`--fallback-model` 标志，后台化会话在 respawn 后保持 MCP 服务器和设置。
+
+```bash
+# 后台化当前会话
+/bg
+
+# 后台化并附带自定义配置
+/bg --mcp-config ./mcp.json --model opus
+```
 
 ### MCP 服务器命令
 
@@ -1150,4 +1185,4 @@ $env:MY_VAR = "value"
 
 **最后更新**: 2026-04-04
 **版本**: v1.3
-**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.92）
+**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.143）
