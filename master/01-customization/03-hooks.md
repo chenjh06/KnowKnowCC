@@ -303,6 +303,16 @@ Hooks 支持两种调用方式：
 ```
 
 > **说明**: `type: "mcp_tool"` 允许 hooks 直接调用已连接的 MCP 服务器工具，无需通过外部脚本。这在需要集成外部服务（如通知、日志、CI）时非常方便。
+
+### Hook 可用环境信息
+
+Hooks 执行时可获取以下信息：
+
+| 信息 | JSON 输入字段 | 环境变量 | 版本 |
+|------|-------------|---------|------|
+| Effort 级别 | `effort.level` | `$CLAUDE_EFFORT` | v2.1.133+ |
+| 插件根目录 | — | `$CLAUDE_PLUGIN_ROOT` | — |
+| 会话标题 | `hookSpecificOutput.sessionTitle` | — | v2.1.94+ |
         ]
       }
     ]

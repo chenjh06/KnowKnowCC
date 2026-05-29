@@ -2,8 +2,44 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.16.0 - Claude Code v2.1.116~v2.1.123 同步
-**发布日期**: 2026-04-29
+**最新版本**: v3.17.0 - Claude Code v2.1.126~v2.1.133 同步
+**发布日期**: 2026-05-07
+
+---
+
+## [3.17.0] - 2026-05-07 🔄 Claude Code v2.1.126~v2.1.133 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.133 (2026-05-07) — 大版本（17条）
+
+**新功能**:
+- ✨ **`worktree.baseRef`** 设置 — 控制 worktree 分支基准（`fresh`=origin/default, `head`=本地HEAD）
+- ✨ **`parentSettingsBehavior`** admin 策略 — 控制父级 managedSettings 合并行为
+- ✨ **Hooks 接收 effort 级别** — `effort.level` JSON 字段 + `$CLAUDE_EFFORT` 环境变量
+
+#### 📋 v2.1.128 (2026-05-04) — 大版本（37条）
+
+**新功能**:
+- ✨ **`/mcp` 显示工具数量** — 标记连接但无工具的服务器
+- ✨ **`--plugin-dir` 支持 .zip** — 直接加载压缩包插件
+- ✨ **`--channels` 支持 console 认证** — console 组织需设置 `channelsEnabled: true`
+
+**改进**:
+- 📈 `/model` 选择器 — Opus 显示为 "Opus"（非 "Opus 4.7"），合并重复条目
+- 📈 子进程不再继承 `OTEL_*` 环境变量
+- 📈 MCP `workspace` 为保留名称，冲突时跳过并警告
+- 📈 MCP 重连不再刷屏工具列表（按服务器前缀摘要）
+- 📈 `EnterWorktree` 从本地 HEAD 创建分支（不再丢弃未推送的提交）
+- 📈 Auto mode 分类器错误含重试/compact/debug 提示
+
+**跳过版本**: v2.1.126、v2.1.129~v2.1.132 纯修复版本
+
+### 📋 更新的文件
+
+- 📝 `master/01-customization/03-hooks.md` - 添加 effort level、mcp_tool 环境信息
+- 📝 `CHANGELOG.md` - 添加 v3.17.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 
