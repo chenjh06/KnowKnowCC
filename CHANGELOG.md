@@ -2,8 +2,51 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.12.0 - Claude Code v2.1.92 同步
-**发布日期**: 2026-04-04
+**最新版本**: v3.13.0 - Claude Code v2.1.94~v2.1.97 同步
+**发布日期**: 2026-04-08
+
+---
+
+## [3.13.0] - 2026-04-08 🔄 Claude Code v2.1.94~v2.1.97 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.97 (2026-04-08) — 大版本（46条）
+
+**新功能**:
+- ✨ **焦点视图 Ctrl+O** - NO_FLICKER 模式下切换紧凑视图，只显示 prompt + 工具摘要（含 diffstats）+ 最终回复
+- ✨ **`refreshInterval` status line** - 状态栏可设置每 N 秒自动刷新
+- ✨ **`workspace.git_worktree`** - status line JSON 新增 git worktree 信息
+- ✨ **`● N running`** - `/agents` 显示活跃子代理数量
+- ✨ **Cedar 策略文件语法高亮** - `.cedar`/`.cedarpolicy` 文件
+
+**改进**:
+- 📈 Accept Edits 模式自动批准安全环境变量前缀的命令（如 `LANG=C rm foo`）
+- 📈 Auto/bypass 模式自动批准 sandbox 网络访问
+- 📈 CJK 输入改进 - 日语/中文标点后可直接触发 `/` 和 `@` 补全
+- 📈 粘贴/附加图片自动压缩到与 Read 工具相同的 token 预算
+- 📈 Bridge sessions 在 claude.ai 显示本地 git 仓库和分支信息
+- 📈 上下文不足警告改为临时 footer 通知（不再占据整行）
+- 📈 Bash OTEL 追踪子进程继承 W3C `TRACEPARENT` 环境变量
+- 📈 `/claude-api` skill 更新，覆盖 Managed Agents
+
+#### 📋 v2.1.94 (2026-04-07)
+
+**新功能**:
+- ✨ **Mantle/Bedrock 支持** - `CLAUDE_CODE_USE_MANTLE=1` 启用
+- ✨ **`/effort` 默认改为 high** - API-key/Bedrock/Vertex/Team/Enterprise 用户
+- ✨ **`keep-coding-instructions`** frontmatter - 插件 output styles 保持编码指令
+- ✨ **`hookSpecificOutput.sessionTitle`** - UserPromptSubmit hooks 可设置会话标题
+- ✨ **Plugin skills `name`** - `skills:["./"]` 使用 frontmatter name 而非目录名
+
+**跳过版本**: v2.1.96/98 纯修复版本
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` - 更新 /effort 默认值说明
+- 📝 `reference/shortcuts.md` - 添加 Ctrl+O 焦点视图
+- 📝 `CHANGELOG.md` - 添加 v3.13.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 
