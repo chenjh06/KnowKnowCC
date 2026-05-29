@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.21.0
+**版本**: v3.22.0
 **更新**: 2026-05-30
-**跟踪官方**: Claude Code v2.1.147
+**跟踪官方**: Claude Code v2.1.150
 **状态**: 100% 完成
 
 ---
@@ -39,6 +39,13 @@ KnowKnowCC/
 ---
 
 ## 最近更新
+
+### v3.22.0 (2026-05-30)
+- Claude Code v2.1.149 同步（~26条变更）
+- `/usage` 按技能/子agent/插件/MCP 分类明细
+- PowerShell 安全加固（cd 绕过、通配符规则、变量追踪）
+- Ctrl+O transcript 视图跟踪新消息
+- Markdown GFM checkbox 渲染
 
 ### v3.21.0 (2026-05-30)
 - Claude Code v2.1.147 同步（~33条变更）

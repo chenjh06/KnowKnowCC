@@ -416,13 +416,13 @@ src/
 |------|------|------|
 | `/help` | 获取使用帮助 | `/help` |
 | `/doctor` | 诊断安装健康（按 `f` 自动修复） | `/doctor` |
-| `/usage` | 统一用量面板（合并原 /cost 和 /stats，按模型/缓存命中细分） | `/usage` |
+| `/usage` | 统一用量面板（按模型/缓存命中细分；v2.1.149+ 按技能/子agent/插件/MCP 分类） | `/usage` |
 | `/cost` | `/usage` 的快捷入口（跳转到用量面板） | `/cost` |
 | `/stats` | `/usage` 的快捷入口（跳转到统计标签） | `/stats` |
 | `/usage-credits` | 查看 usage credits（原 `/extra-usage`，v2.1.144+） | `/usage-credits` |
 | `/context` | 可视化上下文使用 | `/context` |
 | `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
-| `/feedback` | 反馈报告（可包含近 24h/7d 会话，v2.1.141+） | `/feedback` |
+| `/feedback` | 反馈报告（可包含近 24h/7d 会话，含压缩前对话 v2.1.149+） | `/feedback` |
 | `/team-onboarding` | 生成团队上手指南（基于本地 Claude Code 使用习惯） | `/team-onboarding` |
 | `/proactive` | `/loop` 的别名，设置循环任务 | `/proactive 5m check status` |
 

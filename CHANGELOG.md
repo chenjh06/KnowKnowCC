@@ -2,8 +2,29 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.21.0 - Claude Code v2.1.147 同步
+**最新版本**: v3.22.0 - Claude Code v2.1.148~v2.1.150 同步
 **发布日期**: 2026-05-30
+
+---
+
+## [3.22.0] - 2026-05-30 🔄 Claude Code v2.1.149 同步
+
+### 🌟 官方更新同步
+
+> **说明**: v2.1.148 纯修复、v2.1.150 内部改进，均跳过。v2.1.149 约 26 条变更。核心：`/usage` 分类明细、PowerShell 安全加固。
+
+**新功能**:
+- ✨ **`/usage` 分类明细** — 按技能、子 agent、插件、每个 MCP 服务器分别展示用量
+- ✨ **Markdown GFM checkbox** — `- [ ] todo` / `- [x] done` 渲染为复选框而非纯文本
+- ✨ **Enterprise `allowAllClaudeAiMcps`** — 允许加载 claude.ai 云端 MCP 连接器
+
+**改进**:
+- 📈 `/feedback` 报告包含压缩前的对话内容（便于诊断长会话早期问题）
+- 📈 `/diff` 详情视图支持键盘滚动（方向键、j/k、PgUp/PgDn、Space）
+- 📈 Ctrl+O transcript 视图跟踪新消息（不再冻结在打开时刻）
+- 📈 状态栏显示 skill/agent frontmatter 实际 effort（非基线设置）
+- 📈 Thinking spinner 不再跨工具调用保持琥珀色
+- 📈 **PowerShell 安全加固** — 修复 `cd..`/`cd\`/`cd~` 绕过工作目录检测、前缀/通配符规则持久化、PWD 变量追踪修复
 
 ---
 
