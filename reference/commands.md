@@ -416,7 +416,9 @@ src/
 |------|------|------|
 | `/help` | 获取使用帮助 | `/help` |
 | `/doctor` | 诊断安装健康（按 `f` 自动修复） | `/doctor` |
-| `/cost` | 显示 token 使用统计（订阅用户可查看按模型/缓存命中细分） | `/cost` |
+| `/usage` | 统一用量面板（合并原 /cost 和 /stats，按模型/缓存命中细分） | `/usage` |
+| `/cost` | `/usage` 的快捷入口（跳转到用量面板） | `/cost` |
+| `/stats` | `/usage` 的快捷入口（跳转到统计标签） | `/stats` |
 | `/context` | 可视化上下文使用 | `/context` |
 | `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
 | `/team-onboarding` | 生成团队上手指南（基于本地 Claude Code 使用习惯） | `/team-onboarding` |
@@ -441,6 +443,7 @@ src/
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/config` | 打开设置界面 | `/config` |
+| `/theme` | 创建/切换自定义主题（`~/.claude/themes/`） | `/theme` |
 | `/memory` | 编辑 CLAUDE.md 文件 | `/memory` |
 | `/hooks` | 管理 hook 配置 | `/hooks` |
 | `/plugin` | 管理插件 | `/plugin` |

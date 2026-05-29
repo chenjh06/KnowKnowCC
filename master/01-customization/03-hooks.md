@@ -281,6 +281,35 @@ Hooks 按匹配器组织，其中每个匹配器可以有多个 hooks：
 }
 ```
 
+### Hook 类型
+
+Hooks 支持两种调用方式：
+
+**1. 命令类型** (`type: "command"`)：
+```json
+{
+  "type": "command",
+  "command": "your-script.sh"
+}
+```
+
+**2. MCP 工具类型** (`type: "mcp_tool"`, v2.1.118+):
+```json
+{
+  "type": "mcp_tool",
+  "server_name": "my-server",
+  "tool_name": "send-notification"
+}
+```
+
+> **说明**: `type: "mcp_tool"` 允许 hooks 直接调用已连接的 MCP 服务器工具，无需通过外部脚本。这在需要集成外部服务（如通知、日志、CI）时非常方便。
+        ]
+      }
+    ]
+  }
+}
+```
+
 ### 字段说明
 
 #### matcher（匹配器）

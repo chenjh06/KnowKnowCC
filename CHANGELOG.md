@@ -2,8 +2,40 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.15.0 - Claude Code v2.1.107~v2.1.114 同步
-**发布日期**: 2026-04-18
+**最新版本**: v3.16.0 - Claude Code v2.1.116~v2.1.123 同步
+**发布日期**: 2026-04-29
+
+---
+
+## [3.16.0] - 2026-04-29 🔄 Claude Code v2.1.116~v2.1.123 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.118 (2026-04-23) — 大版本（34条）
+
+**新功能**:
+- ✨ **`/usage` 统一面板** — 合并 `/cost` 和 `/stats`（两者仍为快捷入口，跳转对应标签）
+- ✨ **Hooks 调用 MCP 工具** — `type: "mcp_tool"` 直接调用已连接的 MCP 服务器工具
+- ✨ **自定义主题** — `/theme` 创建/切换主题，插件可附带 `themes/` 目录
+- ✨ **Vim visual mode** — `v` 可视模式、`V` 可视行模式，支持选择和操作
+- ✨ **`DISABLE_UPDATES`** — 完全阻止所有更新路径（比 `DISABLE_AUTOUPDATER` 更严格）
+- ✨ **WSL 继承 Windows 管理设置** — `wslInheritsWindowsSettings` 策略键
+- ✨ **Auto mode `$defaults`** — 在 `autoMode.allow`/`soft_deny`/`environment` 中使用 `"$defaults"` 在内置规则旁添加自定义规则
+- ✨ **Auto mode "Don't ask again"** — 选择不再提示 opt-in
+
+**改进**:
+- 📈 `--continue`/`--resume` 可找到通过 `/add-dir` 添加了当前目录的会话
+- 📈 `/color` 通过 Remote Control 同步会话颜色到 claude.ai
+- 📈 `/model` 选择器支持 `ANTHROPIC_DEFAULT_*_MODEL_NAME` 自定义描述
+
+**跳过版本**: v2.1.116~v2.1.117、v2.1.119~v2.1.123 纯修复版本
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` - /usage 替代 /cost+/stats，新增 /theme
+- 📝 `master/01-customization/03-hooks.md` - 添加 mcp_tool hook 类型
+- 📝 `CHANGELOG.md` - 添加 v3.16.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 
