@@ -430,6 +430,8 @@ src/
 | `/model` | 选择或切换模型 | `/model` |
 | `/output-style [style]` | 设置输出风格 | `/output-style professional` |
 | `/permissions` | 查看或更新权限 | `/permissions` |
+| `/tui` | 切换渲染模式（如 `/tui fullscreen` 无闪烁） | `/tui fullscreen` |
+| `/focus` | 切换焦点视图（仅显示 prompt + 工具摘要 + 最终回复） | `/focus` |
 | `/effort` | 控制分析深度（默认 medium，API/Bedrock/Team/Enterprise 用户默认 high） | `/effort medium` |
 | `/color` | 设置会话颜色标识 (v2.1.75) | `/color blue` |
 | `--enable-auto-mode` | 启用 Auto Mode 自动模式 (v2.1.84) | `claude --enable-auto-mode` |

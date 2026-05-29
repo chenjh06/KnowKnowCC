@@ -2,8 +2,41 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.14.0 - Claude Code v2.1.101~v2.1.105 同步
-**发布日期**: 2026-04-13
+**最新版本**: v3.15.0 - Claude Code v2.1.107~v2.1.114 同步
+**发布日期**: 2026-04-18
+
+---
+
+## [3.15.0] - 2026-04-18 🔄 Claude Code v2.1.107~v2.1.114 同步
+
+### 🌟 官方更新同步
+
+#### 📋 v2.1.110 (2026-04-15) — 大版本（33条）
+
+**新功能**:
+- ✨ **`/tui` 命令** - 在同一会话中切换渲染模式（如 `/tui fullscreen` 无闪烁）
+- ✨ **`/focus` 命令** - 焦点视图切换（仅显示 prompt + 工具摘要 + 最终回复）
+- ✨ **Ctrl+O 行为变更** — 改为切换正常/详细 transcript 模式（焦点视图移至 `/focus`）
+- ✨ **推送通知** - Remote Control 启用时 Claude 可发送移动端推送通知
+- ✨ **`autoScrollEnabled` 配置** - 禁用全屏模式自动滚动
+- ✨ **Ctrl+G 编辑器** - 可显示 Claude 最后回复作为注释上下文
+
+**改进**:
+- 📈 `/plugin` Installed 标签改进 — 需要注意的项目和收藏置顶，禁用项折叠
+- 📈 `/doctor` 检测 MCP 服务器多配置源冲突
+- 📈 `--resume`/`--continue` 恢复未过期的定时任务
+- 📈 Session recap 扩展到禁用遥测用户（Bedrock/Vertex/Foundry）
+- 📈 Write 工具通知模型用户在 IDE diff 中编辑了建议内容
+- 📈 SDK/headless 读取 `TRACEPARENT`/`TRACESTATE` 环境变量
+
+**跳过版本**: v2.1.107~v2.1.109、v2.1.111~v2.1.114 纯修复版本
+
+### 📋 更新的文件
+
+- 📝 `reference/commands.md` - 添加 /tui、/focus 命令
+- 📝 `reference/shortcuts.md` - 更新 Ctrl+O 描述
+- 📝 `CHANGELOG.md` - 添加 v3.15.0 版本
+- 📝 `PROJECT-STATUS.md` - 版本号更新
 
 ---
 
