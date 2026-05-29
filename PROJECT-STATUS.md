@@ -1,8 +1,8 @@
 # knowknowcc 项目状态
 
-**版本**: v3.19.0
-**更新**: 2026-05-15
-**跟踪官方**: Claude Code v2.1.143
+**版本**: v3.20.0
+**更新**: 2026-05-30
+**跟踪官方**: Claude Code v2.1.146
 **状态**: 100% 完成
 
 ---
@@ -39,6 +39,15 @@ KnowKnowCC/
 ---
 
 ## 最近更新
+
+### v3.20.0 (2026-05-30)
+- Claude Code v2.1.144~v2.1.146 同步（~87条变更）
+- `/simplify` → `/code-review` 重命名（可选 effort level）
+- `/model` 会话级切换 + `d` 设默认值
+- `/resume` 支持后台会话
+- `/extra-usage` → `/usage-credits`
+- Stop/SubagentStop hook 新增 `background_tasks`/`session_crons`
+- `claude agents --json` 脚本集成
 
 ### v3.19.0 (2026-05-15)
 - Claude Code v2.1.141~v2.1.143 同步（118条变更）

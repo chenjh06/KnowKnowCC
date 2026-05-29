@@ -2,8 +2,56 @@
 
 所有重要变更都将记录在此文件中。
 
-**最新版本**: v3.19.0 - Claude Code v2.1.141~v2.1.143 同步
-**发布日期**: 2026-05-15
+**最新版本**: v3.20.0 - Claude Code v2.1.144~v2.1.146 同步
+**发布日期**: 2026-05-30
+
+---
+
+## [3.20.0] - 2026-05-30 🔄 Claude Code v2.1.144~v2.1.146 同步
+
+### 🌟 官方更新同步
+
+> **说明**: v2.1.144~v2.1.146 共 3 个版本，合计 ~87 条变更。核心变更：`/simplify`→`/code-review` 重命名、`/model` 会话级切换、`/resume` 支持后台会话。
+
+#### 📋 v2.1.144 (2026-05-19) — 超大版本（50条）
+
+**新功能**:
+- ✨ **`/resume` 支持后台会话** — `claude --bg` 启动的会话出现在列表中，标记 `bg`
+- ✨ **`/model` 会话级切换** — 仅影响当前会话；按 `d` 设为新会话默认值
+- ✨ **`/extra-usage` → `/usage-credits`** — 旧名仍可用
+- ✨ **`/plugin` 显示更新时间** — 浏览和发现面板展示最后更新日期
+- ✨ **后台 agent 完成通知显示耗时** — 如 "Agent completed · 3h 2m 5s"
+
+**改进**:
+- 📈 `claude mcp list` 配置解析错误时显示具体错误而非静默返回空
+- 📈 插件安装后返回 Installed 列表
+- 📈 `/doctor` 显示命令 hook 缺少 `command` 字段时的 exec-form 示例
+- 📈 SDK/headless MCP 启动优化：预等待与启动并行（快 ~2s）
+
+#### 📋 v2.1.145 (2026-05-20) — 大版本（24条）
+
+**新功能**:
+- ✨ **`claude agents --json`** — 列出会话 JSON，支持脚本集成（tmux-resurrect、状态栏）
+- ✨ **Stop/SubagentStop hook 新增字段** — 输入包含 `background_tasks` 和 `session_crons`
+- ✨ **`/plugin` 安装前详情** — 显示命令、agents、skills、hooks、MCP/LSP 服务器
+- ✨ **状态栏 GitHub 信息** — 检测到仓库/PR 时显示在状态栏
+- ✨ **Slash 命令/@-mention 列表支持鼠标悬停和点击**（全屏模式）
+
+**改进**:
+- 📈 OTEL spans 新增 `agent_id` 和 `parent_agent_id`，修复 trace parenting
+- 📈 Read 工具超大文件返回截断首页（"PARTIAL view"）而非硬错误
+
+#### 📋 v2.1.146 (2026-05-21) — 中版本（17条）
+
+**新功能**:
+- ✨ **`/simplify` → `/code-review` 重命名** — 可选 effort level，如 `/code-review high`
+- ✨ **Auto mode 不再抑制 AskUserQuestion** — 当用户或 skill 显式依赖时
+
+**改进**:
+- 📈 自动更新器重试瞬时网络故障
+- 📈 Diff 渲染性能优化（大文件编辑）
+- 📈 Windows PowerShell 工具修复 winget/Store 安装的 `pwsh` 兼容性
+- 📈 MCP `resources/list`、`prompts/list` 分页修复
 
 ---
 

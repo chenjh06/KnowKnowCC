@@ -166,7 +166,7 @@ claude --session ecommerce-feature-auth
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/continue` | 继续上一个会话 | `/continue` |
-| `/resume <name>` | 恢复指定会话 | `/resume my-project` |
+| `/resume <name>` | 恢复指定会话（含后台会话，标记 `bg`，v2.1.144+） | `/resume my-project` |
 | `/sessions` | 列出所有会话 | `/sessions` |
 | `/save <name>` | 保存当前会话 | `/save backup-01` |
 
@@ -392,7 +392,7 @@ src/
 |------|------|------|
 | `/clear` | 清除对话历史 | `/clear` |
 | `/continue` | 继续上一个会话 | `/continue` |
-| `/resume <name>` | 恢复指定会话 | `/resume my-project` |
+| `/resume <name>` | 恢复指定会话（含后台会话，标记 `bg`，v2.1.144+） | `/resume my-project` |
 | `/sessions` | 列出所有会话 | `/sessions` |
 | `/save <name>` | 保存当前会话 | `/save backup-01` |
 | `/compact` | 压缩对话上下文 | `/compact` |
@@ -419,6 +419,7 @@ src/
 | `/usage` | 统一用量面板（合并原 /cost 和 /stats，按模型/缓存命中细分） | `/usage` |
 | `/cost` | `/usage` 的快捷入口（跳转到用量面板） | `/cost` |
 | `/stats` | `/usage` 的快捷入口（跳转到统计标签） | `/stats` |
+| `/usage-credits` | 查看 usage credits（原 `/extra-usage`，v2.1.144+） | `/usage-credits` |
 | `/context` | 可视化上下文使用 | `/context` |
 | `/release-notes` | 交互式选择版本查看更新日志 | `/release-notes` |
 | `/feedback` | 反馈报告（可包含近 24h/7d 会话，v2.1.141+） | `/feedback` |
@@ -430,7 +431,7 @@ src/
 | 命令 | 说明 | 示例 |
 |------|------|------|
 | `/plan` | 进入 Plan 模式 | `/plan` |
-| `/model` | 选择或切换模型 | `/model` |
+| `/model` | 选择模型（仅当前会话生效）；按 `d` 设为新会话默认值（v2.1.144+） | `/model` |
 | `/output-style [style]` | 设置输出风格 | `/output-style professional` |
 | `/permissions` | 查看或更新权限 | `/permissions` |
 | `/tui` | 切换渲染模式（如 `/tui fullscreen` 无闪烁） | `/tui fullscreen` |
@@ -470,6 +471,7 @@ claude agents --permission-mode auto
 claude agents --model claude-sonnet-4-5-20250929
 claude agents --effort high
 claude agents --dangerously-skip-permissions
+claude agents --json                     # 列出会话 JSON（脚本集成，v2.1.145+）
 ```
 
 ### `/bg` 后台化命令
@@ -503,18 +505,21 @@ claude agents --dangerously-skip-permissions
 
 | 命令 | 说明 | 示例 |
 |------|------|------|
-| `/simplify [focus]` | 审查最近更改的文件，检查代码复用、质量和效率问题并修复。生成 3 个并行审查代理 | `/simplify` |
+| `/code-review [effort]` | 审查最近更改的文件，检查代码复用、质量和效率问题并修复（原 `/simplify`，v2.1.146+ 重命名） | `/code-review high` |
 | `/batch <instruction>` | 编排大规模并行变更。将工作分解为独立单元，每个在隔离 git worktree 中执行并开 PR | `/batch migrate from Solid to React` |
 
-**`/simplify` vs `/batch` 区别**：
+**`/code-review` vs `/batch` 区别**：
 
-| 维度 | `/simplify` | `/batch` |
+| 维度 | `/code-review` | `/batch` |
 |------|-------------|----------|
-| **目标** | 优化已有代码 | 大规模迁移/变更 |
+| **目标** | 审查优化已有代码 | 大规模迁移/变更 |
 | **范围** | 最近修改的文件 | 整个代码库 |
 | **并行度** | 3 个审查代理 | 5-30 个独立单元 |
 | **输出** | 直接修复 | 每个单元开 PR |
 | **需要 Git** | 否 | 是 |
+| **effort** | `/code-review high` | N/A |
+
+> **历史**: v2.1.146 前 `/code-review` 名为 `/simplify`（旧名仍可用）。
 
 ### 其他命令
 
@@ -1185,4 +1190,4 @@ $env:MY_VAR = "value"
 
 **最后更新**: 2026-04-04
 **版本**: v1.3
-**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.143）
+**验证状态**: ✅ 已基于官方文档验证（Claude Code v2.1.146）
